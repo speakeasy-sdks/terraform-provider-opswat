@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 9954f3c474501f6a305db91c4f4e2315
   docVersion: v5.6.1
-  speakeasyVersion: 1.91.2
-  generationVersion: 2.131.1
+  speakeasyVersion: 1.91.3
+  generationVersion: 2.139.1
 generation:
   comments:
     disableComments: false
@@ -14,9 +14,9 @@ generation:
   tagNamespacingDisabled: false
 features:
   terraform:
-    core: 2.89.1
+    core: 2.90.0
     globalServerURLs: 2.82.0
 terraform:
-  version: 0.1.0
+  version: 0.2.0
   author: gerbil
   packageName: Metadefender

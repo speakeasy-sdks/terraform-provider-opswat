@@ -47,6 +47,7 @@ type sdkConfiguration struct {
 	OpenAPIDocVersion string
 	SDKVersion        string
 	GenVersion        string
+	UserAgent         string
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
@@ -193,8 +194,9 @@ func New(opts ...SDKOption) *Metadefender {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "terraform",
 			OpenAPIDocVersion: "v5.6.1",
-			SDKVersion:        "0.1.0",
-			GenVersion:        "2.131.1",
+			SDKVersion:        "0.2.0",
+			GenVersion:        "2.139.1",
+			UserAgent:         "speakeasy-sdk/terraform 0.2.0 2.139.1 v5.6.1 Metadefender",
 		},
 	}
 	for _, opt := range opts {
