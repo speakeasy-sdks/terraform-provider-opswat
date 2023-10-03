@@ -194,9 +194,9 @@ func New(opts ...SDKOption) *Metadefender {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "terraform",
 			OpenAPIDocVersion: "v5.6.1",
-			SDKVersion:        "0.3.1",
-			GenVersion:        "2.143.2",
-			UserAgent:         "speakeasy-sdk/terraform 0.3.1 2.143.2 v5.6.1 Metadefender",
+			SDKVersion:        "0.4.0",
+			GenVersion:        "2.144.7",
+			UserAgent:         "speakeasy-sdk/terraform 0.4.0 2.144.7 v5.6.1 Metadefender",
 		},
 	}
 	for _, opt := range opts {
