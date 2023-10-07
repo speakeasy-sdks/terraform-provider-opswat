@@ -170,6 +170,7 @@ internal/sdk/pkg/models/shared/userlogin.go
 internal/sdk/pkg/models/shared/batchresponseclosed.go
 internal/sdk/pkg/models/shared/batchid.go
 internal/sdk/pkg/models/shared/batchresponseinprogress.go
+internal/sdk/pkg/models/shared/admincleanup.go
 internal/sdk/pkg/models/shared/skiplistafterdeleted.go
 internal/sdk/pkg/models/shared/adminconfigcustomresponseheader.go
 internal/sdk/pkg/models/shared/healthcheck.go

@@ -3,16 +3,12 @@
 package operations
 
 import (
+	"Metadefender/internal/sdk/pkg/models/shared"
 	"net/http"
 )
 
-type ConfigScanHistoryRequestBody struct {
-	// The number of hours of data retention. Anything older than this number will be deleted.
-	Cleanuprange *int64 `json:"cleanuprange,omitempty"`
-}
-
 type ConfigScanHistoryRequest struct {
-	RequestBody *ConfigScanHistoryRequestBody `request:"mediaType=application/json"`
+	AdminCleanup *shared.AdminCleanup `request:"mediaType=application/json"`
 	// Generated `session_id` from [Login](/mdcore/metadefender-core/ref#userlogin) call can be used as an `apikey` for API calls that require authentication.
 	//
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
