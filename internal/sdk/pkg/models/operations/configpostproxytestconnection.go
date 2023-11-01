@@ -4,8 +4,7 @@ package operations
 
 import (
 	"Metadefender/internal/sdk/pkg/models/shared"
-	"bytes"
-	"encoding/json"
+	"Metadefender/internal/sdk/pkg/utils"
 	"errors"
 	"net/http"
 )
@@ -15,6 +14,20 @@ type ConfigPostProxyTestconnectionRequest struct {
 	// Generated `session_id` from [Login](/mdcore/metadefender-core/ref#userlogin) call can be used as an `apikey` for API calls that require authentication.
 	//
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
+}
+
+func (o *ConfigPostProxyTestconnectionRequest) GetPostProxyRequest() *shared.PostProxyRequest {
+	if o == nil {
+		return nil
+	}
+	return o.PostProxyRequest
+}
+
+func (o *ConfigPostProxyTestconnectionRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
 }
 
 type ConfigPostProxyTestconnection400ApplicationJSONType string
@@ -61,30 +74,23 @@ func CreateConfigPostProxyTestconnection400ApplicationJSONProxyRequiresAuthentic
 }
 
 func (u *ConfigPostProxyTestconnection400ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	missingPort := new(shared.MissingPort)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&missingPort); err == nil {
+	if err := utils.UnmarshalJSON(data, &missingPort, "", true, true); err == nil {
 		u.MissingPort = missingPort
 		u.Type = ConfigPostProxyTestconnection400ApplicationJSONTypeMissingPort
 		return nil
 	}
 
 	missingServerAddress := new(shared.MissingServerAddress)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&missingServerAddress); err == nil {
+	if err := utils.UnmarshalJSON(data, &missingServerAddress, "", true, true); err == nil {
 		u.MissingServerAddress = missingServerAddress
 		u.Type = ConfigPostProxyTestconnection400ApplicationJSONTypeMissingServerAddress
 		return nil
 	}
 
 	proxyRequiresAuthentication := new(shared.ProxyRequiresAuthentication)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&proxyRequiresAuthentication); err == nil {
+	if err := utils.UnmarshalJSON(data, &proxyRequiresAuthentication, "", true, true); err == nil {
 		u.ProxyRequiresAuthentication = proxyRequiresAuthentication
 		u.Type = ConfigPostProxyTestconnection400ApplicationJSONTypeProxyRequiresAuthentication
 		return nil
@@ -95,23 +101,30 @@ func (u *ConfigPostProxyTestconnection400ApplicationJSON) UnmarshalJSON(data []b
 
 func (u ConfigPostProxyTestconnection400ApplicationJSON) MarshalJSON() ([]byte, error) {
 	if u.MissingPort != nil {
-		return json.Marshal(u.MissingPort)
+		return utils.MarshalJSON(u.MissingPort, "", true)
 	}
 
 	if u.MissingServerAddress != nil {
-		return json.Marshal(u.MissingServerAddress)
+		return utils.MarshalJSON(u.MissingServerAddress, "", true)
 	}
 
 	if u.ProxyRequiresAuthentication != nil {
-		return json.Marshal(u.ProxyRequiresAuthentication)
+		return utils.MarshalJSON(u.ProxyRequiresAuthentication, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 // ConfigPostProxyTestconnection200ApplicationJSON - Request processed successfully
 type ConfigPostProxyTestconnection200ApplicationJSON struct {
 	Result *string `json:"result,omitempty"`
+}
+
+func (o *ConfigPostProxyTestconnection200ApplicationJSON) GetResult() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Result
 }
 
 type ConfigPostProxyTestconnectionResponse struct {
@@ -125,4 +138,39 @@ type ConfigPostProxyTestconnectionResponse struct {
 	ConfigPostProxyTestconnection200ApplicationJSONObject *ConfigPostProxyTestconnection200ApplicationJSON
 	// Bad Request (e.g. invalid header, apikey is missing or invalid).
 	ConfigPostProxyTestconnection400ApplicationJSONOneOf *ConfigPostProxyTestconnection400ApplicationJSON
+}
+
+func (o *ConfigPostProxyTestconnectionResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigPostProxyTestconnectionResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigPostProxyTestconnectionResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigPostProxyTestconnectionResponse) GetConfigPostProxyTestconnection200ApplicationJSONObject() *ConfigPostProxyTestconnection200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigPostProxyTestconnection200ApplicationJSONObject
+}
+
+func (o *ConfigPostProxyTestconnectionResponse) GetConfigPostProxyTestconnection400ApplicationJSONOneOf() *ConfigPostProxyTestconnection400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigPostProxyTestconnection400ApplicationJSONOneOf
 }

@@ -13,3 +13,10 @@ type AdminConfigSessioncookie struct {
 	//
 	Samesite *float64 `json:"samesite,omitempty"`
 }
+
+func (o *AdminConfigSessioncookie) GetSamesite() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Samesite
+}

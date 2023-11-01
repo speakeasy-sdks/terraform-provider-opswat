@@ -6,3 +6,10 @@ type InternalServerError struct {
 	// Internal server error
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *InternalServerError) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

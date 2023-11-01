@@ -25,3 +25,59 @@ type UserRequest struct {
 	// Configuration of Management Console for this user.
 	UISettings *UserRequestUISettings `json:"ui_settings,omitempty"`
 }
+
+func (o *UserRequest) GetAPIKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.APIKey
+}
+
+func (o *UserRequest) GetDirectoryID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.DirectoryID
+}
+
+func (o *UserRequest) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *UserRequest) GetEmail() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Email
+}
+
+func (o *UserRequest) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UserRequest) GetPassword() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Password
+}
+
+func (o *UserRequest) GetRoles() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Roles
+}
+
+func (o *UserRequest) GetUISettings() *UserRequestUISettings {
+	if o == nil {
+		return nil
+	}
+	return o.UISettings
+}

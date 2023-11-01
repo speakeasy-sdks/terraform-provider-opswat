@@ -14,10 +14,31 @@ type ConfigAuditLogRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *ConfigAuditLogRequest) GetAdminCleanup() *shared.AdminCleanup {
+	if o == nil {
+		return nil
+	}
+	return o.AdminCleanup
+}
+
+func (o *ConfigAuditLogRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // ConfigAuditLog500ApplicationJSON - Unexpected event on server
 type ConfigAuditLog500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigAuditLog500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ConfigAuditLog405ApplicationJSON - The user has no rights for this operation.
@@ -26,16 +47,37 @@ type ConfigAuditLog405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigAuditLog405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigAuditLog403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigAuditLog403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigAuditLog403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigAuditLog200ApplicationJSON - Request processed successfully
 type ConfigAuditLog200ApplicationJSON struct {
 	// The number of hours of data retention. Anything older than this number will be deleted.
 	Cleanuprange *int64 `json:"cleanuprange,omitempty"`
+}
+
+func (o *ConfigAuditLog200ApplicationJSON) GetCleanuprange() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Cleanuprange
 }
 
 type ConfigAuditLogResponse struct {
@@ -53,4 +95,53 @@ type ConfigAuditLogResponse struct {
 	ConfigAuditLog405ApplicationJSONObject *ConfigAuditLog405ApplicationJSON
 	// Unexpected event on server
 	ConfigAuditLog500ApplicationJSONObject *ConfigAuditLog500ApplicationJSON
+}
+
+func (o *ConfigAuditLogResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigAuditLogResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigAuditLogResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigAuditLogResponse) GetConfigAuditLog200ApplicationJSONObject() *ConfigAuditLog200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigAuditLog200ApplicationJSONObject
+}
+
+func (o *ConfigAuditLogResponse) GetConfigAuditLog403ApplicationJSONObject() *ConfigAuditLog403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigAuditLog403ApplicationJSONObject
+}
+
+func (o *ConfigAuditLogResponse) GetConfigAuditLog405ApplicationJSONObject() *ConfigAuditLog405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigAuditLog405ApplicationJSONObject
+}
+
+func (o *ConfigAuditLogResponse) GetConfigAuditLog500ApplicationJSONObject() *ConfigAuditLog500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigAuditLog500ApplicationJSONObject
 }

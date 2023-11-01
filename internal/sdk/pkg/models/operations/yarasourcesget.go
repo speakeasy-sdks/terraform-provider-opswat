@@ -13,16 +13,37 @@ type YaraSourcesGetRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *YaraSourcesGetRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // YaraSourcesGet500ApplicationJSON - Unexpected event on server
 type YaraSourcesGet500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *YaraSourcesGet500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // YaraSourcesGet403ApplicationJSON - Invalid user information or Not Allowed
 type YaraSourcesGet403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *YaraSourcesGet403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type YaraSourcesGetResponse struct {
@@ -38,4 +59,46 @@ type YaraSourcesGetResponse struct {
 	YaraSourcesGet403ApplicationJSONObject *YaraSourcesGet403ApplicationJSON
 	// Unexpected event on server
 	YaraSourcesGet500ApplicationJSONObject *YaraSourcesGet500ApplicationJSON
+}
+
+func (o *YaraSourcesGetResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *YaraSourcesGetResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *YaraSourcesGetResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *YaraSourcesGetResponse) GetYaraSourcesObject() *shared.YaraSourcesObject {
+	if o == nil {
+		return nil
+	}
+	return o.YaraSourcesObject
+}
+
+func (o *YaraSourcesGetResponse) GetYaraSourcesGet403ApplicationJSONObject() *YaraSourcesGet403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.YaraSourcesGet403ApplicationJSONObject
+}
+
+func (o *YaraSourcesGetResponse) GetYaraSourcesGet500ApplicationJSONObject() *YaraSourcesGet500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.YaraSourcesGet500ApplicationJSONObject
 }

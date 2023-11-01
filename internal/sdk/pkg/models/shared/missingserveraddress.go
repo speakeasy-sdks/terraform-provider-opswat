@@ -6,3 +6,10 @@ type MissingServerAddress struct {
 	// Missing server address
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *MissingServerAddress) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

@@ -91,6 +91,62 @@ type FileTypeResponseFileInfo struct {
 	TypeIds []string `json:"type_ids"`
 }
 
+func (o *FileTypeResponseFileInfo) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *FileTypeResponseFileInfo) GetEncrypted() bool {
+	if o == nil {
+		return false
+	}
+	return o.Encrypted
+}
+
+func (o *FileTypeResponseFileInfo) GetExtensions() string {
+	if o == nil {
+		return ""
+	}
+	return o.Extensions
+}
+
+func (o *FileTypeResponseFileInfo) GetGroupID() string {
+	if o == nil {
+		return ""
+	}
+	return o.GroupID
+}
+
+func (o *FileTypeResponseFileInfo) GetGroupIDs() []FileTypeResponseFileInfoGroupIDs {
+	if o == nil {
+		return []FileTypeResponseFileInfoGroupIDs{}
+	}
+	return o.GroupIDs
+}
+
+func (o *FileTypeResponseFileInfo) GetType() string {
+	if o == nil {
+		return ""
+	}
+	return o.Type
+}
+
+func (o *FileTypeResponseFileInfo) GetTypeID() string {
+	if o == nil {
+		return ""
+	}
+	return o.TypeID
+}
+
+func (o *FileTypeResponseFileInfo) GetTypeIds() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.TypeIds
+}
+
 // FileTypeResponseFileInfoDetails - Detailed information.
 type FileTypeResponseFileInfoDetails struct {
 }
@@ -108,4 +164,32 @@ type FileTypeResponse struct {
 	FileMetadata *FileTypeResponseFileMetadata `json:"file_metadata,omitempty"`
 	// SHA256 Hash of user-interface template. For web console only.
 	ResultTemplateHash *string `json:"result_template_hash,omitempty"`
+}
+
+func (o *FileTypeResponse) GetFileInfo() FileTypeResponseFileInfo {
+	if o == nil {
+		return FileTypeResponseFileInfo{}
+	}
+	return o.FileInfo
+}
+
+func (o *FileTypeResponse) GetFileInfoDetails() *FileTypeResponseFileInfoDetails {
+	if o == nil {
+		return nil
+	}
+	return o.FileInfoDetails
+}
+
+func (o *FileTypeResponse) GetFileMetadata() *FileTypeResponseFileMetadata {
+	if o == nil {
+		return nil
+	}
+	return o.FileMetadata
+}
+
+func (o *FileTypeResponse) GetResultTemplateHash() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ResultTemplateHash
 }

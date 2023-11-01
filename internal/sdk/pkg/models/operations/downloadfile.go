@@ -14,10 +14,31 @@ type DownloadFileRequest struct {
 	DataID string `pathParam:"style=simple,explode=false,name=data_id"`
 }
 
+func (o *DownloadFileRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *DownloadFileRequest) GetDataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DataID
+}
+
 // DownloadFile500ApplicationJSON - Unexpected event on server
 type DownloadFile500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *DownloadFile500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // DownloadFile405ApplicationJSON - The user has no rights for this operation.
@@ -26,10 +47,24 @@ type DownloadFile405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *DownloadFile405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // DownloadFile404ApplicationJSON - File could not be found
 type DownloadFile404ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *DownloadFile404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type DownloadFileResponse struct {
@@ -47,4 +82,53 @@ type DownloadFileResponse struct {
 	DownloadFile405ApplicationJSONObject *DownloadFile405ApplicationJSON
 	// Unexpected event on server
 	DownloadFile500ApplicationJSONObject *DownloadFile500ApplicationJSON
+}
+
+func (o *DownloadFileResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DownloadFileResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DownloadFileResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *DownloadFileResponse) GetDownloadFile200ApplicationOctetStreamBinaryString() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadFile200ApplicationOctetStreamBinaryString
+}
+
+func (o *DownloadFileResponse) GetDownloadFile404ApplicationJSONObject() *DownloadFile404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadFile404ApplicationJSONObject
+}
+
+func (o *DownloadFileResponse) GetDownloadFile405ApplicationJSONObject() *DownloadFile405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadFile405ApplicationJSONObject
+}
+
+func (o *DownloadFileResponse) GetDownloadFile500ApplicationJSONObject() *DownloadFile500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadFile500ApplicationJSONObject
 }

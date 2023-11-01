@@ -8,3 +8,10 @@ type AdminConfigFileSync struct {
 	//
 	Timeout *float64 `json:"timeout,omitempty"`
 }
+
+func (o *AdminConfigFileSync) GetTimeout() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Timeout
+}

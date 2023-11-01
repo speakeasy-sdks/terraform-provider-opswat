@@ -6,3 +6,10 @@ type NoAvailableRule struct {
 	// No available rule is present for scanning.
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *NoAvailableRule) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

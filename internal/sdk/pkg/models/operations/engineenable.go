@@ -14,10 +14,31 @@ type EngineEnableRequest struct {
 	EngineID string `pathParam:"style=simple,explode=false,name=engineId"`
 }
 
+func (o *EngineEnableRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
+func (o *EngineEnableRequest) GetEngineID() string {
+	if o == nil {
+		return ""
+	}
+	return o.EngineID
+}
+
 // EngineEnable500ApplicationJSON - Unexpected event on server
 type EngineEnable500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *EngineEnable500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // EngineEnable405ApplicationJSON - The user has no rights for this operation.
@@ -26,10 +47,24 @@ type EngineEnable405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *EngineEnable405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // EngineEnable403ApplicationJSON - Invalid user information or Not Allowed
 type EngineEnable403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *EngineEnable403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // EngineEnable400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
@@ -38,9 +73,23 @@ type EngineEnable400ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *EngineEnable400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // EngineEnable200ApplicationJSON - Request processed successfully
 type EngineEnable200ApplicationJSON struct {
 	Result *string `json:"result,omitempty"`
+}
+
+func (o *EngineEnable200ApplicationJSON) GetResult() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Result
 }
 
 type EngineEnableResponse struct {
@@ -60,4 +109,60 @@ type EngineEnableResponse struct {
 	EngineEnable405ApplicationJSONObject *EngineEnable405ApplicationJSON
 	// Unexpected event on server
 	EngineEnable500ApplicationJSONObject *EngineEnable500ApplicationJSON
+}
+
+func (o *EngineEnableResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *EngineEnableResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *EngineEnableResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *EngineEnableResponse) GetEngineEnable200ApplicationJSONObject() *EngineEnable200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineEnable200ApplicationJSONObject
+}
+
+func (o *EngineEnableResponse) GetEngineEnable400ApplicationJSONObject() *EngineEnable400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineEnable400ApplicationJSONObject
+}
+
+func (o *EngineEnableResponse) GetEngineEnable403ApplicationJSONObject() *EngineEnable403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineEnable403ApplicationJSONObject
+}
+
+func (o *EngineEnableResponse) GetEngineEnable405ApplicationJSONObject() *EngineEnable405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineEnable405ApplicationJSONObject
+}
+
+func (o *EngineEnableResponse) GetEngineEnable500ApplicationJSONObject() *EngineEnable500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineEnable500ApplicationJSONObject
 }

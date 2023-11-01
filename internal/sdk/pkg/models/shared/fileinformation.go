@@ -100,3 +100,87 @@ type FileInformation struct {
 	// The timestamp when upload progress finished (all bytes received) (in milliseconds)
 	UploadTimestamp *string `json:"upload_timestamp,omitempty"`
 }
+
+func (o *FileInformation) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *FileInformation) GetFileSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.FileSize
+}
+
+func (o *FileInformation) GetFileType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileType
+}
+
+func (o *FileInformation) GetFileTypeDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileTypeDescription
+}
+
+func (o *FileInformation) GetMd5() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Md5
+}
+
+func (o *FileInformation) GetReceiveDataTimestamp() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ReceiveDataTimestamp
+}
+
+func (o *FileInformation) GetSha1() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Sha1
+}
+
+func (o *FileInformation) GetSha256() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Sha256
+}
+
+func (o *FileInformation) GetSignerInfos() []SignerInfo {
+	if o == nil {
+		return nil
+	}
+	return o.SignerInfos
+}
+
+func (o *FileInformation) GetTypeCategory() []FileInformationTypeCategory {
+	if o == nil {
+		return nil
+	}
+	return o.TypeCategory
+}
+
+func (o *FileInformation) GetUploadTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.UploadTime
+}
+
+func (o *FileInformation) GetUploadTimestamp() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UploadTimestamp
+}

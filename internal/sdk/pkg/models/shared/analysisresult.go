@@ -53,6 +53,48 @@ type AnalysisResultProcessInfoPostProcessing struct {
 	SanitizationDetails *DeepCDRDetails `json:"sanitization_details,omitempty"`
 }
 
+func (o *AnalysisResultProcessInfoPostProcessing) GetActionsFailed() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ActionsFailed
+}
+
+func (o *AnalysisResultProcessInfoPostProcessing) GetActionsRan() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ActionsRan
+}
+
+func (o *AnalysisResultProcessInfoPostProcessing) GetConvertedDestination() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ConvertedDestination
+}
+
+func (o *AnalysisResultProcessInfoPostProcessing) GetConvertedTo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ConvertedTo
+}
+
+func (o *AnalysisResultProcessInfoPostProcessing) GetCopyMoveDestination() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CopyMoveDestination
+}
+
+func (o *AnalysisResultProcessInfoPostProcessing) GetSanitizationDetails() *DeepCDRDetails {
+	if o == nil {
+		return nil
+	}
+	return o.SanitizationDetails
+}
+
 // AnalysisResultProcessInfoProcessingTimeDetails - Starting with MetaDefender Core 4.19.1, processing time on each major workflow processing step is calculated.
 type AnalysisResultProcessInfoProcessingTimeDetails struct {
 	// AV engines' processing time.
@@ -80,6 +122,76 @@ type AnalysisResultProcessInfoProcessingTimeDetails struct {
 	VulTime *int64 `json:"vul_time,omitempty"`
 	// Yara engine's processing time.
 	YaraTime *int64 `json:"yara_time,omitempty"`
+}
+
+func (o *AnalysisResultProcessInfoProcessingTimeDetails) GetAvScanTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.AvScanTime
+}
+
+func (o *AnalysisResultProcessInfoProcessingTimeDetails) GetCdrTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.CdrTime
+}
+
+func (o *AnalysisResultProcessInfoProcessingTimeDetails) GetDlpTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.DlpTime
+}
+
+func (o *AnalysisResultProcessInfoProcessingTimeDetails) GetExtractionTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ExtractionTime
+}
+
+func (o *AnalysisResultProcessInfoProcessingTimeDetails) GetFiletypeTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.FiletypeTime
+}
+
+func (o *AnalysisResultProcessInfoProcessingTimeDetails) GetOpswatfilescanTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.OpswatfilescanTime
+}
+
+func (o *AnalysisResultProcessInfoProcessingTimeDetails) GetOthersTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.OthersTime
+}
+
+func (o *AnalysisResultProcessInfoProcessingTimeDetails) GetParseDgsgTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ParseDgsgTime
+}
+
+func (o *AnalysisResultProcessInfoProcessingTimeDetails) GetVulTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.VulTime
+}
+
+func (o *AnalysisResultProcessInfoProcessingTimeDetails) GetYaraTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.YaraTime
 }
 
 // AnalysisResultProcessInfo - Processing information
@@ -120,6 +232,111 @@ type AnalysisResultProcessInfo struct {
 	Verdicts []string `json:"verdicts,omitempty"`
 }
 
+func (o *AnalysisResultProcessInfo) GetBlockedReason() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BlockedReason
+}
+
+func (o *AnalysisResultProcessInfo) GetBlockedReasons() []string {
+	if o == nil {
+		return nil
+	}
+	return o.BlockedReasons
+}
+
+func (o *AnalysisResultProcessInfo) GetFileTypeSkippedScan() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.FileTypeSkippedScan
+}
+
+func (o *AnalysisResultProcessInfo) GetHashTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.HashTime
+}
+
+func (o *AnalysisResultProcessInfo) GetOutdatedData() []AnalysisResultProcessInfoOutdatedData {
+	if o == nil {
+		return nil
+	}
+	return o.OutdatedData
+}
+
+func (o *AnalysisResultProcessInfo) GetPostProcessing() *AnalysisResultProcessInfoPostProcessing {
+	if o == nil {
+		return nil
+	}
+	return o.PostProcessing
+}
+
+func (o *AnalysisResultProcessInfo) GetProcessingTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ProcessingTime
+}
+
+func (o *AnalysisResultProcessInfo) GetProcessingTimeDetails() *AnalysisResultProcessInfoProcessingTimeDetails {
+	if o == nil {
+		return nil
+	}
+	return o.ProcessingTimeDetails
+}
+
+func (o *AnalysisResultProcessInfo) GetProfile() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Profile
+}
+
+func (o *AnalysisResultProcessInfo) GetProgressPercentage() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ProgressPercentage
+}
+
+func (o *AnalysisResultProcessInfo) GetQueueTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.QueueTime
+}
+
+func (o *AnalysisResultProcessInfo) GetResult() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Result
+}
+
+func (o *AnalysisResultProcessInfo) GetUserAgent() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserAgent
+}
+
+func (o *AnalysisResultProcessInfo) GetUsername() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Username
+}
+
+func (o *AnalysisResultProcessInfo) GetVerdicts() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Verdicts
+}
+
 type AnalysisResult struct {
 	// data identifier of the requested file
 	DataID *string `json:"data_id,omitempty"`
@@ -143,4 +360,81 @@ type AnalysisResult struct {
 	VulnerabilityInfo *VulnerabilityResponse `json:"vulnerability_info,omitempty"`
 	// Information on data that matched yara rules
 	Yara *YaraReport `json:"yara,omitempty"`
+}
+
+func (o *AnalysisResult) GetDataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DataID
+}
+
+func (o *AnalysisResult) GetDlpInfo() *DLPResponse {
+	if o == nil {
+		return nil
+	}
+	return o.DlpInfo
+}
+
+func (o *AnalysisResult) GetDownloadInfo() *DownloadInfo {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadInfo
+}
+
+func (o *AnalysisResult) GetExtractionInfo() *ExtractionInfo {
+	if o == nil {
+		return nil
+	}
+	return o.ExtractionInfo
+}
+
+func (o *AnalysisResult) GetFileInfo() *FileInformation {
+	if o == nil {
+		return nil
+	}
+	return o.FileInfo
+}
+
+func (o *AnalysisResult) GetFiletypeInfo() *FileTypeResponse {
+	if o == nil {
+		return nil
+	}
+	return o.FiletypeInfo
+}
+
+func (o *AnalysisResult) GetOpswatfilescanInfo() *OPSWATFilescanResponse {
+	if o == nil {
+		return nil
+	}
+	return o.OpswatfilescanInfo
+}
+
+func (o *AnalysisResult) GetProcessInfo() *AnalysisResultProcessInfo {
+	if o == nil {
+		return nil
+	}
+	return o.ProcessInfo
+}
+
+func (o *AnalysisResult) GetScanResults() *MetascanReport {
+	if o == nil {
+		return nil
+	}
+	return o.ScanResults
+}
+
+func (o *AnalysisResult) GetVulnerabilityInfo() *VulnerabilityResponse {
+	if o == nil {
+		return nil
+	}
+	return o.VulnerabilityInfo
+}
+
+func (o *AnalysisResult) GetYara() *YaraReport {
+	if o == nil {
+		return nil
+	}
+	return o.Yara
 }

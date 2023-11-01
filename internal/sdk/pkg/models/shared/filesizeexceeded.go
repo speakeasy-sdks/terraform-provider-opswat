@@ -6,3 +6,10 @@ type FileSizeExceeded struct {
 	// Failed to request scan. File size exceeded the maximum size permitted by your configuration.
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *FileSizeExceeded) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

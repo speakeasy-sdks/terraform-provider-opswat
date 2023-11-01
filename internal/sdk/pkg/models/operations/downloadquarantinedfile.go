@@ -14,10 +14,31 @@ type DownloadQuarantinedFileRequest struct {
 	Sha256 string `pathParam:"style=simple,explode=false,name=sha256"`
 }
 
+func (o *DownloadQuarantinedFileRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
+func (o *DownloadQuarantinedFileRequest) GetSha256() string {
+	if o == nil {
+		return ""
+	}
+	return o.Sha256
+}
+
 // DownloadQuarantinedFile500ApplicationJSON - Unexpected event on server
 type DownloadQuarantinedFile500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *DownloadQuarantinedFile500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // DownloadQuarantinedFile404ApplicationJSON - Requests resource was not found.
@@ -26,10 +47,24 @@ type DownloadQuarantinedFile404ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *DownloadQuarantinedFile404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // DownloadQuarantinedFile403ApplicationJSON - Invalid user information or Not Allowed
 type DownloadQuarantinedFile403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *DownloadQuarantinedFile403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type DownloadQuarantinedFileResponse struct {
@@ -47,4 +82,53 @@ type DownloadQuarantinedFileResponse struct {
 	DownloadQuarantinedFile404ApplicationJSONObject *DownloadQuarantinedFile404ApplicationJSON
 	// Unexpected event on server
 	DownloadQuarantinedFile500ApplicationJSONObject *DownloadQuarantinedFile500ApplicationJSON
+}
+
+func (o *DownloadQuarantinedFileResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DownloadQuarantinedFileResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DownloadQuarantinedFileResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *DownloadQuarantinedFileResponse) GetDownloadQuarantinedFile200ApplicationOctetStreamBinaryString() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadQuarantinedFile200ApplicationOctetStreamBinaryString
+}
+
+func (o *DownloadQuarantinedFileResponse) GetDownloadQuarantinedFile403ApplicationJSONObject() *DownloadQuarantinedFile403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadQuarantinedFile403ApplicationJSONObject
+}
+
+func (o *DownloadQuarantinedFileResponse) GetDownloadQuarantinedFile404ApplicationJSONObject() *DownloadQuarantinedFile404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadQuarantinedFile404ApplicationJSONObject
+}
+
+func (o *DownloadQuarantinedFileResponse) GetDownloadQuarantinedFile500ApplicationJSONObject() *DownloadQuarantinedFile500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadQuarantinedFile500ApplicationJSONObject
 }

@@ -17,10 +17,31 @@ type FileAnalysisGetAllChildFilesRequest struct {
 	DataID string `pathParam:"style=simple,explode=false,name=data_id"`
 }
 
+func (o *FileAnalysisGetAllChildFilesRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *FileAnalysisGetAllChildFilesRequest) GetDataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DataID
+}
+
 // FileAnalysisGetAllChildFiles500ApplicationJSON - Unexpected event on server
 type FileAnalysisGetAllChildFiles500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *FileAnalysisGetAllChildFiles500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type FileAnalysisGetAllChildFilesResponse struct {
@@ -34,4 +55,39 @@ type FileAnalysisGetAllChildFilesResponse struct {
 	RawResponse *http.Response
 	// Unexpected event on server
 	FileAnalysisGetAllChildFiles500ApplicationJSONObject *FileAnalysisGetAllChildFiles500ApplicationJSON
+}
+
+func (o *FileAnalysisGetAllChildFilesResponse) GetAnalysisResultAllExtractedFiles() *shared.AnalysisResultAllExtractedFiles {
+	if o == nil {
+		return nil
+	}
+	return o.AnalysisResultAllExtractedFiles
+}
+
+func (o *FileAnalysisGetAllChildFilesResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *FileAnalysisGetAllChildFilesResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *FileAnalysisGetAllChildFilesResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *FileAnalysisGetAllChildFilesResponse) GetFileAnalysisGetAllChildFiles500ApplicationJSONObject() *FileAnalysisGetAllChildFiles500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisGetAllChildFiles500ApplicationJSONObject
 }

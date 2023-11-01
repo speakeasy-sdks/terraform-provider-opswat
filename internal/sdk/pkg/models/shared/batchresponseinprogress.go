@@ -19,6 +19,34 @@ type BatchResponseInProgressBatchFilesFilesInBatchProcessInfo struct {
 	Verdicts []string `json:"verdicts,omitempty"`
 }
 
+func (o *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo) GetBlockedReason() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BlockedReason
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo) GetProgressPercentage() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ProgressPercentage
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo) GetResult() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Result
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo) GetVerdicts() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Verdicts
+}
+
 // BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA - Processing result and its index
 // * `No Threat Detected`: 0
 // * `Infected`: 1
@@ -235,6 +263,83 @@ type BatchResponseInProgressBatchFilesFilesInBatch struct {
 	ScannedWith *int64 `json:"scanned_with,omitempty"`
 }
 
+func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetDataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DataID
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetDetectedBy() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.DetectedBy
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetFileSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.FileSize
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetFileType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileType
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetFileTypeDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileTypeDescription
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetProcessInfo() *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo {
+	if o == nil {
+		return nil
+	}
+	return o.ProcessInfo
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetProgressPercentage() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ProgressPercentage
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetScanAllResultA() *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA {
+	if o == nil {
+		return nil
+	}
+	return o.ScanAllResultA
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetScanAllResultI() *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI {
+	if o == nil {
+		return nil
+	}
+	return o.ScanAllResultI
+}
+
+func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetScannedWith() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ScannedWith
+}
+
 // BatchResponseInProgressBatchFiles - Information about the files included in this batch.
 type BatchResponseInProgressBatchFiles struct {
 	// How many files/entries in the batch.
@@ -245,6 +350,34 @@ type BatchResponseInProgressBatchFiles struct {
 	FirstIndex *int64 `json:"first_index,omitempty"`
 	// The number of entries per page.
 	PageSize *int64 `json:"page_size,omitempty"`
+}
+
+func (o *BatchResponseInProgressBatchFiles) GetBatchCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.BatchCount
+}
+
+func (o *BatchResponseInProgressBatchFiles) GetFilesInBatch() []BatchResponseInProgressBatchFilesFilesInBatch {
+	if o == nil {
+		return nil
+	}
+	return o.FilesInBatch
+}
+
+func (o *BatchResponseInProgressBatchFiles) GetFirstIndex() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.FirstIndex
+}
+
+func (o *BatchResponseInProgressBatchFiles) GetPageSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.PageSize
 }
 
 // BatchResponseInProgressProcessInfo - Overall batch process result
@@ -261,6 +394,48 @@ type BatchResponseInProgressProcessInfo struct {
 	UserAgent *string `json:"user_agent,omitempty"`
 	// User identifier who submitted scan request earlier.
 	Username *string `json:"username,omitempty"`
+}
+
+func (o *BatchResponseInProgressProcessInfo) GetBlockedReason() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BlockedReason
+}
+
+func (o *BatchResponseInProgressProcessInfo) GetFileTypeSkippedScan() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.FileTypeSkippedScan
+}
+
+func (o *BatchResponseInProgressProcessInfo) GetProfile() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Profile
+}
+
+func (o *BatchResponseInProgressProcessInfo) GetResult() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Result
+}
+
+func (o *BatchResponseInProgressProcessInfo) GetUserAgent() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserAgent
+}
+
+func (o *BatchResponseInProgressProcessInfo) GetUsername() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Username
 }
 
 // BatchResponseInProgressScanResultsScanAllResultA - Processing result and its index
@@ -470,6 +645,48 @@ type BatchResponseInProgressScanResults struct {
 	TotalTime *int64 `json:"total_time,omitempty"`
 }
 
+func (o *BatchResponseInProgressScanResults) GetBatchID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BatchID
+}
+
+func (o *BatchResponseInProgressScanResults) GetScanAllResultA() *BatchResponseInProgressScanResultsScanAllResultA {
+	if o == nil {
+		return nil
+	}
+	return o.ScanAllResultA
+}
+
+func (o *BatchResponseInProgressScanResults) GetScanAllResultI() *BatchResponseInProgressScanResultsScanAllResultI {
+	if o == nil {
+		return nil
+	}
+	return o.ScanAllResultI
+}
+
+func (o *BatchResponseInProgressScanResults) GetStartTime() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StartTime
+}
+
+func (o *BatchResponseInProgressScanResults) GetTotalAvs() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalAvs
+}
+
+func (o *BatchResponseInProgressScanResults) GetTotalTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalTime
+}
+
 // BatchResponseInProgress - The response for a Batch status request.
 type BatchResponseInProgress struct {
 	// Information about the files included in this batch.
@@ -484,4 +701,46 @@ type BatchResponseInProgress struct {
 	ScanResults *BatchResponseInProgressScanResults `json:"scan_results,omitempty"`
 	// Metadata submitted at batch creation.
 	UserData *string `json:"user_data,omitempty"`
+}
+
+func (o *BatchResponseInProgress) GetBatchFiles() *BatchResponseInProgressBatchFiles {
+	if o == nil {
+		return nil
+	}
+	return o.BatchFiles
+}
+
+func (o *BatchResponseInProgress) GetBatchID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BatchID
+}
+
+func (o *BatchResponseInProgress) GetIsClosed() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsClosed
+}
+
+func (o *BatchResponseInProgress) GetProcessInfo() *BatchResponseInProgressProcessInfo {
+	if o == nil {
+		return nil
+	}
+	return o.ProcessInfo
+}
+
+func (o *BatchResponseInProgress) GetScanResults() *BatchResponseInProgressScanResults {
+	if o == nil {
+		return nil
+	}
+	return o.ScanResults
+}
+
+func (o *BatchResponseInProgress) GetUserData() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserData
 }

@@ -6,3 +6,10 @@ type RedirectLinkNotSupported struct {
 	// Redirect link not supported.
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *RedirectLinkNotSupported) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

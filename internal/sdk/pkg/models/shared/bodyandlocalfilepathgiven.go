@@ -6,3 +6,10 @@ type BodyAndLocalFilePathGiven struct {
 	// Both body data and local file path were given.
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *BodyAndLocalFilePathGiven) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

@@ -43,6 +43,62 @@ type HashGetRequest struct {
 	Timerange *int64 `header:"style=simple,explode=false,name=timerange"`
 }
 
+func (o *HashGetRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *HashGetRequest) GetFirst() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.First
+}
+
+func (o *HashGetRequest) GetHash() string {
+	if o == nil {
+		return ""
+	}
+	return o.Hash
+}
+
+func (o *HashGetRequest) GetIncludeInprogress() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IncludeInprogress
+}
+
+func (o *HashGetRequest) GetRule() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Rule
+}
+
+func (o *HashGetRequest) GetSelfonly() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Selfonly
+}
+
+func (o *HashGetRequest) GetSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Size
+}
+
+func (o *HashGetRequest) GetTimerange() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Timerange
+}
+
 type HashGetResponse struct {
 	// Get information of file
 	AnalysisResult *shared.AnalysisResult
@@ -52,4 +108,32 @@ type HashGetResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+}
+
+func (o *HashGetResponse) GetAnalysisResult() *shared.AnalysisResult {
+	if o == nil {
+		return nil
+	}
+	return o.AnalysisResult
+}
+
+func (o *HashGetResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *HashGetResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *HashGetResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

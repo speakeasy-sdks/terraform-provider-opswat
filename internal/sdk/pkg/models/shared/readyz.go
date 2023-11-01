@@ -13,6 +13,13 @@ type ReadyzDatabase struct {
 	Status *bool `json:"status,omitempty"`
 }
 
+func (o *ReadyzDatabase) GetStatus() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
 type ReadyzEngines struct {
 	// Engine ID
 	EngineID *string `json:"engine_id,omitempty"`
@@ -20,6 +27,27 @@ type ReadyzEngines struct {
 	Required *bool `json:"required,omitempty"`
 	// Status
 	Status *bool `json:"status,omitempty"`
+}
+
+func (o *ReadyzEngines) GetEngineID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EngineID
+}
+
+func (o *ReadyzEngines) GetRequired() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Required
+}
+
+func (o *ReadyzEngines) GetStatus() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Status
 }
 
 // ReadyzLicenseStatus - License status
@@ -59,12 +87,33 @@ type ReadyzLicense struct {
 	Status *ReadyzLicenseStatus `json:"status,omitempty"`
 }
 
+func (o *ReadyzLicense) GetStatus() *ReadyzLicenseStatus {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
 // ReadyzNumberActiveAvEngines - Number of active AV engines
 type ReadyzNumberActiveAvEngines struct {
 	// Status
 	Status *bool `json:"status,omitempty"`
 	// User-defined threshold
 	Threshold *int64 `json:"threshold,omitempty"`
+}
+
+func (o *ReadyzNumberActiveAvEngines) GetStatus() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *ReadyzNumberActiveAvEngines) GetThreshold() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Threshold
 }
 
 // ReadyzScanQueue - Scan queue status
@@ -79,6 +128,34 @@ type ReadyzScanQueue struct {
 	Threshold *int64 `json:"threshold,omitempty"`
 }
 
+func (o *ReadyzScanQueue) GetMaxNumberInQueue() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.MaxNumberInQueue
+}
+
+func (o *ReadyzScanQueue) GetNumberInQueue() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.NumberInQueue
+}
+
+func (o *ReadyzScanQueue) GetStatus() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *ReadyzScanQueue) GetThreshold() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Threshold
+}
+
 type Readyz struct {
 	// Database connection
 	Database *ReadyzDatabase `json:"database,omitempty"`
@@ -90,4 +167,39 @@ type Readyz struct {
 	NumberActiveAvEngines *ReadyzNumberActiveAvEngines `json:"number_active_av_engines,omitempty"`
 	// Scan queue status
 	ScanQueue *ReadyzScanQueue `json:"scan_queue,omitempty"`
+}
+
+func (o *Readyz) GetDatabase() *ReadyzDatabase {
+	if o == nil {
+		return nil
+	}
+	return o.Database
+}
+
+func (o *Readyz) GetEngines() []ReadyzEngines {
+	if o == nil {
+		return nil
+	}
+	return o.Engines
+}
+
+func (o *Readyz) GetLicense() *ReadyzLicense {
+	if o == nil {
+		return nil
+	}
+	return o.License
+}
+
+func (o *Readyz) GetNumberActiveAvEngines() *ReadyzNumberActiveAvEngines {
+	if o == nil {
+		return nil
+	}
+	return o.NumberActiveAvEngines
+}
+
+func (o *Readyz) GetScanQueue() *ReadyzScanQueue {
+	if o == nil {
+		return nil
+	}
+	return o.ScanQueue
 }

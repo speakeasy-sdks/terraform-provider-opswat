@@ -14,10 +14,31 @@ type ConfigPutSessioncookieRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *ConfigPutSessioncookieRequest) GetAdminConfigSessioncookie() *shared.AdminConfigSessioncookie {
+	if o == nil {
+		return nil
+	}
+	return o.AdminConfigSessioncookie
+}
+
+func (o *ConfigPutSessioncookieRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // ConfigPutSessioncookie500ApplicationJSON - Unexpected event on server
 type ConfigPutSessioncookie500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigPutSessioncookie500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ConfigPutSessioncookie404ApplicationJSON - Requests resource was not found.
@@ -26,10 +47,24 @@ type ConfigPutSessioncookie404ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigPutSessioncookie404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigPutSessioncookie403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigPutSessioncookie403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigPutSessioncookie403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type ConfigPutSessioncookieResponse struct {
@@ -47,4 +82,53 @@ type ConfigPutSessioncookieResponse struct {
 	ConfigPutSessioncookie404ApplicationJSONObject *ConfigPutSessioncookie404ApplicationJSON
 	// Unexpected event on server
 	ConfigPutSessioncookie500ApplicationJSONObject *ConfigPutSessioncookie500ApplicationJSON
+}
+
+func (o *ConfigPutSessioncookieResponse) GetAdminConfigSessioncookie() *shared.AdminConfigSessioncookie {
+	if o == nil {
+		return nil
+	}
+	return o.AdminConfigSessioncookie
+}
+
+func (o *ConfigPutSessioncookieResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigPutSessioncookieResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigPutSessioncookieResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigPutSessioncookieResponse) GetConfigPutSessioncookie403ApplicationJSONObject() *ConfigPutSessioncookie403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigPutSessioncookie403ApplicationJSONObject
+}
+
+func (o *ConfigPutSessioncookieResponse) GetConfigPutSessioncookie404ApplicationJSONObject() *ConfigPutSessioncookie404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigPutSessioncookie404ApplicationJSONObject
+}
+
+func (o *ConfigPutSessioncookieResponse) GetConfigPutSessioncookie500ApplicationJSONObject() *ConfigPutSessioncookie500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigPutSessioncookie500ApplicationJSONObject
 }

@@ -6,3 +6,10 @@ type ProxyRequiresAuthentication struct {
 	// Test proxy connection failed. Error: Proxy requires authentication
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *ProxyRequiresAuthentication) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

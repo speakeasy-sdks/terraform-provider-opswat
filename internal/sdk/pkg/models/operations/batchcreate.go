@@ -23,10 +23,45 @@ type BatchCreateRequest struct {
 	UserAgent *string `header:"style=simple,explode=false,name=user_agent"`
 }
 
+func (o *BatchCreateRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *BatchCreateRequest) GetRule() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Rule
+}
+
+func (o *BatchCreateRequest) GetUserData() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserData
+}
+
+func (o *BatchCreateRequest) GetUserAgent() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserAgent
+}
+
 // BatchCreate500ApplicationJSON - Unexpected event on server
 type BatchCreate500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *BatchCreate500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // BatchCreate403ApplicationJSON - Invalid user information or Not Allowed
@@ -35,10 +70,24 @@ type BatchCreate403ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *BatchCreate403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // BatchCreate400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type BatchCreate400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *BatchCreate400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type BatchCreateResponse struct {
@@ -56,4 +105,53 @@ type BatchCreateResponse struct {
 	BatchCreate403ApplicationJSONObject *BatchCreate403ApplicationJSON
 	// Unexpected event on server
 	BatchCreate500ApplicationJSONObject *BatchCreate500ApplicationJSON
+}
+
+func (o *BatchCreateResponse) GetBatchID() *shared.BatchID {
+	if o == nil {
+		return nil
+	}
+	return o.BatchID
+}
+
+func (o *BatchCreateResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *BatchCreateResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *BatchCreateResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *BatchCreateResponse) GetBatchCreate400ApplicationJSONObject() *BatchCreate400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchCreate400ApplicationJSONObject
+}
+
+func (o *BatchCreateResponse) GetBatchCreate403ApplicationJSONObject() *BatchCreate403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchCreate403ApplicationJSONObject
+}
+
+func (o *BatchCreateResponse) GetBatchCreate500ApplicationJSONObject() *BatchCreate500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchCreate500ApplicationJSONObject
 }

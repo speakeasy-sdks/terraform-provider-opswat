@@ -6,3 +6,10 @@ type CallbackURLNotSupported struct {
 	// callbackurl is not supported
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *CallbackURLNotSupported) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

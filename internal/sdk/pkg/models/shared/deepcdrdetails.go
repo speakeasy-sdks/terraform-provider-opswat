@@ -75,6 +75,34 @@ type DeepCDRDetailsDetailsDetails struct {
 	ObjectName *string `json:"object_name,omitempty"`
 }
 
+func (o *DeepCDRDetailsDetailsDetails) GetAction() *DeepCDRDetailsDetailsDetailsAction {
+	if o == nil {
+		return nil
+	}
+	return o.Action
+}
+
+func (o *DeepCDRDetailsDetailsDetails) GetCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Count
+}
+
+func (o *DeepCDRDetailsDetailsDetails) GetObjectDetails() []string {
+	if o == nil {
+		return nil
+	}
+	return o.ObjectDetails
+}
+
+func (o *DeepCDRDetailsDetailsDetails) GetObjectName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ObjectName
+}
+
 type DeepCDRDetailsDetails struct {
 	// The type of action that was performed
 	Action DeepCDRDetailsDetailsAction `json:"action"`
@@ -92,6 +120,55 @@ type DeepCDRDetailsDetails struct {
 	ObjectName string `json:"object_name"`
 }
 
+func (o *DeepCDRDetailsDetails) GetAction() DeepCDRDetailsDetailsAction {
+	if o == nil {
+		return DeepCDRDetailsDetailsAction("")
+	}
+	return o.Action
+}
+
+func (o *DeepCDRDetailsDetails) GetCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Count
+}
+
+func (o *DeepCDRDetailsDetails) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *DeepCDRDetailsDetails) GetDetails() *DeepCDRDetailsDetailsDetails {
+	if o == nil {
+		return nil
+	}
+	return o.Details
+}
+
+func (o *DeepCDRDetailsDetails) GetFileName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileName
+}
+
+func (o *DeepCDRDetailsDetails) GetObjectDetails() []string {
+	if o == nil {
+		return nil
+	}
+	return o.ObjectDetails
+}
+
+func (o *DeepCDRDetailsDetails) GetObjectName() string {
+	if o == nil {
+		return ""
+	}
+	return o.ObjectName
+}
+
 // DeepCDRDetailsSanitizedFileInfo - Information of sanitized file.
 // Only applicable to individual file sanitization, or original archive document sanitization level.
 type DeepCDRDetailsSanitizedFileInfo struct {
@@ -99,6 +176,20 @@ type DeepCDRDetailsSanitizedFileInfo struct {
 	FileSize *int64 `json:"file_size,omitempty"`
 	// SHA256 hash of sanitized file.
 	Sha256 *string `json:"sha256,omitempty"`
+}
+
+func (o *DeepCDRDetailsSanitizedFileInfo) GetFileSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.FileSize
+}
+
+func (o *DeepCDRDetailsSanitizedFileInfo) GetSha256() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Sha256
 }
 
 // DeepCDRDetails - Deep CDR module returns forensic info to describe what happened during the process in the case file was successfully sanitized.
@@ -116,4 +207,32 @@ type DeepCDRDetails struct {
 	// Only applicable to individual file sanitization, or original archive document sanitization level.
 	//
 	SanitizedFileInfo *DeepCDRDetailsSanitizedFileInfo `json:"sanitized_file_info,omitempty"`
+}
+
+func (o *DeepCDRDetails) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *DeepCDRDetails) GetDetails() []DeepCDRDetailsDetails {
+	if o == nil {
+		return nil
+	}
+	return o.Details
+}
+
+func (o *DeepCDRDetails) GetFailureCategory() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FailureCategory
+}
+
+func (o *DeepCDRDetails) GetSanitizedFileInfo() *DeepCDRDetailsSanitizedFileInfo {
+	if o == nil {
+		return nil
+	}
+	return o.SanitizedFileInfo
 }

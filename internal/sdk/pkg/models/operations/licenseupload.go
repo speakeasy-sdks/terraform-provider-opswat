@@ -13,10 +13,31 @@ type LicenseUploadRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *LicenseUploadRequest) GetRequestBody() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RequestBody
+}
+
+func (o *LicenseUploadRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // LicenseUpload500ApplicationJSON - Unexpected event on server
 type LicenseUpload500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *LicenseUpload500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // LicenseUpload403ApplicationJSON - Invalid user information or Not Allowed
@@ -25,9 +46,23 @@ type LicenseUpload403ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *LicenseUpload403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // LicenseUpload200ApplicationJSON - Request processed successfully
 type LicenseUpload200ApplicationJSON struct {
 	Success *bool `json:"success,omitempty"`
+}
+
+func (o *LicenseUpload200ApplicationJSON) GetSuccess() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Success
 }
 
 type LicenseUploadResponse struct {
@@ -43,4 +78,46 @@ type LicenseUploadResponse struct {
 	LicenseUpload403ApplicationJSONObject *LicenseUpload403ApplicationJSON
 	// Unexpected event on server
 	LicenseUpload500ApplicationJSONObject *LicenseUpload500ApplicationJSON
+}
+
+func (o *LicenseUploadResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *LicenseUploadResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *LicenseUploadResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *LicenseUploadResponse) GetLicenseUpload200ApplicationJSONObject() *LicenseUpload200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.LicenseUpload200ApplicationJSONObject
+}
+
+func (o *LicenseUploadResponse) GetLicenseUpload403ApplicationJSONObject() *LicenseUpload403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.LicenseUpload403ApplicationJSONObject
+}
+
+func (o *LicenseUploadResponse) GetLicenseUpload500ApplicationJSONObject() *LicenseUpload500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.LicenseUpload500ApplicationJSONObject
 }

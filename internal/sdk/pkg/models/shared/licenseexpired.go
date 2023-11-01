@@ -6,3 +6,10 @@ type LicenseExpired struct {
 	// License is expired
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *LicenseExpired) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

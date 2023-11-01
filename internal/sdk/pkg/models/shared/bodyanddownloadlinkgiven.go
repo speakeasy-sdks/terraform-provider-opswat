@@ -6,3 +6,10 @@ type BodyAndDownloadLinkGiven struct {
 	// Both body data and download link were given.
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *BodyAndDownloadLinkGiven) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

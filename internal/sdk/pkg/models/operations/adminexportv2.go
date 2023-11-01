@@ -15,10 +15,31 @@ type AdminExportV2Request struct {
 	Password string `header:"style=simple,explode=false,name=password"`
 }
 
+func (o *AdminExportV2Request) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
+func (o *AdminExportV2Request) GetPassword() string {
+	if o == nil {
+		return ""
+	}
+	return o.Password
+}
+
 // AdminExportV2500ApplicationJSON - Unexpected event on server
 type AdminExportV2500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *AdminExportV2500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // AdminExportV2405ApplicationJSON - The user has no rights for this operation.
@@ -27,15 +48,36 @@ type AdminExportV2405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *AdminExportV2405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // AdminExportV2403ApplicationJSON - Invalid user information or Not Allowed
 type AdminExportV2403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *AdminExportV2403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // AdminExportV2400ApplicationJSON - Bad request
 type AdminExportV2400ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *AdminExportV2400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type AdminExportV2Response struct {
@@ -55,4 +97,60 @@ type AdminExportV2Response struct {
 	AdminExportV2405ApplicationJSONObject *AdminExportV2405ApplicationJSON
 	// Unexpected event on server
 	AdminExportV2500ApplicationJSONObject *AdminExportV2500ApplicationJSON
+}
+
+func (o *AdminExportV2Response) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *AdminExportV2Response) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *AdminExportV2Response) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *AdminExportV2Response) GetAdminExportV2200ApplicationOctetStreamBinaryString() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.AdminExportV2200ApplicationOctetStreamBinaryString
+}
+
+func (o *AdminExportV2Response) GetAdminExportV2400ApplicationJSONObject() *AdminExportV2400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AdminExportV2400ApplicationJSONObject
+}
+
+func (o *AdminExportV2Response) GetAdminExportV2403ApplicationJSONObject() *AdminExportV2403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AdminExportV2403ApplicationJSONObject
+}
+
+func (o *AdminExportV2Response) GetAdminExportV2405ApplicationJSONObject() *AdminExportV2405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AdminExportV2405ApplicationJSONObject
+}
+
+func (o *AdminExportV2Response) GetAdminExportV2500ApplicationJSONObject() *AdminExportV2500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AdminExportV2500ApplicationJSONObject
 }

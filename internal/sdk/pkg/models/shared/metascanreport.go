@@ -204,6 +204,13 @@ type MetascanReportScanDetails struct {
 	ClamAV *AVEngineScanReport `json:"ClamAV,omitempty"`
 }
 
+func (o *MetascanReportScanDetails) GetClamAV() *AVEngineScanReport {
+	if o == nil {
+		return nil
+	}
+	return o.ClamAV
+}
+
 // MetascanReport - Result of the scanning process.
 type MetascanReport struct {
 	// Data ID of the requested file
@@ -222,4 +229,60 @@ type MetascanReport struct {
 	TotalAvs *int64 `json:"total_avs,omitempty"`
 	// Total time elapsed during scan (in milliseconds).
 	TotalTime *int64 `json:"total_time,omitempty"`
+}
+
+func (o *MetascanReport) GetDataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DataID
+}
+
+func (o *MetascanReport) GetProgressPercentage() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ProgressPercentage
+}
+
+func (o *MetascanReport) GetScanAllResultA() *MetascanReportScanAllResultA {
+	if o == nil {
+		return nil
+	}
+	return o.ScanAllResultA
+}
+
+func (o *MetascanReport) GetScanAllResultI() *MetascanReportScanAllResultI {
+	if o == nil {
+		return nil
+	}
+	return o.ScanAllResultI
+}
+
+func (o *MetascanReport) GetScanDetails() *MetascanReportScanDetails {
+	if o == nil {
+		return nil
+	}
+	return o.ScanDetails
+}
+
+func (o *MetascanReport) GetStartTime() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StartTime
+}
+
+func (o *MetascanReport) GetTotalAvs() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalAvs
+}
+
+func (o *MetascanReport) GetTotalTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalTime
 }

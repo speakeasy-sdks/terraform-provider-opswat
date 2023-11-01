@@ -9,3 +9,10 @@ type ErrorWhileModifyingConfig struct {
 	//
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *ErrorWhileModifyingConfig) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

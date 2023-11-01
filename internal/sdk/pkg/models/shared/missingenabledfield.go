@@ -6,3 +6,10 @@ type MissingEnabledField struct {
 	// Missing enabled field
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *MissingEnabledField) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

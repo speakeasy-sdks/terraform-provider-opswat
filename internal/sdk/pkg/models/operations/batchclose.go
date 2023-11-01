@@ -15,10 +15,31 @@ type BatchCloseRequest struct {
 	BatchID string `pathParam:"style=simple,explode=false,name=batchId"`
 }
 
+func (o *BatchCloseRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *BatchCloseRequest) GetBatchID() string {
+	if o == nil {
+		return ""
+	}
+	return o.BatchID
+}
+
 // BatchClose500ApplicationJSON - Unexpected event on server
 type BatchClose500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *BatchClose500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // BatchClose404ApplicationJSON - Requests resource was not found.
@@ -27,16 +48,37 @@ type BatchClose404ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *BatchClose404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // BatchClose403ApplicationJSON - Invalid user information or Not Allowed
 type BatchClose403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *BatchClose403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // BatchClose400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type BatchClose400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *BatchClose400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type BatchCloseResponse struct {
@@ -56,4 +98,60 @@ type BatchCloseResponse struct {
 	BatchClose404ApplicationJSONObject *BatchClose404ApplicationJSON
 	// Unexpected event on server
 	BatchClose500ApplicationJSONObject *BatchClose500ApplicationJSON
+}
+
+func (o *BatchCloseResponse) GetBatchResponseClosed() *shared.BatchResponseClosed {
+	if o == nil {
+		return nil
+	}
+	return o.BatchResponseClosed
+}
+
+func (o *BatchCloseResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *BatchCloseResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *BatchCloseResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *BatchCloseResponse) GetBatchClose400ApplicationJSONObject() *BatchClose400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchClose400ApplicationJSONObject
+}
+
+func (o *BatchCloseResponse) GetBatchClose403ApplicationJSONObject() *BatchClose403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchClose403ApplicationJSONObject
+}
+
+func (o *BatchCloseResponse) GetBatchClose404ApplicationJSONObject() *BatchClose404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchClose404ApplicationJSONObject
+}
+
+func (o *BatchCloseResponse) GetBatchClose500ApplicationJSONObject() *BatchClose500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchClose500ApplicationJSONObject
 }

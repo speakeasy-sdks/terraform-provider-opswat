@@ -6,3 +6,10 @@ type FileUploadRejected struct {
 	// File upload rejected due to insufficient disk space
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *FileUploadRejected) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

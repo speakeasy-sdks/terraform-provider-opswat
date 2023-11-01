@@ -17,3 +17,45 @@ type PostProxyRequest struct {
 	// Username for proxy authentication
 	Username *string `json:"username,omitempty"`
 }
+
+func (o *PostProxyRequest) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *PostProxyRequest) GetExclusion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Exclusion
+}
+
+func (o *PostProxyRequest) GetPassword() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Password
+}
+
+func (o *PostProxyRequest) GetPort() string {
+	if o == nil {
+		return ""
+	}
+	return o.Port
+}
+
+func (o *PostProxyRequest) GetServer() string {
+	if o == nil {
+		return ""
+	}
+	return o.Server
+}
+
+func (o *PostProxyRequest) GetUsername() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Username
+}

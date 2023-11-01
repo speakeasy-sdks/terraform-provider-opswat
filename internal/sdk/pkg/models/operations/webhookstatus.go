@@ -14,10 +14,31 @@ type WebhookStatusRequest struct {
 	DataID string `pathParam:"style=simple,explode=false,name=data_id"`
 }
 
+func (o *WebhookStatusRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *WebhookStatusRequest) GetDataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DataID
+}
+
 // WebhookStatus500ApplicationJSON - Unexpected event on server
 type WebhookStatus500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *WebhookStatus500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // WebhookStatus404ApplicationJSON - Requests resource was not found.
@@ -26,16 +47,37 @@ type WebhookStatus404ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *WebhookStatus404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // WebhookStatus403ApplicationJSON - Invalid user information or Not Allowed
 type WebhookStatus403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *WebhookStatus403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // WebhookStatus400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type WebhookStatus400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *WebhookStatus400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // WebhookStatus200ApplicationJSON - Webhooks status is fetched successfully.
@@ -95,6 +137,34 @@ type WebhookStatus200ApplicationJSON struct {
 	URL *string `json:"url,omitempty"`
 }
 
+func (o *WebhookStatus200ApplicationJSON) GetDataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DataID
+}
+
+func (o *WebhookStatus200ApplicationJSON) GetRequestTime() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RequestTime
+}
+
+func (o *WebhookStatus200ApplicationJSON) GetStatusCode() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.StatusCode
+}
+
+func (o *WebhookStatus200ApplicationJSON) GetURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.URL
+}
+
 type WebhookStatusResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -112,4 +182,60 @@ type WebhookStatusResponse struct {
 	WebhookStatus404ApplicationJSONObject *WebhookStatus404ApplicationJSON
 	// Unexpected event on server
 	WebhookStatus500ApplicationJSONObject *WebhookStatus500ApplicationJSON
+}
+
+func (o *WebhookStatusResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *WebhookStatusResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *WebhookStatusResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *WebhookStatusResponse) GetWebhookStatus200ApplicationJSONObject() *WebhookStatus200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.WebhookStatus200ApplicationJSONObject
+}
+
+func (o *WebhookStatusResponse) GetWebhookStatus400ApplicationJSONObject() *WebhookStatus400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.WebhookStatus400ApplicationJSONObject
+}
+
+func (o *WebhookStatusResponse) GetWebhookStatus403ApplicationJSONObject() *WebhookStatus403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.WebhookStatus403ApplicationJSONObject
+}
+
+func (o *WebhookStatusResponse) GetWebhookStatus404ApplicationJSONObject() *WebhookStatus404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.WebhookStatus404ApplicationJSONObject
+}
+
+func (o *WebhookStatusResponse) GetWebhookStatus500ApplicationJSONObject() *WebhookStatus500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.WebhookStatus500ApplicationJSONObject
 }

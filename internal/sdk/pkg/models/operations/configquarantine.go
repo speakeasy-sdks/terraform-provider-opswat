@@ -14,10 +14,31 @@ type ConfigQuarantineRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *ConfigQuarantineRequest) GetAdminCleanup() *shared.AdminCleanup {
+	if o == nil {
+		return nil
+	}
+	return o.AdminCleanup
+}
+
+func (o *ConfigQuarantineRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // ConfigQuarantine500ApplicationJSON - Unexpected event on server
 type ConfigQuarantine500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigQuarantine500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ConfigQuarantine405ApplicationJSON - The user has no rights for this operation.
@@ -26,16 +47,37 @@ type ConfigQuarantine405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigQuarantine405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigQuarantine403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigQuarantine403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigQuarantine403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigQuarantine200ApplicationJSON - Request processed successfully
 type ConfigQuarantine200ApplicationJSON struct {
 	// The number of hours of data retention. Anything older than this number will be deleted.
 	Cleanuprange *int64 `json:"cleanuprange,omitempty"`
+}
+
+func (o *ConfigQuarantine200ApplicationJSON) GetCleanuprange() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Cleanuprange
 }
 
 type ConfigQuarantineResponse struct {
@@ -53,4 +95,53 @@ type ConfigQuarantineResponse struct {
 	ConfigQuarantine405ApplicationJSONObject *ConfigQuarantine405ApplicationJSON
 	// Unexpected event on server
 	ConfigQuarantine500ApplicationJSONObject *ConfigQuarantine500ApplicationJSON
+}
+
+func (o *ConfigQuarantineResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigQuarantineResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigQuarantineResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigQuarantineResponse) GetConfigQuarantine200ApplicationJSONObject() *ConfigQuarantine200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigQuarantine200ApplicationJSONObject
+}
+
+func (o *ConfigQuarantineResponse) GetConfigQuarantine403ApplicationJSONObject() *ConfigQuarantine403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigQuarantine403ApplicationJSONObject
+}
+
+func (o *ConfigQuarantineResponse) GetConfigQuarantine405ApplicationJSONObject() *ConfigQuarantine405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigQuarantine405ApplicationJSONObject
+}
+
+func (o *ConfigQuarantineResponse) GetConfigQuarantine500ApplicationJSONObject() *ConfigQuarantine500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigQuarantine500ApplicationJSONObject
 }

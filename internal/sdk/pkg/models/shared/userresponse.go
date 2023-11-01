@@ -23,3 +23,52 @@ type UserResponse struct {
 	// Configuration of Management Console for this user.
 	UISettings *UserResponseUISettings `json:"ui_settings,omitempty"`
 }
+
+func (o *UserResponse) GetAPIKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.APIKey
+}
+
+func (o *UserResponse) GetDirectoryID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.DirectoryID
+}
+
+func (o *UserResponse) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *UserResponse) GetEmail() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Email
+}
+
+func (o *UserResponse) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UserResponse) GetRoles() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Roles
+}
+
+func (o *UserResponse) GetUISettings() *UserResponseUISettings {
+	if o == nil {
+		return nil
+	}
+	return o.UISettings
+}

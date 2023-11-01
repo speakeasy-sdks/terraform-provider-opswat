@@ -16,10 +16,38 @@ type ActivePerformanceRequest struct {
 	RuleName *string `header:"style=simple,explode=false,name=rule_name"`
 }
 
+func (o *ActivePerformanceRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
+func (o *ActivePerformanceRequest) GetHoursRange() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.HoursRange
+}
+
+func (o *ActivePerformanceRequest) GetRuleName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RuleName
+}
+
 // ActivePerformance500ApplicationJSON - Unexpected event on server
 type ActivePerformance500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ActivePerformance500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ActivePerformance405ApplicationJSON - The user has no rights for this operation.
@@ -28,10 +56,24 @@ type ActivePerformance405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ActivePerformance405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ActivePerformance403ApplicationJSON - Invalid user information or Not Allowed
 type ActivePerformance403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ActivePerformance403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type ActivePerformance200ApplicationJSONActivePerformanceHashTime struct {
@@ -43,6 +85,27 @@ type ActivePerformance200ApplicationJSONActivePerformanceHashTime struct {
 	Min *int64 `json:"min,omitempty"`
 }
 
+func (o *ActivePerformance200ApplicationJSONActivePerformanceHashTime) GetAvg() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Avg
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformanceHashTime) GetMax() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Max
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformanceHashTime) GetMin() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Min
+}
+
 type ActivePerformance200ApplicationJSONActivePerformanceProcessingTime struct {
 	// Average overall processing time.
 	Avg *int64 `json:"avg,omitempty"`
@@ -50,6 +113,27 @@ type ActivePerformance200ApplicationJSONActivePerformanceProcessingTime struct {
 	Max *int64 `json:"max,omitempty"`
 	// Minimum overall processing time.
 	Min *int64 `json:"min,omitempty"`
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformanceProcessingTime) GetAvg() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Avg
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformanceProcessingTime) GetMax() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Max
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformanceProcessingTime) GetMin() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Min
 }
 
 type ActivePerformance200ApplicationJSONActivePerformanceQueueTime struct {
@@ -61,6 +145,27 @@ type ActivePerformance200ApplicationJSONActivePerformanceQueueTime struct {
 	Min *int64 `json:"min,omitempty"`
 }
 
+func (o *ActivePerformance200ApplicationJSONActivePerformanceQueueTime) GetAvg() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Avg
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformanceQueueTime) GetMax() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Max
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformanceQueueTime) GetMin() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Min
+}
+
 type ActivePerformance200ApplicationJSONActivePerformanceWaitTime struct {
 	// Average waiting time.
 	Avg *int64 `json:"avg,omitempty"`
@@ -68,6 +173,27 @@ type ActivePerformance200ApplicationJSONActivePerformanceWaitTime struct {
 	Max *int64 `json:"max,omitempty"`
 	// Minimum waiting time.
 	Min *int64 `json:"min,omitempty"`
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformanceWaitTime) GetAvg() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Avg
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformanceWaitTime) GetMax() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Max
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformanceWaitTime) GetMin() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Min
 }
 
 type ActivePerformance200ApplicationJSONActivePerformance struct {
@@ -85,11 +211,81 @@ type ActivePerformance200ApplicationJSONActivePerformance struct {
 	WaitTime      *ActivePerformance200ApplicationJSONActivePerformanceWaitTime `json:"wait_time,omitempty"`
 }
 
+func (o *ActivePerformance200ApplicationJSONActivePerformance) GetFailedResults() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.FailedResults
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformance) GetHashTime() *ActivePerformance200ApplicationJSONActivePerformanceHashTime {
+	if o == nil {
+		return nil
+	}
+	return o.HashTime
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformance) GetProcessingTime() *ActivePerformance200ApplicationJSONActivePerformanceProcessingTime {
+	if o == nil {
+		return nil
+	}
+	return o.ProcessingTime
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformance) GetQueueTime() *ActivePerformance200ApplicationJSONActivePerformanceQueueTime {
+	if o == nil {
+		return nil
+	}
+	return o.QueueTime
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformance) GetSuccessResults() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.SuccessResults
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformance) GetTotalFilesize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalFilesize
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformance) GetTotalRequests() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalRequests
+}
+
+func (o *ActivePerformance200ApplicationJSONActivePerformance) GetWaitTime() *ActivePerformance200ApplicationJSONActivePerformanceWaitTime {
+	if o == nil {
+		return nil
+	}
+	return o.WaitTime
+}
+
 // ActivePerformance200ApplicationJSON - Active performance report on MetaDefender Core
 type ActivePerformance200ApplicationJSON struct {
 	ActivePerformance *ActivePerformance200ApplicationJSONActivePerformance `json:"active_performance,omitempty"`
 	// The data is gathered in this recent milliseconds.
 	FromTime *int64 `json:"from_time,omitempty"`
+}
+
+func (o *ActivePerformance200ApplicationJSON) GetActivePerformance() *ActivePerformance200ApplicationJSONActivePerformance {
+	if o == nil {
+		return nil
+	}
+	return o.ActivePerformance
+}
+
+func (o *ActivePerformance200ApplicationJSON) GetFromTime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.FromTime
 }
 
 type ActivePerformanceResponse struct {
@@ -107,4 +303,53 @@ type ActivePerformanceResponse struct {
 	ActivePerformance405ApplicationJSONObject *ActivePerformance405ApplicationJSON
 	// Unexpected event on server
 	ActivePerformance500ApplicationJSONObject *ActivePerformance500ApplicationJSON
+}
+
+func (o *ActivePerformanceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ActivePerformanceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ActivePerformanceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ActivePerformanceResponse) GetActivePerformance200ApplicationJSONObject() *ActivePerformance200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ActivePerformance200ApplicationJSONObject
+}
+
+func (o *ActivePerformanceResponse) GetActivePerformance403ApplicationJSONObject() *ActivePerformance403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ActivePerformance403ApplicationJSONObject
+}
+
+func (o *ActivePerformanceResponse) GetActivePerformance405ApplicationJSONObject() *ActivePerformance405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ActivePerformance405ApplicationJSONObject
+}
+
+func (o *ActivePerformanceResponse) GetActivePerformance500ApplicationJSONObject() *ActivePerformance500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ActivePerformance500ApplicationJSONObject
 }

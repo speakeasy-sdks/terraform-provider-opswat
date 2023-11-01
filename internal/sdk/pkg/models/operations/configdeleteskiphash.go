@@ -15,10 +15,31 @@ type ConfigDeleteSkipHashRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *ConfigDeleteSkipHashRequest) GetRequestBody() []string {
+	if o == nil {
+		return nil
+	}
+	return o.RequestBody
+}
+
+func (o *ConfigDeleteSkipHashRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // ConfigDeleteSkipHash500ApplicationJSON - Unexpected event on server
 type ConfigDeleteSkipHash500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigDeleteSkipHash500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ConfigDeleteSkipHash404ApplicationJSON - Requests resource was not found.
@@ -27,10 +48,24 @@ type ConfigDeleteSkipHash404ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigDeleteSkipHash404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigDeleteSkipHash403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigDeleteSkipHash403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigDeleteSkipHash403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type ConfigDeleteSkipHashResponse struct {
@@ -48,4 +83,53 @@ type ConfigDeleteSkipHashResponse struct {
 	ConfigDeleteSkipHash404ApplicationJSONObject *ConfigDeleteSkipHash404ApplicationJSON
 	// Unexpected event on server
 	ConfigDeleteSkipHash500ApplicationJSONObject *ConfigDeleteSkipHash500ApplicationJSON
+}
+
+func (o *ConfigDeleteSkipHashResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigDeleteSkipHashResponse) GetSkipListAfterDeleted() *shared.SkipListAfterDeleted {
+	if o == nil {
+		return nil
+	}
+	return o.SkipListAfterDeleted
+}
+
+func (o *ConfigDeleteSkipHashResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigDeleteSkipHashResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigDeleteSkipHashResponse) GetConfigDeleteSkipHash403ApplicationJSONObject() *ConfigDeleteSkipHash403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigDeleteSkipHash403ApplicationJSONObject
+}
+
+func (o *ConfigDeleteSkipHashResponse) GetConfigDeleteSkipHash404ApplicationJSONObject() *ConfigDeleteSkipHash404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigDeleteSkipHash404ApplicationJSONObject
+}
+
+func (o *ConfigDeleteSkipHashResponse) GetConfigDeleteSkipHash500ApplicationJSONObject() *ConfigDeleteSkipHash500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigDeleteSkipHash500ApplicationJSONObject
 }

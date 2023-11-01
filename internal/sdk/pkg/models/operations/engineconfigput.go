@@ -14,10 +14,31 @@ type EngineConfigPutRequest struct {
 	EngineID string `pathParam:"style=simple,explode=false,name=engineId"`
 }
 
+func (o *EngineConfigPutRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
+func (o *EngineConfigPutRequest) GetEngineID() string {
+	if o == nil {
+		return ""
+	}
+	return o.EngineID
+}
+
 // EngineConfigPut500ApplicationJSON - Unexpected event on server
 type EngineConfigPut500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *EngineConfigPut500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // EngineConfigPut405ApplicationJSON - The user has no rights for this operation.
@@ -26,16 +47,37 @@ type EngineConfigPut405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *EngineConfigPut405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // EngineConfigPut403ApplicationJSON - Invalid user information or Not Allowed
 type EngineConfigPut403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *EngineConfigPut403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // EngineConfigPut400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type EngineConfigPut400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *EngineConfigPut400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // EngineConfigPut200ApplicationJSON - Each engine has different number and types of configurations
@@ -59,4 +101,60 @@ type EngineConfigPutResponse struct {
 	EngineConfigPut405ApplicationJSONObject *EngineConfigPut405ApplicationJSON
 	// Unexpected event on server
 	EngineConfigPut500ApplicationJSONObject *EngineConfigPut500ApplicationJSON
+}
+
+func (o *EngineConfigPutResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *EngineConfigPutResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *EngineConfigPutResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *EngineConfigPutResponse) GetEngineConfigPut200ApplicationJSONObject() *EngineConfigPut200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineConfigPut200ApplicationJSONObject
+}
+
+func (o *EngineConfigPutResponse) GetEngineConfigPut400ApplicationJSONObject() *EngineConfigPut400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineConfigPut400ApplicationJSONObject
+}
+
+func (o *EngineConfigPutResponse) GetEngineConfigPut403ApplicationJSONObject() *EngineConfigPut403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineConfigPut403ApplicationJSONObject
+}
+
+func (o *EngineConfigPutResponse) GetEngineConfigPut405ApplicationJSONObject() *EngineConfigPut405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineConfigPut405ApplicationJSONObject
+}
+
+func (o *EngineConfigPutResponse) GetEngineConfigPut500ApplicationJSONObject() *EngineConfigPut500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineConfigPut500ApplicationJSONObject
 }

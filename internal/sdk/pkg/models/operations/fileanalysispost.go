@@ -4,8 +4,7 @@ package operations
 
 import (
 	"Metadefender/internal/sdk/pkg/models/shared"
-	"bytes"
-	"encoding/json"
+	"Metadefender/internal/sdk/pkg/utils"
 	"errors"
 	"net/http"
 )
@@ -114,9 +113,121 @@ type FileAnalysisPostRequest struct {
 	Workflow *string `header:"style=simple,explode=false,name=workflow"`
 }
 
+func (o *FileAnalysisPostRequest) GetRequestBody() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.RequestBody
+}
+
+func (o *FileAnalysisPostRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *FileAnalysisPostRequest) GetArchivepwd() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Archivepwd
+}
+
+func (o *FileAnalysisPostRequest) GetBatch() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Batch
+}
+
+func (o *FileAnalysisPostRequest) GetCallbackurl() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Callbackurl
+}
+
+func (o *FileAnalysisPostRequest) GetDownloadfrom() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Downloadfrom
+}
+
+func (o *FileAnalysisPostRequest) GetEnginesMetadata() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EnginesMetadata
+}
+
+func (o *FileAnalysisPostRequest) GetFilename() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Filename
+}
+
+func (o *FileAnalysisPostRequest) GetFilepath() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Filepath
+}
+
+func (o *FileAnalysisPostRequest) GetGlobalTimeout() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.GlobalTimeout
+}
+
+func (o *FileAnalysisPostRequest) GetMetadata() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
+}
+
+func (o *FileAnalysisPostRequest) GetRule() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Rule
+}
+
+func (o *FileAnalysisPostRequest) GetSanitizedurl() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Sanitizedurl
+}
+
+func (o *FileAnalysisPostRequest) GetUserAgent() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserAgent
+}
+
+func (o *FileAnalysisPostRequest) GetWorkflow() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Workflow
+}
+
 // FileAnalysisPost503ApplicationJSON - Server is too busy, scan queue is full. Try again later.
 type FileAnalysisPost503ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *FileAnalysisPost503ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // FileAnalysisPost500ApplicationJSON - Unexpected event on server
@@ -125,9 +236,23 @@ type FileAnalysisPost500ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *FileAnalysisPost500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // FileAnalysisPost422ApplicationJSON - Body input is empty.
 type FileAnalysisPost422ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *FileAnalysisPost422ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // FileAnalysisPost411ApplicationJSON - Content-Length header is missing from the request.
@@ -135,10 +260,24 @@ type FileAnalysisPost411ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *FileAnalysisPost411ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // FileAnalysisPost403ApplicationJSON - Invalid user information or Not Allowed
 type FileAnalysisPost403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *FileAnalysisPost403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type FileAnalysisPost400ApplicationJSONType string
@@ -185,30 +324,23 @@ func CreateFileAnalysisPost400ApplicationJSONFileUploadRejected(fileUploadReject
 }
 
 func (u *FileAnalysisPost400ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	bodyAndDownloadLinkGiven := new(shared.BodyAndDownloadLinkGiven)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&bodyAndDownloadLinkGiven); err == nil {
+	if err := utils.UnmarshalJSON(data, &bodyAndDownloadLinkGiven, "", true, true); err == nil {
 		u.BodyAndDownloadLinkGiven = bodyAndDownloadLinkGiven
 		u.Type = FileAnalysisPost400ApplicationJSONTypeBodyAndDownloadLinkGiven
 		return nil
 	}
 
 	callbackURLInvalid := new(shared.CallbackURLInvalid)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&callbackURLInvalid); err == nil {
+	if err := utils.UnmarshalJSON(data, &callbackURLInvalid, "", true, true); err == nil {
 		u.CallbackURLInvalid = callbackURLInvalid
 		u.Type = FileAnalysisPost400ApplicationJSONTypeCallbackURLInvalid
 		return nil
 	}
 
 	fileUploadRejected := new(shared.FileUploadRejected)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&fileUploadRejected); err == nil {
+	if err := utils.UnmarshalJSON(data, &fileUploadRejected, "", true, true); err == nil {
 		u.FileUploadRejected = fileUploadRejected
 		u.Type = FileAnalysisPost400ApplicationJSONTypeFileUploadRejected
 		return nil
@@ -219,18 +351,18 @@ func (u *FileAnalysisPost400ApplicationJSON) UnmarshalJSON(data []byte) error {
 
 func (u FileAnalysisPost400ApplicationJSON) MarshalJSON() ([]byte, error) {
 	if u.BodyAndDownloadLinkGiven != nil {
-		return json.Marshal(u.BodyAndDownloadLinkGiven)
+		return utils.MarshalJSON(u.BodyAndDownloadLinkGiven, "", true)
 	}
 
 	if u.CallbackURLInvalid != nil {
-		return json.Marshal(u.CallbackURLInvalid)
+		return utils.MarshalJSON(u.CallbackURLInvalid, "", true)
 	}
 
 	if u.FileUploadRejected != nil {
-		return json.Marshal(u.FileUploadRejected)
+		return utils.MarshalJSON(u.FileUploadRejected, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 // FileAnalysisPost200ApplicationJSON - Successful file submission
@@ -239,6 +371,13 @@ type FileAnalysisPost200ApplicationJSON struct {
 	// Use this value to reference the submission.
 	//
 	DataID string `json:"data_id"`
+}
+
+func (o *FileAnalysisPost200ApplicationJSON) GetDataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DataID
 }
 
 type FileAnalysisPostResponse struct {
@@ -263,4 +402,81 @@ type FileAnalysisPostResponse struct {
 	FileAnalysisPost500ApplicationJSONObject *FileAnalysisPost500ApplicationJSON
 	// Server is too busy, scan queue is full. Try again later.
 	FileAnalysisPost503ApplicationJSONObject *FileAnalysisPost503ApplicationJSON
+}
+
+func (o *FileAnalysisPostResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *FileAnalysisPostResponse) GetHeaders() map[string][]string {
+	if o == nil {
+		return nil
+	}
+	return o.Headers
+}
+
+func (o *FileAnalysisPostResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *FileAnalysisPostResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *FileAnalysisPostResponse) GetFileAnalysisPost200ApplicationJSONObject() *FileAnalysisPost200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisPost200ApplicationJSONObject
+}
+
+func (o *FileAnalysisPostResponse) GetFileAnalysisPost400ApplicationJSONOneOf() *FileAnalysisPost400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisPost400ApplicationJSONOneOf
+}
+
+func (o *FileAnalysisPostResponse) GetFileAnalysisPost403ApplicationJSONObject() *FileAnalysisPost403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisPost403ApplicationJSONObject
+}
+
+func (o *FileAnalysisPostResponse) GetFileAnalysisPost411ApplicationJSONObject() *FileAnalysisPost411ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisPost411ApplicationJSONObject
+}
+
+func (o *FileAnalysisPostResponse) GetFileAnalysisPost422ApplicationJSONObject() *FileAnalysisPost422ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisPost422ApplicationJSONObject
+}
+
+func (o *FileAnalysisPostResponse) GetFileAnalysisPost500ApplicationJSONObject() *FileAnalysisPost500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisPost500ApplicationJSONObject
+}
+
+func (o *FileAnalysisPostResponse) GetFileAnalysisPost503ApplicationJSONObject() *FileAnalysisPost503ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisPost503ApplicationJSONObject
 }

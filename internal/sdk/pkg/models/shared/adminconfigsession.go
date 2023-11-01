@@ -13,3 +13,31 @@ type AdminConfigSession struct {
 	// The interval (in milliseconds) for the user's session timeout, based on last activity. Timer starts after the last activity for the apikey.
 	SessionTimeout *int64 `json:"sessionTimeout,omitempty"`
 }
+
+func (o *AdminConfigSession) GetAbsoluteSessionTimeout() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.AbsoluteSessionTimeout
+}
+
+func (o *AdminConfigSession) GetAllowCrossIPSessions() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowCrossIPSessions
+}
+
+func (o *AdminConfigSession) GetAllowDuplicateSession() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AllowDuplicateSession
+}
+
+func (o *AdminConfigSession) GetSessionTimeout() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.SessionTimeout
+}

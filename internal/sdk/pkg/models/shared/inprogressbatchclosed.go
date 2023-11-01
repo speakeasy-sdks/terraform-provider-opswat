@@ -6,3 +6,10 @@ type InprogressBatchClosed struct {
 	// Batch closed during file upload.
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *InprogressBatchClosed) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

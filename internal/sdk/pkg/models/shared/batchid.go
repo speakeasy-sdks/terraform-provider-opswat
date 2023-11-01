@@ -6,3 +6,10 @@ type BatchID struct {
 	// The batch identifier used to submit files in the batch and to close the batch.
 	BatchID string `json:"batch_id"`
 }
+
+func (o *BatchID) GetBatchID() string {
+	if o == nil {
+		return ""
+	}
+	return o.BatchID
+}

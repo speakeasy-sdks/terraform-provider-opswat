@@ -14,3 +14,24 @@ type FileAnalysisPostOnFinishCallbackResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
+
+func (o *FileAnalysisPostOnFinishCallbackResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *FileAnalysisPostOnFinishCallbackResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *FileAnalysisPostOnFinishCallbackResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}

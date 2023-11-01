@@ -21,3 +21,59 @@ type LicenseInformation struct {
 	// Official MetaDefender base product name licensed.
 	ProductName *string `json:"product_name,omitempty"`
 }
+
+func (o *LicenseInformation) GetDaysLeft() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.DaysLeft
+}
+
+func (o *LicenseInformation) GetDeployment() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Deployment
+}
+
+func (o *LicenseInformation) GetExpiration() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Expiration
+}
+
+func (o *LicenseInformation) GetLicensedEngines() []string {
+	if o == nil {
+		return nil
+	}
+	return o.LicensedEngines
+}
+
+func (o *LicenseInformation) GetMaxNodeCount() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MaxNodeCount
+}
+
+func (o *LicenseInformation) GetOnlineActivated() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.OnlineActivated
+}
+
+func (o *LicenseInformation) GetProductID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ProductID
+}
+
+func (o *LicenseInformation) GetProductName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ProductName
+}

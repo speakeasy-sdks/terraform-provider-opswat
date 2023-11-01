@@ -6,3 +6,10 @@ type ErrorWhileRequestingConfig struct {
 	// Error while requesting configuration
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *ErrorWhileRequestingConfig) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

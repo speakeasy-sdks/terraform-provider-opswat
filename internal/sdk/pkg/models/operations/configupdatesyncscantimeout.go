@@ -4,8 +4,7 @@ package operations
 
 import (
 	"Metadefender/internal/sdk/pkg/models/shared"
-	"bytes"
-	"encoding/json"
+	"Metadefender/internal/sdk/pkg/utils"
 	"errors"
 	"net/http"
 )
@@ -15,6 +14,20 @@ type ConfigUpdateSyncScanTimeoutRequest struct {
 	// Generated `session_id` from [Login](/mdcore/metadefender-core/ref#userlogin) call can be used as an `apikey` for API calls that require authentication.
 	//
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
+}
+
+func (o *ConfigUpdateSyncScanTimeoutRequest) GetAdminConfigFileSync() *shared.AdminConfigFileSync {
+	if o == nil {
+		return nil
+	}
+	return o.AdminConfigFileSync
+}
+
+func (o *ConfigUpdateSyncScanTimeoutRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
 }
 
 type ConfigUpdateSyncScanTimeout500ApplicationJSONType string
@@ -50,21 +63,16 @@ func CreateConfigUpdateSyncScanTimeout500ApplicationJSONInternalServerError(inte
 }
 
 func (u *ConfigUpdateSyncScanTimeout500ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	errorWhileModifyingConfig := new(shared.ErrorWhileModifyingConfig)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&errorWhileModifyingConfig); err == nil {
+	if err := utils.UnmarshalJSON(data, &errorWhileModifyingConfig, "", true, true); err == nil {
 		u.ErrorWhileModifyingConfig = errorWhileModifyingConfig
 		u.Type = ConfigUpdateSyncScanTimeout500ApplicationJSONTypeErrorWhileModifyingConfig
 		return nil
 	}
 
 	internalServerError := new(shared.InternalServerError)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&internalServerError); err == nil {
+	if err := utils.UnmarshalJSON(data, &internalServerError, "", true, true); err == nil {
 		u.InternalServerError = internalServerError
 		u.Type = ConfigUpdateSyncScanTimeout500ApplicationJSONTypeInternalServerError
 		return nil
@@ -75,14 +83,14 @@ func (u *ConfigUpdateSyncScanTimeout500ApplicationJSON) UnmarshalJSON(data []byt
 
 func (u ConfigUpdateSyncScanTimeout500ApplicationJSON) MarshalJSON() ([]byte, error) {
 	if u.ErrorWhileModifyingConfig != nil {
-		return json.Marshal(u.ErrorWhileModifyingConfig)
+		return utils.MarshalJSON(u.ErrorWhileModifyingConfig, "", true)
 	}
 
 	if u.InternalServerError != nil {
-		return json.Marshal(u.InternalServerError)
+		return utils.MarshalJSON(u.InternalServerError, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 // ConfigUpdateSyncScanTimeout405ApplicationJSON - The user has no rights for this operation.
@@ -91,10 +99,24 @@ type ConfigUpdateSyncScanTimeout405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigUpdateSyncScanTimeout405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigUpdateSyncScanTimeout403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigUpdateSyncScanTimeout403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigUpdateSyncScanTimeout403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type ConfigUpdateSyncScanTimeoutResponse struct {
@@ -112,4 +134,53 @@ type ConfigUpdateSyncScanTimeoutResponse struct {
 	ConfigUpdateSyncScanTimeout405ApplicationJSONObject *ConfigUpdateSyncScanTimeout405ApplicationJSON
 	// Error while modifying configuration.
 	ConfigUpdateSyncScanTimeout500ApplicationJSONOneOf *ConfigUpdateSyncScanTimeout500ApplicationJSON
+}
+
+func (o *ConfigUpdateSyncScanTimeoutResponse) GetAdminConfigFileSync() *shared.AdminConfigFileSync {
+	if o == nil {
+		return nil
+	}
+	return o.AdminConfigFileSync
+}
+
+func (o *ConfigUpdateSyncScanTimeoutResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigUpdateSyncScanTimeoutResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigUpdateSyncScanTimeoutResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigUpdateSyncScanTimeoutResponse) GetConfigUpdateSyncScanTimeout403ApplicationJSONObject() *ConfigUpdateSyncScanTimeout403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigUpdateSyncScanTimeout403ApplicationJSONObject
+}
+
+func (o *ConfigUpdateSyncScanTimeoutResponse) GetConfigUpdateSyncScanTimeout405ApplicationJSONObject() *ConfigUpdateSyncScanTimeout405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigUpdateSyncScanTimeout405ApplicationJSONObject
+}
+
+func (o *ConfigUpdateSyncScanTimeoutResponse) GetConfigUpdateSyncScanTimeout500ApplicationJSONOneOf() *ConfigUpdateSyncScanTimeout500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigUpdateSyncScanTimeout500ApplicationJSONOneOf
 }

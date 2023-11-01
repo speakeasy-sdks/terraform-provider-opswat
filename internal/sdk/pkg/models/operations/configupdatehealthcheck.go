@@ -4,8 +4,7 @@ package operations
 
 import (
 	"Metadefender/internal/sdk/pkg/models/shared"
-	"bytes"
-	"encoding/json"
+	"Metadefender/internal/sdk/pkg/utils"
 	"errors"
 	"net/http"
 )
@@ -15,6 +14,20 @@ type ConfigUpdateHealthCheckRequest struct {
 	// Generated `session_id` from [Login](/mdcore/metadefender-core/ref#userlogin) call can be used as an `apikey` for API calls that require authentication.
 	//
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
+}
+
+func (o *ConfigUpdateHealthCheckRequest) GetPostRequestBody() *shared.PostRequestBody {
+	if o == nil {
+		return nil
+	}
+	return o.PostRequestBody
+}
+
+func (o *ConfigUpdateHealthCheckRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
 }
 
 type ConfigUpdateHealthCheck400ApplicationJSONType string
@@ -50,21 +63,16 @@ func CreateConfigUpdateHealthCheck400ApplicationJSONSetRequiredEngineFailedWhenI
 }
 
 func (u *ConfigUpdateHealthCheck400ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	setRequiredEngineFailedWhenInvalidLicense := new(shared.SetRequiredEngineFailedWhenInvalidLicense)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&setRequiredEngineFailedWhenInvalidLicense); err == nil {
+	if err := utils.UnmarshalJSON(data, &setRequiredEngineFailedWhenInvalidLicense, "", true, true); err == nil {
 		u.SetRequiredEngineFailedWhenInvalidLicense = setRequiredEngineFailedWhenInvalidLicense
 		u.Type = ConfigUpdateHealthCheck400ApplicationJSONTypeSetRequiredEngineFailedWhenInvalidLicense
 		return nil
 	}
 
 	setRequiredEngineFailedWhenInvalidEngine := new(shared.SetRequiredEngineFailedWhenInvalidEngine)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&setRequiredEngineFailedWhenInvalidEngine); err == nil {
+	if err := utils.UnmarshalJSON(data, &setRequiredEngineFailedWhenInvalidEngine, "", true, true); err == nil {
 		u.SetRequiredEngineFailedWhenInvalidEngine = setRequiredEngineFailedWhenInvalidEngine
 		u.Type = ConfigUpdateHealthCheck400ApplicationJSONTypeSetRequiredEngineFailedWhenInvalidEngine
 		return nil
@@ -75,14 +83,14 @@ func (u *ConfigUpdateHealthCheck400ApplicationJSON) UnmarshalJSON(data []byte) e
 
 func (u ConfigUpdateHealthCheck400ApplicationJSON) MarshalJSON() ([]byte, error) {
 	if u.SetRequiredEngineFailedWhenInvalidLicense != nil {
-		return json.Marshal(u.SetRequiredEngineFailedWhenInvalidLicense)
+		return utils.MarshalJSON(u.SetRequiredEngineFailedWhenInvalidLicense, "", true)
 	}
 
 	if u.SetRequiredEngineFailedWhenInvalidEngine != nil {
-		return json.Marshal(u.SetRequiredEngineFailedWhenInvalidEngine)
+		return utils.MarshalJSON(u.SetRequiredEngineFailedWhenInvalidEngine, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type ConfigUpdateHealthCheckResponse struct {
@@ -98,4 +106,46 @@ type ConfigUpdateHealthCheckResponse struct {
 	RawResponse *http.Response
 	// Bad Request (e.g. invalid header, apikey is missing or invalid).
 	ConfigUpdateHealthCheck400ApplicationJSONOneOf *ConfigUpdateHealthCheck400ApplicationJSON
+}
+
+func (o *ConfigUpdateHealthCheckResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigUpdateHealthCheckResponse) GetErrorWhileModifyingConfig() *shared.ErrorWhileModifyingConfig {
+	if o == nil {
+		return nil
+	}
+	return o.ErrorWhileModifyingConfig
+}
+
+func (o *ConfigUpdateHealthCheckResponse) GetHealthCheck() *shared.HealthCheck {
+	if o == nil {
+		return nil
+	}
+	return o.HealthCheck
+}
+
+func (o *ConfigUpdateHealthCheckResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigUpdateHealthCheckResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigUpdateHealthCheckResponse) GetConfigUpdateHealthCheck400ApplicationJSONOneOf() *ConfigUpdateHealthCheck400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigUpdateHealthCheck400ApplicationJSONOneOf
 }

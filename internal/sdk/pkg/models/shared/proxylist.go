@@ -95,6 +95,48 @@ type ProxyListFeatureProxy struct {
 	Username *string                        `json:"username,omitempty"`
 }
 
+func (o *ProxyListFeatureProxy) GetExclusion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Exclusion
+}
+
+func (o *ProxyListFeatureProxy) GetID() *ProxyListFeatureProxyID {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ProxyListFeatureProxy) GetPort() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Port
+}
+
+func (o *ProxyListFeatureProxy) GetServer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Server
+}
+
+func (o *ProxyListFeatureProxy) GetUseProxy() *ProxyListFeatureProxyUseProxy {
+	if o == nil {
+		return nil
+	}
+	return o.UseProxy
+}
+
+func (o *ProxyListFeatureProxy) GetUsername() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Username
+}
+
 type ProxyList struct {
 	Enabled   *bool   `json:"enabled,omitempty"`
 	Exclusion *string `json:"exclusion,omitempty"`
@@ -103,4 +145,46 @@ type ProxyList struct {
 	Port         *string                 `json:"port,omitempty"`
 	Server       *string                 `json:"server,omitempty"`
 	Username     *string                 `json:"username,omitempty"`
+}
+
+func (o *ProxyList) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *ProxyList) GetExclusion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Exclusion
+}
+
+func (o *ProxyList) GetFeatureProxy() []ProxyListFeatureProxy {
+	if o == nil {
+		return nil
+	}
+	return o.FeatureProxy
+}
+
+func (o *ProxyList) GetPort() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Port
+}
+
+func (o *ProxyList) GetServer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Server
+}
+
+func (o *ProxyList) GetUsername() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Username
 }

@@ -13,11 +13,39 @@ type UserChangePassRequestBody struct {
 	OldPassword *string `json:"old_password,omitempty"`
 }
 
+func (o *UserChangePassRequestBody) GetNewPassword() *string {
+	if o == nil {
+		return nil
+	}
+	return o.NewPassword
+}
+
+func (o *UserChangePassRequestBody) GetOldPassword() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OldPassword
+}
+
 type UserChangePassRequest struct {
 	RequestBody *UserChangePassRequestBody `request:"mediaType=application/json"`
 	// Generated `session_id` from [Login](/mdcore/metadefender-core/ref#userlogin) call can be used as an `apikey` for API calls that require authentication.
 	//
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
+}
+
+func (o *UserChangePassRequest) GetRequestBody() *UserChangePassRequestBody {
+	if o == nil {
+		return nil
+	}
+	return o.RequestBody
+}
+
+func (o *UserChangePassRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
 }
 
 // UserChangePass500ApplicationJSON - Unexpected event on server
@@ -26,10 +54,24 @@ type UserChangePass500ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *UserChangePass500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // UserChangePass405ApplicationJSON - The user has no rights for this operation.
 type UserChangePass405ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *UserChangePass405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // UserChangePass400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
@@ -38,9 +80,23 @@ type UserChangePass400ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *UserChangePass400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // UserChangePass200ApplicationJSON - Request processed successfully
 type UserChangePass200ApplicationJSON struct {
 	Success *bool `json:"success,omitempty"`
+}
+
+func (o *UserChangePass200ApplicationJSON) GetSuccess() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Success
 }
 
 type UserChangePassResponse struct {
@@ -58,4 +114,53 @@ type UserChangePassResponse struct {
 	UserChangePass405ApplicationJSONObject *UserChangePass405ApplicationJSON
 	// Unexpected event on server
 	UserChangePass500ApplicationJSONObject *UserChangePass500ApplicationJSON
+}
+
+func (o *UserChangePassResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UserChangePassResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UserChangePassResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *UserChangePassResponse) GetUserChangePass200ApplicationJSONObject() *UserChangePass200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UserChangePass200ApplicationJSONObject
+}
+
+func (o *UserChangePassResponse) GetUserChangePass400ApplicationJSONObject() *UserChangePass400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UserChangePass400ApplicationJSONObject
+}
+
+func (o *UserChangePassResponse) GetUserChangePass405ApplicationJSONObject() *UserChangePass405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UserChangePass405ApplicationJSONObject
+}
+
+func (o *UserChangePassResponse) GetUserChangePass500ApplicationJSONObject() *UserChangePass500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UserChangePass500ApplicationJSONObject
 }

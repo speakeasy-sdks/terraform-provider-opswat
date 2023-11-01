@@ -95,6 +95,48 @@ type ProxyListRequestBodyFeatureProxy struct {
 	Username *string                                   `json:"username,omitempty"`
 }
 
+func (o *ProxyListRequestBodyFeatureProxy) GetExclusion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Exclusion
+}
+
+func (o *ProxyListRequestBodyFeatureProxy) GetID() *ProxyListRequestBodyFeatureProxyID {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ProxyListRequestBodyFeatureProxy) GetPort() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Port
+}
+
+func (o *ProxyListRequestBodyFeatureProxy) GetServer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Server
+}
+
+func (o *ProxyListRequestBodyFeatureProxy) GetUseProxy() *ProxyListRequestBodyFeatureProxyUseProxy {
+	if o == nil {
+		return nil
+	}
+	return o.UseProxy
+}
+
+func (o *ProxyListRequestBodyFeatureProxy) GetUsername() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Username
+}
+
 type ProxyListRequestBody struct {
 	// When true, use a proxy server for MetaDefender Core
 	Enabled bool `json:"enabled"`
@@ -110,4 +152,53 @@ type ProxyListRequestBody struct {
 	Server string `json:"server"`
 	// Username for proxy authentication
 	Username *string `json:"username,omitempty"`
+}
+
+func (o *ProxyListRequestBody) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *ProxyListRequestBody) GetExclusion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Exclusion
+}
+
+func (o *ProxyListRequestBody) GetFeatureProxy() []ProxyListRequestBodyFeatureProxy {
+	if o == nil {
+		return nil
+	}
+	return o.FeatureProxy
+}
+
+func (o *ProxyListRequestBody) GetPassword() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Password
+}
+
+func (o *ProxyListRequestBody) GetPort() string {
+	if o == nil {
+		return ""
+	}
+	return o.Port
+}
+
+func (o *ProxyListRequestBody) GetServer() string {
+	if o == nil {
+		return ""
+	}
+	return o.Server
+}
+
+func (o *ProxyListRequestBody) GetUsername() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Username
 }

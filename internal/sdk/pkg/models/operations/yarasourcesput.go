@@ -15,16 +15,44 @@ type YaraSourcesPutRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *YaraSourcesPutRequest) GetYaraSourcesObject() *shared.YaraSourcesObject {
+	if o == nil {
+		return nil
+	}
+	return o.YaraSourcesObject
+}
+
+func (o *YaraSourcesPutRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // YaraSourcesPut500ApplicationJSON - Unexpected event on server
 type YaraSourcesPut500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *YaraSourcesPut500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // YaraSourcesPut403ApplicationJSON - Invalid user information or Not Allowed
 type YaraSourcesPut403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *YaraSourcesPut403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type YaraSourcesPutResponse struct {
@@ -40,4 +68,46 @@ type YaraSourcesPutResponse struct {
 	YaraSourcesPut403ApplicationJSONObject *YaraSourcesPut403ApplicationJSON
 	// Unexpected event on server
 	YaraSourcesPut500ApplicationJSONObject *YaraSourcesPut500ApplicationJSON
+}
+
+func (o *YaraSourcesPutResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *YaraSourcesPutResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *YaraSourcesPutResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *YaraSourcesPutResponse) GetYaraSourcesObject() *shared.YaraSourcesObject {
+	if o == nil {
+		return nil
+	}
+	return o.YaraSourcesObject
+}
+
+func (o *YaraSourcesPutResponse) GetYaraSourcesPut403ApplicationJSONObject() *YaraSourcesPut403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.YaraSourcesPut403ApplicationJSONObject
+}
+
+func (o *YaraSourcesPutResponse) GetYaraSourcesPut500ApplicationJSONObject() *YaraSourcesPut500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.YaraSourcesPut500ApplicationJSONObject
 }

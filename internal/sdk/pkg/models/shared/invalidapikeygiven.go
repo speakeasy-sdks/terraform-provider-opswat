@@ -6,3 +6,10 @@ type InvalidAPIKeyGiven struct {
 	// Invalid apikey given
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *InvalidAPIKeyGiven) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

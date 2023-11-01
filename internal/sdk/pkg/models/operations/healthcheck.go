@@ -12,10 +12,24 @@ type HealthCheckRequest struct {
 	Verbose *bool `queryParam:"style=form,explode=true,name=verbose"`
 }
 
+func (o *HealthCheckRequest) GetVerbose() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Verbose
+}
+
 // HealthCheck500ApplicationJSON - Unexpected event on server
 type HealthCheck500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *HealthCheck500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type HealthCheckResponse struct {
@@ -29,4 +43,39 @@ type HealthCheckResponse struct {
 	HealthCheck500ApplicationJSONObject *HealthCheck500ApplicationJSON
 	// Service is currently healthy
 	Readyz *shared.Readyz
+}
+
+func (o *HealthCheckResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *HealthCheckResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *HealthCheckResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *HealthCheckResponse) GetHealthCheck500ApplicationJSONObject() *HealthCheck500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.HealthCheck500ApplicationJSONObject
+}
+
+func (o *HealthCheckResponse) GetReadyz() *shared.Readyz {
+	if o == nil {
+		return nil
+	}
+	return o.Readyz
 }

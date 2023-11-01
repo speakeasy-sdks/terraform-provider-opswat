@@ -43,6 +43,20 @@ type YaraSourcesObjectHTTPSources struct {
 	State *YaraSourcesObjectHTTPSourcesState `json:"state,omitempty"`
 }
 
+func (o *YaraSourcesObjectHTTPSources) GetSource() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Source
+}
+
+func (o *YaraSourcesObjectHTTPSources) GetState() *YaraSourcesObjectHTTPSourcesState {
+	if o == nil {
+		return nil
+	}
+	return o.State
+}
+
 // YaraSourcesObjectLocalSourcesState - Defining if this source is being used or not
 type YaraSourcesObjectLocalSourcesState string
 
@@ -79,10 +93,38 @@ type YaraSourcesObjectLocalSources struct {
 	State *YaraSourcesObjectLocalSourcesState `json:"state,omitempty"`
 }
 
+func (o *YaraSourcesObjectLocalSources) GetSource() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Source
+}
+
+func (o *YaraSourcesObjectLocalSources) GetState() *YaraSourcesObjectLocalSourcesState {
+	if o == nil {
+		return nil
+	}
+	return o.State
+}
+
 // YaraSourcesObject - Object describing the yara sources.
 type YaraSourcesObject struct {
 	// A list of all remote sources.
 	HTTPSources []YaraSourcesObjectHTTPSources `json:"http_sources,omitempty"`
 	// A list of all locals sources
 	LocalSources []YaraSourcesObjectLocalSources `json:"local_sources,omitempty"`
+}
+
+func (o *YaraSourcesObject) GetHTTPSources() []YaraSourcesObjectHTTPSources {
+	if o == nil {
+		return nil
+	}
+	return o.HTTPSources
+}
+
+func (o *YaraSourcesObject) GetLocalSources() []YaraSourcesObjectLocalSources {
+	if o == nil {
+		return nil
+	}
+	return o.LocalSources
 }

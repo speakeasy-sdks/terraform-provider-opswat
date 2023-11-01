@@ -12,10 +12,24 @@ type UserLogoutRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *UserLogoutRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // UserLogout500ApplicationJSON - Unexpected event on server
 type UserLogout500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *UserLogout500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // UserLogout403ApplicationJSON - Invalid user information.
@@ -23,14 +37,35 @@ type UserLogout403ApplicationJSON struct {
 	Err string `json:"err"`
 }
 
+func (o *UserLogout403ApplicationJSON) GetErr() string {
+	if o == nil {
+		return ""
+	}
+	return o.Err
+}
+
 // UserLogout400ApplicationJSON - Bad Request.
 type UserLogout400ApplicationJSON struct {
 	Err string `json:"err"`
 }
 
+func (o *UserLogout400ApplicationJSON) GetErr() string {
+	if o == nil {
+		return ""
+	}
+	return o.Err
+}
+
 // UserLogout200ApplicationJSON - OK
 type UserLogout200ApplicationJSON struct {
 	Response string `json:"response"`
+}
+
+func (o *UserLogout200ApplicationJSON) GetResponse() string {
+	if o == nil {
+		return ""
+	}
+	return o.Response
 }
 
 type UserLogoutResponse struct {
@@ -48,4 +83,53 @@ type UserLogoutResponse struct {
 	UserLogout403ApplicationJSONObject *UserLogout403ApplicationJSON
 	// Unexpected event on server
 	UserLogout500ApplicationJSONObject *UserLogout500ApplicationJSON
+}
+
+func (o *UserLogoutResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UserLogoutResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UserLogoutResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *UserLogoutResponse) GetUserLogout200ApplicationJSONObject() *UserLogout200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UserLogout200ApplicationJSONObject
+}
+
+func (o *UserLogoutResponse) GetUserLogout400ApplicationJSONObject() *UserLogout400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UserLogout400ApplicationJSONObject
+}
+
+func (o *UserLogoutResponse) GetUserLogout403ApplicationJSONObject() *UserLogout403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UserLogout403ApplicationJSONObject
+}
+
+func (o *UserLogoutResponse) GetUserLogout500ApplicationJSONObject() *UserLogout500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UserLogout500ApplicationJSONObject
 }

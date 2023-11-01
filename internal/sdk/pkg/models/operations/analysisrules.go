@@ -18,10 +18,24 @@ type AnalysisRulesRequest struct {
 	UserAgent *string `header:"style=simple,explode=false,name=user_agent"`
 }
 
+func (o *AnalysisRulesRequest) GetUserAgent() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserAgent
+}
+
 // AnalysisRules500ApplicationJSON - Unexpected event on server
 type AnalysisRules500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *AnalysisRules500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type AnalysisRules200ApplicationJSON struct {
@@ -29,6 +43,20 @@ type AnalysisRules200ApplicationJSON struct {
 	MaxFileSize *int64 `json:"max_file_size,omitempty"`
 	// A unique identifier for identify in the used rule for a scan..
 	Name *string `json:"name,omitempty"`
+}
+
+func (o *AnalysisRules200ApplicationJSON) GetMaxFileSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.MaxFileSize
+}
+
+func (o *AnalysisRules200ApplicationJSON) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
 }
 
 type AnalysisRulesResponse struct {
@@ -42,4 +70,39 @@ type AnalysisRulesResponse struct {
 	AnalysisRules200ApplicationJSONObjects []AnalysisRules200ApplicationJSON
 	// Unexpected event on server
 	AnalysisRules500ApplicationJSONObject *AnalysisRules500ApplicationJSON
+}
+
+func (o *AnalysisRulesResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *AnalysisRulesResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *AnalysisRulesResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *AnalysisRulesResponse) GetAnalysisRules200ApplicationJSONObjects() []AnalysisRules200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AnalysisRules200ApplicationJSONObjects
+}
+
+func (o *AnalysisRulesResponse) GetAnalysisRules500ApplicationJSONObject() *AnalysisRules500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AnalysisRules500ApplicationJSONObject
 }

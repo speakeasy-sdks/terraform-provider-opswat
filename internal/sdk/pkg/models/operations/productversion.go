@@ -12,10 +12,24 @@ type ProductVersionRequest struct {
 	Apikey *string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *ProductVersionRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
 // ProductVersion500ApplicationJSON - Unexpected event on server
 type ProductVersion500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ProductVersion500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ProductVersion200ApplicationJSON - Provides productId and version information.
@@ -24,6 +38,20 @@ type ProductVersion200ApplicationJSON struct {
 	ProductID *string `json:"product_id,omitempty"`
 	// The product version currently used.
 	Version *string `json:"version,omitempty"`
+}
+
+func (o *ProductVersion200ApplicationJSON) GetProductID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ProductID
+}
+
+func (o *ProductVersion200ApplicationJSON) GetVersion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Version
 }
 
 type ProductVersionResponse struct {
@@ -37,4 +65,39 @@ type ProductVersionResponse struct {
 	ProductVersion200ApplicationJSONObject *ProductVersion200ApplicationJSON
 	// Unexpected event on server
 	ProductVersion500ApplicationJSONObject *ProductVersion500ApplicationJSON
+}
+
+func (o *ProductVersionResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ProductVersionResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ProductVersionResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ProductVersionResponse) GetProductVersion200ApplicationJSONObject() *ProductVersion200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ProductVersion200ApplicationJSONObject
+}
+
+func (o *ProductVersionResponse) GetProductVersion500ApplicationJSONObject() *ProductVersion500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ProductVersion500ApplicationJSONObject
 }

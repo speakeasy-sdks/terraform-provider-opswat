@@ -14,6 +14,13 @@ type EnginesStatusRequest struct {
 	Apikey *string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *EnginesStatusRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
 // EnginesStatus200ApplicationJSONEngineType - Engine's type:
 //   - av
 //   - archive
@@ -143,6 +150,76 @@ type EnginesStatus200ApplicationJSON struct {
 	State *EnginesStatus200ApplicationJSONState `json:"state,omitempty"`
 }
 
+func (o *EnginesStatus200ApplicationJSON) GetActive() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Active
+}
+
+func (o *EnginesStatus200ApplicationJSON) GetDefTime() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DefTime
+}
+
+func (o *EnginesStatus200ApplicationJSON) GetDownloadProgress() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadProgress
+}
+
+func (o *EnginesStatus200ApplicationJSON) GetDownloadTime() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadTime
+}
+
+func (o *EnginesStatus200ApplicationJSON) GetEngID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EngID
+}
+
+func (o *EnginesStatus200ApplicationJSON) GetEngName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EngName
+}
+
+func (o *EnginesStatus200ApplicationJSON) GetEngType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EngType
+}
+
+func (o *EnginesStatus200ApplicationJSON) GetEngVer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EngVer
+}
+
+func (o *EnginesStatus200ApplicationJSON) GetEngineType() *EnginesStatus200ApplicationJSONEngineType {
+	if o == nil {
+		return nil
+	}
+	return o.EngineType
+}
+
+func (o *EnginesStatus200ApplicationJSON) GetState() *EnginesStatus200ApplicationJSONState {
+	if o == nil {
+		return nil
+	}
+	return o.State
+}
+
 type EnginesStatusResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -152,4 +229,32 @@ type EnginesStatusResponse struct {
 	RawResponse *http.Response
 	// An array with all the engines and their details.
 	EnginesStatus200ApplicationJSONObjects []EnginesStatus200ApplicationJSON
+}
+
+func (o *EnginesStatusResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *EnginesStatusResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *EnginesStatusResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *EnginesStatusResponse) GetEnginesStatus200ApplicationJSONObjects() []EnginesStatus200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EnginesStatus200ApplicationJSONObjects
 }

@@ -60,3 +60,31 @@ type DownloadInfo struct {
 	//
 	URL *string `json:"url,omitempty"`
 }
+
+func (o *DownloadInfo) GetErrorDetail() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ErrorDetail
+}
+
+func (o *DownloadInfo) GetProgress() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Progress
+}
+
+func (o *DownloadInfo) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *DownloadInfo) GetURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.URL
+}

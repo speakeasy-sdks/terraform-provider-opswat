@@ -48,3 +48,38 @@ type ExtractionInfo struct {
 	// Indicate if file is password-protected or not.
 	IsEncryptedFile *bool `json:"is_encrypted_file,omitempty"`
 }
+
+func (o *ExtractionInfo) GetDecryptedStatus() *ExtractionInfoDecryptedStatus {
+	if o == nil {
+		return nil
+	}
+	return o.DecryptedStatus
+}
+
+func (o *ExtractionInfo) GetErrCategory() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ErrCategory
+}
+
+func (o *ExtractionInfo) GetErrCode() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ErrCode
+}
+
+func (o *ExtractionInfo) GetErrDetails() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ErrDetails
+}
+
+func (o *ExtractionInfo) GetIsEncryptedFile() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsEncryptedFile
+}

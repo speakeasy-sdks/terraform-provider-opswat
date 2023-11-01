@@ -14,10 +14,31 @@ type ConfigUpdateWebhookRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *ConfigUpdateWebhookRequest) GetAdminConfigWebhook() *shared.AdminConfigWebhook {
+	if o == nil {
+		return nil
+	}
+	return o.AdminConfigWebhook
+}
+
+func (o *ConfigUpdateWebhookRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // ConfigUpdateWebhook500ApplicationJSON - Unexpected event on server
 type ConfigUpdateWebhook500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigUpdateWebhook500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ConfigUpdateWebhook404ApplicationJSON - Requests resource was not found.
@@ -26,10 +47,24 @@ type ConfigUpdateWebhook404ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigUpdateWebhook404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigUpdateWebhook403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigUpdateWebhook403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigUpdateWebhook403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type ConfigUpdateWebhookResponse struct {
@@ -47,4 +82,53 @@ type ConfigUpdateWebhookResponse struct {
 	ConfigUpdateWebhook404ApplicationJSONObject *ConfigUpdateWebhook404ApplicationJSON
 	// Unexpected event on server
 	ConfigUpdateWebhook500ApplicationJSONObject *ConfigUpdateWebhook500ApplicationJSON
+}
+
+func (o *ConfigUpdateWebhookResponse) GetAdminConfigWebhook() *shared.AdminConfigWebhook {
+	if o == nil {
+		return nil
+	}
+	return o.AdminConfigWebhook
+}
+
+func (o *ConfigUpdateWebhookResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigUpdateWebhookResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigUpdateWebhookResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigUpdateWebhookResponse) GetConfigUpdateWebhook403ApplicationJSONObject() *ConfigUpdateWebhook403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigUpdateWebhook403ApplicationJSONObject
+}
+
+func (o *ConfigUpdateWebhookResponse) GetConfigUpdateWebhook404ApplicationJSONObject() *ConfigUpdateWebhook404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigUpdateWebhook404ApplicationJSONObject
+}
+
+func (o *ConfigUpdateWebhookResponse) GetConfigUpdateWebhook500ApplicationJSONObject() *ConfigUpdateWebhook500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigUpdateWebhook500ApplicationJSONObject
 }

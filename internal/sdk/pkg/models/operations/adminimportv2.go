@@ -17,10 +17,38 @@ type AdminImportV2Request struct {
 	Password *string `header:"style=simple,explode=false,name=password"`
 }
 
+func (o *AdminImportV2Request) GetRequestBody() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.RequestBody
+}
+
+func (o *AdminImportV2Request) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
+func (o *AdminImportV2Request) GetPassword() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Password
+}
+
 // AdminImportV2500ApplicationJSON - Unexpected event on server
 type AdminImportV2500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *AdminImportV2500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // AdminImportV2405ApplicationJSON - The user has no rights for this operation.
@@ -29,10 +57,24 @@ type AdminImportV2405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *AdminImportV2405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // AdminImportV2403ApplicationJSON - Invalid user information or Not Allowed
 type AdminImportV2403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *AdminImportV2403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // AdminImportV2304ApplicationJSON - The configuration has not changed
@@ -42,6 +84,13 @@ type AdminImportV2304ApplicationJSON struct {
 // AdminImportV2200ApplicationJSON - Request processed successfully
 type AdminImportV2200ApplicationJSON struct {
 	Result *string `json:"result,omitempty"`
+}
+
+func (o *AdminImportV2200ApplicationJSON) GetResult() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Result
 }
 
 type AdminImportV2Response struct {
@@ -63,4 +112,67 @@ type AdminImportV2Response struct {
 	AdminImportV2405ApplicationJSONObject *AdminImportV2405ApplicationJSON
 	// Unexpected event on server
 	AdminImportV2500ApplicationJSONObject *AdminImportV2500ApplicationJSON
+}
+
+func (o *AdminImportV2Response) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *AdminImportV2Response) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *AdminImportV2Response) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *AdminImportV2Response) GetAdminImportV2200ApplicationJSONObject() *AdminImportV2200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AdminImportV2200ApplicationJSONObject
+}
+
+func (o *AdminImportV2Response) GetAdminImportV2304ApplicationJSONObject() *AdminImportV2304ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AdminImportV2304ApplicationJSONObject
+}
+
+func (o *AdminImportV2Response) GetAdminImportV2400ApplicationJSONJSONString() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AdminImportV2400ApplicationJSONJSONString
+}
+
+func (o *AdminImportV2Response) GetAdminImportV2403ApplicationJSONObject() *AdminImportV2403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AdminImportV2403ApplicationJSONObject
+}
+
+func (o *AdminImportV2Response) GetAdminImportV2405ApplicationJSONObject() *AdminImportV2405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AdminImportV2405ApplicationJSONObject
+}
+
+func (o *AdminImportV2Response) GetAdminImportV2500ApplicationJSONObject() *AdminImportV2500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AdminImportV2500ApplicationJSONObject
 }

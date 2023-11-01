@@ -25,10 +25,52 @@ type FileAnalysisGetRequest struct {
 	UserAgent *string `header:"style=simple,explode=false,name=user_agent"`
 }
 
+func (o *FileAnalysisGetRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *FileAnalysisGetRequest) GetDataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DataID
+}
+
+func (o *FileAnalysisGetRequest) GetFirst() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.First
+}
+
+func (o *FileAnalysisGetRequest) GetSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Size
+}
+
+func (o *FileAnalysisGetRequest) GetUserAgent() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserAgent
+}
+
 // FileAnalysisGet500ApplicationJSON - Unexpected event on server
 type FileAnalysisGet500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *FileAnalysisGet500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type FileAnalysisGetResponse struct {
@@ -43,4 +85,46 @@ type FileAnalysisGetResponse struct {
 	RawResponse *http.Response
 	// Unexpected event on server
 	FileAnalysisGet500ApplicationJSONObject *FileAnalysisGet500ApplicationJSON
+}
+
+func (o *FileAnalysisGetResponse) GetAnalysisResult() *shared.AnalysisResult {
+	if o == nil {
+		return nil
+	}
+	return o.AnalysisResult
+}
+
+func (o *FileAnalysisGetResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *FileAnalysisGetResponse) GetHeaders() map[string][]string {
+	if o == nil {
+		return nil
+	}
+	return o.Headers
+}
+
+func (o *FileAnalysisGetResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *FileAnalysisGetResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *FileAnalysisGetResponse) GetFileAnalysisGet500ApplicationJSONObject() *FileAnalysisGet500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisGet500ApplicationJSONObject
 }

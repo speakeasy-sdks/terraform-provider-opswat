@@ -9,3 +9,31 @@ type PostRequestBody struct {
 	RequiredEngines       []string `json:"required_engines,omitempty"`
 	ScanQueue             *int64   `json:"scan_queue,omitempty"`
 }
+
+func (o *PostRequestBody) GetEnableFeature() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.EnableFeature
+}
+
+func (o *PostRequestBody) GetNumberActiveAvEngines() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.NumberActiveAvEngines
+}
+
+func (o *PostRequestBody) GetRequiredEngines() []string {
+	if o == nil {
+		return nil
+	}
+	return o.RequiredEngines
+}
+
+func (o *PostRequestBody) GetScanQueue() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ScanQueue
+}

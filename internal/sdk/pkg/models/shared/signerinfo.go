@@ -21,3 +21,45 @@ type SignerInfo struct {
 	//
 	Version *string `json:"version,omitempty"`
 }
+
+func (o *SignerInfo) GetDigestAlgorithm() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DigestAlgorithm
+}
+
+func (o *SignerInfo) GetDigestEncryptionAlgorithm() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DigestEncryptionAlgorithm
+}
+
+func (o *SignerInfo) GetIssuer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Issuer
+}
+
+func (o *SignerInfo) GetSerialNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SerialNumber
+}
+
+func (o *SignerInfo) GetVendorName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.VendorName
+}
+
+func (o *SignerInfo) GetVersion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Version
+}

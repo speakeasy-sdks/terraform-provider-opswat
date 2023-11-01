@@ -6,3 +6,10 @@ type BatchInstanceMismatched struct {
 	// Cannot scan batch in another instance.
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *BatchInstanceMismatched) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

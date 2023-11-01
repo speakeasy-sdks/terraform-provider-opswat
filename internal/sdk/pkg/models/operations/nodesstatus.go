@@ -14,16 +14,37 @@ type NodesStatusRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *NodesStatusRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // NodesStatus405ApplicationJSON - The user has no rights for this operation.
 type NodesStatus405ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *NodesStatus405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // NodesStatus403ApplicationJSON - Invalid user information or Not Allowed
 type NodesStatus403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *NodesStatus403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // NodesStatus200ApplicationJSONStatusesEnginesEngineType - Engine's type:
@@ -82,11 +103,74 @@ type NodesStatus200ApplicationJSONStatusesEngines struct {
 	ID *string `json:"id,omitempty"`
 }
 
+func (o *NodesStatus200ApplicationJSONStatusesEngines) GetActive() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Active
+}
+
+func (o *NodesStatus200ApplicationJSONStatusesEngines) GetDbVer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DbVer
+}
+
+func (o *NodesStatus200ApplicationJSONStatusesEngines) GetDefTime() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DefTime
+}
+
+func (o *NodesStatus200ApplicationJSONStatusesEngines) GetEngName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EngName
+}
+
+func (o *NodesStatus200ApplicationJSONStatusesEngines) GetEngVer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EngVer
+}
+
+func (o *NodesStatus200ApplicationJSONStatusesEngines) GetEngineType() *NodesStatus200ApplicationJSONStatusesEnginesEngineType {
+	if o == nil {
+		return nil
+	}
+	return o.EngineType
+}
+
+func (o *NodesStatus200ApplicationJSONStatusesEngines) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
 type NodesStatus200ApplicationJSONStatusesIssues struct {
 	// Text detailing the issue.
 	Description *string `json:"description,omitempty"`
 	// How important is the reported issue.
 	Severity *string `json:"severity,omitempty"`
+}
+
+func (o *NodesStatus200ApplicationJSONStatusesIssues) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *NodesStatus200ApplicationJSONStatusesIssues) GetSeverity() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Severity
 }
 
 // NodesStatus200ApplicationJSONStatuses - Node status
@@ -123,6 +207,111 @@ type NodesStatus200ApplicationJSONStatuses struct {
 	Version *string `json:"version,omitempty"`
 }
 
+func (o *NodesStatus200ApplicationJSONStatuses) GetAddress() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Address
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetAvailableMem() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.AvailableMem
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetCPUCores() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.CPUCores
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetEngines() []NodesStatus200ApplicationJSONStatusesEngines {
+	if o == nil {
+		return nil
+	}
+	return o.Engines
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetFreeDiskSpace() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.FreeDiskSpace
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetIssues() []NodesStatus200ApplicationJSONStatusesIssues {
+	if o == nil {
+		return nil
+	}
+	return o.Issues
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetLoad() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Load
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetOs() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Os
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetScanQueue() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ScanQueue
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetTotalDiskSpace() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalDiskSpace
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetTotalMem() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalMem
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetTotalScanQueue() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalScanQueue
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetUptime() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Uptime
+}
+
+func (o *NodesStatus200ApplicationJSONStatuses) GetVersion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Version
+}
+
 type NodesStatus200ApplicationJSON struct {
 	// Configuration option if additional external nodes could be connected.
 	ExternalNodesAllowed *bool `json:"external_nodes_allowed,omitempty"`
@@ -130,6 +319,27 @@ type NodesStatus200ApplicationJSON struct {
 	MaxNodeCount *int64 `json:"max_node_count,omitempty"`
 	// Array with a status for each attached node.
 	Statuses []NodesStatus200ApplicationJSONStatuses `json:"statuses,omitempty"`
+}
+
+func (o *NodesStatus200ApplicationJSON) GetExternalNodesAllowed() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ExternalNodesAllowed
+}
+
+func (o *NodesStatus200ApplicationJSON) GetMaxNodeCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.MaxNodeCount
+}
+
+func (o *NodesStatus200ApplicationJSON) GetStatuses() []NodesStatus200ApplicationJSONStatuses {
+	if o == nil {
+		return nil
+	}
+	return o.Statuses
 }
 
 type NodesStatusResponse struct {
@@ -145,4 +355,46 @@ type NodesStatusResponse struct {
 	NodesStatus403ApplicationJSONObject *NodesStatus403ApplicationJSON
 	// The user has no rights for this operation.
 	NodesStatus405ApplicationJSONObject *NodesStatus405ApplicationJSON
+}
+
+func (o *NodesStatusResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *NodesStatusResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *NodesStatusResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *NodesStatusResponse) GetNodesStatus200ApplicationJSONObjects() []NodesStatus200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.NodesStatus200ApplicationJSONObjects
+}
+
+func (o *NodesStatusResponse) GetNodesStatus403ApplicationJSONObject() *NodesStatus403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.NodesStatus403ApplicationJSONObject
+}
+
+func (o *NodesStatusResponse) GetNodesStatus405ApplicationJSONObject() *NodesStatus405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.NodesStatus405ApplicationJSONObject
 }

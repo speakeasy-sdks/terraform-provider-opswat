@@ -12,10 +12,24 @@ type GetLicenseBackupRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *GetLicenseBackupRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // GetLicenseBackup500ApplicationJSON - Unexpected event on server
 type GetLicenseBackup500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *GetLicenseBackup500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // GetLicenseBackup403ApplicationJSON - Invalid user information or Not Allowed
@@ -24,16 +38,37 @@ type GetLicenseBackup403ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *GetLicenseBackup403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // GetLicenseBackup400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type GetLicenseBackup400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *GetLicenseBackup400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // GetLicenseBackup200ApplicationJSON - Request processed successfully
 type GetLicenseBackup200ApplicationJSON struct {
 	// The instance is a backup or not.
 	IsBackup *bool `json:"is_backup,omitempty"`
+}
+
+func (o *GetLicenseBackup200ApplicationJSON) GetIsBackup() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsBackup
 }
 
 type GetLicenseBackupResponse struct {
@@ -51,4 +86,53 @@ type GetLicenseBackupResponse struct {
 	GetLicenseBackup403ApplicationJSONObject *GetLicenseBackup403ApplicationJSON
 	// Unexpected event on server
 	GetLicenseBackup500ApplicationJSONObject *GetLicenseBackup500ApplicationJSON
+}
+
+func (o *GetLicenseBackupResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetLicenseBackupResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetLicenseBackupResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetLicenseBackupResponse) GetGetLicenseBackup200ApplicationJSONObject() *GetLicenseBackup200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetLicenseBackup200ApplicationJSONObject
+}
+
+func (o *GetLicenseBackupResponse) GetGetLicenseBackup400ApplicationJSONObject() *GetLicenseBackup400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetLicenseBackup400ApplicationJSONObject
+}
+
+func (o *GetLicenseBackupResponse) GetGetLicenseBackup403ApplicationJSONObject() *GetLicenseBackup403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetLicenseBackup403ApplicationJSONObject
+}
+
+func (o *GetLicenseBackupResponse) GetGetLicenseBackup500ApplicationJSONObject() *GetLicenseBackup500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetLicenseBackup500ApplicationJSONObject
 }

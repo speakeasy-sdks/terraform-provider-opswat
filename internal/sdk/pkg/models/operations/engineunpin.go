@@ -48,10 +48,38 @@ type EngineUnpinRequest struct {
 	Type *EngineUnpinType `header:"style=simple,explode=false,name=type"`
 }
 
+func (o *EngineUnpinRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
+func (o *EngineUnpinRequest) GetEngineID() string {
+	if o == nil {
+		return ""
+	}
+	return o.EngineID
+}
+
+func (o *EngineUnpinRequest) GetType() *EngineUnpinType {
+	if o == nil {
+		return nil
+	}
+	return o.Type
+}
+
 // EngineUnpin500ApplicationJSON - Unexpected event on server
 type EngineUnpin500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *EngineUnpin500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // EngineUnpin405ApplicationJSON - The user has no rights for this operation.
@@ -60,16 +88,37 @@ type EngineUnpin405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *EngineUnpin405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // EngineUnpin403ApplicationJSON - Invalid user information or Not Allowed
 type EngineUnpin403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *EngineUnpin403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // EngineUnpin400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type EngineUnpin400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *EngineUnpin400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type EngineUnpin200ApplicationJSONResult string
@@ -107,6 +156,13 @@ type EngineUnpin200ApplicationJSON struct {
 	Result *EngineUnpin200ApplicationJSONResult `json:"result,omitempty"`
 }
 
+func (o *EngineUnpin200ApplicationJSON) GetResult() *EngineUnpin200ApplicationJSONResult {
+	if o == nil {
+		return nil
+	}
+	return o.Result
+}
+
 type EngineUnpinResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -124,4 +180,60 @@ type EngineUnpinResponse struct {
 	EngineUnpin405ApplicationJSONObject *EngineUnpin405ApplicationJSON
 	// Unexpected event on server
 	EngineUnpin500ApplicationJSONObject *EngineUnpin500ApplicationJSON
+}
+
+func (o *EngineUnpinResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *EngineUnpinResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *EngineUnpinResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *EngineUnpinResponse) GetEngineUnpin200ApplicationJSONObject() *EngineUnpin200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineUnpin200ApplicationJSONObject
+}
+
+func (o *EngineUnpinResponse) GetEngineUnpin400ApplicationJSONObject() *EngineUnpin400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineUnpin400ApplicationJSONObject
+}
+
+func (o *EngineUnpinResponse) GetEngineUnpin403ApplicationJSONObject() *EngineUnpin403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineUnpin403ApplicationJSONObject
+}
+
+func (o *EngineUnpinResponse) GetEngineUnpin405ApplicationJSONObject() *EngineUnpin405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineUnpin405ApplicationJSONObject
+}
+
+func (o *EngineUnpinResponse) GetEngineUnpin500ApplicationJSONObject() *EngineUnpin500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.EngineUnpin500ApplicationJSONObject
 }

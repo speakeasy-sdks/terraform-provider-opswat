@@ -17,3 +17,24 @@ type SkipListAfterDeleted struct {
 	Skip      *SkipListAfterDeletedSkip      `json:"skip,omitempty"`
 	Whitelist *SkipListAfterDeletedWhitelist `json:"whitelist,omitempty"`
 }
+
+func (o *SkipListAfterDeleted) GetBlacklist() *SkipListAfterDeletedBlacklist {
+	if o == nil {
+		return nil
+	}
+	return o.Blacklist
+}
+
+func (o *SkipListAfterDeleted) GetSkip() *SkipListAfterDeletedSkip {
+	if o == nil {
+		return nil
+	}
+	return o.Skip
+}
+
+func (o *SkipListAfterDeleted) GetWhitelist() *SkipListAfterDeletedWhitelist {
+	if o == nil {
+		return nil
+	}
+	return o.Whitelist
+}

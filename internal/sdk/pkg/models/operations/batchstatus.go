@@ -19,10 +19,45 @@ type BatchStatusRequest struct {
 	Size *int64 `queryParam:"style=form,explode=true,name=size"`
 }
 
+func (o *BatchStatusRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *BatchStatusRequest) GetBatchID() string {
+	if o == nil {
+		return ""
+	}
+	return o.BatchID
+}
+
+func (o *BatchStatusRequest) GetFirst() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.First
+}
+
+func (o *BatchStatusRequest) GetSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Size
+}
+
 // BatchStatus500ApplicationJSON - Unexpected event on server
 type BatchStatus500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *BatchStatus500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // BatchStatus404ApplicationJSON - Requests resource was not found.
@@ -31,16 +66,37 @@ type BatchStatus404ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *BatchStatus404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // BatchStatus403ApplicationJSON - Invalid user information or Not Allowed
 type BatchStatus403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *BatchStatus403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // BatchStatus400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type BatchStatus400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *BatchStatus400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type BatchStatusResponse struct {
@@ -60,4 +116,60 @@ type BatchStatusResponse struct {
 	BatchStatus404ApplicationJSONObject *BatchStatus404ApplicationJSON
 	// Unexpected event on server
 	BatchStatus500ApplicationJSONObject *BatchStatus500ApplicationJSON
+}
+
+func (o *BatchStatusResponse) GetBatchResponseInProgress() *shared.BatchResponseInProgress {
+	if o == nil {
+		return nil
+	}
+	return o.BatchResponseInProgress
+}
+
+func (o *BatchStatusResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *BatchStatusResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *BatchStatusResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *BatchStatusResponse) GetBatchStatus400ApplicationJSONObject() *BatchStatus400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchStatus400ApplicationJSONObject
+}
+
+func (o *BatchStatusResponse) GetBatchStatus403ApplicationJSONObject() *BatchStatus403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchStatus403ApplicationJSONObject
+}
+
+func (o *BatchStatusResponse) GetBatchStatus404ApplicationJSONObject() *BatchStatus404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchStatus404ApplicationJSONObject
+}
+
+func (o *BatchStatusResponse) GetBatchStatus500ApplicationJSONObject() *BatchStatus500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchStatus500ApplicationJSONObject
 }

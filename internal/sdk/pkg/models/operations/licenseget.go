@@ -13,16 +13,37 @@ type LicenseGetRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *LicenseGetRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // LicenseGet500ApplicationJSON - Unexpected event on server
 type LicenseGet500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *LicenseGet500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // LicenseGet403ApplicationJSON - Invalid user information or Not Allowed
 type LicenseGet403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *LicenseGet403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type LicenseGetResponse struct {
@@ -38,4 +59,46 @@ type LicenseGetResponse struct {
 	LicenseGet403ApplicationJSONObject *LicenseGet403ApplicationJSON
 	// Unexpected event on server
 	LicenseGet500ApplicationJSONObject *LicenseGet500ApplicationJSON
+}
+
+func (o *LicenseGetResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *LicenseGetResponse) GetLicenseInformation() *shared.LicenseInformation {
+	if o == nil {
+		return nil
+	}
+	return o.LicenseInformation
+}
+
+func (o *LicenseGetResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *LicenseGetResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *LicenseGetResponse) GetLicenseGet403ApplicationJSONObject() *LicenseGet403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.LicenseGet403ApplicationJSONObject
+}
+
+func (o *LicenseGetResponse) GetLicenseGet500ApplicationJSONObject() *LicenseGet500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.LicenseGet500ApplicationJSONObject
 }

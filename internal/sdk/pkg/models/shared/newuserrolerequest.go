@@ -40,6 +40,125 @@ type NewUserRoleRequestRights struct {
 	Zone []RolePermissionObject `json:"zone,omitempty"`
 }
 
+func (o *NewUserRoleRequestRights) GetAgents() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Agents
+}
+
+func (o *NewUserRoleRequestRights) GetCert() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Cert
+}
+
+func (o *NewUserRoleRequestRights) GetConfiglog() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Configlog
+}
+
+func (o *NewUserRoleRequestRights) GetEngines() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Engines
+}
+
+func (o *NewUserRoleRequestRights) GetExternal() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.External
+}
+
+func (o *NewUserRoleRequestRights) GetLicense() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.License
+}
+
+func (o *NewUserRoleRequestRights) GetQuarantine() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Quarantine
+}
+
+func (o *NewUserRoleRequestRights) GetRetention() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Retention
+}
+
+func (o *NewUserRoleRequestRights) GetRule() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Rule
+}
+
+func (o *NewUserRoleRequestRights) GetScan() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Scan
+}
+
+func (o *NewUserRoleRequestRights) GetScanlog() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Scanlog
+}
+
+func (o *NewUserRoleRequestRights) GetSkip() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Skip
+}
+
+func (o *NewUserRoleRequestRights) GetUpdate() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Update
+}
+
+func (o *NewUserRoleRequestRights) GetUpdatelog() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Updatelog
+}
+
+func (o *NewUserRoleRequestRights) GetUsers() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Users
+}
+
+func (o *NewUserRoleRequestRights) GetWorkflow() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Workflow
+}
+
+func (o *NewUserRoleRequestRights) GetZone() []RolePermissionObject {
+	if o == nil {
+		return nil
+	}
+	return o.Zone
+}
+
 // NewUserRoleRequest - MetaDefender user role describing object.
 type NewUserRoleRequest struct {
 	// The extended name showed in the Management Console.
@@ -48,4 +167,25 @@ type NewUserRoleRequest struct {
 	Name *string `json:"name,omitempty"`
 	// A list of rights for each permission
 	Rights *NewUserRoleRequestRights `json:"rights,omitempty"`
+}
+
+func (o *NewUserRoleRequest) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *NewUserRoleRequest) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *NewUserRoleRequest) GetRights() *NewUserRoleRequestRights {
+	if o == nil {
+		return nil
+	}
+	return o.Rights
 }

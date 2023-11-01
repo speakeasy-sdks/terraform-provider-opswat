@@ -19,10 +19,45 @@ type PostLicenseBackupRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *PostLicenseBackupRequest) GetRequestBody() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RequestBody
+}
+
+func (o *PostLicenseBackupRequest) GetActivationKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ActivationKey
+}
+
+func (o *PostLicenseBackupRequest) GetActiveDeploymentID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ActiveDeploymentID
+}
+
+func (o *PostLicenseBackupRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // PostLicenseBackup500ApplicationJSON - Unexpected event on server
 type PostLicenseBackup500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *PostLicenseBackup500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // PostLicenseBackup403ApplicationJSON - Invalid user information or Not Allowed
@@ -31,16 +66,37 @@ type PostLicenseBackup403ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *PostLicenseBackup403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // PostLicenseBackup400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type PostLicenseBackup400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *PostLicenseBackup400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // PostLicenseBackup200ApplicationJSON - Request successfully
 type PostLicenseBackup200ApplicationJSON struct {
 	// Successful message
 	Success *string `json:"success,omitempty"`
+}
+
+func (o *PostLicenseBackup200ApplicationJSON) GetSuccess() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Success
 }
 
 type PostLicenseBackupResponse struct {
@@ -58,4 +114,53 @@ type PostLicenseBackupResponse struct {
 	PostLicenseBackup403ApplicationJSONObject *PostLicenseBackup403ApplicationJSON
 	// Unexpected event on server
 	PostLicenseBackup500ApplicationJSONObject *PostLicenseBackup500ApplicationJSON
+}
+
+func (o *PostLicenseBackupResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *PostLicenseBackupResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *PostLicenseBackupResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *PostLicenseBackupResponse) GetPostLicenseBackup200ApplicationJSONObject() *PostLicenseBackup200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.PostLicenseBackup200ApplicationJSONObject
+}
+
+func (o *PostLicenseBackupResponse) GetPostLicenseBackup400ApplicationJSONObject() *PostLicenseBackup400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.PostLicenseBackup400ApplicationJSONObject
+}
+
+func (o *PostLicenseBackupResponse) GetPostLicenseBackup403ApplicationJSONObject() *PostLicenseBackup403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.PostLicenseBackup403ApplicationJSONObject
+}
+
+func (o *PostLicenseBackupResponse) GetPostLicenseBackup500ApplicationJSONObject() *PostLicenseBackup500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.PostLicenseBackup500ApplicationJSONObject
 }

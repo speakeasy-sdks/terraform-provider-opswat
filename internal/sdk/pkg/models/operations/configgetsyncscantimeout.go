@@ -4,8 +4,7 @@ package operations
 
 import (
 	"Metadefender/internal/sdk/pkg/models/shared"
-	"bytes"
-	"encoding/json"
+	"Metadefender/internal/sdk/pkg/utils"
 	"errors"
 	"net/http"
 )
@@ -14,6 +13,13 @@ type ConfigGetSyncScanTimeoutRequest struct {
 	// Generated `session_id` from [Login](/mdcore/metadefender-core/ref#userlogin) call can be used as an `apikey` for API calls that require authentication.
 	//
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
+}
+
+func (o *ConfigGetSyncScanTimeoutRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
 }
 
 type ConfigGetSyncScanTimeout500ApplicationJSONType string
@@ -49,21 +55,16 @@ func CreateConfigGetSyncScanTimeout500ApplicationJSONInternalServerError(interna
 }
 
 func (u *ConfigGetSyncScanTimeout500ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	errorWhileRequestingConfig := new(shared.ErrorWhileRequestingConfig)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&errorWhileRequestingConfig); err == nil {
+	if err := utils.UnmarshalJSON(data, &errorWhileRequestingConfig, "", true, true); err == nil {
 		u.ErrorWhileRequestingConfig = errorWhileRequestingConfig
 		u.Type = ConfigGetSyncScanTimeout500ApplicationJSONTypeErrorWhileRequestingConfig
 		return nil
 	}
 
 	internalServerError := new(shared.InternalServerError)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&internalServerError); err == nil {
+	if err := utils.UnmarshalJSON(data, &internalServerError, "", true, true); err == nil {
 		u.InternalServerError = internalServerError
 		u.Type = ConfigGetSyncScanTimeout500ApplicationJSONTypeInternalServerError
 		return nil
@@ -74,14 +75,14 @@ func (u *ConfigGetSyncScanTimeout500ApplicationJSON) UnmarshalJSON(data []byte) 
 
 func (u ConfigGetSyncScanTimeout500ApplicationJSON) MarshalJSON() ([]byte, error) {
 	if u.ErrorWhileRequestingConfig != nil {
-		return json.Marshal(u.ErrorWhileRequestingConfig)
+		return utils.MarshalJSON(u.ErrorWhileRequestingConfig, "", true)
 	}
 
 	if u.InternalServerError != nil {
-		return json.Marshal(u.InternalServerError)
+		return utils.MarshalJSON(u.InternalServerError, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 // ConfigGetSyncScanTimeout405ApplicationJSON - The user has no rights for this operation.
@@ -90,10 +91,24 @@ type ConfigGetSyncScanTimeout405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigGetSyncScanTimeout405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigGetSyncScanTimeout403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigGetSyncScanTimeout403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigGetSyncScanTimeout403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type ConfigGetSyncScanTimeoutResponse struct {
@@ -111,4 +126,53 @@ type ConfigGetSyncScanTimeoutResponse struct {
 	ConfigGetSyncScanTimeout405ApplicationJSONObject *ConfigGetSyncScanTimeout405ApplicationJSON
 	// Error while requesting configuration.
 	ConfigGetSyncScanTimeout500ApplicationJSONOneOf *ConfigGetSyncScanTimeout500ApplicationJSON
+}
+
+func (o *ConfigGetSyncScanTimeoutResponse) GetAdminConfigFileSync() *shared.AdminConfigFileSync {
+	if o == nil {
+		return nil
+	}
+	return o.AdminConfigFileSync
+}
+
+func (o *ConfigGetSyncScanTimeoutResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigGetSyncScanTimeoutResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigGetSyncScanTimeoutResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigGetSyncScanTimeoutResponse) GetConfigGetSyncScanTimeout403ApplicationJSONObject() *ConfigGetSyncScanTimeout403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigGetSyncScanTimeout403ApplicationJSONObject
+}
+
+func (o *ConfigGetSyncScanTimeoutResponse) GetConfigGetSyncScanTimeout405ApplicationJSONObject() *ConfigGetSyncScanTimeout405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigGetSyncScanTimeout405ApplicationJSONObject
+}
+
+func (o *ConfigGetSyncScanTimeoutResponse) GetConfigGetSyncScanTimeout500ApplicationJSONOneOf() *ConfigGetSyncScanTimeout500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigGetSyncScanTimeout500ApplicationJSONOneOf
 }

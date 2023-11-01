@@ -14,10 +14,31 @@ type LicenseActivationRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *LicenseActivationRequest) GetPostlicenseKeyRequest() *shared.PostlicenseKeyRequest {
+	if o == nil {
+		return nil
+	}
+	return o.PostlicenseKeyRequest
+}
+
+func (o *LicenseActivationRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // LicenseActivation500ApplicationJSON - Unexpected event on server
 type LicenseActivation500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *LicenseActivation500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // LicenseActivation403ApplicationJSON - Invalid user information or Not Allowed
@@ -26,15 +47,36 @@ type LicenseActivation403ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *LicenseActivation403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // LicenseActivation400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type LicenseActivation400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *LicenseActivation400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // LicenseActivation200ApplicationJSON - Request processed successfully
 type LicenseActivation200ApplicationJSON struct {
 	Success *bool `json:"success,omitempty"`
+}
+
+func (o *LicenseActivation200ApplicationJSON) GetSuccess() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Success
 }
 
 type LicenseActivationResponse struct {
@@ -52,4 +94,53 @@ type LicenseActivationResponse struct {
 	LicenseActivation403ApplicationJSONObject *LicenseActivation403ApplicationJSON
 	// Unexpected event on server
 	LicenseActivation500ApplicationJSONObject *LicenseActivation500ApplicationJSON
+}
+
+func (o *LicenseActivationResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *LicenseActivationResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *LicenseActivationResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *LicenseActivationResponse) GetLicenseActivation200ApplicationJSONObject() *LicenseActivation200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.LicenseActivation200ApplicationJSONObject
+}
+
+func (o *LicenseActivationResponse) GetLicenseActivation400ApplicationJSONObject() *LicenseActivation400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.LicenseActivation400ApplicationJSONObject
+}
+
+func (o *LicenseActivationResponse) GetLicenseActivation403ApplicationJSONObject() *LicenseActivation403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.LicenseActivation403ApplicationJSONObject
+}
+
+func (o *LicenseActivationResponse) GetLicenseActivation500ApplicationJSONObject() *LicenseActivation500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.LicenseActivation500ApplicationJSONObject
 }

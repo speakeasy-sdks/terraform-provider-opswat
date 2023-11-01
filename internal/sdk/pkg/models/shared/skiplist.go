@@ -17,3 +17,24 @@ type SkipList struct {
 	Skip      *SkipListSkip      `json:"skip,omitempty"`
 	Whitelist *SkipListWhitelist `json:"whitelist,omitempty"`
 }
+
+func (o *SkipList) GetBlacklist() *SkipListBlacklist {
+	if o == nil {
+		return nil
+	}
+	return o.Blacklist
+}
+
+func (o *SkipList) GetSkip() *SkipListSkip {
+	if o == nil {
+		return nil
+	}
+	return o.Skip
+}
+
+func (o *SkipList) GetWhitelist() *SkipListWhitelist {
+	if o == nil {
+		return nil
+	}
+	return o.Whitelist
+}

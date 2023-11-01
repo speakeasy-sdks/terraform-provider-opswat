@@ -11,3 +11,24 @@ type PostlicenseKeyRequest struct {
 	// The number of MetaDefender nodes attached to this instance.
 	Quantity *int64 `json:"quantity,omitempty"`
 }
+
+func (o *PostlicenseKeyRequest) GetActivationKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ActivationKey
+}
+
+func (o *PostlicenseKeyRequest) GetComment() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Comment
+}
+
+func (o *PostlicenseKeyRequest) GetQuantity() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Quantity
+}

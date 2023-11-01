@@ -8,3 +8,17 @@ type UserLogin struct {
 	// The apikey used to make API calls which requires authentication
 	SessionID string `json:"session_id"`
 }
+
+func (o *UserLogin) GetOmsCsrfToken() string {
+	if o == nil {
+		return ""
+	}
+	return o.OmsCsrfToken
+}
+
+func (o *UserLogin) GetSessionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SessionID
+}

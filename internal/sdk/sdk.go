@@ -48,6 +48,7 @@ type sdkConfiguration struct {
 	SDKVersion        string
 	GenVersion        string
 	UserAgent         string
+	RetryConfig       *utils.RetryConfig
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
@@ -113,9 +114,9 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 //
 // https://onlinehelp.opswat.com/corev4 - Official product documentation
 type Metadefender struct {
-	// Admin - Admin specific API requests.
+	// Admin specific API requests.
 	Admin *admin
-	// Analysis - ### File analysis APIs
+	// ### File analysis APIs
 	// Submit each file to MetaDefender Core individually or group them in batches. Each file submission will return a `data_id` which will be the unique identifier used to retrieve the analysis results.
 	// **Important**: Even though one file is being submitted, if MetaDefender Core is configured to extract the files, all compound file types (archives, Office documents, etc.) will be extracted and each file within will be analyzed as a separate entry.
 	//   - This means that if you submit an archive with 100 files in it, MetaDefender Core will process 101 files: original file as it is and each of the 100 child files
@@ -124,7 +125,7 @@ type Metadefender struct {
 	// > _**Note**:_ MetaDefender API doesn't support chunk upload. You shouldn't load the file in memory, is recommended to stream the files to MetaDefender Core as part of the upload process.
 	//
 	Analysis *analysis
-	// Auth - ### Authentication APIs
+	// ### Authentication APIs
 	// User authentication is done via username & password.
 	// Additional integrations are available within the product:
 	//   - **LDAP** integration
@@ -132,19 +133,19 @@ type Metadefender struct {
 	//   - **SAML** integration (starting with v4.18.0)
 	//
 	Auth *auth
-	// Batch - Group the analysis requests in batches.
+	// Group the analysis requests in batches.
 	Batch *batch
-	// Config - Configure the product through APIs (especially the Settings). Will require admin apikey.
+	// Configure the product through APIs (especially the Settings). Will require admin apikey.
 	//
 	Config *config
-	// Engines - Enable/disable or pin/unpin the engines through API.
+	// Enable/disable or pin/unpin the engines through API.
 	Engines *engines
-	// License - Activate the product or get licensing information. Will require admin apikey.
+	// Activate the product or get licensing information. Will require admin apikey.
 	//
 	License *license
-	// Stats - Health check and statistics about MetaDefender Core usage.
+	// Health check and statistics about MetaDefender Core usage.
 	Stats *stats
-	// Yara - Yara engine configuration and source management APIs.
+	// Yara engine configuration and source management APIs.
 	Yara *yara
 
 	sdkConfiguration sdkConfiguration
@@ -188,15 +189,21 @@ func WithClient(client HTTPClient) SDKOption {
 	}
 }
 
+func WithRetryConfig(retryConfig utils.RetryConfig) SDKOption {
+	return func(sdk *Metadefender) {
+		sdk.sdkConfiguration.RetryConfig = &retryConfig
+	}
+}
+
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Metadefender {
 	sdk := &Metadefender{
 		sdkConfiguration: sdkConfiguration{
-			Language:          "terraform",
+			Language:          "go",
 			OpenAPIDocVersion: "v5.6.1",
-			SDKVersion:        "0.4.1",
-			GenVersion:        "2.150.0",
-			UserAgent:         "speakeasy-sdk/terraform 0.4.1 2.150.0 v5.6.1 Metadefender",
+			SDKVersion:        "0.5.0",
+			GenVersion:        "2.173.0",
+			UserAgent:         "speakeasy-sdk/go 0.5.0 2.173.0 v5.6.1 Metadefender",
 		},
 	}
 	for _, opt := range opts {

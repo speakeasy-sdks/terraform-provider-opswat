@@ -12,10 +12,24 @@ type RemoveBackupInstanceRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *RemoveBackupInstanceRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // RemoveBackupInstance500ApplicationJSON - Unexpected event on server
 type RemoveBackupInstance500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *RemoveBackupInstance500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // RemoveBackupInstance403ApplicationJSON - Invalid user information or Not Allowed
@@ -24,16 +38,37 @@ type RemoveBackupInstance403ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *RemoveBackupInstance403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // RemoveBackupInstance400ApplicationJSON - Bad Request
 type RemoveBackupInstance400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *RemoveBackupInstance400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // RemoveBackupInstance200ApplicationJSON - Request successfully
 type RemoveBackupInstance200ApplicationJSON struct {
 	// Successful message
 	Success *string `json:"success,omitempty"`
+}
+
+func (o *RemoveBackupInstance200ApplicationJSON) GetSuccess() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Success
 }
 
 type RemoveBackupInstanceResponse struct {
@@ -51,4 +86,53 @@ type RemoveBackupInstanceResponse struct {
 	RemoveBackupInstance403ApplicationJSONObject *RemoveBackupInstance403ApplicationJSON
 	// Unexpected event on server
 	RemoveBackupInstance500ApplicationJSONObject *RemoveBackupInstance500ApplicationJSON
+}
+
+func (o *RemoveBackupInstanceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *RemoveBackupInstanceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *RemoveBackupInstanceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *RemoveBackupInstanceResponse) GetRemoveBackupInstance200ApplicationJSONObject() *RemoveBackupInstance200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RemoveBackupInstance200ApplicationJSONObject
+}
+
+func (o *RemoveBackupInstanceResponse) GetRemoveBackupInstance400ApplicationJSONObject() *RemoveBackupInstance400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RemoveBackupInstance400ApplicationJSONObject
+}
+
+func (o *RemoveBackupInstanceResponse) GetRemoveBackupInstance403ApplicationJSONObject() *RemoveBackupInstance403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RemoveBackupInstance403ApplicationJSONObject
+}
+
+func (o *RemoveBackupInstanceResponse) GetRemoveBackupInstance500ApplicationJSONObject() *RemoveBackupInstance500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RemoveBackupInstance500ApplicationJSONObject
 }

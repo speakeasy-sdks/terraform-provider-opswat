@@ -6,3 +6,10 @@ type InvalidProtocolDownloadLink struct {
 	// Download url must start with http:// or https://.
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *InvalidProtocolDownloadLink) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

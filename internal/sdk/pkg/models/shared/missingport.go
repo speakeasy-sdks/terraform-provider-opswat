@@ -6,3 +6,10 @@ type MissingPort struct {
 	// Missing port
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *MissingPort) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

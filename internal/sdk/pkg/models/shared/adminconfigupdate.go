@@ -18,6 +18,27 @@ type AdminConfigUpdateDisabledupdate struct {
 	To *int64 `json:"to,omitempty"`
 }
 
+func (o *AdminConfigUpdateDisabledupdate) GetDays() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Days
+}
+
+func (o *AdminConfigUpdateDisabledupdate) GetFrom() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.From
+}
+
+func (o *AdminConfigUpdateDisabledupdate) GetTo() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.To
+}
+
 // AdminConfigUpdateSource - Define where the updates will be loaded from. <p> This can be either:
 //   - `internet` -> if selected, will check for new updates every `autoupdateperiod` minutes
 //   - `folder` -> make sure that MetaDefender has access/permission to that folder
@@ -68,4 +89,39 @@ type AdminConfigUpdate struct {
 	//   * `manual` -> requires manually uploading the packages in Inventory > Modules > Upload package.
 	//
 	Source *AdminConfigUpdateSource `json:"source,omitempty"`
+}
+
+func (o *AdminConfigUpdate) GetAutoupdateperiod() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Autoupdateperiod
+}
+
+func (o *AdminConfigUpdate) GetDeleteafterimport() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Deleteafterimport
+}
+
+func (o *AdminConfigUpdate) GetDisabledupdate() []AdminConfigUpdateDisabledupdate {
+	if o == nil {
+		return nil
+	}
+	return o.Disabledupdate
+}
+
+func (o *AdminConfigUpdate) GetPickupfolder() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Pickupfolder
+}
+
+func (o *AdminConfigUpdate) GetSource() *AdminConfigUpdateSource {
+	if o == nil {
+		return nil
+	}
+	return o.Source
 }

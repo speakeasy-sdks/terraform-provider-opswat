@@ -14,10 +14,31 @@ type ConfigScanHistoryRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *ConfigScanHistoryRequest) GetAdminCleanup() *shared.AdminCleanup {
+	if o == nil {
+		return nil
+	}
+	return o.AdminCleanup
+}
+
+func (o *ConfigScanHistoryRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // ConfigScanHistory500ApplicationJSON - Unexpected event on server
 type ConfigScanHistory500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigScanHistory500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ConfigScanHistory405ApplicationJSON - The user has no rights for this operation.
@@ -26,16 +47,37 @@ type ConfigScanHistory405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigScanHistory405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigScanHistory403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigScanHistory403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigScanHistory403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigScanHistory200ApplicationJSON - Request processed successfully
 type ConfigScanHistory200ApplicationJSON struct {
 	// The number of hours of data retention. Anything older than this number will be deleted.
 	Cleanuprange *int64 `json:"cleanuprange,omitempty"`
+}
+
+func (o *ConfigScanHistory200ApplicationJSON) GetCleanuprange() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Cleanuprange
 }
 
 type ConfigScanHistoryResponse struct {
@@ -53,4 +95,53 @@ type ConfigScanHistoryResponse struct {
 	ConfigScanHistory405ApplicationJSONObject *ConfigScanHistory405ApplicationJSON
 	// Unexpected event on server
 	ConfigScanHistory500ApplicationJSONObject *ConfigScanHistory500ApplicationJSON
+}
+
+func (o *ConfigScanHistoryResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigScanHistoryResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigScanHistoryResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigScanHistoryResponse) GetConfigScanHistory200ApplicationJSONObject() *ConfigScanHistory200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigScanHistory200ApplicationJSONObject
+}
+
+func (o *ConfigScanHistoryResponse) GetConfigScanHistory403ApplicationJSONObject() *ConfigScanHistory403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigScanHistory403ApplicationJSONObject
+}
+
+func (o *ConfigScanHistoryResponse) GetConfigScanHistory405ApplicationJSONObject() *ConfigScanHistory405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigScanHistory405ApplicationJSONObject
+}
+
+func (o *ConfigScanHistoryResponse) GetConfigScanHistory500ApplicationJSONObject() *ConfigScanHistory500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigScanHistory500ApplicationJSONObject
 }

@@ -6,3 +6,10 @@ type SetRequiredEngineFailedWhenInvalidLicense struct {
 	// Failed to set required_engines when license is not valid
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *SetRequiredEngineFailedWhenInvalidLicense) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

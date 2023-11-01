@@ -10,6 +10,20 @@ type AdminConfigCustomResponseHeaderIncludeAddress struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }
 
+func (o *AdminConfigCustomResponseHeaderIncludeAddress) GetAddressStr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AddressStr
+}
+
+func (o *AdminConfigCustomResponseHeaderIncludeAddress) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
 type AdminConfigCustomResponseHeaderSpecifyUsersAgent struct {
 	// Indicate which user_agent should be allowed to include new header in response header.
 	AllowedUsersAgent []string `json:"allowed_users_agent,omitempty"`
@@ -17,6 +31,20 @@ type AdminConfigCustomResponseHeaderSpecifyUsersAgent struct {
 	// to return new header X-Core-Id in response.
 	//
 	Enabled *bool `json:"enabled,omitempty"`
+}
+
+func (o *AdminConfigCustomResponseHeaderSpecifyUsersAgent) GetAllowedUsersAgent() []string {
+	if o == nil {
+		return nil
+	}
+	return o.AllowedUsersAgent
+}
+
+func (o *AdminConfigCustomResponseHeaderSpecifyUsersAgent) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
 }
 
 // AdminConfigCustomResponseHeader - Custom response header details.
@@ -28,4 +56,32 @@ type AdminConfigCustomResponseHeader struct {
 	// Include generated deployment ID.
 	IncludeDeploymentID *bool                                             `json:"include_deployment_id,omitempty"`
 	SpecifyUsersAgent   *AdminConfigCustomResponseHeaderSpecifyUsersAgent `json:"specify_users_agent,omitempty"`
+}
+
+func (o *AdminConfigCustomResponseHeader) GetAuthorizedOnly() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AuthorizedOnly
+}
+
+func (o *AdminConfigCustomResponseHeader) GetIncludeAddress() *AdminConfigCustomResponseHeaderIncludeAddress {
+	if o == nil {
+		return nil
+	}
+	return o.IncludeAddress
+}
+
+func (o *AdminConfigCustomResponseHeader) GetIncludeDeploymentID() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IncludeDeploymentID
+}
+
+func (o *AdminConfigCustomResponseHeader) GetSpecifyUsersAgent() *AdminConfigCustomResponseHeaderSpecifyUsersAgent {
+	if o == nil {
+		return nil
+	}
+	return o.SpecifyUsersAgent
 }

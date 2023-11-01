@@ -14,10 +14,31 @@ type ResultExportedFileRequest struct {
 	DataID string `pathParam:"style=simple,explode=false,name=data_id"`
 }
 
+func (o *ResultExportedFileRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
+func (o *ResultExportedFileRequest) GetDataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DataID
+}
+
 // ResultExportedFile500ApplicationJSON - Unexpected event on server
 type ResultExportedFile500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ResultExportedFile500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ResultExportedFile404ApplicationJSON - Requests resource was not found.
@@ -26,10 +47,24 @@ type ResultExportedFile404ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ResultExportedFile404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ResultExportedFile403ApplicationJSON - Invalid user information or Not Allowed
 type ResultExportedFile403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ResultExportedFile403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type ResultExportedFileResponse struct {
@@ -47,4 +82,53 @@ type ResultExportedFileResponse struct {
 	ResultExportedFile404ApplicationJSONObject *ResultExportedFile404ApplicationJSON
 	// Unexpected event on server
 	ResultExportedFile500ApplicationJSONObject *ResultExportedFile500ApplicationJSON
+}
+
+func (o *ResultExportedFileResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ResultExportedFileResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ResultExportedFileResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ResultExportedFileResponse) GetResultExportedFile200ApplicationPdfBinaryString() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.ResultExportedFile200ApplicationPdfBinaryString
+}
+
+func (o *ResultExportedFileResponse) GetResultExportedFile403ApplicationJSONObject() *ResultExportedFile403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ResultExportedFile403ApplicationJSONObject
+}
+
+func (o *ResultExportedFileResponse) GetResultExportedFile404ApplicationJSONObject() *ResultExportedFile404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ResultExportedFile404ApplicationJSONObject
+}
+
+func (o *ResultExportedFileResponse) GetResultExportedFile500ApplicationJSONObject() *ResultExportedFile500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ResultExportedFile500ApplicationJSONObject
 }

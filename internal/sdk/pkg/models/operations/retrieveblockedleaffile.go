@@ -14,10 +14,31 @@ type RetrieveBlockedLeafFileRequest struct {
 	DataID string `pathParam:"style=simple,explode=false,name=data_id"`
 }
 
+func (o *RetrieveBlockedLeafFileRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *RetrieveBlockedLeafFileRequest) GetDataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DataID
+}
+
 // RetrieveBlockedLeafFile500ApplicationJSON - Unexpected event on server
 type RetrieveBlockedLeafFile500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *RetrieveBlockedLeafFile500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // RetrieveBlockedLeafFile405ApplicationJSON - The user has no rights for this operation.
@@ -26,10 +47,24 @@ type RetrieveBlockedLeafFile405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *RetrieveBlockedLeafFile405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // RetrieveBlockedLeafFile404ApplicationJSON - Requests resource was not found.
 type RetrieveBlockedLeafFile404ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *RetrieveBlockedLeafFile404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // RetrieveBlockedLeafFile200ApplicationOctetStreamDetailsProcessInfoPostProcessing - Processing information
@@ -40,10 +75,31 @@ type RetrieveBlockedLeafFile200ApplicationOctetStreamDetailsProcessInfoPostProce
 	ActionsRan *string
 }
 
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStreamDetailsProcessInfoPostProcessing) GetActionsFailed() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ActionsFailed
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStreamDetailsProcessInfoPostProcessing) GetActionsRan() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ActionsRan
+}
+
 // RetrieveBlockedLeafFile200ApplicationOctetStreamDetailsProcessInfo - Processing information
 type RetrieveBlockedLeafFile200ApplicationOctetStreamDetailsProcessInfo struct {
 	// Processing information
 	PostProcessing *RetrieveBlockedLeafFile200ApplicationOctetStreamDetailsProcessInfoPostProcessing
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStreamDetailsProcessInfo) GetPostProcessing() *RetrieveBlockedLeafFile200ApplicationOctetStreamDetailsProcessInfoPostProcessing {
+	if o == nil {
+		return nil
+	}
+	return o.PostProcessing
 }
 
 type RetrieveBlockedLeafFile200ApplicationOctetStreamDetails struct {
@@ -65,6 +121,62 @@ type RetrieveBlockedLeafFile200ApplicationOctetStreamDetails struct {
 	Verdicts []string
 }
 
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStreamDetails) GetBlockedReasons() []string {
+	if o == nil {
+		return nil
+	}
+	return o.BlockedReasons
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStreamDetails) GetDataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DataID
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStreamDetails) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStreamDetails) GetFileType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileType
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStreamDetails) GetParentID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ParentID
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStreamDetails) GetPath() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Path
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStreamDetails) GetProcessInfo() *RetrieveBlockedLeafFile200ApplicationOctetStreamDetailsProcessInfo {
+	if o == nil {
+		return nil
+	}
+	return o.ProcessInfo
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStreamDetails) GetVerdicts() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Verdicts
+}
+
 // RetrieveBlockedLeafFile200ApplicationOctetStream - Returns the list of blocked leaf files.
 type RetrieveBlockedLeafFile200ApplicationOctetStream struct {
 	Details []RetrieveBlockedLeafFile200ApplicationOctetStreamDetails
@@ -72,6 +184,27 @@ type RetrieveBlockedLeafFile200ApplicationOctetStream struct {
 	LimitReached *bool
 	// Total number of files in the above array.
 	Total *int64
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStream) GetDetails() []RetrieveBlockedLeafFile200ApplicationOctetStreamDetails {
+	if o == nil {
+		return nil
+	}
+	return o.Details
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStream) GetLimitReached() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.LimitReached
+}
+
+func (o *RetrieveBlockedLeafFile200ApplicationOctetStream) GetTotal() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Total
 }
 
 type RetrieveBlockedLeafFileResponse struct {
@@ -88,4 +221,53 @@ type RetrieveBlockedLeafFileResponse struct {
 	RetrieveBlockedLeafFile405ApplicationJSONObject *RetrieveBlockedLeafFile405ApplicationJSON
 	// Unexpected event on server
 	RetrieveBlockedLeafFile500ApplicationJSONObject *RetrieveBlockedLeafFile500ApplicationJSON
+}
+
+func (o *RetrieveBlockedLeafFileResponse) GetBody() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.Body
+}
+
+func (o *RetrieveBlockedLeafFileResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *RetrieveBlockedLeafFileResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *RetrieveBlockedLeafFileResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *RetrieveBlockedLeafFileResponse) GetRetrieveBlockedLeafFile404ApplicationJSONObject() *RetrieveBlockedLeafFile404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RetrieveBlockedLeafFile404ApplicationJSONObject
+}
+
+func (o *RetrieveBlockedLeafFileResponse) GetRetrieveBlockedLeafFile405ApplicationJSONObject() *RetrieveBlockedLeafFile405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RetrieveBlockedLeafFile405ApplicationJSONObject
+}
+
+func (o *RetrieveBlockedLeafFileResponse) GetRetrieveBlockedLeafFile500ApplicationJSONObject() *RetrieveBlockedLeafFile500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.RetrieveBlockedLeafFile500ApplicationJSONObject
 }

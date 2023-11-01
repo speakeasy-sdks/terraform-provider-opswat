@@ -13,10 +13,24 @@ type ConfigGetCustomResponseHeaderRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *ConfigGetCustomResponseHeaderRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // ConfigGetCustomResponseHeader500ApplicationJSON - Unexpected event on server
 type ConfigGetCustomResponseHeader500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigGetCustomResponseHeader500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ConfigGetCustomResponseHeader405ApplicationJSON - The user has no rights for this operation.
@@ -25,10 +39,24 @@ type ConfigGetCustomResponseHeader405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigGetCustomResponseHeader405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigGetCustomResponseHeader403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigGetCustomResponseHeader403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigGetCustomResponseHeader403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type ConfigGetCustomResponseHeaderResponse struct {
@@ -46,4 +74,53 @@ type ConfigGetCustomResponseHeaderResponse struct {
 	ConfigGetCustomResponseHeader405ApplicationJSONObject *ConfigGetCustomResponseHeader405ApplicationJSON
 	// Unexpected event on server
 	ConfigGetCustomResponseHeader500ApplicationJSONObject *ConfigGetCustomResponseHeader500ApplicationJSON
+}
+
+func (o *ConfigGetCustomResponseHeaderResponse) GetAdminConfigCustomResponseHeader() *shared.AdminConfigCustomResponseHeader {
+	if o == nil {
+		return nil
+	}
+	return o.AdminConfigCustomResponseHeader
+}
+
+func (o *ConfigGetCustomResponseHeaderResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigGetCustomResponseHeaderResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigGetCustomResponseHeaderResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigGetCustomResponseHeaderResponse) GetConfigGetCustomResponseHeader403ApplicationJSONObject() *ConfigGetCustomResponseHeader403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigGetCustomResponseHeader403ApplicationJSONObject
+}
+
+func (o *ConfigGetCustomResponseHeaderResponse) GetConfigGetCustomResponseHeader405ApplicationJSONObject() *ConfigGetCustomResponseHeader405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigGetCustomResponseHeader405ApplicationJSONObject
+}
+
+func (o *ConfigGetCustomResponseHeaderResponse) GetConfigGetCustomResponseHeader500ApplicationJSONObject() *ConfigGetCustomResponseHeader500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigGetCustomResponseHeader500ApplicationJSONObject
 }

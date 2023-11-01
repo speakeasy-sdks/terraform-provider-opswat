@@ -6,3 +6,10 @@ type AdminCleanup struct {
 	// The number of hours of data retention. Anything older than this number will be deleted.
 	Cleanuprange *int64 `json:"cleanuprange,omitempty"`
 }
+
+func (o *AdminCleanup) GetCleanuprange() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Cleanuprange
+}

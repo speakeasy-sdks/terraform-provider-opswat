@@ -29,3 +29,45 @@ type AdminConfigWebhook struct {
 	//
 	Workercount *float64 `json:"workercount,omitempty"`
 }
+
+func (o *AdminConfigWebhook) GetDelayduration() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Delayduration
+}
+
+func (o *AdminConfigWebhook) GetDelayprogression() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Delayprogression
+}
+
+func (o *AdminConfigWebhook) GetMaxretrytime() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Maxretrytime
+}
+
+func (o *AdminConfigWebhook) GetRequestqueue() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Requestqueue
+}
+
+func (o *AdminConfigWebhook) GetTransfertimeout() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Transfertimeout
+}
+
+func (o *AdminConfigWebhook) GetWorkercount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Workercount
+}

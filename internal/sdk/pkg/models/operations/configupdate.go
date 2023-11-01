@@ -14,10 +14,31 @@ type ConfigUpdateRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *ConfigUpdateRequest) GetAdminConfigUpdate() *shared.AdminConfigUpdate {
+	if o == nil {
+		return nil
+	}
+	return o.AdminConfigUpdate
+}
+
+func (o *ConfigUpdateRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // ConfigUpdate500ApplicationJSON - Unexpected event on server
 type ConfigUpdate500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigUpdate500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ConfigUpdate405ApplicationJSON - The user has no rights for this operation.
@@ -26,10 +47,24 @@ type ConfigUpdate405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigUpdate405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigUpdate403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigUpdate403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigUpdate403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type ConfigUpdateResponse struct {
@@ -47,4 +82,53 @@ type ConfigUpdateResponse struct {
 	ConfigUpdate405ApplicationJSONObject *ConfigUpdate405ApplicationJSON
 	// Unexpected event on server
 	ConfigUpdate500ApplicationJSONObject *ConfigUpdate500ApplicationJSON
+}
+
+func (o *ConfigUpdateResponse) GetAdminConfigUpdate() *shared.AdminConfigUpdate {
+	if o == nil {
+		return nil
+	}
+	return o.AdminConfigUpdate
+}
+
+func (o *ConfigUpdateResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigUpdateResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigUpdateResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigUpdateResponse) GetConfigUpdate403ApplicationJSONObject() *ConfigUpdate403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigUpdate403ApplicationJSONObject
+}
+
+func (o *ConfigUpdateResponse) GetConfigUpdate405ApplicationJSONObject() *ConfigUpdate405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigUpdate405ApplicationJSONObject
+}
+
+func (o *ConfigUpdateResponse) GetConfigUpdate500ApplicationJSONObject() *ConfigUpdate500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigUpdate500ApplicationJSONObject
 }

@@ -14,16 +14,44 @@ type UserLoginRequestBody struct {
 	User string `json:"user"`
 }
 
+func (o *UserLoginRequestBody) GetPassword() string {
+	if o == nil {
+		return ""
+	}
+	return o.Password
+}
+
+func (o *UserLoginRequestBody) GetUser() string {
+	if o == nil {
+		return ""
+	}
+	return o.User
+}
+
 // UserLogin500ApplicationJSON - Unexpected event on server
 type UserLogin500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *UserLogin500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // UserLogin403ApplicationJSON - Invalid credentials
 type UserLogin403ApplicationJSON struct {
 	// <error message> will describe the incident. More details would be logged in MetaDefender Core logs
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *UserLogin403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type UserLoginResponse struct {
@@ -39,4 +67,46 @@ type UserLoginResponse struct {
 	UserLogin403ApplicationJSONObject *UserLogin403ApplicationJSON
 	// Unexpected event on server
 	UserLogin500ApplicationJSONObject *UserLogin500ApplicationJSON
+}
+
+func (o *UserLoginResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UserLoginResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UserLoginResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *UserLoginResponse) GetUserLogin() *shared.UserLogin {
+	if o == nil {
+		return nil
+	}
+	return o.UserLogin
+}
+
+func (o *UserLoginResponse) GetUserLogin403ApplicationJSONObject() *UserLogin403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UserLogin403ApplicationJSONObject
+}
+
+func (o *UserLoginResponse) GetUserLogin500ApplicationJSONObject() *UserLogin500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.UserLogin500ApplicationJSONObject
 }

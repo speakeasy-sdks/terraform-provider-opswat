@@ -15,10 +15,31 @@ type ConfigPostSkipHashRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *ConfigPostSkipHashRequest) GetSkipList() *shared.SkipList {
+	if o == nil {
+		return nil
+	}
+	return o.SkipList
+}
+
+func (o *ConfigPostSkipHashRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // ConfigPostSkipHash500ApplicationJSON - Unexpected event on server
 type ConfigPostSkipHash500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigPostSkipHash500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // ConfigPostSkipHash404ApplicationJSON - Requests resource was not found.
@@ -27,10 +48,24 @@ type ConfigPostSkipHash404ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigPostSkipHash404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigPostSkipHash403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigPostSkipHash403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigPostSkipHash403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type ConfigPostSkipHashResponse struct {
@@ -48,4 +83,53 @@ type ConfigPostSkipHashResponse struct {
 	ConfigPostSkipHash404ApplicationJSONObject *ConfigPostSkipHash404ApplicationJSON
 	// Unexpected event on server
 	ConfigPostSkipHash500ApplicationJSONObject *ConfigPostSkipHash500ApplicationJSON
+}
+
+func (o *ConfigPostSkipHashResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigPostSkipHashResponse) GetSkipList() *shared.SkipList {
+	if o == nil {
+		return nil
+	}
+	return o.SkipList
+}
+
+func (o *ConfigPostSkipHashResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigPostSkipHashResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigPostSkipHashResponse) GetConfigPostSkipHash403ApplicationJSONObject() *ConfigPostSkipHash403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigPostSkipHash403ApplicationJSONObject
+}
+
+func (o *ConfigPostSkipHashResponse) GetConfigPostSkipHash404ApplicationJSONObject() *ConfigPostSkipHash404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigPostSkipHash404ApplicationJSONObject
+}
+
+func (o *ConfigPostSkipHashResponse) GetConfigPostSkipHash500ApplicationJSONObject() *ConfigPostSkipHash500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigPostSkipHash500ApplicationJSONObject
 }

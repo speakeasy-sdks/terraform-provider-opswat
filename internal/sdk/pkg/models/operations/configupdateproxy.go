@@ -4,8 +4,7 @@ package operations
 
 import (
 	"Metadefender/internal/sdk/pkg/models/shared"
-	"bytes"
-	"encoding/json"
+	"Metadefender/internal/sdk/pkg/utils"
 	"errors"
 	"net/http"
 )
@@ -15,6 +14,20 @@ type ConfigUpdateProxyRequest struct {
 	// Generated `session_id` from [Login](/mdcore/metadefender-core/ref#userlogin) call can be used as an `apikey` for API calls that require authentication.
 	//
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
+}
+
+func (o *ConfigUpdateProxyRequest) GetProxyListRequestBody() *shared.ProxyListRequestBody {
+	if o == nil {
+		return nil
+	}
+	return o.ProxyListRequestBody
+}
+
+func (o *ConfigUpdateProxyRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
 }
 
 type ConfigUpdateProxy400ApplicationJSONType string
@@ -83,48 +96,37 @@ func CreateConfigUpdateProxy400ApplicationJSONProxyRequiresAuthentication(proxyR
 }
 
 func (u *ConfigUpdateProxy400ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	missingEnabledField := new(shared.MissingEnabledField)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&missingEnabledField); err == nil {
+	if err := utils.UnmarshalJSON(data, &missingEnabledField, "", true, true); err == nil {
 		u.MissingEnabledField = missingEnabledField
 		u.Type = ConfigUpdateProxy400ApplicationJSONTypeMissingEnabledField
 		return nil
 	}
 
 	errorWhileParsingInputJSON := new(shared.ErrorWhileParsingInputJSON)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&errorWhileParsingInputJSON); err == nil {
+	if err := utils.UnmarshalJSON(data, &errorWhileParsingInputJSON, "", true, true); err == nil {
 		u.ErrorWhileParsingInputJSON = errorWhileParsingInputJSON
 		u.Type = ConfigUpdateProxy400ApplicationJSONTypeErrorWhileParsingInputJSON
 		return nil
 	}
 
 	missingPort := new(shared.MissingPort)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&missingPort); err == nil {
+	if err := utils.UnmarshalJSON(data, &missingPort, "", true, true); err == nil {
 		u.MissingPort = missingPort
 		u.Type = ConfigUpdateProxy400ApplicationJSONTypeMissingPort
 		return nil
 	}
 
 	missingServerAddress := new(shared.MissingServerAddress)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&missingServerAddress); err == nil {
+	if err := utils.UnmarshalJSON(data, &missingServerAddress, "", true, true); err == nil {
 		u.MissingServerAddress = missingServerAddress
 		u.Type = ConfigUpdateProxy400ApplicationJSONTypeMissingServerAddress
 		return nil
 	}
 
 	proxyRequiresAuthentication := new(shared.ProxyRequiresAuthentication)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&proxyRequiresAuthentication); err == nil {
+	if err := utils.UnmarshalJSON(data, &proxyRequiresAuthentication, "", true, true); err == nil {
 		u.ProxyRequiresAuthentication = proxyRequiresAuthentication
 		u.Type = ConfigUpdateProxy400ApplicationJSONTypeProxyRequiresAuthentication
 		return nil
@@ -135,26 +137,26 @@ func (u *ConfigUpdateProxy400ApplicationJSON) UnmarshalJSON(data []byte) error {
 
 func (u ConfigUpdateProxy400ApplicationJSON) MarshalJSON() ([]byte, error) {
 	if u.MissingEnabledField != nil {
-		return json.Marshal(u.MissingEnabledField)
+		return utils.MarshalJSON(u.MissingEnabledField, "", true)
 	}
 
 	if u.ErrorWhileParsingInputJSON != nil {
-		return json.Marshal(u.ErrorWhileParsingInputJSON)
+		return utils.MarshalJSON(u.ErrorWhileParsingInputJSON, "", true)
 	}
 
 	if u.MissingPort != nil {
-		return json.Marshal(u.MissingPort)
+		return utils.MarshalJSON(u.MissingPort, "", true)
 	}
 
 	if u.MissingServerAddress != nil {
-		return json.Marshal(u.MissingServerAddress)
+		return utils.MarshalJSON(u.MissingServerAddress, "", true)
 	}
 
 	if u.ProxyRequiresAuthentication != nil {
-		return json.Marshal(u.ProxyRequiresAuthentication)
+		return utils.MarshalJSON(u.ProxyRequiresAuthentication, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type ConfigUpdateProxyResponse struct {
@@ -168,4 +170,39 @@ type ConfigUpdateProxyResponse struct {
 	RawResponse *http.Response
 	// Bad Request (e.g. invalid header, apikey is missing or invalid).
 	ConfigUpdateProxy400ApplicationJSONOneOf *ConfigUpdateProxy400ApplicationJSON
+}
+
+func (o *ConfigUpdateProxyResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigUpdateProxyResponse) GetProxyList() *shared.ProxyList {
+	if o == nil {
+		return nil
+	}
+	return o.ProxyList
+}
+
+func (o *ConfigUpdateProxyResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigUpdateProxyResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigUpdateProxyResponse) GetConfigUpdateProxy400ApplicationJSONOneOf() *ConfigUpdateProxy400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigUpdateProxy400ApplicationJSONOneOf
 }

@@ -22,3 +22,17 @@ type YaraReport struct {
 	//
 	Verdict *ScanResultEnum `json:"verdict,omitempty"`
 }
+
+func (o *YaraReport) GetHits() *YaraReportHits {
+	if o == nil {
+		return nil
+	}
+	return o.Hits
+}
+
+func (o *YaraReport) GetVerdict() *ScanResultEnum {
+	if o == nil {
+		return nil
+	}
+	return o.Verdict
+}

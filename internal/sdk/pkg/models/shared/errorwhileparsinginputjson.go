@@ -6,3 +6,10 @@ type ErrorWhileParsingInputJSON struct {
 	// Error while parsing input json
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *ErrorWhileParsingInputJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

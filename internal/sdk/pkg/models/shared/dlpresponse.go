@@ -155,11 +155,81 @@ type DLPResponseHitsCcnHits struct {
 	TryRedact *bool `json:"tryRedact,omitempty"`
 }
 
+func (o *DLPResponseHitsCcnHits) GetAfter() *string {
+	if o == nil {
+		return nil
+	}
+	return o.After
+}
+
+func (o *DLPResponseHitsCcnHits) GetBefore() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Before
+}
+
+func (o *DLPResponseHitsCcnHits) GetCertainty() *DLPResponseHitsCcnHitsCertainty {
+	if o == nil {
+		return nil
+	}
+	return o.Certainty
+}
+
+func (o *DLPResponseHitsCcnHits) GetCertaintyScore() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.CertaintyScore
+}
+
+func (o *DLPResponseHitsCcnHits) GetHit() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Hit
+}
+
+func (o *DLPResponseHitsCcnHits) GetLocation() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Location
+}
+
+func (o *DLPResponseHitsCcnHits) GetSeverity() *DLPResponseHitsCcnHitsSeverity {
+	if o == nil {
+		return nil
+	}
+	return o.Severity
+}
+
+func (o *DLPResponseHitsCcnHits) GetTryRedact() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.TryRedact
+}
+
 type DLPResponseHitsCcn struct {
 	// Credit Card Number, Social Security Number, or in case of RegEx, the name of the rule that has been given by the user
 	DisplayName *string `json:"display_name,omitempty"`
 	// A list of detections that matched this rule/pattern.
 	Hits []DLPResponseHitsCcnHits `json:"hits,omitempty"`
+}
+
+func (o *DLPResponseHitsCcn) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *DLPResponseHitsCcn) GetHits() []DLPResponseHitsCcnHits {
+	if o == nil {
+		return nil
+	}
+	return o.Hits
 }
 
 // DLPResponseHits - Detailed results that contains as key the type of matched rule:
@@ -168,6 +238,13 @@ type DLPResponseHitsCcn struct {
 //   - regex_<index> (regular expression with an index in order to differentiate the RegEx rules if there are more.)
 type DLPResponseHits struct {
 	Ccn *DLPResponseHitsCcn `json:"ccn,omitempty"`
+}
+
+func (o *DLPResponseHits) GetCcn() *DLPResponseHitsCcn {
+	if o == nil {
+		return nil
+	}
+	return o.Ccn
 }
 
 // DLPResponseMetadataRemovalResult - Result of the metadata removal process, possible values:
@@ -214,6 +291,13 @@ type DLPResponseMetadataRemoval struct {
 	Result *DLPResponseMetadataRemovalResult `json:"result,omitempty"`
 }
 
+func (o *DLPResponseMetadataRemoval) GetResult() *DLPResponseMetadataRemovalResult {
+	if o == nil {
+		return nil
+	}
+	return o.Result
+}
+
 // DLPResponseRedactResult - Result of the redaction process, possible values:
 //   - `redacted`
 //   - `not redacted`
@@ -256,6 +340,13 @@ type DLPResponseRedact struct {
 	//   * `failed to redact`
 	//
 	Result *DLPResponseRedactResult `json:"result,omitempty"`
+}
+
+func (o *DLPResponseRedact) GetResult() *DLPResponseRedactResult {
+	if o == nil {
+		return nil
+	}
+	return o.Result
 }
 
 // DLPResponseSeverity - (NOTE: this field is deprecated): represents the severity of the data loss, possible values:
@@ -374,6 +465,13 @@ type DLPResponseWatermark struct {
 	Result *DLPResponseWatermarkResult `json:"result,omitempty"`
 }
 
+func (o *DLPResponseWatermark) GetResult() *DLPResponseWatermarkResult {
+	if o == nil {
+		return nil
+	}
+	return o.Result
+}
+
 // DLPResponse - Full report from Proactive DLP
 type DLPResponse struct {
 	// Describes how certain the hit is, possible values:
@@ -418,4 +516,67 @@ type DLPResponse struct {
 	Verdict *DLPResponseVerdict `json:"verdict,omitempty"`
 	// Result of watermarking process.
 	Watermark *DLPResponseWatermark `json:"watermark,omitempty"`
+}
+
+func (o *DLPResponse) GetCertainty() *DLPResponseCertainty {
+	if o == nil {
+		return nil
+	}
+	return o.Certainty
+}
+
+func (o *DLPResponse) GetErrors() *DLPResponseErrors {
+	if o == nil {
+		return nil
+	}
+	return o.Errors
+}
+
+func (o *DLPResponse) GetFilename() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Filename
+}
+
+func (o *DLPResponse) GetHits() *DLPResponseHits {
+	if o == nil {
+		return nil
+	}
+	return o.Hits
+}
+
+func (o *DLPResponse) GetMetadataRemoval() *DLPResponseMetadataRemoval {
+	if o == nil {
+		return nil
+	}
+	return o.MetadataRemoval
+}
+
+func (o *DLPResponse) GetRedact() *DLPResponseRedact {
+	if o == nil {
+		return nil
+	}
+	return o.Redact
+}
+
+func (o *DLPResponse) GetSeverity() *DLPResponseSeverity {
+	if o == nil {
+		return nil
+	}
+	return o.Severity
+}
+
+func (o *DLPResponse) GetVerdict() *DLPResponseVerdict {
+	if o == nil {
+		return nil
+	}
+	return o.Verdict
+}
+
+func (o *DLPResponse) GetWatermark() *DLPResponseWatermark {
+	if o == nil {
+		return nil
+	}
+	return o.Watermark
 }

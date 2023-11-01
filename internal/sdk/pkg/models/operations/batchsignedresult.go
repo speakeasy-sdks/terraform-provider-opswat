@@ -14,10 +14,31 @@ type BatchSignedResultRequest struct {
 	BatchID string `pathParam:"style=simple,explode=false,name=batchId"`
 }
 
+func (o *BatchSignedResultRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *BatchSignedResultRequest) GetBatchID() string {
+	if o == nil {
+		return ""
+	}
+	return o.BatchID
+}
+
 // BatchSignedResult500ApplicationJSON - Unexpected event on server
 type BatchSignedResult500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *BatchSignedResult500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // BatchSignedResult404ApplicationJSON - Requests resource was not found.
@@ -26,16 +47,37 @@ type BatchSignedResult404ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *BatchSignedResult404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // BatchSignedResult403ApplicationJSON - Invalid user information or Not Allowed
 type BatchSignedResult403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *BatchSignedResult403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // BatchSignedResult400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type BatchSignedResult400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *BatchSignedResult400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type BatchSignedResultResponse struct {
@@ -53,4 +95,53 @@ type BatchSignedResultResponse struct {
 	BatchSignedResult404ApplicationJSONObject *BatchSignedResult404ApplicationJSON
 	// Unexpected event on server
 	BatchSignedResult500ApplicationJSONObject *BatchSignedResult500ApplicationJSON
+}
+
+func (o *BatchSignedResultResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *BatchSignedResultResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *BatchSignedResultResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *BatchSignedResultResponse) GetBatchSignedResult400ApplicationJSONObject() *BatchSignedResult400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchSignedResult400ApplicationJSONObject
+}
+
+func (o *BatchSignedResultResponse) GetBatchSignedResult403ApplicationJSONObject() *BatchSignedResult403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchSignedResult403ApplicationJSONObject
+}
+
+func (o *BatchSignedResultResponse) GetBatchSignedResult404ApplicationJSONObject() *BatchSignedResult404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchSignedResult404ApplicationJSONObject
+}
+
+func (o *BatchSignedResultResponse) GetBatchSignedResult500ApplicationJSONObject() *BatchSignedResult500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.BatchSignedResult500ApplicationJSONObject
 }

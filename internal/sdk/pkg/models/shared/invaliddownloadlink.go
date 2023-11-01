@@ -6,3 +6,10 @@ type InvalidDownloadLink struct {
 	// Invalid download url.
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *InvalidDownloadLink) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

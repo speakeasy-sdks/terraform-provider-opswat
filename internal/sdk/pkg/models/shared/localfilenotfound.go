@@ -6,3 +6,10 @@ type LocalFileNotFound struct {
 	// File not found, invalid path or access.
 	Err *string `json:"err,omitempty"`
 }
+
+func (o *LocalFileNotFound) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}

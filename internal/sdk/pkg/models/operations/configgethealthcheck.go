@@ -13,16 +13,37 @@ type ConfigGetHealthCheckRequest struct {
 	Apikey string `header:"style=simple,explode=false,name=apikey"`
 }
 
+func (o *ConfigGetHealthCheckRequest) GetApikey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Apikey
+}
+
 // ConfigGetHealthCheck500ApplicationJSON - Unexpected event on server
 type ConfigGetHealthCheck500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *ConfigGetHealthCheck500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // ConfigGetHealthCheck403ApplicationJSON - Invalid user information or Not Allowed
 type ConfigGetHealthCheck403ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *ConfigGetHealthCheck403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type ConfigGetHealthCheckResponse struct {
@@ -38,4 +59,46 @@ type ConfigGetHealthCheckResponse struct {
 	ConfigGetHealthCheck403ApplicationJSONObject *ConfigGetHealthCheck403ApplicationJSON
 	// Unexpected event on server
 	ConfigGetHealthCheck500ApplicationJSONObject *ConfigGetHealthCheck500ApplicationJSON
+}
+
+func (o *ConfigGetHealthCheckResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ConfigGetHealthCheckResponse) GetHealthCheck() *shared.HealthCheck {
+	if o == nil {
+		return nil
+	}
+	return o.HealthCheck
+}
+
+func (o *ConfigGetHealthCheckResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ConfigGetHealthCheckResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ConfigGetHealthCheckResponse) GetConfigGetHealthCheck403ApplicationJSONObject() *ConfigGetHealthCheck403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigGetHealthCheck403ApplicationJSONObject
+}
+
+func (o *ConfigGetHealthCheckResponse) GetConfigGetHealthCheck500ApplicationJSONObject() *ConfigGetHealthCheck500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigGetHealthCheck500ApplicationJSONObject
 }

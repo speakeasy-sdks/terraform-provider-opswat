@@ -16,10 +16,31 @@ type FileAnalysisCancelRequest struct {
 	DataID string `pathParam:"style=simple,explode=false,name=data_id"`
 }
 
+func (o *FileAnalysisCancelRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *FileAnalysisCancelRequest) GetDataID() string {
+	if o == nil {
+		return ""
+	}
+	return o.DataID
+}
+
 // FileAnalysisCancel500ApplicationJSON - Unexpected event on server
 type FileAnalysisCancel500ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *FileAnalysisCancel500ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // FileAnalysisCancel405ApplicationJSON - The user has no rights for this operation.
@@ -27,9 +48,23 @@ type FileAnalysisCancel405ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *FileAnalysisCancel405ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // FileAnalysisCancel404ApplicationJSON - Data ID not found (invalid id) or Requests resource was not found
 type FileAnalysisCancel404ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *FileAnalysisCancel404ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // FileAnalysisCancel403ApplicationJSON - Invalid user information or Not Allowed
@@ -38,10 +73,24 @@ type FileAnalysisCancel403ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *FileAnalysisCancel403ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // FileAnalysisCancel400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type FileAnalysisCancel400ApplicationJSON struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *FileAnalysisCancel400ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 // FileAnalysisCancel200ApplicationJSON - Analysis was sucessfully cancelled.
@@ -67,4 +116,67 @@ type FileAnalysisCancelResponse struct {
 	FileAnalysisCancel405ApplicationJSONObject *FileAnalysisCancel405ApplicationJSON
 	// Unexpected event on server
 	FileAnalysisCancel500ApplicationJSONObject *FileAnalysisCancel500ApplicationJSON
+}
+
+func (o *FileAnalysisCancelResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *FileAnalysisCancelResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *FileAnalysisCancelResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel200ApplicationJSONObject() *FileAnalysisCancel200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisCancel200ApplicationJSONObject
+}
+
+func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel400ApplicationJSONObject() *FileAnalysisCancel400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisCancel400ApplicationJSONObject
+}
+
+func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel403ApplicationJSONObject() *FileAnalysisCancel403ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisCancel403ApplicationJSONObject
+}
+
+func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel404ApplicationJSONObject() *FileAnalysisCancel404ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisCancel404ApplicationJSONObject
+}
+
+func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel405ApplicationJSONObject() *FileAnalysisCancel405ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisCancel405ApplicationJSONObject
+}
+
+func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel500ApplicationJSONObject() *FileAnalysisCancel500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisCancel500ApplicationJSONObject
 }

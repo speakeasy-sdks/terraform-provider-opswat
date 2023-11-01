@@ -4,8 +4,7 @@ package operations
 
 import (
 	"Metadefender/internal/sdk/pkg/models/shared"
-	"bytes"
-	"encoding/json"
+	"Metadefender/internal/sdk/pkg/utils"
 	"errors"
 	"net/http"
 )
@@ -82,9 +81,100 @@ type FileAnalysisSyncPostRequest struct {
 	Workflow *string `header:"style=simple,explode=false,name=workflow"`
 }
 
+func (o *FileAnalysisSyncPostRequest) GetRequestBody() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.RequestBody
+}
+
+func (o *FileAnalysisSyncPostRequest) GetApikey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Apikey
+}
+
+func (o *FileAnalysisSyncPostRequest) GetArchivepwd() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Archivepwd
+}
+
+func (o *FileAnalysisSyncPostRequest) GetBatch() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Batch
+}
+
+func (o *FileAnalysisSyncPostRequest) GetDownloadfrom() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Downloadfrom
+}
+
+func (o *FileAnalysisSyncPostRequest) GetEnginesMetadata() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EnginesMetadata
+}
+
+func (o *FileAnalysisSyncPostRequest) GetFilename() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Filename
+}
+
+func (o *FileAnalysisSyncPostRequest) GetFilepath() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Filepath
+}
+
+func (o *FileAnalysisSyncPostRequest) GetMetadata() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
+}
+
+func (o *FileAnalysisSyncPostRequest) GetRule() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Rule
+}
+
+func (o *FileAnalysisSyncPostRequest) GetUserAgent() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserAgent
+}
+
+func (o *FileAnalysisSyncPostRequest) GetWorkflow() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Workflow
+}
+
 // FileAnalysisSyncPost503ApplicationJSON - Server is too busy, scan queue is full. Try again later.
 type FileAnalysisSyncPost503ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
+}
+
+func (o *FileAnalysisSyncPost503ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
 }
 
 type FileAnalysisSyncPost500ApplicationJSONType string
@@ -153,48 +243,37 @@ func CreateFileAnalysisSyncPost500ApplicationJSONFileSizeExceeded(fileSizeExceed
 }
 
 func (u *FileAnalysisSyncPost500ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	licenseExpired := new(shared.LicenseExpired)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&licenseExpired); err == nil {
+	if err := utils.UnmarshalJSON(data, &licenseExpired, "", true, true); err == nil {
 		u.LicenseExpired = licenseExpired
 		u.Type = FileAnalysisSyncPost500ApplicationJSONTypeLicenseExpired
 		return nil
 	}
 
 	noAvailableRule := new(shared.NoAvailableRule)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&noAvailableRule); err == nil {
+	if err := utils.UnmarshalJSON(data, &noAvailableRule, "", true, true); err == nil {
 		u.NoAvailableRule = noAvailableRule
 		u.Type = FileAnalysisSyncPost500ApplicationJSONTypeNoAvailableRule
 		return nil
 	}
 
 	internalError := new(shared.InternalError)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&internalError); err == nil {
+	if err := utils.UnmarshalJSON(data, &internalError, "", true, true); err == nil {
 		u.InternalError = internalError
 		u.Type = FileAnalysisSyncPost500ApplicationJSONTypeInternalError
 		return nil
 	}
 
 	localFileNotFound := new(shared.LocalFileNotFound)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&localFileNotFound); err == nil {
+	if err := utils.UnmarshalJSON(data, &localFileNotFound, "", true, true); err == nil {
 		u.LocalFileNotFound = localFileNotFound
 		u.Type = FileAnalysisSyncPost500ApplicationJSONTypeLocalFileNotFound
 		return nil
 	}
 
 	fileSizeExceeded := new(shared.FileSizeExceeded)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&fileSizeExceeded); err == nil {
+	if err := utils.UnmarshalJSON(data, &fileSizeExceeded, "", true, true); err == nil {
 		u.FileSizeExceeded = fileSizeExceeded
 		u.Type = FileAnalysisSyncPost500ApplicationJSONTypeFileSizeExceeded
 		return nil
@@ -205,26 +284,26 @@ func (u *FileAnalysisSyncPost500ApplicationJSON) UnmarshalJSON(data []byte) erro
 
 func (u FileAnalysisSyncPost500ApplicationJSON) MarshalJSON() ([]byte, error) {
 	if u.LicenseExpired != nil {
-		return json.Marshal(u.LicenseExpired)
+		return utils.MarshalJSON(u.LicenseExpired, "", true)
 	}
 
 	if u.NoAvailableRule != nil {
-		return json.Marshal(u.NoAvailableRule)
+		return utils.MarshalJSON(u.NoAvailableRule, "", true)
 	}
 
 	if u.InternalError != nil {
-		return json.Marshal(u.InternalError)
+		return utils.MarshalJSON(u.InternalError, "", true)
 	}
 
 	if u.LocalFileNotFound != nil {
-		return json.Marshal(u.LocalFileNotFound)
+		return utils.MarshalJSON(u.LocalFileNotFound, "", true)
 	}
 
 	if u.FileSizeExceeded != nil {
-		return json.Marshal(u.FileSizeExceeded)
+		return utils.MarshalJSON(u.FileSizeExceeded, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 // FileAnalysisSyncPost422ApplicationJSON - Body input is empty.
@@ -232,14 +311,35 @@ type FileAnalysisSyncPost422ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *FileAnalysisSyncPost422ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // FileAnalysisSyncPost411ApplicationJSON - Content-Length header is missing from the request.
 type FileAnalysisSyncPost411ApplicationJSON struct {
 	Err *string `json:"err,omitempty"`
 }
 
+func (o *FileAnalysisSyncPost411ApplicationJSON) GetErr() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Err
+}
+
 // FileAnalysisSyncPost408ApplicationJSON - Timed out response. The scan is still in progress, but the connection is timed out.
 type FileAnalysisSyncPost408ApplicationJSON struct {
 	DataID *string `json:"data_id,omitempty"`
+}
+
+func (o *FileAnalysisSyncPost408ApplicationJSON) GetDataID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DataID
 }
 
 type FileAnalysisSyncPost400ApplicationJSONType string
@@ -363,93 +463,72 @@ func CreateFileAnalysisSyncPost400ApplicationJSONInvalidProtocolDownloadLink(inv
 }
 
 func (u *FileAnalysisSyncPost400ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	invalidAPIKeyGiven := new(shared.InvalidAPIKeyGiven)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&invalidAPIKeyGiven); err == nil {
+	if err := utils.UnmarshalJSON(data, &invalidAPIKeyGiven, "", true, true); err == nil {
 		u.InvalidAPIKeyGiven = invalidAPIKeyGiven
 		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeInvalidAPIKeyGiven
 		return nil
 	}
 
 	bodyAndDownloadLinkGiven := new(shared.BodyAndDownloadLinkGiven)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&bodyAndDownloadLinkGiven); err == nil {
+	if err := utils.UnmarshalJSON(data, &bodyAndDownloadLinkGiven, "", true, true); err == nil {
 		u.BodyAndDownloadLinkGiven = bodyAndDownloadLinkGiven
 		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeBodyAndDownloadLinkGiven
 		return nil
 	}
 
 	inprogressBatchClosed := new(shared.InprogressBatchClosed)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&inprogressBatchClosed); err == nil {
+	if err := utils.UnmarshalJSON(data, &inprogressBatchClosed, "", true, true); err == nil {
 		u.InprogressBatchClosed = inprogressBatchClosed
 		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeInprogressBatchClosed
 		return nil
 	}
 
 	batchNotFound := new(shared.BatchNotFound)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&batchNotFound); err == nil {
+	if err := utils.UnmarshalJSON(data, &batchNotFound, "", true, true); err == nil {
 		u.BatchNotFound = batchNotFound
 		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeBatchNotFound
 		return nil
 	}
 
 	batchInstanceMismatched := new(shared.BatchInstanceMismatched)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&batchInstanceMismatched); err == nil {
+	if err := utils.UnmarshalJSON(data, &batchInstanceMismatched, "", true, true); err == nil {
 		u.BatchInstanceMismatched = batchInstanceMismatched
 		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeBatchInstanceMismatched
 		return nil
 	}
 
 	bodyAndLocalFilePathGiven := new(shared.BodyAndLocalFilePathGiven)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&bodyAndLocalFilePathGiven); err == nil {
+	if err := utils.UnmarshalJSON(data, &bodyAndLocalFilePathGiven, "", true, true); err == nil {
 		u.BodyAndLocalFilePathGiven = bodyAndLocalFilePathGiven
 		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeBodyAndLocalFilePathGiven
 		return nil
 	}
 
 	fileUploadRejected := new(shared.FileUploadRejected)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&fileUploadRejected); err == nil {
+	if err := utils.UnmarshalJSON(data, &fileUploadRejected, "", true, true); err == nil {
 		u.FileUploadRejected = fileUploadRejected
 		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeFileUploadRejected
 		return nil
 	}
 
 	redirectLinkNotSupported := new(shared.RedirectLinkNotSupported)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&redirectLinkNotSupported); err == nil {
+	if err := utils.UnmarshalJSON(data, &redirectLinkNotSupported, "", true, true); err == nil {
 		u.RedirectLinkNotSupported = redirectLinkNotSupported
 		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeRedirectLinkNotSupported
 		return nil
 	}
 
 	invalidDownloadLink := new(shared.InvalidDownloadLink)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&invalidDownloadLink); err == nil {
+	if err := utils.UnmarshalJSON(data, &invalidDownloadLink, "", true, true); err == nil {
 		u.InvalidDownloadLink = invalidDownloadLink
 		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeInvalidDownloadLink
 		return nil
 	}
 
 	invalidProtocolDownloadLink := new(shared.InvalidProtocolDownloadLink)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&invalidProtocolDownloadLink); err == nil {
+	if err := utils.UnmarshalJSON(data, &invalidProtocolDownloadLink, "", true, true); err == nil {
 		u.InvalidProtocolDownloadLink = invalidProtocolDownloadLink
 		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeInvalidProtocolDownloadLink
 		return nil
@@ -460,46 +539,46 @@ func (u *FileAnalysisSyncPost400ApplicationJSON) UnmarshalJSON(data []byte) erro
 
 func (u FileAnalysisSyncPost400ApplicationJSON) MarshalJSON() ([]byte, error) {
 	if u.InvalidAPIKeyGiven != nil {
-		return json.Marshal(u.InvalidAPIKeyGiven)
+		return utils.MarshalJSON(u.InvalidAPIKeyGiven, "", true)
 	}
 
 	if u.BodyAndDownloadLinkGiven != nil {
-		return json.Marshal(u.BodyAndDownloadLinkGiven)
+		return utils.MarshalJSON(u.BodyAndDownloadLinkGiven, "", true)
 	}
 
 	if u.InprogressBatchClosed != nil {
-		return json.Marshal(u.InprogressBatchClosed)
+		return utils.MarshalJSON(u.InprogressBatchClosed, "", true)
 	}
 
 	if u.BatchNotFound != nil {
-		return json.Marshal(u.BatchNotFound)
+		return utils.MarshalJSON(u.BatchNotFound, "", true)
 	}
 
 	if u.BatchInstanceMismatched != nil {
-		return json.Marshal(u.BatchInstanceMismatched)
+		return utils.MarshalJSON(u.BatchInstanceMismatched, "", true)
 	}
 
 	if u.BodyAndLocalFilePathGiven != nil {
-		return json.Marshal(u.BodyAndLocalFilePathGiven)
+		return utils.MarshalJSON(u.BodyAndLocalFilePathGiven, "", true)
 	}
 
 	if u.FileUploadRejected != nil {
-		return json.Marshal(u.FileUploadRejected)
+		return utils.MarshalJSON(u.FileUploadRejected, "", true)
 	}
 
 	if u.RedirectLinkNotSupported != nil {
-		return json.Marshal(u.RedirectLinkNotSupported)
+		return utils.MarshalJSON(u.RedirectLinkNotSupported, "", true)
 	}
 
 	if u.InvalidDownloadLink != nil {
-		return json.Marshal(u.InvalidDownloadLink)
+		return utils.MarshalJSON(u.InvalidDownloadLink, "", true)
 	}
 
 	if u.InvalidProtocolDownloadLink != nil {
-		return json.Marshal(u.InvalidProtocolDownloadLink)
+		return utils.MarshalJSON(u.InvalidProtocolDownloadLink, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type FileAnalysisSyncPostResponse struct {
@@ -525,4 +604,81 @@ type FileAnalysisSyncPostResponse struct {
 	FileAnalysisSyncPost500ApplicationJSONOneOf *FileAnalysisSyncPost500ApplicationJSON
 	// Server is too busy, scan queue is full. Try again later.
 	FileAnalysisSyncPost503ApplicationJSONObject *FileAnalysisSyncPost503ApplicationJSON
+}
+
+func (o *FileAnalysisSyncPostResponse) GetAnalysisResult() *shared.AnalysisResult {
+	if o == nil {
+		return nil
+	}
+	return o.AnalysisResult
+}
+
+func (o *FileAnalysisSyncPostResponse) GetCallbackURLNotSupported() *shared.CallbackURLNotSupported {
+	if o == nil {
+		return nil
+	}
+	return o.CallbackURLNotSupported
+}
+
+func (o *FileAnalysisSyncPostResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *FileAnalysisSyncPostResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *FileAnalysisSyncPostResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost400ApplicationJSONOneOf() *FileAnalysisSyncPost400ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisSyncPost400ApplicationJSONOneOf
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost408ApplicationJSONObject() *FileAnalysisSyncPost408ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisSyncPost408ApplicationJSONObject
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost411ApplicationJSONObject() *FileAnalysisSyncPost411ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisSyncPost411ApplicationJSONObject
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost422ApplicationJSONObject() *FileAnalysisSyncPost422ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisSyncPost422ApplicationJSONObject
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost500ApplicationJSONOneOf() *FileAnalysisSyncPost500ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisSyncPost500ApplicationJSONOneOf
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost503ApplicationJSONObject() *FileAnalysisSyncPost503ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.FileAnalysisSyncPost503ApplicationJSONObject
 }
