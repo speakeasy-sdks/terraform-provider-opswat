@@ -48,51 +48,51 @@ func (o *UserChangePassRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// UserChangePass500ApplicationJSON - Unexpected event on server
-type UserChangePass500ApplicationJSON struct {
+// UserChangePassAuthResponse500ResponseBody - Unexpected event on server
+type UserChangePassAuthResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *UserChangePass500ApplicationJSON) GetErr() *string {
+func (o *UserChangePassAuthResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// UserChangePass405ApplicationJSON - The user has no rights for this operation.
-type UserChangePass405ApplicationJSON struct {
+// UserChangePassAuthResponseResponseBody - The user has no rights for this operation.
+type UserChangePassAuthResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *UserChangePass405ApplicationJSON) GetErr() *string {
+func (o *UserChangePassAuthResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// UserChangePass400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type UserChangePass400ApplicationJSON struct {
+// UserChangePassAuthResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type UserChangePassAuthResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *UserChangePass400ApplicationJSON) GetErr() *string {
+func (o *UserChangePassAuthResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// UserChangePass200ApplicationJSON - Request processed successfully
-type UserChangePass200ApplicationJSON struct {
+// UserChangePassResponseBody - Request processed successfully
+type UserChangePassResponseBody struct {
 	Success *bool `json:"success,omitempty"`
 }
 
-func (o *UserChangePass200ApplicationJSON) GetSuccess() *bool {
+func (o *UserChangePassResponseBody) GetSuccess() *bool {
 	if o == nil {
 		return nil
 	}
@@ -100,20 +100,48 @@ func (o *UserChangePass200ApplicationJSON) GetSuccess() *bool {
 }
 
 type UserChangePassResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *UserChangePassResponseBody
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *UserChangePassAuthResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *UserChangePassAuthResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *UserChangePassAuthResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	UserChangePass200ApplicationJSONObject *UserChangePass200ApplicationJSON
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	UserChangePass400ApplicationJSONObject *UserChangePass400ApplicationJSON
-	// The user has no rights for this operation.
-	UserChangePass405ApplicationJSONObject *UserChangePass405ApplicationJSON
-	// Unexpected event on server
-	UserChangePass500ApplicationJSONObject *UserChangePass500ApplicationJSON
+}
+
+func (o *UserChangePassResponse) GetTwoHundredApplicationJSONObject() *UserChangePassResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *UserChangePassResponse) GetFourHundredApplicationJSONObject() *UserChangePassAuthResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *UserChangePassResponse) GetFourHundredAndFiveApplicationJSONObject() *UserChangePassAuthResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *UserChangePassResponse) GetFiveHundredApplicationJSONObject() *UserChangePassAuthResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *UserChangePassResponse) GetContentType() string {
@@ -135,32 +163,4 @@ func (o *UserChangePassResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *UserChangePassResponse) GetUserChangePass200ApplicationJSONObject() *UserChangePass200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserChangePass200ApplicationJSONObject
-}
-
-func (o *UserChangePassResponse) GetUserChangePass400ApplicationJSONObject() *UserChangePass400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserChangePass400ApplicationJSONObject
-}
-
-func (o *UserChangePassResponse) GetUserChangePass405ApplicationJSONObject() *UserChangePass405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserChangePass405ApplicationJSONObject
-}
-
-func (o *UserChangePassResponse) GetUserChangePass500ApplicationJSONObject() *UserChangePass500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserChangePass500ApplicationJSONObject
 }

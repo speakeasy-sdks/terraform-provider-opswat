@@ -28,60 +28,60 @@ func (o *WebhookStatusRequest) GetDataID() string {
 	return o.DataID
 }
 
-// WebhookStatus500ApplicationJSON - Unexpected event on server
-type WebhookStatus500ApplicationJSON struct {
+// WebhookStatusAnalysisResponse500ResponseBody - Unexpected event on server
+type WebhookStatusAnalysisResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *WebhookStatus500ApplicationJSON) GetErr() *string {
+func (o *WebhookStatusAnalysisResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// WebhookStatus404ApplicationJSON - Requests resource was not found.
-type WebhookStatus404ApplicationJSON struct {
+// WebhookStatusAnalysisResponse404ResponseBody - Requests resource was not found.
+type WebhookStatusAnalysisResponse404ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *WebhookStatus404ApplicationJSON) GetErr() *string {
+func (o *WebhookStatusAnalysisResponse404ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// WebhookStatus403ApplicationJSON - Invalid user information or Not Allowed
-type WebhookStatus403ApplicationJSON struct {
+// WebhookStatusAnalysisResponseResponseBody - Invalid user information or Not Allowed
+type WebhookStatusAnalysisResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *WebhookStatus403ApplicationJSON) GetErr() *string {
+func (o *WebhookStatusAnalysisResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// WebhookStatus400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type WebhookStatus400ApplicationJSON struct {
+// WebhookStatusAnalysisResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type WebhookStatusAnalysisResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *WebhookStatus400ApplicationJSON) GetErr() *string {
+func (o *WebhookStatusAnalysisResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// WebhookStatus200ApplicationJSON - Webhooks status is fetched successfully.
-type WebhookStatus200ApplicationJSON struct {
+// WebhookStatusResponseBody - Webhooks status is fetched successfully.
+type WebhookStatusResponseBody struct {
 	// The file submission identifier
 	DataID *string `json:"data_id,omitempty"`
 	// A timestamp when the request has been made.
@@ -137,28 +137,28 @@ type WebhookStatus200ApplicationJSON struct {
 	URL *string `json:"url,omitempty"`
 }
 
-func (o *WebhookStatus200ApplicationJSON) GetDataID() *string {
+func (o *WebhookStatusResponseBody) GetDataID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DataID
 }
 
-func (o *WebhookStatus200ApplicationJSON) GetRequestTime() *string {
+func (o *WebhookStatusResponseBody) GetRequestTime() *string {
 	if o == nil {
 		return nil
 	}
 	return o.RequestTime
 }
 
-func (o *WebhookStatus200ApplicationJSON) GetStatusCode() *int64 {
+func (o *WebhookStatusResponseBody) GetStatusCode() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.StatusCode
 }
 
-func (o *WebhookStatus200ApplicationJSON) GetURL() *string {
+func (o *WebhookStatusResponseBody) GetURL() *string {
 	if o == nil {
 		return nil
 	}
@@ -166,22 +166,57 @@ func (o *WebhookStatus200ApplicationJSON) GetURL() *string {
 }
 
 type WebhookStatusResponse struct {
+	// Webhooks status is fetched successfully.
+	TwoHundredApplicationJSONObject *WebhookStatusResponseBody
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *WebhookStatusAnalysisResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *WebhookStatusAnalysisResponseResponseBody
+	// Requests resource was not found.
+	FourHundredAndFourApplicationJSONObject *WebhookStatusAnalysisResponse404ResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *WebhookStatusAnalysisResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Webhooks status is fetched successfully.
-	WebhookStatus200ApplicationJSONObject *WebhookStatus200ApplicationJSON
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	WebhookStatus400ApplicationJSONObject *WebhookStatus400ApplicationJSON
-	// Invalid user information or Not Allowed
-	WebhookStatus403ApplicationJSONObject *WebhookStatus403ApplicationJSON
-	// Requests resource was not found.
-	WebhookStatus404ApplicationJSONObject *WebhookStatus404ApplicationJSON
-	// Unexpected event on server
-	WebhookStatus500ApplicationJSONObject *WebhookStatus500ApplicationJSON
+}
+
+func (o *WebhookStatusResponse) GetTwoHundredApplicationJSONObject() *WebhookStatusResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *WebhookStatusResponse) GetFourHundredApplicationJSONObject() *WebhookStatusAnalysisResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *WebhookStatusResponse) GetFourHundredAndThreeApplicationJSONObject() *WebhookStatusAnalysisResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *WebhookStatusResponse) GetFourHundredAndFourApplicationJSONObject() *WebhookStatusAnalysisResponse404ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFourApplicationJSONObject
+}
+
+func (o *WebhookStatusResponse) GetFiveHundredApplicationJSONObject() *WebhookStatusAnalysisResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *WebhookStatusResponse) GetContentType() string {
@@ -203,39 +238,4 @@ func (o *WebhookStatusResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *WebhookStatusResponse) GetWebhookStatus200ApplicationJSONObject() *WebhookStatus200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.WebhookStatus200ApplicationJSONObject
-}
-
-func (o *WebhookStatusResponse) GetWebhookStatus400ApplicationJSONObject() *WebhookStatus400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.WebhookStatus400ApplicationJSONObject
-}
-
-func (o *WebhookStatusResponse) GetWebhookStatus403ApplicationJSONObject() *WebhookStatus403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.WebhookStatus403ApplicationJSONObject
-}
-
-func (o *WebhookStatusResponse) GetWebhookStatus404ApplicationJSONObject() *WebhookStatus404ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.WebhookStatus404ApplicationJSONObject
-}
-
-func (o *WebhookStatusResponse) GetWebhookStatus500ApplicationJSONObject() *WebhookStatus500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.WebhookStatus500ApplicationJSONObject
 }

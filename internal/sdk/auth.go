@@ -15,25 +15,25 @@ import (
 	"strings"
 )
 
-// auth - ### Authentication APIs
+// Auth - ### Authentication APIs
 // User authentication is done via username & password.
 // Additional integrations are available within the product:
 //   - **LDAP** integration
 //   - **Active Directory** integration
 //   - **SAML** integration (starting with v4.18.0)
-type auth struct {
+type Auth struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newAuth(sdkConfig sdkConfiguration) *auth {
-	return &auth{
+func newAuth(sdkConfig sdkConfiguration) *Auth {
+	return &Auth{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // UserChangePass - Change Password
 // Modify the current password for the user identified by apikey
-func (s *auth) UserChangePass(ctx context.Context, request operations.UserChangePassRequest) (*operations.UserChangePassResponse, error) {
+func (s *Auth) UserChangePass(ctx context.Context, request operations.UserChangePassRequest) (*operations.UserChangePassResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/user/changepassword"
 
@@ -84,48 +84,48 @@ func (s *auth) UserChangePass(ctx context.Context, request operations.UserChange
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserChangePass200ApplicationJSON
+			var out operations.UserChangePassResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserChangePass200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserChangePass400ApplicationJSON
+			var out operations.UserChangePassAuthResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserChangePass400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserChangePass405ApplicationJSON
+			var out operations.UserChangePassAuthResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserChangePass405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserChangePass500ApplicationJSON
+			var out operations.UserChangePassAuthResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserChangePass500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -136,7 +136,7 @@ func (s *auth) UserChangePass(ctx context.Context, request operations.UserChange
 
 // UserLogin - Login
 // Initiate a new session. Required for using protected REST APIs.
-func (s *auth) UserLogin(ctx context.Context, request *operations.UserLoginRequestBody) (*operations.UserLoginResponse, error) {
+func (s *Auth) UserLogin(ctx context.Context, request *operations.UserLoginRequestBody) (*operations.UserLoginResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/login"
 
@@ -197,24 +197,24 @@ func (s *auth) UserLogin(ctx context.Context, request *operations.UserLoginReque
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserLogin403ApplicationJSON
+			var out operations.UserLoginResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserLogin403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserLogin500ApplicationJSON
+			var out operations.UserLoginAuthResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserLogin500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -225,7 +225,7 @@ func (s *auth) UserLogin(ctx context.Context, request *operations.UserLoginReque
 
 // UserLogout - Logout
 // Destroy session for not using protected REST APIs.
-func (s *auth) UserLogout(ctx context.Context, request operations.UserLogoutRequest) (*operations.UserLogoutResponse, error) {
+func (s *Auth) UserLogout(ctx context.Context, request operations.UserLogoutRequest) (*operations.UserLogoutResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/logout"
 
@@ -266,48 +266,48 @@ func (s *auth) UserLogout(ctx context.Context, request operations.UserLogoutRequ
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserLogout200ApplicationJSON
+			var out operations.UserLogoutResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserLogout200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserLogout400ApplicationJSON
+			var out operations.UserLogoutAuthResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserLogout400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserLogout403ApplicationJSON
+			var out operations.UserLogoutAuthResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserLogout403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserLogout500ApplicationJSON
+			var out operations.UserLogoutAuthResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserLogout500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

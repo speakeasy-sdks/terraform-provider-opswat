@@ -28,39 +28,39 @@ func (o *SanitizedFileRequest) GetDataID() string {
 	return o.DataID
 }
 
-// SanitizedFile500ApplicationJSON - Unexpected event on server
-type SanitizedFile500ApplicationJSON struct {
+// SanitizedFileAnalysisResponseResponseBody - Unexpected event on server
+type SanitizedFileAnalysisResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *SanitizedFile500ApplicationJSON) GetErr() *string {
+func (o *SanitizedFileAnalysisResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// SanitizedFile405ApplicationJSON - The user has no rights for this operation.
-type SanitizedFile405ApplicationJSON struct {
+// SanitizedFileAnalysisResponseBody - The user has no rights for this operation.
+type SanitizedFileAnalysisResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *SanitizedFile405ApplicationJSON) GetErr() *string {
+func (o *SanitizedFileAnalysisResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// SanitizedFile404ApplicationJSON - Requests resource was not found.
-type SanitizedFile404ApplicationJSON struct {
+// SanitizedFileResponseBody - Requests resource was not found.
+type SanitizedFileResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *SanitizedFile404ApplicationJSON) GetErr() *string {
+func (o *SanitizedFileResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -68,20 +68,48 @@ func (o *SanitizedFile404ApplicationJSON) GetErr() *string {
 }
 
 type SanitizedFileResponse struct {
+	// Returns the sanitized content.
+	TwoHundredApplicationOctetStreamBytes []byte
+	// Requests resource was not found.
+	FourHundredAndFourApplicationJSONObject *SanitizedFileResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *SanitizedFileAnalysisResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *SanitizedFileAnalysisResponseResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Returns the sanitized content.
-	SanitizedFile200ApplicationOctetStreamBinaryString []byte
-	// Requests resource was not found.
-	SanitizedFile404ApplicationJSONObject *SanitizedFile404ApplicationJSON
-	// The user has no rights for this operation.
-	SanitizedFile405ApplicationJSONObject *SanitizedFile405ApplicationJSON
-	// Unexpected event on server
-	SanitizedFile500ApplicationJSONObject *SanitizedFile500ApplicationJSON
+}
+
+func (o *SanitizedFileResponse) GetTwoHundredApplicationOctetStreamBytes() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationOctetStreamBytes
+}
+
+func (o *SanitizedFileResponse) GetFourHundredAndFourApplicationJSONObject() *SanitizedFileResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFourApplicationJSONObject
+}
+
+func (o *SanitizedFileResponse) GetFourHundredAndFiveApplicationJSONObject() *SanitizedFileAnalysisResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *SanitizedFileResponse) GetFiveHundredApplicationJSONObject() *SanitizedFileAnalysisResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *SanitizedFileResponse) GetContentType() string {
@@ -103,32 +131,4 @@ func (o *SanitizedFileResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *SanitizedFileResponse) GetSanitizedFile200ApplicationOctetStreamBinaryString() []byte {
-	if o == nil {
-		return nil
-	}
-	return o.SanitizedFile200ApplicationOctetStreamBinaryString
-}
-
-func (o *SanitizedFileResponse) GetSanitizedFile404ApplicationJSONObject() *SanitizedFile404ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.SanitizedFile404ApplicationJSONObject
-}
-
-func (o *SanitizedFileResponse) GetSanitizedFile405ApplicationJSONObject() *SanitizedFile405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.SanitizedFile405ApplicationJSONObject
-}
-
-func (o *SanitizedFileResponse) GetSanitizedFile500ApplicationJSONObject() *SanitizedFile500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.SanitizedFile500ApplicationJSONObject
 }

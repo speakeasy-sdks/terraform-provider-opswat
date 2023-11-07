@@ -28,39 +28,39 @@ func (o *ResultExportedFileRequest) GetDataID() string {
 	return o.DataID
 }
 
-// ResultExportedFile500ApplicationJSON - Unexpected event on server
-type ResultExportedFile500ApplicationJSON struct {
+// ResultExportedFileAnalysisResponseResponseBody - Unexpected event on server
+type ResultExportedFileAnalysisResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ResultExportedFile500ApplicationJSON) GetErr() *string {
+func (o *ResultExportedFileAnalysisResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ResultExportedFile404ApplicationJSON - Requests resource was not found.
-type ResultExportedFile404ApplicationJSON struct {
+// ResultExportedFileAnalysisResponseBody - Requests resource was not found.
+type ResultExportedFileAnalysisResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ResultExportedFile404ApplicationJSON) GetErr() *string {
+func (o *ResultExportedFileAnalysisResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ResultExportedFile403ApplicationJSON - Invalid user information or Not Allowed
-type ResultExportedFile403ApplicationJSON struct {
+// ResultExportedFileResponseBody - Invalid user information or Not Allowed
+type ResultExportedFileResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ResultExportedFile403ApplicationJSON) GetErr() *string {
+func (o *ResultExportedFileResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -68,20 +68,48 @@ func (o *ResultExportedFile403ApplicationJSON) GetErr() *string {
 }
 
 type ResultExportedFileResponse struct {
+	// Returns the exported result PDF file
+	TwoHundredApplicationPdfBytes []byte
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ResultExportedFileResponseBody
+	// Requests resource was not found.
+	FourHundredAndFourApplicationJSONObject *ResultExportedFileAnalysisResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ResultExportedFileAnalysisResponseResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Returns the exported result PDF file
-	ResultExportedFile200ApplicationPdfBinaryString []byte
-	// Invalid user information or Not Allowed
-	ResultExportedFile403ApplicationJSONObject *ResultExportedFile403ApplicationJSON
-	// Requests resource was not found.
-	ResultExportedFile404ApplicationJSONObject *ResultExportedFile404ApplicationJSON
-	// Unexpected event on server
-	ResultExportedFile500ApplicationJSONObject *ResultExportedFile500ApplicationJSON
+}
+
+func (o *ResultExportedFileResponse) GetTwoHundredApplicationPdfBytes() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationPdfBytes
+}
+
+func (o *ResultExportedFileResponse) GetFourHundredAndThreeApplicationJSONObject() *ResultExportedFileResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ResultExportedFileResponse) GetFourHundredAndFourApplicationJSONObject() *ResultExportedFileAnalysisResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFourApplicationJSONObject
+}
+
+func (o *ResultExportedFileResponse) GetFiveHundredApplicationJSONObject() *ResultExportedFileAnalysisResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ResultExportedFileResponse) GetContentType() string {
@@ -103,32 +131,4 @@ func (o *ResultExportedFileResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ResultExportedFileResponse) GetResultExportedFile200ApplicationPdfBinaryString() []byte {
-	if o == nil {
-		return nil
-	}
-	return o.ResultExportedFile200ApplicationPdfBinaryString
-}
-
-func (o *ResultExportedFileResponse) GetResultExportedFile403ApplicationJSONObject() *ResultExportedFile403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ResultExportedFile403ApplicationJSONObject
-}
-
-func (o *ResultExportedFileResponse) GetResultExportedFile404ApplicationJSONObject() *ResultExportedFile404ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ResultExportedFile404ApplicationJSONObject
-}
-
-func (o *ResultExportedFileResponse) GetResultExportedFile500ApplicationJSONObject() *ResultExportedFile500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ResultExportedFile500ApplicationJSONObject
 }

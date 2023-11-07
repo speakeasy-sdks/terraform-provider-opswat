@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// YaraSourcesObjectHTTPSourcesState - Defining if this source is being used or not
-type YaraSourcesObjectHTTPSourcesState string
+// State - Defining if this source is being used or not
+type State string
 
 const (
-	YaraSourcesObjectHTTPSourcesStateDisabled YaraSourcesObjectHTTPSourcesState = "disabled"
-	YaraSourcesObjectHTTPSourcesStateEnabled  YaraSourcesObjectHTTPSourcesState = "enabled"
+	StateDisabled State = "disabled"
+	StateEnabled  State = "enabled"
 )
 
-func (e YaraSourcesObjectHTTPSourcesState) ToPointer() *YaraSourcesObjectHTTPSourcesState {
+func (e State) ToPointer() *State {
 	return &e
 }
 
-func (e *YaraSourcesObjectHTTPSourcesState) UnmarshalJSON(data []byte) error {
+func (e *State) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,48 +28,48 @@ func (e *YaraSourcesObjectHTTPSourcesState) UnmarshalJSON(data []byte) error {
 	case "disabled":
 		fallthrough
 	case "enabled":
-		*e = YaraSourcesObjectHTTPSourcesState(v)
+		*e = State(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for YaraSourcesObjectHTTPSourcesState: %v", v)
+		return fmt.Errorf("invalid value for State: %v", v)
 	}
 }
 
-// YaraSourcesObjectHTTPSources - Object defining the URL and if this source is being used.
-type YaraSourcesObjectHTTPSources struct {
+// HTTPSources - Object defining the URL and if this source is being used.
+type HTTPSources struct {
 	// The location (URL) of the package.
 	Source *string `json:"source,omitempty"`
 	// Defining if this source is being used or not
-	State *YaraSourcesObjectHTTPSourcesState `json:"state,omitempty"`
+	State *State `json:"state,omitempty"`
 }
 
-func (o *YaraSourcesObjectHTTPSources) GetSource() *string {
+func (o *HTTPSources) GetSource() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Source
 }
 
-func (o *YaraSourcesObjectHTTPSources) GetState() *YaraSourcesObjectHTTPSourcesState {
+func (o *HTTPSources) GetState() *State {
 	if o == nil {
 		return nil
 	}
 	return o.State
 }
 
-// YaraSourcesObjectLocalSourcesState - Defining if this source is being used or not
-type YaraSourcesObjectLocalSourcesState string
+// YaraSourcesObjectState - Defining if this source is being used or not
+type YaraSourcesObjectState string
 
 const (
-	YaraSourcesObjectLocalSourcesStateDisabled YaraSourcesObjectLocalSourcesState = "disabled"
-	YaraSourcesObjectLocalSourcesStateEnabled  YaraSourcesObjectLocalSourcesState = "enabled"
+	YaraSourcesObjectStateDisabled YaraSourcesObjectState = "disabled"
+	YaraSourcesObjectStateEnabled  YaraSourcesObjectState = "enabled"
 )
 
-func (e YaraSourcesObjectLocalSourcesState) ToPointer() *YaraSourcesObjectLocalSourcesState {
+func (e YaraSourcesObjectState) ToPointer() *YaraSourcesObjectState {
 	return &e
 }
 
-func (e *YaraSourcesObjectLocalSourcesState) UnmarshalJSON(data []byte) error {
+func (e *YaraSourcesObjectState) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -78,29 +78,29 @@ func (e *YaraSourcesObjectLocalSourcesState) UnmarshalJSON(data []byte) error {
 	case "disabled":
 		fallthrough
 	case "enabled":
-		*e = YaraSourcesObjectLocalSourcesState(v)
+		*e = YaraSourcesObjectState(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for YaraSourcesObjectLocalSourcesState: %v", v)
+		return fmt.Errorf("invalid value for YaraSourcesObjectState: %v", v)
 	}
 }
 
-// YaraSourcesObjectLocalSources - Object defining the location of the files and if this source is being used.
-type YaraSourcesObjectLocalSources struct {
+// LocalSources - Object defining the location of the files and if this source is being used.
+type LocalSources struct {
 	// The location (file path) of the files.
 	Source *string `json:"source,omitempty"`
 	// Defining if this source is being used or not
-	State *YaraSourcesObjectLocalSourcesState `json:"state,omitempty"`
+	State *YaraSourcesObjectState `json:"state,omitempty"`
 }
 
-func (o *YaraSourcesObjectLocalSources) GetSource() *string {
+func (o *LocalSources) GetSource() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Source
 }
 
-func (o *YaraSourcesObjectLocalSources) GetState() *YaraSourcesObjectLocalSourcesState {
+func (o *LocalSources) GetState() *YaraSourcesObjectState {
 	if o == nil {
 		return nil
 	}
@@ -110,19 +110,19 @@ func (o *YaraSourcesObjectLocalSources) GetState() *YaraSourcesObjectLocalSource
 // YaraSourcesObject - Object describing the yara sources.
 type YaraSourcesObject struct {
 	// A list of all remote sources.
-	HTTPSources []YaraSourcesObjectHTTPSources `json:"http_sources,omitempty"`
+	HTTPSources []HTTPSources `json:"http_sources,omitempty"`
 	// A list of all locals sources
-	LocalSources []YaraSourcesObjectLocalSources `json:"local_sources,omitempty"`
+	LocalSources []LocalSources `json:"local_sources,omitempty"`
 }
 
-func (o *YaraSourcesObject) GetHTTPSources() []YaraSourcesObjectHTTPSources {
+func (o *YaraSourcesObject) GetHTTPSources() []HTTPSources {
 	if o == nil {
 		return nil
 	}
 	return o.HTTPSources
 }
 
-func (o *YaraSourcesObject) GetLocalSources() []YaraSourcesObjectLocalSources {
+func (o *YaraSourcesObject) GetLocalSources() []LocalSources {
 	if o == nil {
 		return nil
 	}

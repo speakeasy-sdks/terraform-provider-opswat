@@ -114,8 +114,18 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 //
 // https://onlinehelp.opswat.com/corev4 - Official product documentation
 type Metadefender struct {
+	// Configure the product through APIs (especially the Settings). Will require admin apikey.
+	//
+	Config *Config
+	// Yara engine configuration and source management APIs.
+	Yara *Yara
+	// Enable/disable or pin/unpin the engines through API.
+	Engines *Engines
 	// Admin specific API requests.
-	Admin *admin
+	Admin *Admin
+	// Activate the product or get licensing information. Will require admin apikey.
+	//
+	License *License
 	// ### File analysis APIs
 	// Submit each file to MetaDefender Core individually or group them in batches. Each file submission will return a `data_id` which will be the unique identifier used to retrieve the analysis results.
 	// **Important**: Even though one file is being submitted, if MetaDefender Core is configured to extract the files, all compound file types (archives, Office documents, etc.) will be extracted and each file within will be analyzed as a separate entry.
@@ -124,7 +134,9 @@ type Metadefender struct {
 	//
 	// > _**Note**:_ MetaDefender API doesn't support chunk upload. You shouldn't load the file in memory, is recommended to stream the files to MetaDefender Core as part of the upload process.
 	//
-	Analysis *analysis
+	Analysis *Analysis
+	// Group the analysis requests in batches.
+	Batch *Batch
 	// ### Authentication APIs
 	// User authentication is done via username & password.
 	// Additional integrations are available within the product:
@@ -132,21 +144,9 @@ type Metadefender struct {
 	//   - **Active Directory** integration
 	//   - **SAML** integration (starting with v4.18.0)
 	//
-	Auth *auth
-	// Group the analysis requests in batches.
-	Batch *batch
-	// Configure the product through APIs (especially the Settings). Will require admin apikey.
-	//
-	Config *config
-	// Enable/disable or pin/unpin the engines through API.
-	Engines *engines
-	// Activate the product or get licensing information. Will require admin apikey.
-	//
-	License *license
+	Auth *Auth
 	// Health check and statistics about MetaDefender Core usage.
-	Stats *stats
-	// Yara engine configuration and source management APIs.
-	Yara *yara
+	Stats *Stats
 
 	sdkConfiguration sdkConfiguration
 }
@@ -201,9 +201,9 @@ func New(opts ...SDKOption) *Metadefender {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "v5.6.1",
-			SDKVersion:        "0.5.0",
-			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go 0.5.0 2.173.0 v5.6.1 Metadefender",
+			SDKVersion:        "0.6.0",
+			GenVersion:        "2.181.1",
+			UserAgent:         "speakeasy-sdk/go 0.6.0 2.181.1 v5.6.1 Metadefender",
 		},
 	}
 	for _, opt := range opts {
@@ -218,23 +218,23 @@ func New(opts ...SDKOption) *Metadefender {
 		sdk.sdkConfiguration.SecurityClient = sdk.sdkConfiguration.DefaultClient
 	}
 
-	sdk.Admin = newAdmin(sdk.sdkConfiguration)
-
-	sdk.Analysis = newAnalysis(sdk.sdkConfiguration)
-
-	sdk.Auth = newAuth(sdk.sdkConfiguration)
-
-	sdk.Batch = newBatch(sdk.sdkConfiguration)
-
 	sdk.Config = newConfig(sdk.sdkConfiguration)
+
+	sdk.Yara = newYara(sdk.sdkConfiguration)
 
 	sdk.Engines = newEngines(sdk.sdkConfiguration)
 
+	sdk.Admin = newAdmin(sdk.sdkConfiguration)
+
 	sdk.License = newLicense(sdk.sdkConfiguration)
 
-	sdk.Stats = newStats(sdk.sdkConfiguration)
+	sdk.Analysis = newAnalysis(sdk.sdkConfiguration)
 
-	sdk.Yara = newYara(sdk.sdkConfiguration)
+	sdk.Batch = newBatch(sdk.sdkConfiguration)
+
+	sdk.Auth = newAuth(sdk.sdkConfiguration)
+
+	sdk.Stats = newStats(sdk.sdkConfiguration)
 
 	return sdk
 }

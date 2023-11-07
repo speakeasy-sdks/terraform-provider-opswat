@@ -30,58 +30,58 @@ func (o *ConfigUpdateHealthCheckRequest) GetApikey() string {
 	return o.Apikey
 }
 
-type ConfigUpdateHealthCheck400ApplicationJSONType string
+type ConfigUpdateHealthCheckResponseBodyType string
 
 const (
-	ConfigUpdateHealthCheck400ApplicationJSONTypeSetRequiredEngineFailedWhenInvalidLicense ConfigUpdateHealthCheck400ApplicationJSONType = "SetRequiredEngineFailedWhenInvalidLicense"
-	ConfigUpdateHealthCheck400ApplicationJSONTypeSetRequiredEngineFailedWhenInvalidEngine  ConfigUpdateHealthCheck400ApplicationJSONType = "SetRequiredEngineFailedWhenInvalidEngine"
+	ConfigUpdateHealthCheckResponseBodyTypeSetRequiredEngineFailedWhenInvalidLicense ConfigUpdateHealthCheckResponseBodyType = "SetRequiredEngineFailedWhenInvalidLicense"
+	ConfigUpdateHealthCheckResponseBodyTypeSetRequiredEngineFailedWhenInvalidEngine  ConfigUpdateHealthCheckResponseBodyType = "SetRequiredEngineFailedWhenInvalidEngine"
 )
 
-type ConfigUpdateHealthCheck400ApplicationJSON struct {
+type ConfigUpdateHealthCheckResponseBody struct {
 	SetRequiredEngineFailedWhenInvalidLicense *shared.SetRequiredEngineFailedWhenInvalidLicense
 	SetRequiredEngineFailedWhenInvalidEngine  *shared.SetRequiredEngineFailedWhenInvalidEngine
 
-	Type ConfigUpdateHealthCheck400ApplicationJSONType
+	Type ConfigUpdateHealthCheckResponseBodyType
 }
 
-func CreateConfigUpdateHealthCheck400ApplicationJSONSetRequiredEngineFailedWhenInvalidLicense(setRequiredEngineFailedWhenInvalidLicense shared.SetRequiredEngineFailedWhenInvalidLicense) ConfigUpdateHealthCheck400ApplicationJSON {
-	typ := ConfigUpdateHealthCheck400ApplicationJSONTypeSetRequiredEngineFailedWhenInvalidLicense
+func CreateConfigUpdateHealthCheckResponseBodySetRequiredEngineFailedWhenInvalidLicense(setRequiredEngineFailedWhenInvalidLicense shared.SetRequiredEngineFailedWhenInvalidLicense) ConfigUpdateHealthCheckResponseBody {
+	typ := ConfigUpdateHealthCheckResponseBodyTypeSetRequiredEngineFailedWhenInvalidLicense
 
-	return ConfigUpdateHealthCheck400ApplicationJSON{
+	return ConfigUpdateHealthCheckResponseBody{
 		SetRequiredEngineFailedWhenInvalidLicense: &setRequiredEngineFailedWhenInvalidLicense,
 		Type: typ,
 	}
 }
 
-func CreateConfigUpdateHealthCheck400ApplicationJSONSetRequiredEngineFailedWhenInvalidEngine(setRequiredEngineFailedWhenInvalidEngine shared.SetRequiredEngineFailedWhenInvalidEngine) ConfigUpdateHealthCheck400ApplicationJSON {
-	typ := ConfigUpdateHealthCheck400ApplicationJSONTypeSetRequiredEngineFailedWhenInvalidEngine
+func CreateConfigUpdateHealthCheckResponseBodySetRequiredEngineFailedWhenInvalidEngine(setRequiredEngineFailedWhenInvalidEngine shared.SetRequiredEngineFailedWhenInvalidEngine) ConfigUpdateHealthCheckResponseBody {
+	typ := ConfigUpdateHealthCheckResponseBodyTypeSetRequiredEngineFailedWhenInvalidEngine
 
-	return ConfigUpdateHealthCheck400ApplicationJSON{
+	return ConfigUpdateHealthCheckResponseBody{
 		SetRequiredEngineFailedWhenInvalidEngine: &setRequiredEngineFailedWhenInvalidEngine,
 		Type:                                     typ,
 	}
 }
 
-func (u *ConfigUpdateHealthCheck400ApplicationJSON) UnmarshalJSON(data []byte) error {
+func (u *ConfigUpdateHealthCheckResponseBody) UnmarshalJSON(data []byte) error {
 
 	setRequiredEngineFailedWhenInvalidLicense := new(shared.SetRequiredEngineFailedWhenInvalidLicense)
 	if err := utils.UnmarshalJSON(data, &setRequiredEngineFailedWhenInvalidLicense, "", true, true); err == nil {
 		u.SetRequiredEngineFailedWhenInvalidLicense = setRequiredEngineFailedWhenInvalidLicense
-		u.Type = ConfigUpdateHealthCheck400ApplicationJSONTypeSetRequiredEngineFailedWhenInvalidLicense
+		u.Type = ConfigUpdateHealthCheckResponseBodyTypeSetRequiredEngineFailedWhenInvalidLicense
 		return nil
 	}
 
 	setRequiredEngineFailedWhenInvalidEngine := new(shared.SetRequiredEngineFailedWhenInvalidEngine)
 	if err := utils.UnmarshalJSON(data, &setRequiredEngineFailedWhenInvalidEngine, "", true, true); err == nil {
 		u.SetRequiredEngineFailedWhenInvalidEngine = setRequiredEngineFailedWhenInvalidEngine
-		u.Type = ConfigUpdateHealthCheck400ApplicationJSONTypeSetRequiredEngineFailedWhenInvalidEngine
+		u.Type = ConfigUpdateHealthCheckResponseBodyTypeSetRequiredEngineFailedWhenInvalidEngine
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u ConfigUpdateHealthCheck400ApplicationJSON) MarshalJSON() ([]byte, error) {
+func (u ConfigUpdateHealthCheckResponseBody) MarshalJSON() ([]byte, error) {
 	if u.SetRequiredEngineFailedWhenInvalidLicense != nil {
 		return utils.MarshalJSON(u.SetRequiredEngineFailedWhenInvalidLicense, "", true)
 	}
@@ -105,7 +105,7 @@ type ConfigUpdateHealthCheckResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	ConfigUpdateHealthCheck400ApplicationJSONOneOf *ConfigUpdateHealthCheck400ApplicationJSON
+	OneOf *ConfigUpdateHealthCheckResponseBody
 }
 
 func (o *ConfigUpdateHealthCheckResponse) GetContentType() string {
@@ -143,9 +143,9 @@ func (o *ConfigUpdateHealthCheckResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *ConfigUpdateHealthCheckResponse) GetConfigUpdateHealthCheck400ApplicationJSONOneOf() *ConfigUpdateHealthCheck400ApplicationJSON {
+func (o *ConfigUpdateHealthCheckResponse) GetOneOf() *ConfigUpdateHealthCheckResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ConfigUpdateHealthCheck400ApplicationJSONOneOf
+	return o.OneOf
 }

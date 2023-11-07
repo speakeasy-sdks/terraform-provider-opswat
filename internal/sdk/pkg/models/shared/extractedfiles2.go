@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-type ExtractedFiles2ProcessInfoOutdatedData string
+type ExtractedFiles2OutdatedData string
 
 const (
-	ExtractedFiles2ProcessInfoOutdatedDataEnginedefinitions ExtractedFiles2ProcessInfoOutdatedData = "enginedefinitions"
-	ExtractedFiles2ProcessInfoOutdatedDataConfiguration     ExtractedFiles2ProcessInfoOutdatedData = "configuration"
-	ExtractedFiles2ProcessInfoOutdatedDataSanitization      ExtractedFiles2ProcessInfoOutdatedData = "sanitization"
+	ExtractedFiles2OutdatedDataEnginedefinitions ExtractedFiles2OutdatedData = "enginedefinitions"
+	ExtractedFiles2OutdatedDataConfiguration     ExtractedFiles2OutdatedData = "configuration"
+	ExtractedFiles2OutdatedDataSanitization      ExtractedFiles2OutdatedData = "sanitization"
 )
 
-func (e ExtractedFiles2ProcessInfoOutdatedData) ToPointer() *ExtractedFiles2ProcessInfoOutdatedData {
+func (e ExtractedFiles2OutdatedData) ToPointer() *ExtractedFiles2OutdatedData {
 	return &e
 }
 
-func (e *ExtractedFiles2ProcessInfoOutdatedData) UnmarshalJSON(data []byte) error {
+func (e *ExtractedFiles2OutdatedData) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -30,15 +30,15 @@ func (e *ExtractedFiles2ProcessInfoOutdatedData) UnmarshalJSON(data []byte) erro
 	case "configuration":
 		fallthrough
 	case "sanitization":
-		*e = ExtractedFiles2ProcessInfoOutdatedData(v)
+		*e = ExtractedFiles2OutdatedData(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ExtractedFiles2ProcessInfoOutdatedData: %v", v)
+		return fmt.Errorf("invalid value for ExtractedFiles2OutdatedData: %v", v)
 	}
 }
 
-// ExtractedFiles2ProcessInfoPostProcessing - Contains information about result of sanitization process and any action done after finalizing the process using Post Actions.
-type ExtractedFiles2ProcessInfoPostProcessing struct {
+// ExtractedFiles2PostProcessing - Contains information about result of sanitization process and any action done after finalizing the process using Post Actions.
+type ExtractedFiles2PostProcessing struct {
 	// Empty string if no action failed or list of failed actions, separated by "|".
 	ActionsFailed *string `json:"actions_failed,omitempty"`
 	// List of successful actions, separated by "|". Empty string if otherwise.
@@ -53,50 +53,50 @@ type ExtractedFiles2ProcessInfoPostProcessing struct {
 	SanitizationDetails *DeepCDRDetails `json:"sanitization_details,omitempty"`
 }
 
-func (o *ExtractedFiles2ProcessInfoPostProcessing) GetActionsFailed() *string {
+func (o *ExtractedFiles2PostProcessing) GetActionsFailed() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ActionsFailed
 }
 
-func (o *ExtractedFiles2ProcessInfoPostProcessing) GetActionsRan() *string {
+func (o *ExtractedFiles2PostProcessing) GetActionsRan() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ActionsRan
 }
 
-func (o *ExtractedFiles2ProcessInfoPostProcessing) GetConvertedDestination() *string {
+func (o *ExtractedFiles2PostProcessing) GetConvertedDestination() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ConvertedDestination
 }
 
-func (o *ExtractedFiles2ProcessInfoPostProcessing) GetConvertedTo() *string {
+func (o *ExtractedFiles2PostProcessing) GetConvertedTo() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ConvertedTo
 }
 
-func (o *ExtractedFiles2ProcessInfoPostProcessing) GetCopyMoveDestination() *string {
+func (o *ExtractedFiles2PostProcessing) GetCopyMoveDestination() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CopyMoveDestination
 }
 
-func (o *ExtractedFiles2ProcessInfoPostProcessing) GetSanitizationDetails() *DeepCDRDetails {
+func (o *ExtractedFiles2PostProcessing) GetSanitizationDetails() *DeepCDRDetails {
 	if o == nil {
 		return nil
 	}
 	return o.SanitizationDetails
 }
 
-// ExtractedFiles2ProcessInfoProcessingTimeDetails - Starting with MetaDefender Core 4.19.1, processing time on each major workflow processing step is calculated.
-type ExtractedFiles2ProcessInfoProcessingTimeDetails struct {
+// ExtractedFiles2ProcessingTimeDetails - Starting with MetaDefender Core 4.19.1, processing time on each major workflow processing step is calculated.
+type ExtractedFiles2ProcessingTimeDetails struct {
 	// AV engines' processing time.
 	AvScanTime *int64 `json:"av_scan_time,omitempty"`
 	// Deep CDR engine's sanitization time.
@@ -122,63 +122,63 @@ type ExtractedFiles2ProcessInfoProcessingTimeDetails struct {
 	YaraTime *int64 `json:"yara_time,omitempty"`
 }
 
-func (o *ExtractedFiles2ProcessInfoProcessingTimeDetails) GetAvScanTime() *int64 {
+func (o *ExtractedFiles2ProcessingTimeDetails) GetAvScanTime() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.AvScanTime
 }
 
-func (o *ExtractedFiles2ProcessInfoProcessingTimeDetails) GetCdrTime() *int64 {
+func (o *ExtractedFiles2ProcessingTimeDetails) GetCdrTime() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.CdrTime
 }
 
-func (o *ExtractedFiles2ProcessInfoProcessingTimeDetails) GetDlpTime() *int64 {
+func (o *ExtractedFiles2ProcessingTimeDetails) GetDlpTime() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.DlpTime
 }
 
-func (o *ExtractedFiles2ProcessInfoProcessingTimeDetails) GetExtractionTime() *int64 {
+func (o *ExtractedFiles2ProcessingTimeDetails) GetExtractionTime() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ExtractionTime
 }
 
-func (o *ExtractedFiles2ProcessInfoProcessingTimeDetails) GetFiletypeTime() *int64 {
+func (o *ExtractedFiles2ProcessingTimeDetails) GetFiletypeTime() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.FiletypeTime
 }
 
-func (o *ExtractedFiles2ProcessInfoProcessingTimeDetails) GetOpswatfilescanTime() *int64 {
+func (o *ExtractedFiles2ProcessingTimeDetails) GetOpswatfilescanTime() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.OpswatfilescanTime
 }
 
-func (o *ExtractedFiles2ProcessInfoProcessingTimeDetails) GetOthersTime() *int64 {
+func (o *ExtractedFiles2ProcessingTimeDetails) GetOthersTime() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.OthersTime
 }
 
-func (o *ExtractedFiles2ProcessInfoProcessingTimeDetails) GetVulTime() *int64 {
+func (o *ExtractedFiles2ProcessingTimeDetails) GetVulTime() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.VulTime
 }
 
-func (o *ExtractedFiles2ProcessInfoProcessingTimeDetails) GetYaraTime() *int64 {
+func (o *ExtractedFiles2ProcessingTimeDetails) GetYaraTime() *int64 {
 	if o == nil {
 		return nil
 	}
@@ -196,13 +196,13 @@ type ExtractedFiles2ProcessInfo struct {
 	//   * configuration: the process' rule - or any item used by the rule - was modified since the item was processed
 	//   * sanitization: if item was sanitized this flag notifies that the sanitization information regarding this result is outdated, meaning the sanitized item is no longer available
 	//
-	OutdatedData []ExtractedFiles2ProcessInfoOutdatedData `json:"outdated_data,omitempty"`
+	OutdatedData []ExtractedFiles2OutdatedData `json:"outdated_data,omitempty"`
 	// Contains information about result of sanitization process and any action done after finalizing the process using Post Actions.
-	PostProcessing *ExtractedFiles2ProcessInfoPostProcessing `json:"post_processing,omitempty"`
+	PostProcessing *ExtractedFiles2PostProcessing `json:"post_processing,omitempty"`
 	// Total time elapsed during processing file on the node (in milliseconds).
 	ProcessingTime *int64 `json:"processing_time,omitempty"`
 	// Starting with MetaDefender Core 4.19.1, processing time on each major workflow processing step is calculated.
-	ProcessingTimeDetails *ExtractedFiles2ProcessInfoProcessingTimeDetails `json:"processing_time_details,omitempty"`
+	ProcessingTimeDetails *ExtractedFiles2ProcessingTimeDetails `json:"processing_time_details,omitempty"`
 	// The used rule name.
 	Profile *string `json:"profile,omitempty"`
 	// Percentage of processing completed (from 1-100).
@@ -233,14 +233,14 @@ func (o *ExtractedFiles2ProcessInfo) GetFileTypeSkippedScan() *bool {
 	return o.FileTypeSkippedScan
 }
 
-func (o *ExtractedFiles2ProcessInfo) GetOutdatedData() []ExtractedFiles2ProcessInfoOutdatedData {
+func (o *ExtractedFiles2ProcessInfo) GetOutdatedData() []ExtractedFiles2OutdatedData {
 	if o == nil {
 		return nil
 	}
 	return o.OutdatedData
 }
 
-func (o *ExtractedFiles2ProcessInfo) GetPostProcessing() *ExtractedFiles2ProcessInfoPostProcessing {
+func (o *ExtractedFiles2ProcessInfo) GetPostProcessing() *ExtractedFiles2PostProcessing {
 	if o == nil {
 		return nil
 	}
@@ -254,7 +254,7 @@ func (o *ExtractedFiles2ProcessInfo) GetProcessingTime() *int64 {
 	return o.ProcessingTime
 }
 
-func (o *ExtractedFiles2ProcessInfo) GetProcessingTimeDetails() *ExtractedFiles2ProcessInfoProcessingTimeDetails {
+func (o *ExtractedFiles2ProcessInfo) GetProcessingTimeDetails() *ExtractedFiles2ProcessingTimeDetails {
 	if o == nil {
 		return nil
 	}

@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// admin - Admin specific API requests.
-type admin struct {
+// Admin specific API requests.
+type Admin struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newAdmin(sdkConfig sdkConfiguration) *admin {
-	return &admin{
+func newAdmin(sdkConfig sdkConfiguration) *Admin {
+	return &Admin{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // AdminExport - Export configuration
 // Export configuration from file.
-func (s *admin) AdminExport(ctx context.Context, request operations.AdminExportRequest) (*operations.AdminExportResponse, error) {
+func (s *Admin) AdminExport(ctx context.Context, request operations.AdminExportRequest) (*operations.AdminExportResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/export"
 
@@ -70,55 +70,55 @@ func (s *admin) AdminExport(ctx context.Context, request operations.AdminExportR
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			out := string(rawBody)
-			res.AdminExport200ApplicationJSONFileString = &out
+			res.TwoHundredApplicationJSONRes = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminExport400ApplicationJSON
+			var out operations.AdminExportResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminExport400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminExport403ApplicationJSON
+			var out operations.AdminExportAdminResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminExport403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminExport405ApplicationJSON
+			var out operations.AdminExportAdminResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminExport405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminExport500ApplicationJSON
+			var out operations.AdminExportAdminResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminExport500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -129,7 +129,7 @@ func (s *admin) AdminExport(ctx context.Context, request operations.AdminExportR
 
 // AdminExportV2 - Export configuration (new version)
 // Export configuration from file (new version)
-func (s *admin) AdminExportV2(ctx context.Context, request operations.AdminExportV2Request, opts ...operations.Option) (*operations.AdminExportV2Response, error) {
+func (s *Admin) AdminExportV2(ctx context.Context, request operations.AdminExportV2Request, opts ...operations.Option) (*operations.AdminExportV2Response, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -185,55 +185,55 @@ func (s *admin) AdminExportV2(ctx context.Context, request operations.AdminExpor
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			res.AdminExportV2200ApplicationOctetStreamBinaryString = rawBody
+			res.TwoHundredApplicationOctetStreamBytes = rawBody
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminExportV2400ApplicationJSON
+			var out operations.AdminExportV2ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminExportV2400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminExportV2403ApplicationJSON
+			var out operations.AdminExportV2AdminResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminExportV2403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminExportV2405ApplicationJSON
+			var out operations.AdminExportV2AdminResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminExportV2405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminExportV2500ApplicationJSON
+			var out operations.AdminExportV2AdminResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminExportV2500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -244,7 +244,7 @@ func (s *admin) AdminExportV2(ctx context.Context, request operations.AdminExpor
 
 // AdminImport - Import configuration
 // Import configuration from file.
-func (s *admin) AdminImport(ctx context.Context, request operations.AdminImportRequest) (*operations.AdminImportResponse, error) {
+func (s *Admin) AdminImport(ctx context.Context, request operations.AdminImportRequest) (*operations.AdminImportResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/import"
 
@@ -295,72 +295,72 @@ func (s *admin) AdminImport(ctx context.Context, request operations.AdminImportR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminImport200ApplicationJSON
+			var out operations.AdminImportResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminImport200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 304:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminImport304ApplicationJSON
+			var out operations.AdminImportAdminResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminImport304ApplicationJSONObject = &out
+			res.ThreeHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminImport400ApplicationJSON
+			var out operations.AdminImportAdminResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminImport400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminImport403ApplicationJSON
+			var out operations.AdminImportAdminResponse403ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminImport403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminImport405ApplicationJSON
+			var out operations.AdminImportAdminResponse405ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminImport405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminImport500ApplicationJSON
+			var out operations.AdminImportAdminResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminImport500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -371,7 +371,7 @@ func (s *admin) AdminImport(ctx context.Context, request operations.AdminImportR
 
 // AdminImportV2 - Import configuration (new version)
 // Import configuration from file (new version)
-func (s *admin) AdminImportV2(ctx context.Context, request operations.AdminImportV2Request) (*operations.AdminImportV2Response, error) {
+func (s *Admin) AdminImportV2(ctx context.Context, request operations.AdminImportV2Request) (*operations.AdminImportV2Response, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/import/v2"
 
@@ -422,24 +422,24 @@ func (s *admin) AdminImportV2(ctx context.Context, request operations.AdminImpor
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminImportV2200ApplicationJSON
+			var out operations.AdminImportV2ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminImportV2200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 304:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminImportV2304ApplicationJSON
+			var out operations.AdminImportV2AdminResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminImportV2304ApplicationJSONObject = &out
+			res.ThreeHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -447,43 +447,43 @@ func (s *admin) AdminImportV2(ctx context.Context, request operations.AdminImpor
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			out := string(rawBody)
-			res.AdminImportV2400ApplicationJSONJSONString = &out
+			res.FourHundredApplicationJSONRes = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminImportV2403ApplicationJSON
+			var out operations.AdminImportV2AdminResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminImportV2403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminImportV2405ApplicationJSON
+			var out operations.AdminImportV2AdminResponse405ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminImportV2405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AdminImportV2500ApplicationJSON
+			var out operations.AdminImportV2AdminResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AdminImportV2500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -494,7 +494,7 @@ func (s *admin) AdminImportV2(ctx context.Context, request operations.AdminImpor
 
 // GetLicenseBackup - Retrieve hot-backup instance
 // This API to set a MetaDefender Core as a backup instance.
-func (s *admin) GetLicenseBackup(ctx context.Context, request operations.GetLicenseBackupRequest) (*operations.GetLicenseBackupResponse, error) {
+func (s *Admin) GetLicenseBackup(ctx context.Context, request operations.GetLicenseBackupRequest) (*operations.GetLicenseBackupResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/license/backup"
 
@@ -535,48 +535,48 @@ func (s *admin) GetLicenseBackup(ctx context.Context, request operations.GetLice
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.GetLicenseBackup200ApplicationJSON
+			var out operations.GetLicenseBackupResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.GetLicenseBackup200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.GetLicenseBackup400ApplicationJSON
+			var out operations.GetLicenseBackupAdminResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.GetLicenseBackup400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.GetLicenseBackup403ApplicationJSON
+			var out operations.GetLicenseBackupAdminResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.GetLicenseBackup403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.GetLicenseBackup500ApplicationJSON
+			var out operations.GetLicenseBackupAdminResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.GetLicenseBackup500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -587,7 +587,7 @@ func (s *admin) GetLicenseBackup(ctx context.Context, request operations.GetLice
 
 // LicenseBackupNomination - Nominate a backup instance to a production instance
 // This API to nominate a backup instance to a production instance.
-func (s *admin) LicenseBackupNomination(ctx context.Context, request operations.LicenseBackupNominationRequest) (*operations.LicenseBackupNominationResponse, error) {
+func (s *Admin) LicenseBackupNomination(ctx context.Context, request operations.LicenseBackupNominationRequest) (*operations.LicenseBackupNominationResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/license/backup/nomination"
 
@@ -628,48 +628,48 @@ func (s *admin) LicenseBackupNomination(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseBackupNomination200ApplicationJSON
+			var out operations.LicenseBackupNominationResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseBackupNomination200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseBackupNomination400ApplicationJSON
+			var out operations.LicenseBackupNominationAdminResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseBackupNomination400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseBackupNomination403ApplicationJSON
+			var out operations.LicenseBackupNominationAdminResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseBackupNomination403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseBackupNomination500ApplicationJSON
+			var out operations.LicenseBackupNominationAdminResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseBackupNomination500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -685,7 +685,7 @@ func (s *admin) LicenseBackupNomination(ctx context.Context, request operations.
 //   - `Offline environment`:
 //   - Obtain license.yml file that supposed to use to active your MetaDefender Core active / production instance before.
 //   - Use that yaml file content in body content of the REST API.
-func (s *admin) PostLicenseBackup(ctx context.Context, request operations.PostLicenseBackupRequest) (*operations.PostLicenseBackupResponse, error) {
+func (s *Admin) PostLicenseBackup(ctx context.Context, request operations.PostLicenseBackupRequest) (*operations.PostLicenseBackupResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/license/backup"
 
@@ -736,48 +736,48 @@ func (s *admin) PostLicenseBackup(ctx context.Context, request operations.PostLi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.PostLicenseBackup200ApplicationJSON
+			var out operations.PostLicenseBackupResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.PostLicenseBackup200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.PostLicenseBackup400ApplicationJSON
+			var out operations.PostLicenseBackupAdminResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.PostLicenseBackup400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.PostLicenseBackup403ApplicationJSON
+			var out operations.PostLicenseBackupAdminResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.PostLicenseBackup403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.PostLicenseBackup500ApplicationJSON
+			var out operations.PostLicenseBackupAdminResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.PostLicenseBackup500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -788,7 +788,7 @@ func (s *admin) PostLicenseBackup(ctx context.Context, request operations.PostLi
 
 // RemoveBackupInstance - Remove a backup instance
 // This API to remove a backup instance.
-func (s *admin) RemoveBackupInstance(ctx context.Context, request operations.RemoveBackupInstanceRequest) (*operations.RemoveBackupInstanceResponse, error) {
+func (s *Admin) RemoveBackupInstance(ctx context.Context, request operations.RemoveBackupInstanceRequest) (*operations.RemoveBackupInstanceResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/license/backup"
 
@@ -829,48 +829,48 @@ func (s *admin) RemoveBackupInstance(ctx context.Context, request operations.Rem
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.RemoveBackupInstance200ApplicationJSON
+			var out operations.RemoveBackupInstanceResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.RemoveBackupInstance200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.RemoveBackupInstance400ApplicationJSON
+			var out operations.RemoveBackupInstanceAdminResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.RemoveBackupInstance400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.RemoveBackupInstance403ApplicationJSON
+			var out operations.RemoveBackupInstanceAdminResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.RemoveBackupInstance403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.RemoveBackupInstance500ApplicationJSON
+			var out operations.RemoveBackupInstanceAdminResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.RemoveBackupInstance500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -881,7 +881,7 @@ func (s *admin) RemoveBackupInstance(ctx context.Context, request operations.Rem
 
 // RoleCreate - Create new role
 // Add a new user role to the system.
-func (s *admin) RoleCreate(ctx context.Context, request operations.RoleCreateRequest) (*operations.RoleCreateResponse, error) {
+func (s *Admin) RoleCreate(ctx context.Context, request operations.RoleCreateRequest) (*operations.RoleCreateResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/role"
 
@@ -944,48 +944,48 @@ func (s *admin) RoleCreate(ctx context.Context, request operations.RoleCreateReq
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.RoleCreate400ApplicationJSON
+			var out operations.RoleCreateResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.RoleCreate400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.RoleCreate403ApplicationJSON
+			var out operations.RoleCreateAdminResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.RoleCreate403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.RoleCreate405ApplicationJSON
+			var out operations.RoleCreateAdminResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.RoleCreate405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.RoleCreate500ApplicationJSON
+			var out operations.RoleCreateAdminResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.RoleCreate500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -995,7 +995,7 @@ func (s *admin) RoleCreate(ctx context.Context, request operations.RoleCreateReq
 }
 
 // UserCreate - Create user
-func (s *admin) UserCreate(ctx context.Context, request operations.UserCreateRequest) (*operations.UserCreateResponse, error) {
+func (s *Admin) UserCreate(ctx context.Context, request operations.UserCreateRequest) (*operations.UserCreateResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/user"
 
@@ -1058,48 +1058,48 @@ func (s *admin) UserCreate(ctx context.Context, request operations.UserCreateReq
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserCreate400ApplicationJSON
+			var out operations.UserCreateResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserCreate400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserCreate403ApplicationJSON
+			var out operations.UserCreateAdminResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserCreate403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserCreate405ApplicationJSON
+			var out operations.UserCreateAdminResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserCreate405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.UserCreate500ApplicationJSON
+			var out operations.UserCreateAdminResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UserCreate500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

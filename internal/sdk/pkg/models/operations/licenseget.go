@@ -20,26 +20,26 @@ func (o *LicenseGetRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// LicenseGet500ApplicationJSON - Unexpected event on server
-type LicenseGet500ApplicationJSON struct {
+// LicenseGetLicenseResponseBody - Unexpected event on server
+type LicenseGetLicenseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *LicenseGet500ApplicationJSON) GetErr() *string {
+func (o *LicenseGetLicenseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// LicenseGet403ApplicationJSON - Invalid user information or Not Allowed
-type LicenseGet403ApplicationJSON struct {
+// LicenseGetResponseBody - Invalid user information or Not Allowed
+type LicenseGetResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *LicenseGet403ApplicationJSON) GetErr() *string {
+func (o *LicenseGetResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -47,6 +47,10 @@ func (o *LicenseGet403ApplicationJSON) GetErr() *string {
 }
 
 type LicenseGetResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *LicenseGetResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *LicenseGetLicenseResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// Information about the licensed product (product type, number of activations, deploymentId, expiration date and days left)
@@ -55,10 +59,20 @@ type LicenseGetResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	LicenseGet403ApplicationJSONObject *LicenseGet403ApplicationJSON
-	// Unexpected event on server
-	LicenseGet500ApplicationJSONObject *LicenseGet500ApplicationJSON
+}
+
+func (o *LicenseGetResponse) GetFourHundredAndThreeApplicationJSONObject() *LicenseGetResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *LicenseGetResponse) GetFiveHundredApplicationJSONObject() *LicenseGetLicenseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *LicenseGetResponse) GetContentType() string {
@@ -87,18 +101,4 @@ func (o *LicenseGetResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *LicenseGetResponse) GetLicenseGet403ApplicationJSONObject() *LicenseGet403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseGet403ApplicationJSONObject
-}
-
-func (o *LicenseGetResponse) GetLicenseGet500ApplicationJSONObject() *LicenseGet500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseGet500ApplicationJSONObject
 }

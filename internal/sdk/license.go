@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// license - Activate the product or get licensing information. Will require admin apikey.
-type license struct {
+// License - Activate the product or get licensing information. Will require admin apikey.
+type License struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newLicense(sdkConfig sdkConfiguration) *license {
-	return &license{
+func newLicense(sdkConfig sdkConfiguration) *License {
+	return &License{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // LicenseActivation - Activate license online
 // This API initiates an online activation of the deployment.  In case of error, check the application logs for more details.
-func (s *license) LicenseActivation(ctx context.Context, request operations.LicenseActivationRequest) (*operations.LicenseActivationResponse, error) {
+func (s *License) LicenseActivation(ctx context.Context, request operations.LicenseActivationRequest) (*operations.LicenseActivationResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/license/activation"
 
@@ -79,48 +79,48 @@ func (s *license) LicenseActivation(ctx context.Context, request operations.Lice
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseActivation200ApplicationJSON
+			var out operations.LicenseActivationResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseActivation200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseActivation400ApplicationJSON
+			var out operations.LicenseActivationLicenseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseActivation400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseActivation403ApplicationJSON
+			var out operations.LicenseActivationLicenseResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseActivation403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseActivation500ApplicationJSON
+			var out operations.LicenseActivationLicenseResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseActivation500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -131,7 +131,7 @@ func (s *license) LicenseActivation(ctx context.Context, request operations.Lice
 
 // LicenseGet - Get current license information
 // Fetch all details about the licensing status of the product.
-func (s *license) LicenseGet(ctx context.Context, request operations.LicenseGetRequest) (*operations.LicenseGetResponse, error) {
+func (s *License) LicenseGet(ctx context.Context, request operations.LicenseGetRequest) (*operations.LicenseGetResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/license"
 
@@ -184,24 +184,24 @@ func (s *license) LicenseGet(ctx context.Context, request operations.LicenseGetR
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseGet403ApplicationJSON
+			var out operations.LicenseGetResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseGet403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseGet500ApplicationJSON
+			var out operations.LicenseGetLicenseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseGet500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -218,7 +218,7 @@ func (s *license) LicenseGet(ctx context.Context, request operations.LicenseGetR
 //   - via activation server REST API: https://activation.dl.opswat.com/activation?key=%activation_key%&deployment=%deployment_unique_ID%&quantity=%quantity%
 //
 // Deployment unique ID can be fetched via Get Current License Information API.
-func (s *license) LicenseUpload(ctx context.Context, request operations.LicenseUploadRequest) (*operations.LicenseUploadResponse, error) {
+func (s *License) LicenseUpload(ctx context.Context, request operations.LicenseUploadRequest) (*operations.LicenseUploadResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/license"
 
@@ -269,12 +269,12 @@ func (s *license) LicenseUpload(ctx context.Context, request operations.LicenseU
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseUpload200ApplicationJSON
+			var out operations.LicenseUploadResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseUpload200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -282,24 +282,24 @@ func (s *license) LicenseUpload(ctx context.Context, request operations.LicenseU
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseUpload403ApplicationJSON
+			var out operations.LicenseUploadLicenseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseUpload403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.LicenseUpload500ApplicationJSON
+			var out operations.LicenseUploadLicenseResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.LicenseUpload500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

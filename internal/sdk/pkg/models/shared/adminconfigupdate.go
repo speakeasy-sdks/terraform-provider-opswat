@@ -7,9 +7,9 @@ import (
 	"fmt"
 )
 
-// AdminConfigUpdateDisabledupdate - The JSON below mean that from Friday to Sunday (week starts on Monday (1), ends on Sunday (7)) from 8:00 to 16:00 you do not want to distribute packages.
+// Disabledupdate - The JSON below mean that from Friday to Sunday (week starts on Monday (1), ends on Sunday (7)) from 8:00 to 16:00 you do not want to distribute packages.
 // <i>From and to is the distance in minutes from 0:00 (8:00 → 480 minutes, 16:00 → 960 minutes)<i>
-type AdminConfigUpdateDisabledupdate struct {
+type Disabledupdate struct {
 	// A particular day (index of the week) or a defined interval (Fri-Sun -> 5-7)
 	Days *string `json:"days,omitempty"`
 	// When to start the lockdown, expressed in minutes (8 AM=480)
@@ -18,44 +18,44 @@ type AdminConfigUpdateDisabledupdate struct {
 	To *int64 `json:"to,omitempty"`
 }
 
-func (o *AdminConfigUpdateDisabledupdate) GetDays() *string {
+func (o *Disabledupdate) GetDays() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Days
 }
 
-func (o *AdminConfigUpdateDisabledupdate) GetFrom() *int64 {
+func (o *Disabledupdate) GetFrom() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.From
 }
 
-func (o *AdminConfigUpdateDisabledupdate) GetTo() *int64 {
+func (o *Disabledupdate) GetTo() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.To
 }
 
-// AdminConfigUpdateSource - Define where the updates will be loaded from. <p> This can be either:
+// Source - Define where the updates will be loaded from. <p> This can be either:
 //   - `internet` -> if selected, will check for new updates every `autoupdateperiod` minutes
 //   - `folder` -> make sure that MetaDefender has access/permission to that folder
 //   - `manual` -> requires manually uploading the packages in Inventory > Modules > Upload package.
-type AdminConfigUpdateSource string
+type Source string
 
 const (
-	AdminConfigUpdateSourceInternet AdminConfigUpdateSource = "internet"
-	AdminConfigUpdateSourceFolder   AdminConfigUpdateSource = "folder"
-	AdminConfigUpdateSourceManual   AdminConfigUpdateSource = "manual"
+	SourceInternet Source = "internet"
+	SourceFolder   Source = "folder"
+	SourceManual   Source = "manual"
 )
 
-func (e AdminConfigUpdateSource) ToPointer() *AdminConfigUpdateSource {
+func (e Source) ToPointer() *Source {
 	return &e
 }
 
-func (e *AdminConfigUpdateSource) UnmarshalJSON(data []byte) error {
+func (e *Source) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -66,10 +66,10 @@ func (e *AdminConfigUpdateSource) UnmarshalJSON(data []byte) error {
 	case "folder":
 		fallthrough
 	case "manual":
-		*e = AdminConfigUpdateSource(v)
+		*e = Source(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for AdminConfigUpdateSource: %v", v)
+		return fmt.Errorf("invalid value for Source: %v", v)
 	}
 }
 
@@ -80,7 +80,7 @@ type AdminConfigUpdate struct {
 	// If you want to clean the pickup folder after the updates have been applied.
 	Deleteafterimport *bool `json:"deleteafterimport,omitempty"`
 	// Lockdown a time interval when the engines are not allowed to update.
-	Disabledupdate []AdminConfigUpdateDisabledupdate `json:"disabledupdate,omitempty"`
+	Disabledupdate []Disabledupdate `json:"disabledupdate,omitempty"`
 	// The folder where MetaDefender will look for the new engine files.
 	Pickupfolder *string `json:"pickupfolder,omitempty"`
 	// Define where the updates will be loaded from. <p> This can be either:
@@ -88,7 +88,7 @@ type AdminConfigUpdate struct {
 	//   * `folder` -> make sure that MetaDefender has access/permission to that folder
 	//   * `manual` -> requires manually uploading the packages in Inventory > Modules > Upload package.
 	//
-	Source *AdminConfigUpdateSource `json:"source,omitempty"`
+	Source *Source `json:"source,omitempty"`
 }
 
 func (o *AdminConfigUpdate) GetAutoupdateperiod() *int64 {
@@ -105,7 +105,7 @@ func (o *AdminConfigUpdate) GetDeleteafterimport() *bool {
 	return o.Deleteafterimport
 }
 
-func (o *AdminConfigUpdate) GetDisabledupdate() []AdminConfigUpdateDisabledupdate {
+func (o *AdminConfigUpdate) GetDisabledupdate() []Disabledupdate {
 	if o == nil {
 		return nil
 	}
@@ -119,7 +119,7 @@ func (o *AdminConfigUpdate) GetPickupfolder() *string {
 	return o.Pickupfolder
 }
 
-func (o *AdminConfigUpdate) GetSource() *AdminConfigUpdateSource {
+func (o *AdminConfigUpdate) GetSource() *Source {
 	if o == nil {
 		return nil
 	}

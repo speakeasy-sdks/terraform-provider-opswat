@@ -7,13 +7,13 @@ import (
 	"fmt"
 )
 
-// ReadyzDatabase - Database connection
-type ReadyzDatabase struct {
+// Database connection
+type Database struct {
 	// Connection status
 	Status *bool `json:"status,omitempty"`
 }
 
-func (o *ReadyzDatabase) GetStatus() *bool {
+func (o *Database) GetStatus() *bool {
 	if o == nil {
 		return nil
 	}
@@ -50,20 +50,20 @@ func (o *ReadyzEngines) GetStatus() *bool {
 	return o.Status
 }
 
-// ReadyzLicenseStatus - License status
-type ReadyzLicenseStatus string
+// Status - License status
+type Status string
 
 const (
-	ReadyzLicenseStatusExpired ReadyzLicenseStatus = "expired"
-	ReadyzLicenseStatusInvalid ReadyzLicenseStatus = "invalid"
-	ReadyzLicenseStatusOk      ReadyzLicenseStatus = "ok"
+	StatusExpired Status = "expired"
+	StatusInvalid Status = "invalid"
+	StatusOk      Status = "ok"
 )
 
-func (e ReadyzLicenseStatus) ToPointer() *ReadyzLicenseStatus {
+func (e Status) ToPointer() *Status {
 	return &e
 }
 
-func (e *ReadyzLicenseStatus) UnmarshalJSON(data []byte) error {
+func (e *Status) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -74,50 +74,50 @@ func (e *ReadyzLicenseStatus) UnmarshalJSON(data []byte) error {
 	case "invalid":
 		fallthrough
 	case "ok":
-		*e = ReadyzLicenseStatus(v)
+		*e = Status(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ReadyzLicenseStatus: %v", v)
+		return fmt.Errorf("invalid value for Status: %v", v)
 	}
 }
 
-// ReadyzLicense - License status
-type ReadyzLicense struct {
+// License status
+type License struct {
 	// License status
-	Status *ReadyzLicenseStatus `json:"status,omitempty"`
+	Status *Status `json:"status,omitempty"`
 }
 
-func (o *ReadyzLicense) GetStatus() *ReadyzLicenseStatus {
+func (o *License) GetStatus() *Status {
 	if o == nil {
 		return nil
 	}
 	return o.Status
 }
 
-// ReadyzNumberActiveAvEngines - Number of active AV engines
-type ReadyzNumberActiveAvEngines struct {
+// NumberActiveAvEngines - Number of active AV engines
+type NumberActiveAvEngines struct {
 	// Status
 	Status *bool `json:"status,omitempty"`
 	// User-defined threshold
 	Threshold *int64 `json:"threshold,omitempty"`
 }
 
-func (o *ReadyzNumberActiveAvEngines) GetStatus() *bool {
+func (o *NumberActiveAvEngines) GetStatus() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.Status
 }
 
-func (o *ReadyzNumberActiveAvEngines) GetThreshold() *int64 {
+func (o *NumberActiveAvEngines) GetThreshold() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Threshold
 }
 
-// ReadyzScanQueue - Scan queue status
-type ReadyzScanQueue struct {
+// ScanQueue - Scan queue status
+type ScanQueue struct {
 	// Maximum slots in scan queue
 	MaxNumberInQueue *int64 `json:"max_number_in_queue,omitempty"`
 	// Current queue status
@@ -128,28 +128,28 @@ type ReadyzScanQueue struct {
 	Threshold *int64 `json:"threshold,omitempty"`
 }
 
-func (o *ReadyzScanQueue) GetMaxNumberInQueue() *int64 {
+func (o *ScanQueue) GetMaxNumberInQueue() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.MaxNumberInQueue
 }
 
-func (o *ReadyzScanQueue) GetNumberInQueue() *int64 {
+func (o *ScanQueue) GetNumberInQueue() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.NumberInQueue
 }
 
-func (o *ReadyzScanQueue) GetStatus() *bool {
+func (o *ScanQueue) GetStatus() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.Status
 }
 
-func (o *ReadyzScanQueue) GetThreshold() *int64 {
+func (o *ScanQueue) GetThreshold() *int64 {
 	if o == nil {
 		return nil
 	}
@@ -158,18 +158,18 @@ func (o *ReadyzScanQueue) GetThreshold() *int64 {
 
 type Readyz struct {
 	// Database connection
-	Database *ReadyzDatabase `json:"database,omitempty"`
+	Database *Database `json:"database,omitempty"`
 	// All available engines according to the activated license
 	Engines []ReadyzEngines `json:"engines,omitempty"`
 	// License status
-	License *ReadyzLicense `json:"license,omitempty"`
+	License *License `json:"license,omitempty"`
 	// Number of active AV engines
-	NumberActiveAvEngines *ReadyzNumberActiveAvEngines `json:"number_active_av_engines,omitempty"`
+	NumberActiveAvEngines *NumberActiveAvEngines `json:"number_active_av_engines,omitempty"`
 	// Scan queue status
-	ScanQueue *ReadyzScanQueue `json:"scan_queue,omitempty"`
+	ScanQueue *ScanQueue `json:"scan_queue,omitempty"`
 }
 
-func (o *Readyz) GetDatabase() *ReadyzDatabase {
+func (o *Readyz) GetDatabase() *Database {
 	if o == nil {
 		return nil
 	}
@@ -183,21 +183,21 @@ func (o *Readyz) GetEngines() []ReadyzEngines {
 	return o.Engines
 }
 
-func (o *Readyz) GetLicense() *ReadyzLicense {
+func (o *Readyz) GetLicense() *License {
 	if o == nil {
 		return nil
 	}
 	return o.License
 }
 
-func (o *Readyz) GetNumberActiveAvEngines() *ReadyzNumberActiveAvEngines {
+func (o *Readyz) GetNumberActiveAvEngines() *NumberActiveAvEngines {
 	if o == nil {
 		return nil
 	}
 	return o.NumberActiveAvEngines
 }
 
-func (o *Readyz) GetScanQueue() *ReadyzScanQueue {
+func (o *Readyz) GetScanQueue() *ScanQueue {
 	if o == nil {
 		return nil
 	}

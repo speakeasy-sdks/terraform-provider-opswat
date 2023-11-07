@@ -39,52 +39,52 @@ func (o *ConfigSanitizedRepoRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigSanitizedRepo500ApplicationJSON - Unexpected event on server
-type ConfigSanitizedRepo500ApplicationJSON struct {
+// ConfigSanitizedRepoConfigResponse500ResponseBody - Unexpected event on server
+type ConfigSanitizedRepoConfigResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigSanitizedRepo500ApplicationJSON) GetErr() *string {
+func (o *ConfigSanitizedRepoConfigResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigSanitizedRepo405ApplicationJSON - The user has no rights for this operation.
-type ConfigSanitizedRepo405ApplicationJSON struct {
+// ConfigSanitizedRepoConfigResponseResponseBody - The user has no rights for this operation.
+type ConfigSanitizedRepoConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigSanitizedRepo405ApplicationJSON) GetErr() *string {
+func (o *ConfigSanitizedRepoConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigSanitizedRepo403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigSanitizedRepo403ApplicationJSON struct {
+// ConfigSanitizedRepoConfigResponseBody - Invalid user information or Not Allowed
+type ConfigSanitizedRepoConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigSanitizedRepo403ApplicationJSON) GetErr() *string {
+func (o *ConfigSanitizedRepoConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigSanitizedRepo200ApplicationJSON - Request processed successfully
-type ConfigSanitizedRepo200ApplicationJSON struct {
+// ConfigSanitizedRepoResponseBody - Request processed successfully
+type ConfigSanitizedRepoResponseBody struct {
 	// The number of minutes of data retention. Anything older than this number will be deleted.
 	Maxage *int64 `json:"maxage,omitempty"`
 }
 
-func (o *ConfigSanitizedRepo200ApplicationJSON) GetMaxage() *int64 {
+func (o *ConfigSanitizedRepoResponseBody) GetMaxage() *int64 {
 	if o == nil {
 		return nil
 	}
@@ -92,20 +92,48 @@ func (o *ConfigSanitizedRepo200ApplicationJSON) GetMaxage() *int64 {
 }
 
 type ConfigSanitizedRepoResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *ConfigSanitizedRepoResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigSanitizedRepoConfigResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *ConfigSanitizedRepoConfigResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigSanitizedRepoConfigResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	ConfigSanitizedRepo200ApplicationJSONObject *ConfigSanitizedRepo200ApplicationJSON
-	// Invalid user information or Not Allowed
-	ConfigSanitizedRepo403ApplicationJSONObject *ConfigSanitizedRepo403ApplicationJSON
-	// The user has no rights for this operation.
-	ConfigSanitizedRepo405ApplicationJSONObject *ConfigSanitizedRepo405ApplicationJSON
-	// Unexpected event on server
-	ConfigSanitizedRepo500ApplicationJSONObject *ConfigSanitizedRepo500ApplicationJSON
+}
+
+func (o *ConfigSanitizedRepoResponse) GetTwoHundredApplicationJSONObject() *ConfigSanitizedRepoResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ConfigSanitizedRepoResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigSanitizedRepoConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigSanitizedRepoResponse) GetFourHundredAndFiveApplicationJSONObject() *ConfigSanitizedRepoConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *ConfigSanitizedRepoResponse) GetFiveHundredApplicationJSONObject() *ConfigSanitizedRepoConfigResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigSanitizedRepoResponse) GetContentType() string {
@@ -127,32 +155,4 @@ func (o *ConfigSanitizedRepoResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigSanitizedRepoResponse) GetConfigSanitizedRepo200ApplicationJSONObject() *ConfigSanitizedRepo200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigSanitizedRepo200ApplicationJSONObject
-}
-
-func (o *ConfigSanitizedRepoResponse) GetConfigSanitizedRepo403ApplicationJSONObject() *ConfigSanitizedRepo403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigSanitizedRepo403ApplicationJSONObject
-}
-
-func (o *ConfigSanitizedRepoResponse) GetConfigSanitizedRepo405ApplicationJSONObject() *ConfigSanitizedRepo405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigSanitizedRepo405ApplicationJSONObject
-}
-
-func (o *ConfigSanitizedRepoResponse) GetConfigSanitizedRepo500ApplicationJSONObject() *ConfigSanitizedRepo500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigSanitizedRepo500ApplicationJSONObject
 }

@@ -28,52 +28,52 @@ func (o *ConfigScanHistoryRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigScanHistory500ApplicationJSON - Unexpected event on server
-type ConfigScanHistory500ApplicationJSON struct {
+// ConfigScanHistoryConfigResponse500ResponseBody - Unexpected event on server
+type ConfigScanHistoryConfigResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigScanHistory500ApplicationJSON) GetErr() *string {
+func (o *ConfigScanHistoryConfigResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigScanHistory405ApplicationJSON - The user has no rights for this operation.
-type ConfigScanHistory405ApplicationJSON struct {
+// ConfigScanHistoryConfigResponseResponseBody - The user has no rights for this operation.
+type ConfigScanHistoryConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigScanHistory405ApplicationJSON) GetErr() *string {
+func (o *ConfigScanHistoryConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigScanHistory403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigScanHistory403ApplicationJSON struct {
+// ConfigScanHistoryConfigResponseBody - Invalid user information or Not Allowed
+type ConfigScanHistoryConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigScanHistory403ApplicationJSON) GetErr() *string {
+func (o *ConfigScanHistoryConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigScanHistory200ApplicationJSON - Request processed successfully
-type ConfigScanHistory200ApplicationJSON struct {
+// ConfigScanHistoryResponseBody - Request processed successfully
+type ConfigScanHistoryResponseBody struct {
 	// The number of hours of data retention. Anything older than this number will be deleted.
 	Cleanuprange *int64 `json:"cleanuprange,omitempty"`
 }
 
-func (o *ConfigScanHistory200ApplicationJSON) GetCleanuprange() *int64 {
+func (o *ConfigScanHistoryResponseBody) GetCleanuprange() *int64 {
 	if o == nil {
 		return nil
 	}
@@ -81,20 +81,48 @@ func (o *ConfigScanHistory200ApplicationJSON) GetCleanuprange() *int64 {
 }
 
 type ConfigScanHistoryResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *ConfigScanHistoryResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigScanHistoryConfigResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *ConfigScanHistoryConfigResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigScanHistoryConfigResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	ConfigScanHistory200ApplicationJSONObject *ConfigScanHistory200ApplicationJSON
-	// Invalid user information or Not Allowed
-	ConfigScanHistory403ApplicationJSONObject *ConfigScanHistory403ApplicationJSON
-	// The user has no rights for this operation.
-	ConfigScanHistory405ApplicationJSONObject *ConfigScanHistory405ApplicationJSON
-	// Unexpected event on server
-	ConfigScanHistory500ApplicationJSONObject *ConfigScanHistory500ApplicationJSON
+}
+
+func (o *ConfigScanHistoryResponse) GetTwoHundredApplicationJSONObject() *ConfigScanHistoryResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ConfigScanHistoryResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigScanHistoryConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigScanHistoryResponse) GetFourHundredAndFiveApplicationJSONObject() *ConfigScanHistoryConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *ConfigScanHistoryResponse) GetFiveHundredApplicationJSONObject() *ConfigScanHistoryConfigResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigScanHistoryResponse) GetContentType() string {
@@ -116,32 +144,4 @@ func (o *ConfigScanHistoryResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigScanHistoryResponse) GetConfigScanHistory200ApplicationJSONObject() *ConfigScanHistory200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigScanHistory200ApplicationJSONObject
-}
-
-func (o *ConfigScanHistoryResponse) GetConfigScanHistory403ApplicationJSONObject() *ConfigScanHistory403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigScanHistory403ApplicationJSONObject
-}
-
-func (o *ConfigScanHistoryResponse) GetConfigScanHistory405ApplicationJSONObject() *ConfigScanHistory405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigScanHistory405ApplicationJSONObject
-}
-
-func (o *ConfigScanHistoryResponse) GetConfigScanHistory500ApplicationJSONObject() *ConfigScanHistory500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigScanHistory500ApplicationJSONObject
 }

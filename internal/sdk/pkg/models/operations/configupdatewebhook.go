@@ -28,39 +28,39 @@ func (o *ConfigUpdateWebhookRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigUpdateWebhook500ApplicationJSON - Unexpected event on server
-type ConfigUpdateWebhook500ApplicationJSON struct {
+// ConfigUpdateWebhookConfigResponseResponseBody - Unexpected event on server
+type ConfigUpdateWebhookConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigUpdateWebhook500ApplicationJSON) GetErr() *string {
+func (o *ConfigUpdateWebhookConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigUpdateWebhook404ApplicationJSON - Requests resource was not found.
-type ConfigUpdateWebhook404ApplicationJSON struct {
+// ConfigUpdateWebhookConfigResponseBody - Requests resource was not found.
+type ConfigUpdateWebhookConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigUpdateWebhook404ApplicationJSON) GetErr() *string {
+func (o *ConfigUpdateWebhookConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigUpdateWebhook403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigUpdateWebhook403ApplicationJSON struct {
+// ConfigUpdateWebhookResponseBody - Invalid user information or Not Allowed
+type ConfigUpdateWebhookResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigUpdateWebhook403ApplicationJSON) GetErr() *string {
+func (o *ConfigUpdateWebhookResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -68,6 +68,12 @@ func (o *ConfigUpdateWebhook403ApplicationJSON) GetErr() *string {
 }
 
 type ConfigUpdateWebhookResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigUpdateWebhookResponseBody
+	// Requests resource was not found.
+	FourHundredAndFourApplicationJSONObject *ConfigUpdateWebhookConfigResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigUpdateWebhookConfigResponseResponseBody
 	// Request processed successfully.
 	AdminConfigWebhook *shared.AdminConfigWebhook
 	// HTTP response content type for this operation
@@ -76,12 +82,27 @@ type ConfigUpdateWebhookResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	ConfigUpdateWebhook403ApplicationJSONObject *ConfigUpdateWebhook403ApplicationJSON
-	// Requests resource was not found.
-	ConfigUpdateWebhook404ApplicationJSONObject *ConfigUpdateWebhook404ApplicationJSON
-	// Unexpected event on server
-	ConfigUpdateWebhook500ApplicationJSONObject *ConfigUpdateWebhook500ApplicationJSON
+}
+
+func (o *ConfigUpdateWebhookResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigUpdateWebhookResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigUpdateWebhookResponse) GetFourHundredAndFourApplicationJSONObject() *ConfigUpdateWebhookConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFourApplicationJSONObject
+}
+
+func (o *ConfigUpdateWebhookResponse) GetFiveHundredApplicationJSONObject() *ConfigUpdateWebhookConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigUpdateWebhookResponse) GetAdminConfigWebhook() *shared.AdminConfigWebhook {
@@ -110,25 +131,4 @@ func (o *ConfigUpdateWebhookResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigUpdateWebhookResponse) GetConfigUpdateWebhook403ApplicationJSONObject() *ConfigUpdateWebhook403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigUpdateWebhook403ApplicationJSONObject
-}
-
-func (o *ConfigUpdateWebhookResponse) GetConfigUpdateWebhook404ApplicationJSONObject() *ConfigUpdateWebhook404ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigUpdateWebhook404ApplicationJSONObject
-}
-
-func (o *ConfigUpdateWebhookResponse) GetConfigUpdateWebhook500ApplicationJSONObject() *ConfigUpdateWebhook500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigUpdateWebhook500ApplicationJSONObject
 }

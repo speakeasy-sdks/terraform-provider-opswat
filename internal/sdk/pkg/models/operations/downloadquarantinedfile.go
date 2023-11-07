@@ -28,39 +28,39 @@ func (o *DownloadQuarantinedFileRequest) GetSha256() string {
 	return o.Sha256
 }
 
-// DownloadQuarantinedFile500ApplicationJSON - Unexpected event on server
-type DownloadQuarantinedFile500ApplicationJSON struct {
+// DownloadQuarantinedFileAnalysisResponseResponseBody - Unexpected event on server
+type DownloadQuarantinedFileAnalysisResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *DownloadQuarantinedFile500ApplicationJSON) GetErr() *string {
+func (o *DownloadQuarantinedFileAnalysisResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// DownloadQuarantinedFile404ApplicationJSON - Requests resource was not found.
-type DownloadQuarantinedFile404ApplicationJSON struct {
+// DownloadQuarantinedFileAnalysisResponseBody - Requests resource was not found.
+type DownloadQuarantinedFileAnalysisResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *DownloadQuarantinedFile404ApplicationJSON) GetErr() *string {
+func (o *DownloadQuarantinedFileAnalysisResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// DownloadQuarantinedFile403ApplicationJSON - Invalid user information or Not Allowed
-type DownloadQuarantinedFile403ApplicationJSON struct {
+// DownloadQuarantinedFileResponseBody - Invalid user information or Not Allowed
+type DownloadQuarantinedFileResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *DownloadQuarantinedFile403ApplicationJSON) GetErr() *string {
+func (o *DownloadQuarantinedFileResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -68,20 +68,48 @@ func (o *DownloadQuarantinedFile403ApplicationJSON) GetErr() *string {
 }
 
 type DownloadQuarantinedFileResponse struct {
+	// Returns the quarantined file.
+	TwoHundredApplicationOctetStreamBytes []byte
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *DownloadQuarantinedFileResponseBody
+	// Requests resource was not found.
+	FourHundredAndFourApplicationJSONObject *DownloadQuarantinedFileAnalysisResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *DownloadQuarantinedFileAnalysisResponseResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Returns the quarantined file.
-	DownloadQuarantinedFile200ApplicationOctetStreamBinaryString []byte
-	// Invalid user information or Not Allowed
-	DownloadQuarantinedFile403ApplicationJSONObject *DownloadQuarantinedFile403ApplicationJSON
-	// Requests resource was not found.
-	DownloadQuarantinedFile404ApplicationJSONObject *DownloadQuarantinedFile404ApplicationJSON
-	// Unexpected event on server
-	DownloadQuarantinedFile500ApplicationJSONObject *DownloadQuarantinedFile500ApplicationJSON
+}
+
+func (o *DownloadQuarantinedFileResponse) GetTwoHundredApplicationOctetStreamBytes() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationOctetStreamBytes
+}
+
+func (o *DownloadQuarantinedFileResponse) GetFourHundredAndThreeApplicationJSONObject() *DownloadQuarantinedFileResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *DownloadQuarantinedFileResponse) GetFourHundredAndFourApplicationJSONObject() *DownloadQuarantinedFileAnalysisResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFourApplicationJSONObject
+}
+
+func (o *DownloadQuarantinedFileResponse) GetFiveHundredApplicationJSONObject() *DownloadQuarantinedFileAnalysisResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *DownloadQuarantinedFileResponse) GetContentType() string {
@@ -103,32 +131,4 @@ func (o *DownloadQuarantinedFileResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *DownloadQuarantinedFileResponse) GetDownloadQuarantinedFile200ApplicationOctetStreamBinaryString() []byte {
-	if o == nil {
-		return nil
-	}
-	return o.DownloadQuarantinedFile200ApplicationOctetStreamBinaryString
-}
-
-func (o *DownloadQuarantinedFileResponse) GetDownloadQuarantinedFile403ApplicationJSONObject() *DownloadQuarantinedFile403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.DownloadQuarantinedFile403ApplicationJSONObject
-}
-
-func (o *DownloadQuarantinedFileResponse) GetDownloadQuarantinedFile404ApplicationJSONObject() *DownloadQuarantinedFile404ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.DownloadQuarantinedFile404ApplicationJSONObject
-}
-
-func (o *DownloadQuarantinedFileResponse) GetDownloadQuarantinedFile500ApplicationJSONObject() *DownloadQuarantinedFile500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.DownloadQuarantinedFile500ApplicationJSONObject
 }

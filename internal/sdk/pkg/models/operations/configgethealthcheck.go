@@ -20,26 +20,26 @@ func (o *ConfigGetHealthCheckRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigGetHealthCheck500ApplicationJSON - Unexpected event on server
-type ConfigGetHealthCheck500ApplicationJSON struct {
+// ConfigGetHealthCheckConfigResponseBody - Unexpected event on server
+type ConfigGetHealthCheckConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigGetHealthCheck500ApplicationJSON) GetErr() *string {
+func (o *ConfigGetHealthCheckConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigGetHealthCheck403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigGetHealthCheck403ApplicationJSON struct {
+// ConfigGetHealthCheckResponseBody - Invalid user information or Not Allowed
+type ConfigGetHealthCheckResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigGetHealthCheck403ApplicationJSON) GetErr() *string {
+func (o *ConfigGetHealthCheckResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -47,6 +47,10 @@ func (o *ConfigGetHealthCheck403ApplicationJSON) GetErr() *string {
 }
 
 type ConfigGetHealthCheckResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigGetHealthCheckResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigGetHealthCheckConfigResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// Health check criterias to determine whether MetaDefender Core server status is healthy or not.
@@ -55,10 +59,20 @@ type ConfigGetHealthCheckResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	ConfigGetHealthCheck403ApplicationJSONObject *ConfigGetHealthCheck403ApplicationJSON
-	// Unexpected event on server
-	ConfigGetHealthCheck500ApplicationJSONObject *ConfigGetHealthCheck500ApplicationJSON
+}
+
+func (o *ConfigGetHealthCheckResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigGetHealthCheckResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigGetHealthCheckResponse) GetFiveHundredApplicationJSONObject() *ConfigGetHealthCheckConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigGetHealthCheckResponse) GetContentType() string {
@@ -87,18 +101,4 @@ func (o *ConfigGetHealthCheckResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigGetHealthCheckResponse) GetConfigGetHealthCheck403ApplicationJSONObject() *ConfigGetHealthCheck403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigGetHealthCheck403ApplicationJSONObject
-}
-
-func (o *ConfigGetHealthCheckResponse) GetConfigGetHealthCheck500ApplicationJSONObject() *ConfigGetHealthCheck500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigGetHealthCheck500ApplicationJSONObject
 }

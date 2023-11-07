@@ -20,26 +20,26 @@ func (o *YaraSourcesGetRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// YaraSourcesGet500ApplicationJSON - Unexpected event on server
-type YaraSourcesGet500ApplicationJSON struct {
+// YaraSourcesGetYaraResponseBody - Unexpected event on server
+type YaraSourcesGetYaraResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *YaraSourcesGet500ApplicationJSON) GetErr() *string {
+func (o *YaraSourcesGetYaraResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// YaraSourcesGet403ApplicationJSON - Invalid user information or Not Allowed
-type YaraSourcesGet403ApplicationJSON struct {
+// YaraSourcesGetResponseBody - Invalid user information or Not Allowed
+type YaraSourcesGetResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *YaraSourcesGet403ApplicationJSON) GetErr() *string {
+func (o *YaraSourcesGetResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -47,6 +47,10 @@ func (o *YaraSourcesGet403ApplicationJSON) GetErr() *string {
 }
 
 type YaraSourcesGetResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *YaraSourcesGetResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *YaraSourcesGetYaraResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -55,10 +59,20 @@ type YaraSourcesGetResponse struct {
 	RawResponse *http.Response
 	// A list of Yara Engine sources.
 	YaraSourcesObject *shared.YaraSourcesObject
-	// Invalid user information or Not Allowed
-	YaraSourcesGet403ApplicationJSONObject *YaraSourcesGet403ApplicationJSON
-	// Unexpected event on server
-	YaraSourcesGet500ApplicationJSONObject *YaraSourcesGet500ApplicationJSON
+}
+
+func (o *YaraSourcesGetResponse) GetFourHundredAndThreeApplicationJSONObject() *YaraSourcesGetResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *YaraSourcesGetResponse) GetFiveHundredApplicationJSONObject() *YaraSourcesGetYaraResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *YaraSourcesGetResponse) GetContentType() string {
@@ -87,18 +101,4 @@ func (o *YaraSourcesGetResponse) GetYaraSourcesObject() *shared.YaraSourcesObjec
 		return nil
 	}
 	return o.YaraSourcesObject
-}
-
-func (o *YaraSourcesGetResponse) GetYaraSourcesGet403ApplicationJSONObject() *YaraSourcesGet403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.YaraSourcesGet403ApplicationJSONObject
-}
-
-func (o *YaraSourcesGetResponse) GetYaraSourcesGet500ApplicationJSONObject() *YaraSourcesGet500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.YaraSourcesGet500ApplicationJSONObject
 }

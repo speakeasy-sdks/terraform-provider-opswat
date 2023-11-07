@@ -29,39 +29,39 @@ func (o *ConfigDeleteSkipHashRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigDeleteSkipHash500ApplicationJSON - Unexpected event on server
-type ConfigDeleteSkipHash500ApplicationJSON struct {
+// ConfigDeleteSkipHashConfigResponseResponseBody - Unexpected event on server
+type ConfigDeleteSkipHashConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigDeleteSkipHash500ApplicationJSON) GetErr() *string {
+func (o *ConfigDeleteSkipHashConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigDeleteSkipHash404ApplicationJSON - Requests resource was not found.
-type ConfigDeleteSkipHash404ApplicationJSON struct {
+// ConfigDeleteSkipHashConfigResponseBody - Requests resource was not found.
+type ConfigDeleteSkipHashConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigDeleteSkipHash404ApplicationJSON) GetErr() *string {
+func (o *ConfigDeleteSkipHashConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigDeleteSkipHash403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigDeleteSkipHash403ApplicationJSON struct {
+// ConfigDeleteSkipHashResponseBody - Invalid user information or Not Allowed
+type ConfigDeleteSkipHashResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigDeleteSkipHash403ApplicationJSON) GetErr() *string {
+func (o *ConfigDeleteSkipHashResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -69,6 +69,12 @@ func (o *ConfigDeleteSkipHash403ApplicationJSON) GetErr() *string {
 }
 
 type ConfigDeleteSkipHashResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigDeleteSkipHashResponseBody
+	// Requests resource was not found.
+	FourHundredAndFourApplicationJSONObject *ConfigDeleteSkipHashConfigResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigDeleteSkipHashConfigResponseResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// A list of all skip/white/black-listed hashes.
@@ -77,12 +83,27 @@ type ConfigDeleteSkipHashResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	ConfigDeleteSkipHash403ApplicationJSONObject *ConfigDeleteSkipHash403ApplicationJSON
-	// Requests resource was not found.
-	ConfigDeleteSkipHash404ApplicationJSONObject *ConfigDeleteSkipHash404ApplicationJSON
-	// Unexpected event on server
-	ConfigDeleteSkipHash500ApplicationJSONObject *ConfigDeleteSkipHash500ApplicationJSON
+}
+
+func (o *ConfigDeleteSkipHashResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigDeleteSkipHashResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigDeleteSkipHashResponse) GetFourHundredAndFourApplicationJSONObject() *ConfigDeleteSkipHashConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFourApplicationJSONObject
+}
+
+func (o *ConfigDeleteSkipHashResponse) GetFiveHundredApplicationJSONObject() *ConfigDeleteSkipHashConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigDeleteSkipHashResponse) GetContentType() string {
@@ -111,25 +132,4 @@ func (o *ConfigDeleteSkipHashResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigDeleteSkipHashResponse) GetConfigDeleteSkipHash403ApplicationJSONObject() *ConfigDeleteSkipHash403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigDeleteSkipHash403ApplicationJSONObject
-}
-
-func (o *ConfigDeleteSkipHashResponse) GetConfigDeleteSkipHash404ApplicationJSONObject() *ConfigDeleteSkipHash404ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigDeleteSkipHash404ApplicationJSONObject
-}
-
-func (o *ConfigDeleteSkipHashResponse) GetConfigDeleteSkipHash500ApplicationJSONObject() *ConfigDeleteSkipHash500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigDeleteSkipHash500ApplicationJSONObject
 }

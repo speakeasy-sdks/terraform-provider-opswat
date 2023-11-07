@@ -28,51 +28,51 @@ func (o *LicenseActivationRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// LicenseActivation500ApplicationJSON - Unexpected event on server
-type LicenseActivation500ApplicationJSON struct {
+// LicenseActivationLicenseResponse500ResponseBody - Unexpected event on server
+type LicenseActivationLicenseResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *LicenseActivation500ApplicationJSON) GetErr() *string {
+func (o *LicenseActivationLicenseResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// LicenseActivation403ApplicationJSON - Invalid user information or Not Allowed
-type LicenseActivation403ApplicationJSON struct {
+// LicenseActivationLicenseResponseResponseBody - Invalid user information or Not Allowed
+type LicenseActivationLicenseResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *LicenseActivation403ApplicationJSON) GetErr() *string {
+func (o *LicenseActivationLicenseResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// LicenseActivation400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type LicenseActivation400ApplicationJSON struct {
+// LicenseActivationLicenseResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type LicenseActivationLicenseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *LicenseActivation400ApplicationJSON) GetErr() *string {
+func (o *LicenseActivationLicenseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// LicenseActivation200ApplicationJSON - Request processed successfully
-type LicenseActivation200ApplicationJSON struct {
+// LicenseActivationResponseBody - Request processed successfully
+type LicenseActivationResponseBody struct {
 	Success *bool `json:"success,omitempty"`
 }
 
-func (o *LicenseActivation200ApplicationJSON) GetSuccess() *bool {
+func (o *LicenseActivationResponseBody) GetSuccess() *bool {
 	if o == nil {
 		return nil
 	}
@@ -80,20 +80,48 @@ func (o *LicenseActivation200ApplicationJSON) GetSuccess() *bool {
 }
 
 type LicenseActivationResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *LicenseActivationResponseBody
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *LicenseActivationLicenseResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *LicenseActivationLicenseResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *LicenseActivationLicenseResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	LicenseActivation200ApplicationJSONObject *LicenseActivation200ApplicationJSON
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	LicenseActivation400ApplicationJSONObject *LicenseActivation400ApplicationJSON
-	// Invalid user information or Not Allowed
-	LicenseActivation403ApplicationJSONObject *LicenseActivation403ApplicationJSON
-	// Unexpected event on server
-	LicenseActivation500ApplicationJSONObject *LicenseActivation500ApplicationJSON
+}
+
+func (o *LicenseActivationResponse) GetTwoHundredApplicationJSONObject() *LicenseActivationResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *LicenseActivationResponse) GetFourHundredApplicationJSONObject() *LicenseActivationLicenseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *LicenseActivationResponse) GetFourHundredAndThreeApplicationJSONObject() *LicenseActivationLicenseResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *LicenseActivationResponse) GetFiveHundredApplicationJSONObject() *LicenseActivationLicenseResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *LicenseActivationResponse) GetContentType() string {
@@ -115,32 +143,4 @@ func (o *LicenseActivationResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *LicenseActivationResponse) GetLicenseActivation200ApplicationJSONObject() *LicenseActivation200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseActivation200ApplicationJSONObject
-}
-
-func (o *LicenseActivationResponse) GetLicenseActivation400ApplicationJSONObject() *LicenseActivation400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseActivation400ApplicationJSONObject
-}
-
-func (o *LicenseActivationResponse) GetLicenseActivation403ApplicationJSONObject() *LicenseActivation403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseActivation403ApplicationJSONObject
-}
-
-func (o *LicenseActivationResponse) GetLicenseActivation500ApplicationJSONObject() *LicenseActivation500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseActivation500ApplicationJSONObject
 }

@@ -38,55 +38,55 @@ func (o *AdminImportV2Request) GetPassword() *string {
 	return o.Password
 }
 
-// AdminImportV2500ApplicationJSON - Unexpected event on server
-type AdminImportV2500ApplicationJSON struct {
+// AdminImportV2AdminResponse500ResponseBody - Unexpected event on server
+type AdminImportV2AdminResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminImportV2500ApplicationJSON) GetErr() *string {
+func (o *AdminImportV2AdminResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminImportV2405ApplicationJSON - The user has no rights for this operation.
-type AdminImportV2405ApplicationJSON struct {
+// AdminImportV2AdminResponse405ResponseBody - The user has no rights for this operation.
+type AdminImportV2AdminResponse405ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminImportV2405ApplicationJSON) GetErr() *string {
+func (o *AdminImportV2AdminResponse405ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminImportV2403ApplicationJSON - Invalid user information or Not Allowed
-type AdminImportV2403ApplicationJSON struct {
+// AdminImportV2AdminResponseResponseBody - Invalid user information or Not Allowed
+type AdminImportV2AdminResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminImportV2403ApplicationJSON) GetErr() *string {
+func (o *AdminImportV2AdminResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminImportV2304ApplicationJSON - The configuration has not changed
-type AdminImportV2304ApplicationJSON struct {
+// AdminImportV2AdminResponseBody - The configuration has not changed
+type AdminImportV2AdminResponseBody struct {
 }
 
-// AdminImportV2200ApplicationJSON - Request processed successfully
-type AdminImportV2200ApplicationJSON struct {
+// AdminImportV2ResponseBody - Request processed successfully
+type AdminImportV2ResponseBody struct {
 	Result *string `json:"result,omitempty"`
 }
 
-func (o *AdminImportV2200ApplicationJSON) GetResult() *string {
+func (o *AdminImportV2ResponseBody) GetResult() *string {
 	if o == nil {
 		return nil
 	}
@@ -94,24 +94,66 @@ func (o *AdminImportV2200ApplicationJSON) GetResult() *string {
 }
 
 type AdminImportV2Response struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *AdminImportV2ResponseBody
+	// The configuration has not changed
+	ThreeHundredAndFourApplicationJSONObject *AdminImportV2AdminResponseBody
+	// Bad request
+	FourHundredApplicationJSONRes *string
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *AdminImportV2AdminResponseResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *AdminImportV2AdminResponse405ResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *AdminImportV2AdminResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	AdminImportV2200ApplicationJSONObject *AdminImportV2200ApplicationJSON
-	// The configuration has not changed
-	AdminImportV2304ApplicationJSONObject *AdminImportV2304ApplicationJSON
-	// Bad request
-	AdminImportV2400ApplicationJSONJSONString *string
-	// Invalid user information or Not Allowed
-	AdminImportV2403ApplicationJSONObject *AdminImportV2403ApplicationJSON
-	// The user has no rights for this operation.
-	AdminImportV2405ApplicationJSONObject *AdminImportV2405ApplicationJSON
-	// Unexpected event on server
-	AdminImportV2500ApplicationJSONObject *AdminImportV2500ApplicationJSON
+}
+
+func (o *AdminImportV2Response) GetTwoHundredApplicationJSONObject() *AdminImportV2ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *AdminImportV2Response) GetThreeHundredAndFourApplicationJSONObject() *AdminImportV2AdminResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.ThreeHundredAndFourApplicationJSONObject
+}
+
+func (o *AdminImportV2Response) GetFourHundredApplicationJSONRes() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONRes
+}
+
+func (o *AdminImportV2Response) GetFourHundredAndThreeApplicationJSONObject() *AdminImportV2AdminResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *AdminImportV2Response) GetFourHundredAndFiveApplicationJSONObject() *AdminImportV2AdminResponse405ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *AdminImportV2Response) GetFiveHundredApplicationJSONObject() *AdminImportV2AdminResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *AdminImportV2Response) GetContentType() string {
@@ -133,46 +175,4 @@ func (o *AdminImportV2Response) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *AdminImportV2Response) GetAdminImportV2200ApplicationJSONObject() *AdminImportV2200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImportV2200ApplicationJSONObject
-}
-
-func (o *AdminImportV2Response) GetAdminImportV2304ApplicationJSONObject() *AdminImportV2304ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImportV2304ApplicationJSONObject
-}
-
-func (o *AdminImportV2Response) GetAdminImportV2400ApplicationJSONJSONString() *string {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImportV2400ApplicationJSONJSONString
-}
-
-func (o *AdminImportV2Response) GetAdminImportV2403ApplicationJSONObject() *AdminImportV2403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImportV2403ApplicationJSONObject
-}
-
-func (o *AdminImportV2Response) GetAdminImportV2405ApplicationJSONObject() *AdminImportV2405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImportV2405ApplicationJSONObject
-}
-
-func (o *AdminImportV2Response) GetAdminImportV2500ApplicationJSONObject() *AdminImportV2500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImportV2500ApplicationJSONObject
 }

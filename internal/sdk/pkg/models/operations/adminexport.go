@@ -19,51 +19,51 @@ func (o *AdminExportRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// AdminExport500ApplicationJSON - Failed to export configuration
-type AdminExport500ApplicationJSON struct {
+// AdminExportAdminResponse500ResponseBody - Failed to export configuration
+type AdminExportAdminResponse500ResponseBody struct {
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminExport500ApplicationJSON) GetErr() *string {
+func (o *AdminExportAdminResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminExport405ApplicationJSON - The user has no rights for this operation.
-type AdminExport405ApplicationJSON struct {
+// AdminExportAdminResponseResponseBody - The user has no rights for this operation.
+type AdminExportAdminResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminExport405ApplicationJSON) GetErr() *string {
+func (o *AdminExportAdminResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminExport403ApplicationJSON - Invalid user information or Not Allowed
-type AdminExport403ApplicationJSON struct {
+// AdminExportAdminResponseBody - Invalid user information or Not Allowed
+type AdminExportAdminResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminExport403ApplicationJSON) GetErr() *string {
+func (o *AdminExportAdminResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminExport400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type AdminExport400ApplicationJSON struct {
+// AdminExportResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type AdminExportResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminExport400ApplicationJSON) GetErr() *string {
+func (o *AdminExportResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -71,22 +71,57 @@ func (o *AdminExport400ApplicationJSON) GetErr() *string {
 }
 
 type AdminExportResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONRes *string
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *AdminExportResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *AdminExportAdminResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *AdminExportAdminResponseResponseBody
+	// Failed to export configuration
+	FiveHundredApplicationJSONObject *AdminExportAdminResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	AdminExport200ApplicationJSONFileString *string
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	AdminExport400ApplicationJSONObject *AdminExport400ApplicationJSON
-	// Invalid user information or Not Allowed
-	AdminExport403ApplicationJSONObject *AdminExport403ApplicationJSON
-	// The user has no rights for this operation.
-	AdminExport405ApplicationJSONObject *AdminExport405ApplicationJSON
-	// Failed to export configuration
-	AdminExport500ApplicationJSONObject *AdminExport500ApplicationJSON
+}
+
+func (o *AdminExportResponse) GetTwoHundredApplicationJSONRes() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONRes
+}
+
+func (o *AdminExportResponse) GetFourHundredApplicationJSONObject() *AdminExportResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *AdminExportResponse) GetFourHundredAndThreeApplicationJSONObject() *AdminExportAdminResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *AdminExportResponse) GetFourHundredAndFiveApplicationJSONObject() *AdminExportAdminResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *AdminExportResponse) GetFiveHundredApplicationJSONObject() *AdminExportAdminResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *AdminExportResponse) GetContentType() string {
@@ -108,39 +143,4 @@ func (o *AdminExportResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *AdminExportResponse) GetAdminExport200ApplicationJSONFileString() *string {
-	if o == nil {
-		return nil
-	}
-	return o.AdminExport200ApplicationJSONFileString
-}
-
-func (o *AdminExportResponse) GetAdminExport400ApplicationJSONObject() *AdminExport400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminExport400ApplicationJSONObject
-}
-
-func (o *AdminExportResponse) GetAdminExport403ApplicationJSONObject() *AdminExport403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminExport403ApplicationJSONObject
-}
-
-func (o *AdminExportResponse) GetAdminExport405ApplicationJSONObject() *AdminExport405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminExport405ApplicationJSONObject
-}
-
-func (o *AdminExportResponse) GetAdminExport500ApplicationJSONObject() *AdminExport500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminExport500ApplicationJSONObject
 }

@@ -7,26 +7,26 @@ import (
 	"fmt"
 )
 
-type FileInformationTypeCategory string
+type TypeCategory string
 
 const (
-	FileInformationTypeCategoryA FileInformationTypeCategory = "A"
-	FileInformationTypeCategoryD FileInformationTypeCategory = "D"
-	FileInformationTypeCategoryE FileInformationTypeCategory = "E"
-	FileInformationTypeCategoryG FileInformationTypeCategory = "G"
-	FileInformationTypeCategoryI FileInformationTypeCategory = "I"
-	FileInformationTypeCategoryM FileInformationTypeCategory = "M"
-	FileInformationTypeCategoryP FileInformationTypeCategory = "P"
-	FileInformationTypeCategoryT FileInformationTypeCategory = "T"
-	FileInformationTypeCategoryZ FileInformationTypeCategory = "Z"
-	FileInformationTypeCategoryO FileInformationTypeCategory = "O"
+	TypeCategoryA TypeCategory = "A"
+	TypeCategoryD TypeCategory = "D"
+	TypeCategoryE TypeCategory = "E"
+	TypeCategoryG TypeCategory = "G"
+	TypeCategoryI TypeCategory = "I"
+	TypeCategoryM TypeCategory = "M"
+	TypeCategoryP TypeCategory = "P"
+	TypeCategoryT TypeCategory = "T"
+	TypeCategoryZ TypeCategory = "Z"
+	TypeCategoryO TypeCategory = "O"
 )
 
-func (e FileInformationTypeCategory) ToPointer() *FileInformationTypeCategory {
+func (e TypeCategory) ToPointer() *TypeCategory {
 	return &e
 }
 
-func (e *FileInformationTypeCategory) UnmarshalJSON(data []byte) error {
+func (e *TypeCategory) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -51,10 +51,10 @@ func (e *FileInformationTypeCategory) UnmarshalJSON(data []byte) error {
 	case "Z":
 		fallthrough
 	case "O":
-		*e = FileInformationTypeCategory(v)
+		*e = TypeCategory(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FileInformationTypeCategory: %v", v)
+		return fmt.Errorf("invalid value for TypeCategory: %v", v)
 	}
 }
 
@@ -94,7 +94,7 @@ type FileInformation struct {
 	//   * `Z` - Mail messages
 	//   * `O` - Other (anything that is not recognized as one of the above)
 	//
-	TypeCategory []FileInformationTypeCategory `json:"type_category,omitempty"`
+	TypeCategory []TypeCategory `json:"type_category,omitempty"`
 	// Total time elapsed for upload process (in milliseconds).
 	UploadTime *int64 `json:"upload_time,omitempty"`
 	// The timestamp when upload progress finished (all bytes received) (in milliseconds)
@@ -164,7 +164,7 @@ func (o *FileInformation) GetSignerInfos() []SignerInfo {
 	return o.SignerInfos
 }
 
-func (o *FileInformation) GetTypeCategory() []FileInformationTypeCategory {
+func (o *FileInformation) GetTypeCategory() []TypeCategory {
 	if o == nil {
 		return nil
 	}

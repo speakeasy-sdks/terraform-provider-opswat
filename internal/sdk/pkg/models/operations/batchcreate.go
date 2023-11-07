@@ -51,39 +51,39 @@ func (o *BatchCreateRequest) GetUserAgent() *string {
 	return o.UserAgent
 }
 
-// BatchCreate500ApplicationJSON - Unexpected event on server
-type BatchCreate500ApplicationJSON struct {
+// BatchCreateBatchResponseResponseBody - Unexpected event on server
+type BatchCreateBatchResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *BatchCreate500ApplicationJSON) GetErr() *string {
+func (o *BatchCreateBatchResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// BatchCreate403ApplicationJSON - Invalid user information or Not Allowed
-type BatchCreate403ApplicationJSON struct {
+// BatchCreateBatchResponseBody - Invalid user information or Not Allowed
+type BatchCreateBatchResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *BatchCreate403ApplicationJSON) GetErr() *string {
+func (o *BatchCreateBatchResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// BatchCreate400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type BatchCreate400ApplicationJSON struct {
+// BatchCreateResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type BatchCreateResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *BatchCreate400ApplicationJSON) GetErr() *string {
+func (o *BatchCreateResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -91,6 +91,12 @@ func (o *BatchCreate400ApplicationJSON) GetErr() *string {
 }
 
 type BatchCreateResponse struct {
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *BatchCreateResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *BatchCreateBatchResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *BatchCreateBatchResponseResponseBody
 	// Batch created successfully.
 	BatchID *shared.BatchID
 	// HTTP response content type for this operation
@@ -99,12 +105,27 @@ type BatchCreateResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	BatchCreate400ApplicationJSONObject *BatchCreate400ApplicationJSON
-	// Invalid user information or Not Allowed
-	BatchCreate403ApplicationJSONObject *BatchCreate403ApplicationJSON
-	// Unexpected event on server
-	BatchCreate500ApplicationJSONObject *BatchCreate500ApplicationJSON
+}
+
+func (o *BatchCreateResponse) GetFourHundredApplicationJSONObject() *BatchCreateResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *BatchCreateResponse) GetFourHundredAndThreeApplicationJSONObject() *BatchCreateBatchResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *BatchCreateResponse) GetFiveHundredApplicationJSONObject() *BatchCreateBatchResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *BatchCreateResponse) GetBatchID() *shared.BatchID {
@@ -133,25 +154,4 @@ func (o *BatchCreateResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *BatchCreateResponse) GetBatchCreate400ApplicationJSONObject() *BatchCreate400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchCreate400ApplicationJSONObject
-}
-
-func (o *BatchCreateResponse) GetBatchCreate403ApplicationJSONObject() *BatchCreate403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchCreate403ApplicationJSONObject
-}
-
-func (o *BatchCreateResponse) GetBatchCreate500ApplicationJSONObject() *BatchCreate500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchCreate500ApplicationJSONObject
 }

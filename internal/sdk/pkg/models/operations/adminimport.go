@@ -27,68 +27,68 @@ func (o *AdminImportRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// AdminImport500ApplicationJSON - Unexpected event on server
-type AdminImport500ApplicationJSON struct {
+// AdminImportAdminResponse500ResponseBody - Unexpected event on server
+type AdminImportAdminResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminImport500ApplicationJSON) GetErr() *string {
+func (o *AdminImportAdminResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminImport405ApplicationJSON - The user has no rights for this operation.
-type AdminImport405ApplicationJSON struct {
+// AdminImportAdminResponse405ResponseBody - The user has no rights for this operation.
+type AdminImportAdminResponse405ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminImport405ApplicationJSON) GetErr() *string {
+func (o *AdminImportAdminResponse405ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminImport403ApplicationJSON - Invalid user information or Not Allowed
-type AdminImport403ApplicationJSON struct {
+// AdminImportAdminResponse403ResponseBody - Invalid user information or Not Allowed
+type AdminImportAdminResponse403ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminImport403ApplicationJSON) GetErr() *string {
+func (o *AdminImportAdminResponse403ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminImport400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type AdminImport400ApplicationJSON struct {
+// AdminImportAdminResponseResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type AdminImportAdminResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminImport400ApplicationJSON) GetErr() *string {
+func (o *AdminImportAdminResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminImport304ApplicationJSON - The configuration has not changed
-type AdminImport304ApplicationJSON struct {
+// AdminImportAdminResponseBody - The configuration has not changed
+type AdminImportAdminResponseBody struct {
 }
 
-// AdminImport200ApplicationJSON - Request processed successfully
-type AdminImport200ApplicationJSON struct {
+// AdminImportResponseBody - Request processed successfully
+type AdminImportResponseBody struct {
 	Result *string `json:"result,omitempty"`
 }
 
-func (o *AdminImport200ApplicationJSON) GetResult() *string {
+func (o *AdminImportResponseBody) GetResult() *string {
 	if o == nil {
 		return nil
 	}
@@ -96,24 +96,66 @@ func (o *AdminImport200ApplicationJSON) GetResult() *string {
 }
 
 type AdminImportResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *AdminImportResponseBody
+	// The configuration has not changed
+	ThreeHundredAndFourApplicationJSONObject *AdminImportAdminResponseBody
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *AdminImportAdminResponseResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *AdminImportAdminResponse403ResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *AdminImportAdminResponse405ResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *AdminImportAdminResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	AdminImport200ApplicationJSONObject *AdminImport200ApplicationJSON
-	// The configuration has not changed
-	AdminImport304ApplicationJSONObject *AdminImport304ApplicationJSON
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	AdminImport400ApplicationJSONObject *AdminImport400ApplicationJSON
-	// Invalid user information or Not Allowed
-	AdminImport403ApplicationJSONObject *AdminImport403ApplicationJSON
-	// The user has no rights for this operation.
-	AdminImport405ApplicationJSONObject *AdminImport405ApplicationJSON
-	// Unexpected event on server
-	AdminImport500ApplicationJSONObject *AdminImport500ApplicationJSON
+}
+
+func (o *AdminImportResponse) GetTwoHundredApplicationJSONObject() *AdminImportResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *AdminImportResponse) GetThreeHundredAndFourApplicationJSONObject() *AdminImportAdminResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.ThreeHundredAndFourApplicationJSONObject
+}
+
+func (o *AdminImportResponse) GetFourHundredApplicationJSONObject() *AdminImportAdminResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *AdminImportResponse) GetFourHundredAndThreeApplicationJSONObject() *AdminImportAdminResponse403ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *AdminImportResponse) GetFourHundredAndFiveApplicationJSONObject() *AdminImportAdminResponse405ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *AdminImportResponse) GetFiveHundredApplicationJSONObject() *AdminImportAdminResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *AdminImportResponse) GetContentType() string {
@@ -135,46 +177,4 @@ func (o *AdminImportResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *AdminImportResponse) GetAdminImport200ApplicationJSONObject() *AdminImport200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImport200ApplicationJSONObject
-}
-
-func (o *AdminImportResponse) GetAdminImport304ApplicationJSONObject() *AdminImport304ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImport304ApplicationJSONObject
-}
-
-func (o *AdminImportResponse) GetAdminImport400ApplicationJSONObject() *AdminImport400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImport400ApplicationJSONObject
-}
-
-func (o *AdminImportResponse) GetAdminImport403ApplicationJSONObject() *AdminImport403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImport403ApplicationJSONObject
-}
-
-func (o *AdminImportResponse) GetAdminImport405ApplicationJSONObject() *AdminImport405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImport405ApplicationJSONObject
-}
-
-func (o *AdminImportResponse) GetAdminImport500ApplicationJSONObject() *AdminImport500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminImport500ApplicationJSONObject
 }

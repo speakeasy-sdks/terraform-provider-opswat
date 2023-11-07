@@ -13,20 +13,20 @@ import (
 	"net/http"
 )
 
-// engines - Enable/disable or pin/unpin the engines through API.
-type engines struct {
+// Engines - Enable/disable or pin/unpin the engines through API.
+type Engines struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newEngines(sdkConfig sdkConfiguration) *engines {
-	return &engines{
+func newEngines(sdkConfig sdkConfiguration) *Engines {
+	return &Engines{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // EngineConfigGet - Retrieve engine configuration
 // Retrieve a list of advanced configuration of an engine.
-func (s *engines) EngineConfigGet(ctx context.Context, request operations.EngineConfigGetRequest) (*operations.EngineConfigGetResponse, error) {
+func (s *Engines) EngineConfigGet(ctx context.Context, request operations.EngineConfigGetRequest) (*operations.EngineConfigGetResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/admin/engine/{engineId}/config", request, nil)
 	if err != nil {
@@ -70,60 +70,60 @@ func (s *engines) EngineConfigGet(ctx context.Context, request operations.Engine
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineConfigGet200ApplicationJSON
+			var out operations.EngineConfigGetResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineConfigGet200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineConfigGet400ApplicationJSON
+			var out operations.EngineConfigGetEnginesResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineConfigGet400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineConfigGet403ApplicationJSON
+			var out operations.EngineConfigGetEnginesResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineConfigGet403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineConfigGet405ApplicationJSON
+			var out operations.EngineConfigGetEnginesResponse405ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineConfigGet405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineConfigGet500ApplicationJSON
+			var out operations.EngineConfigGetEnginesResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineConfigGet500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -134,7 +134,7 @@ func (s *engines) EngineConfigGet(ctx context.Context, request operations.Engine
 
 // EngineConfigPut - Update engine configuration
 // Modifying advanced configurations of an engine.
-func (s *engines) EngineConfigPut(ctx context.Context, request operations.EngineConfigPutRequest) (*operations.EngineConfigPutResponse, error) {
+func (s *Engines) EngineConfigPut(ctx context.Context, request operations.EngineConfigPutRequest) (*operations.EngineConfigPutResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/admin/engine/{engineId}/config", request, nil)
 	if err != nil {
@@ -178,60 +178,60 @@ func (s *engines) EngineConfigPut(ctx context.Context, request operations.Engine
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineConfigPut200ApplicationJSON
+			var out operations.EngineConfigPutResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineConfigPut200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineConfigPut400ApplicationJSON
+			var out operations.EngineConfigPutEnginesResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineConfigPut400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineConfigPut403ApplicationJSON
+			var out operations.EngineConfigPutEnginesResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineConfigPut403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineConfigPut405ApplicationJSON
+			var out operations.EngineConfigPutEnginesResponse405ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineConfigPut405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineConfigPut500ApplicationJSON
+			var out operations.EngineConfigPutEnginesResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineConfigPut500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -242,7 +242,7 @@ func (s *engines) EngineConfigPut(ctx context.Context, request operations.Engine
 
 // EngineDisable - Disable engines
 // Disable to use the selected engines on the nodes.
-func (s *engines) EngineDisable(ctx context.Context, request operations.EngineDisableRequest) (*operations.EngineDisableResponse, error) {
+func (s *Engines) EngineDisable(ctx context.Context, request operations.EngineDisableRequest) (*operations.EngineDisableResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/admin/engine/{engineId}/disable", request, nil)
 	if err != nil {
@@ -286,60 +286,60 @@ func (s *engines) EngineDisable(ctx context.Context, request operations.EngineDi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineDisable200ApplicationJSON
+			var out operations.EngineDisableResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineDisable200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineDisable400ApplicationJSON
+			var out operations.EngineDisableEnginesResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineDisable400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineDisable403ApplicationJSON
+			var out operations.EngineDisableEnginesResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineDisable403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineDisable405ApplicationJSON
+			var out operations.EngineDisableEnginesResponse405ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineDisable405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineDisable500ApplicationJSON
+			var out operations.EngineDisableEnginesResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineDisable500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -350,7 +350,7 @@ func (s *engines) EngineDisable(ctx context.Context, request operations.EngineDi
 
 // EngineEnable - Enable engines
 // Enable to use the selected engine on the nodes.
-func (s *engines) EngineEnable(ctx context.Context, request operations.EngineEnableRequest) (*operations.EngineEnableResponse, error) {
+func (s *Engines) EngineEnable(ctx context.Context, request operations.EngineEnableRequest) (*operations.EngineEnableResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/admin/engine/{engineId}/enable", request, nil)
 	if err != nil {
@@ -394,60 +394,60 @@ func (s *engines) EngineEnable(ctx context.Context, request operations.EngineEna
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineEnable200ApplicationJSON
+			var out operations.EngineEnableResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineEnable200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineEnable400ApplicationJSON
+			var out operations.EngineEnableEnginesResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineEnable400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineEnable403ApplicationJSON
+			var out operations.EngineEnableEnginesResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineEnable403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineEnable405ApplicationJSON
+			var out operations.EngineEnableEnginesResponse405ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineEnable405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineEnable500ApplicationJSON
+			var out operations.EngineEnableEnginesResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineEnable500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -458,7 +458,7 @@ func (s *engines) EngineEnable(ctx context.Context, request operations.EngineEna
 
 // EnginePin - Pin engine to prevent auto-updates
 // Pin engines to prevent applying automatic updates on them. Manual updates still can be applied.
-func (s *engines) EnginePin(ctx context.Context, request operations.EnginePinRequest) (*operations.EnginePinResponse, error) {
+func (s *Engines) EnginePin(ctx context.Context, request operations.EnginePinRequest) (*operations.EnginePinResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/admin/engine/{engineId}/pin", request, nil)
 	if err != nil {
@@ -502,60 +502,60 @@ func (s *engines) EnginePin(ctx context.Context, request operations.EnginePinReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EnginePin200ApplicationJSON
+			var out operations.EnginePinResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EnginePin200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EnginePin400ApplicationJSON
+			var out operations.EnginePinEnginesResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EnginePin400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EnginePin403ApplicationJSON
+			var out operations.EnginePinEnginesResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EnginePin403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EnginePin405ApplicationJSON
+			var out operations.EnginePinEnginesResponse405ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EnginePin405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EnginePin500ApplicationJSON
+			var out operations.EnginePinEnginesResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EnginePin500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -566,7 +566,7 @@ func (s *engines) EnginePin(ctx context.Context, request operations.EnginePinReq
 
 // EngineUnpin - Unpin engine to prevent auto-updates
 // Unpin engines so automatic updates will be applied on them.
-func (s *engines) EngineUnpin(ctx context.Context, request operations.EngineUnpinRequest) (*operations.EngineUnpinResponse, error) {
+func (s *Engines) EngineUnpin(ctx context.Context, request operations.EngineUnpinRequest) (*operations.EngineUnpinResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/admin/engine/{engineId}/unpin", request, nil)
 	if err != nil {
@@ -610,60 +610,60 @@ func (s *engines) EngineUnpin(ctx context.Context, request operations.EngineUnpi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineUnpin200ApplicationJSON
+			var out operations.EngineUnpinResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineUnpin200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineUnpin400ApplicationJSON
+			var out operations.EngineUnpinEnginesResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineUnpin400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineUnpin403ApplicationJSON
+			var out operations.EngineUnpinEnginesResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineUnpin403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineUnpin405ApplicationJSON
+			var out operations.EngineUnpinEnginesResponse405ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineUnpin405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.EngineUnpin500ApplicationJSON
+			var out operations.EngineUnpinEnginesResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EngineUnpin500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

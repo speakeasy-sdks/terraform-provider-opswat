@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// DeepCDRDetailsDetailsAction - The type of action that was performed
-type DeepCDRDetailsDetailsAction string
+// Action - The type of action that was performed
+type Action string
 
 const (
-	DeepCDRDetailsDetailsActionSanitized DeepCDRDetailsDetailsAction = "sanitized"
-	DeepCDRDetailsDetailsActionRemoved   DeepCDRDetailsDetailsAction = "removed"
+	ActionSanitized Action = "sanitized"
+	ActionRemoved   Action = "removed"
 )
 
-func (e DeepCDRDetailsDetailsAction) ToPointer() *DeepCDRDetailsDetailsAction {
+func (e Action) ToPointer() *Action {
 	return &e
 }
 
-func (e *DeepCDRDetailsDetailsAction) UnmarshalJSON(data []byte) error {
+func (e *Action) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,26 +28,26 @@ func (e *DeepCDRDetailsDetailsAction) UnmarshalJSON(data []byte) error {
 	case "sanitized":
 		fallthrough
 	case "removed":
-		*e = DeepCDRDetailsDetailsAction(v)
+		*e = Action(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DeepCDRDetailsDetailsAction: %v", v)
+		return fmt.Errorf("invalid value for Action: %v", v)
 	}
 }
 
-// DeepCDRDetailsDetailsDetailsAction - The type of action that was performed
-type DeepCDRDetailsDetailsDetailsAction string
+// DeepCDRDetailsAction - The type of action that was performed
+type DeepCDRDetailsAction string
 
 const (
-	DeepCDRDetailsDetailsDetailsActionSanitized DeepCDRDetailsDetailsDetailsAction = "sanitized"
-	DeepCDRDetailsDetailsDetailsActionRemoved   DeepCDRDetailsDetailsDetailsAction = "removed"
+	DeepCDRDetailsActionSanitized DeepCDRDetailsAction = "sanitized"
+	DeepCDRDetailsActionRemoved   DeepCDRDetailsAction = "removed"
 )
 
-func (e DeepCDRDetailsDetailsDetailsAction) ToPointer() *DeepCDRDetailsDetailsDetailsAction {
+func (e DeepCDRDetailsAction) ToPointer() *DeepCDRDetailsAction {
 	return &e
 }
 
-func (e *DeepCDRDetailsDetailsDetailsAction) UnmarshalJSON(data []byte) error {
+func (e *DeepCDRDetailsAction) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -56,17 +56,17 @@ func (e *DeepCDRDetailsDetailsDetailsAction) UnmarshalJSON(data []byte) error {
 	case "sanitized":
 		fallthrough
 	case "removed":
-		*e = DeepCDRDetailsDetailsDetailsAction(v)
+		*e = DeepCDRDetailsAction(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DeepCDRDetailsDetailsDetailsAction: %v", v)
+		return fmt.Errorf("invalid value for DeepCDRDetailsAction: %v", v)
 	}
 }
 
-// DeepCDRDetailsDetailsDetails - List of all sanitized objects of a sanitized embedded file
-type DeepCDRDetailsDetailsDetails struct {
+// DeepCDRDetailsDetails - List of all sanitized objects of a sanitized embedded file
+type DeepCDRDetailsDetails struct {
 	// The type of action that was performed
-	Action *DeepCDRDetailsDetailsDetailsAction `json:"action,omitempty"`
+	Action *DeepCDRDetailsAction `json:"action,omitempty"`
 	// The number of objects that were sanitized/removed.
 	Count *int64 `json:"count,omitempty"`
 	// Additional information about the sanitized object
@@ -75,54 +75,9 @@ type DeepCDRDetailsDetailsDetails struct {
 	ObjectName *string `json:"object_name,omitempty"`
 }
 
-func (o *DeepCDRDetailsDetailsDetails) GetAction() *DeepCDRDetailsDetailsDetailsAction {
+func (o *DeepCDRDetailsDetails) GetAction() *DeepCDRDetailsAction {
 	if o == nil {
 		return nil
-	}
-	return o.Action
-}
-
-func (o *DeepCDRDetailsDetailsDetails) GetCount() *int64 {
-	if o == nil {
-		return nil
-	}
-	return o.Count
-}
-
-func (o *DeepCDRDetailsDetailsDetails) GetObjectDetails() []string {
-	if o == nil {
-		return nil
-	}
-	return o.ObjectDetails
-}
-
-func (o *DeepCDRDetailsDetailsDetails) GetObjectName() *string {
-	if o == nil {
-		return nil
-	}
-	return o.ObjectName
-}
-
-type DeepCDRDetailsDetails struct {
-	// The type of action that was performed
-	Action DeepCDRDetailsDetailsAction `json:"action"`
-	// The number of objects that were sanitized/removed.
-	Count *int64 `json:"count,omitempty"`
-	// Action was successful or not.
-	Description *string `json:"description,omitempty"`
-	// List of all sanitized objects of a sanitized embedded file
-	Details *DeepCDRDetailsDetailsDetails `json:"details,omitempty"`
-	// If an embedded file was sanitized.
-	FileName *string `json:"file_name,omitempty"`
-	// Additional information about the sanitized object
-	ObjectDetails []string `json:"object_details,omitempty"`
-	// The object type that was sanitized/removed.
-	ObjectName string `json:"object_name"`
-}
-
-func (o *DeepCDRDetailsDetails) GetAction() DeepCDRDetailsDetailsAction {
-	if o == nil {
-		return DeepCDRDetailsDetailsAction("")
 	}
 	return o.Action
 }
@@ -134,27 +89,6 @@ func (o *DeepCDRDetailsDetails) GetCount() *int64 {
 	return o.Count
 }
 
-func (o *DeepCDRDetailsDetails) GetDescription() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Description
-}
-
-func (o *DeepCDRDetailsDetails) GetDetails() *DeepCDRDetailsDetailsDetails {
-	if o == nil {
-		return nil
-	}
-	return o.Details
-}
-
-func (o *DeepCDRDetailsDetails) GetFileName() *string {
-	if o == nil {
-		return nil
-	}
-	return o.FileName
-}
-
 func (o *DeepCDRDetailsDetails) GetObjectDetails() []string {
 	if o == nil {
 		return nil
@@ -162,30 +96,96 @@ func (o *DeepCDRDetailsDetails) GetObjectDetails() []string {
 	return o.ObjectDetails
 }
 
-func (o *DeepCDRDetailsDetails) GetObjectName() string {
+func (o *DeepCDRDetailsDetails) GetObjectName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ObjectName
+}
+
+type Details struct {
+	// The type of action that was performed
+	Action Action `json:"action"`
+	// The number of objects that were sanitized/removed.
+	Count *int64 `json:"count,omitempty"`
+	// Action was successful or not.
+	Description *string `json:"description,omitempty"`
+	// List of all sanitized objects of a sanitized embedded file
+	Details *DeepCDRDetailsDetails `json:"details,omitempty"`
+	// If an embedded file was sanitized.
+	FileName *string `json:"file_name,omitempty"`
+	// Additional information about the sanitized object
+	ObjectDetails []string `json:"object_details,omitempty"`
+	// The object type that was sanitized/removed.
+	ObjectName string `json:"object_name"`
+}
+
+func (o *Details) GetAction() Action {
+	if o == nil {
+		return Action("")
+	}
+	return o.Action
+}
+
+func (o *Details) GetCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Count
+}
+
+func (o *Details) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *Details) GetDetails() *DeepCDRDetailsDetails {
+	if o == nil {
+		return nil
+	}
+	return o.Details
+}
+
+func (o *Details) GetFileName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileName
+}
+
+func (o *Details) GetObjectDetails() []string {
+	if o == nil {
+		return nil
+	}
+	return o.ObjectDetails
+}
+
+func (o *Details) GetObjectName() string {
 	if o == nil {
 		return ""
 	}
 	return o.ObjectName
 }
 
-// DeepCDRDetailsSanitizedFileInfo - Information of sanitized file.
+// SanitizedFileInfo - Information of sanitized file.
 // Only applicable to individual file sanitization, or original archive document sanitization level.
-type DeepCDRDetailsSanitizedFileInfo struct {
+type SanitizedFileInfo struct {
 	// Size of sanitized file in bytes.
 	FileSize *int64 `json:"file_size,omitempty"`
 	// SHA256 hash of sanitized file.
 	Sha256 *string `json:"sha256,omitempty"`
 }
 
-func (o *DeepCDRDetailsSanitizedFileInfo) GetFileSize() *int64 {
+func (o *SanitizedFileInfo) GetFileSize() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.FileSize
 }
 
-func (o *DeepCDRDetailsSanitizedFileInfo) GetSha256() *string {
+func (o *SanitizedFileInfo) GetSha256() *string {
 	if o == nil {
 		return nil
 	}
@@ -197,7 +197,7 @@ type DeepCDRDetails struct {
 	// Action was successful or not.
 	Description *string `json:"description,omitempty"`
 	// List of all sanitized objects
-	Details []DeepCDRDetailsDetails `json:"details,omitempty"`
+	Details []Details `json:"details,omitempty"`
 	// Deep CDR errors are classified into different categories.
 	//
 	// For more details, please find [Troubleshooting sanitization failures](https://docs.opswat.com/mdcore/deep-cdr/troubleshooting-sanitization-failures)
@@ -206,7 +206,7 @@ type DeepCDRDetails struct {
 	// Information of sanitized file.
 	// Only applicable to individual file sanitization, or original archive document sanitization level.
 	//
-	SanitizedFileInfo *DeepCDRDetailsSanitizedFileInfo `json:"sanitized_file_info,omitempty"`
+	SanitizedFileInfo *SanitizedFileInfo `json:"sanitized_file_info,omitempty"`
 }
 
 func (o *DeepCDRDetails) GetDescription() *string {
@@ -216,7 +216,7 @@ func (o *DeepCDRDetails) GetDescription() *string {
 	return o.Description
 }
 
-func (o *DeepCDRDetails) GetDetails() []DeepCDRDetailsDetails {
+func (o *DeepCDRDetails) GetDetails() []Details {
 	if o == nil {
 		return nil
 	}
@@ -230,7 +230,7 @@ func (o *DeepCDRDetails) GetFailureCategory() *string {
 	return o.FailureCategory
 }
 
-func (o *DeepCDRDetails) GetSanitizedFileInfo() *DeepCDRDetailsSanitizedFileInfo {
+func (o *DeepCDRDetails) GetSanitizedFileInfo() *SanitizedFileInfo {
 	if o == nil {
 		return nil
 	}

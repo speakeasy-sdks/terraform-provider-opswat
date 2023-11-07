@@ -29,39 +29,39 @@ func (o *ConfigPostSkipHashRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigPostSkipHash500ApplicationJSON - Unexpected event on server
-type ConfigPostSkipHash500ApplicationJSON struct {
+// ConfigPostSkipHashConfigResponseResponseBody - Unexpected event on server
+type ConfigPostSkipHashConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigPostSkipHash500ApplicationJSON) GetErr() *string {
+func (o *ConfigPostSkipHashConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigPostSkipHash404ApplicationJSON - Requests resource was not found.
-type ConfigPostSkipHash404ApplicationJSON struct {
+// ConfigPostSkipHashConfigResponseBody - Requests resource was not found.
+type ConfigPostSkipHashConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigPostSkipHash404ApplicationJSON) GetErr() *string {
+func (o *ConfigPostSkipHashConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigPostSkipHash403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigPostSkipHash403ApplicationJSON struct {
+// ConfigPostSkipHashResponseBody - Invalid user information or Not Allowed
+type ConfigPostSkipHashResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigPostSkipHash403ApplicationJSON) GetErr() *string {
+func (o *ConfigPostSkipHashResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -69,6 +69,12 @@ func (o *ConfigPostSkipHash403ApplicationJSON) GetErr() *string {
 }
 
 type ConfigPostSkipHashResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigPostSkipHashResponseBody
+	// Requests resource was not found.
+	FourHundredAndFourApplicationJSONObject *ConfigPostSkipHashConfigResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigPostSkipHashConfigResponseResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// A list of all skip/white/black-listed hashes.
@@ -77,12 +83,27 @@ type ConfigPostSkipHashResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	ConfigPostSkipHash403ApplicationJSONObject *ConfigPostSkipHash403ApplicationJSON
-	// Requests resource was not found.
-	ConfigPostSkipHash404ApplicationJSONObject *ConfigPostSkipHash404ApplicationJSON
-	// Unexpected event on server
-	ConfigPostSkipHash500ApplicationJSONObject *ConfigPostSkipHash500ApplicationJSON
+}
+
+func (o *ConfigPostSkipHashResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigPostSkipHashResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigPostSkipHashResponse) GetFourHundredAndFourApplicationJSONObject() *ConfigPostSkipHashConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFourApplicationJSONObject
+}
+
+func (o *ConfigPostSkipHashResponse) GetFiveHundredApplicationJSONObject() *ConfigPostSkipHashConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigPostSkipHashResponse) GetContentType() string {
@@ -111,25 +132,4 @@ func (o *ConfigPostSkipHashResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigPostSkipHashResponse) GetConfigPostSkipHash403ApplicationJSONObject() *ConfigPostSkipHash403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigPostSkipHash403ApplicationJSONObject
-}
-
-func (o *ConfigPostSkipHashResponse) GetConfigPostSkipHash404ApplicationJSONObject() *ConfigPostSkipHash404ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigPostSkipHash404ApplicationJSONObject
-}
-
-func (o *ConfigPostSkipHashResponse) GetConfigPostSkipHash500ApplicationJSONObject() *ConfigPostSkipHash500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigPostSkipHash500ApplicationJSONObject
 }

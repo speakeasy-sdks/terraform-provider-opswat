@@ -28,52 +28,52 @@ func (o *BatchSignedResultRequest) GetBatchID() string {
 	return o.BatchID
 }
 
-// BatchSignedResult500ApplicationJSON - Unexpected event on server
-type BatchSignedResult500ApplicationJSON struct {
+// BatchSignedResultBatchResponse500ResponseBody - Unexpected event on server
+type BatchSignedResultBatchResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *BatchSignedResult500ApplicationJSON) GetErr() *string {
+func (o *BatchSignedResultBatchResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// BatchSignedResult404ApplicationJSON - Requests resource was not found.
-type BatchSignedResult404ApplicationJSON struct {
+// BatchSignedResultBatchResponseResponseBody - Requests resource was not found.
+type BatchSignedResultBatchResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *BatchSignedResult404ApplicationJSON) GetErr() *string {
+func (o *BatchSignedResultBatchResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// BatchSignedResult403ApplicationJSON - Invalid user information or Not Allowed
-type BatchSignedResult403ApplicationJSON struct {
+// BatchSignedResultBatchResponseBody - Invalid user information or Not Allowed
+type BatchSignedResultBatchResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *BatchSignedResult403ApplicationJSON) GetErr() *string {
+func (o *BatchSignedResultBatchResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// BatchSignedResult400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type BatchSignedResult400ApplicationJSON struct {
+// BatchSignedResultResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type BatchSignedResultResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *BatchSignedResult400ApplicationJSON) GetErr() *string {
+func (o *BatchSignedResultResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -81,20 +81,48 @@ func (o *BatchSignedResult400ApplicationJSON) GetErr() *string {
 }
 
 type BatchSignedResultResponse struct {
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *BatchSignedResultResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *BatchSignedResultBatchResponseBody
+	// Requests resource was not found.
+	FourHundredAndFourApplicationJSONObject *BatchSignedResultBatchResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *BatchSignedResultBatchResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	BatchSignedResult400ApplicationJSONObject *BatchSignedResult400ApplicationJSON
-	// Invalid user information or Not Allowed
-	BatchSignedResult403ApplicationJSONObject *BatchSignedResult403ApplicationJSON
-	// Requests resource was not found.
-	BatchSignedResult404ApplicationJSONObject *BatchSignedResult404ApplicationJSON
-	// Unexpected event on server
-	BatchSignedResult500ApplicationJSONObject *BatchSignedResult500ApplicationJSON
+}
+
+func (o *BatchSignedResultResponse) GetFourHundredApplicationJSONObject() *BatchSignedResultResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *BatchSignedResultResponse) GetFourHundredAndThreeApplicationJSONObject() *BatchSignedResultBatchResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *BatchSignedResultResponse) GetFourHundredAndFourApplicationJSONObject() *BatchSignedResultBatchResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFourApplicationJSONObject
+}
+
+func (o *BatchSignedResultResponse) GetFiveHundredApplicationJSONObject() *BatchSignedResultBatchResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *BatchSignedResultResponse) GetContentType() string {
@@ -116,32 +144,4 @@ func (o *BatchSignedResultResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *BatchSignedResultResponse) GetBatchSignedResult400ApplicationJSONObject() *BatchSignedResult400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchSignedResult400ApplicationJSONObject
-}
-
-func (o *BatchSignedResultResponse) GetBatchSignedResult403ApplicationJSONObject() *BatchSignedResult403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchSignedResult403ApplicationJSONObject
-}
-
-func (o *BatchSignedResultResponse) GetBatchSignedResult404ApplicationJSONObject() *BatchSignedResult404ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchSignedResult404ApplicationJSONObject
-}
-
-func (o *BatchSignedResultResponse) GetBatchSignedResult500ApplicationJSONObject() *BatchSignedResult500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchSignedResult500ApplicationJSONObject
 }

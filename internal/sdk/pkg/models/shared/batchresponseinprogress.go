@@ -7,8 +7,8 @@ import (
 	"fmt"
 )
 
-// BatchResponseInProgressBatchFilesFilesInBatchProcessInfo - The analysis summary
-type BatchResponseInProgressBatchFilesFilesInBatchProcessInfo struct {
+// BatchResponseInProgressSchemasProcessInfo - The analysis summary
+type BatchResponseInProgressSchemasProcessInfo struct {
 	// Provides the reason why the file is blocked (if so).
 	BlockedReason *string `json:"blocked_reason,omitempty"`
 	// Percentage of processing completed (from 1-100).
@@ -19,35 +19,35 @@ type BatchResponseInProgressBatchFilesFilesInBatchProcessInfo struct {
 	Verdicts []string `json:"verdicts,omitempty"`
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo) GetBlockedReason() *string {
+func (o *BatchResponseInProgressSchemasProcessInfo) GetBlockedReason() *string {
 	if o == nil {
 		return nil
 	}
 	return o.BlockedReason
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo) GetProgressPercentage() *int64 {
+func (o *BatchResponseInProgressSchemasProcessInfo) GetProgressPercentage() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ProgressPercentage
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo) GetResult() *string {
+func (o *BatchResponseInProgressSchemasProcessInfo) GetResult() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Result
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo) GetVerdicts() []string {
+func (o *BatchResponseInProgressSchemasProcessInfo) GetVerdicts() []string {
 	if o == nil {
 		return nil
 	}
 	return o.Verdicts
 }
 
-// BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA - Processing result and its index
+// BatchResponseInProgressSchemasScanAllResultA - Processing result and its index
 // * `No Threat Detected`: 0
 // * `Infected`: 1
 // * `Suspicious`: 2
@@ -69,37 +69,37 @@ func (o *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo) GetVerdicts()
 // * `Potentially Unwanted`: 22
 // * `Unsupported File Type`: 23
 // * `In Progress`: 255
-type BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA string
+type BatchResponseInProgressSchemasScanAllResultA string
 
 const (
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultANoThreatDetected          BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "No Threat Detected"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAInfected                  BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Infected"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultASuspicious                BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Suspicious"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAFailed                    BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Failed"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAWhitelisted               BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Whitelisted"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultABlacklisted               BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Blacklisted"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAExceededArchiveDepth      BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Exceeded Archive Depth"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultANotScanned                BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Not Scanned"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAEncryptedArchive          BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Encrypted Archive"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAExceededArchiveSize       BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Exceeded Archive Size"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAExceededArchiveFileNumber BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Exceeded Archive File Number"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAPasswordProtectedDocument BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Password Protected Document"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAExceededArchiveTimeout    BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Exceeded Archive Timeout"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAMismatch                  BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Mismatch"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAPotentiallyVulnerableFile BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Potentially Vulnerable File"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultACancelled                 BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Cancelled"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultASensitiveDataFound        BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Sensitive Data Found"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAYaraRuleMatched           BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Yara Rule Matched"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAPotentiallyUnwanted       BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Potentially Unwanted"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAUnsupportedFileType       BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "Unsupported File Type"
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultAInProgress                BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA = "In Progress"
+	BatchResponseInProgressSchemasScanAllResultANoThreatDetected          BatchResponseInProgressSchemasScanAllResultA = "No Threat Detected"
+	BatchResponseInProgressSchemasScanAllResultAInfected                  BatchResponseInProgressSchemasScanAllResultA = "Infected"
+	BatchResponseInProgressSchemasScanAllResultASuspicious                BatchResponseInProgressSchemasScanAllResultA = "Suspicious"
+	BatchResponseInProgressSchemasScanAllResultAFailed                    BatchResponseInProgressSchemasScanAllResultA = "Failed"
+	BatchResponseInProgressSchemasScanAllResultAWhitelisted               BatchResponseInProgressSchemasScanAllResultA = "Whitelisted"
+	BatchResponseInProgressSchemasScanAllResultABlacklisted               BatchResponseInProgressSchemasScanAllResultA = "Blacklisted"
+	BatchResponseInProgressSchemasScanAllResultAExceededArchiveDepth      BatchResponseInProgressSchemasScanAllResultA = "Exceeded Archive Depth"
+	BatchResponseInProgressSchemasScanAllResultANotScanned                BatchResponseInProgressSchemasScanAllResultA = "Not Scanned"
+	BatchResponseInProgressSchemasScanAllResultAEncryptedArchive          BatchResponseInProgressSchemasScanAllResultA = "Encrypted Archive"
+	BatchResponseInProgressSchemasScanAllResultAExceededArchiveSize       BatchResponseInProgressSchemasScanAllResultA = "Exceeded Archive Size"
+	BatchResponseInProgressSchemasScanAllResultAExceededArchiveFileNumber BatchResponseInProgressSchemasScanAllResultA = "Exceeded Archive File Number"
+	BatchResponseInProgressSchemasScanAllResultAPasswordProtectedDocument BatchResponseInProgressSchemasScanAllResultA = "Password Protected Document"
+	BatchResponseInProgressSchemasScanAllResultAExceededArchiveTimeout    BatchResponseInProgressSchemasScanAllResultA = "Exceeded Archive Timeout"
+	BatchResponseInProgressSchemasScanAllResultAMismatch                  BatchResponseInProgressSchemasScanAllResultA = "Mismatch"
+	BatchResponseInProgressSchemasScanAllResultAPotentiallyVulnerableFile BatchResponseInProgressSchemasScanAllResultA = "Potentially Vulnerable File"
+	BatchResponseInProgressSchemasScanAllResultACancelled                 BatchResponseInProgressSchemasScanAllResultA = "Cancelled"
+	BatchResponseInProgressSchemasScanAllResultASensitiveDataFound        BatchResponseInProgressSchemasScanAllResultA = "Sensitive Data Found"
+	BatchResponseInProgressSchemasScanAllResultAYaraRuleMatched           BatchResponseInProgressSchemasScanAllResultA = "Yara Rule Matched"
+	BatchResponseInProgressSchemasScanAllResultAPotentiallyUnwanted       BatchResponseInProgressSchemasScanAllResultA = "Potentially Unwanted"
+	BatchResponseInProgressSchemasScanAllResultAUnsupportedFileType       BatchResponseInProgressSchemasScanAllResultA = "Unsupported File Type"
+	BatchResponseInProgressSchemasScanAllResultAInProgress                BatchResponseInProgressSchemasScanAllResultA = "In Progress"
 )
 
-func (e BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA) ToPointer() *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA {
+func (e BatchResponseInProgressSchemasScanAllResultA) ToPointer() *BatchResponseInProgressSchemasScanAllResultA {
 	return &e
 }
 
-func (e *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA) UnmarshalJSON(data []byte) error {
+func (e *BatchResponseInProgressSchemasScanAllResultA) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -146,45 +146,45 @@ func (e *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA) UnmarshalJ
 	case "Unsupported File Type":
 		fallthrough
 	case "In Progress":
-		*e = BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA(v)
+		*e = BatchResponseInProgressSchemasScanAllResultA(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA: %v", v)
+		return fmt.Errorf("invalid value for BatchResponseInProgressSchemasScanAllResultA: %v", v)
 	}
 }
 
-// BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI - Scan result as index in the Processing Results table above
-type BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI int64
+// BatchResponseInProgressSchemasScanAllResultI - Scan result as index in the Processing Results table above
+type BatchResponseInProgressSchemasScanAllResultI int64
 
 const (
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultIZero                   BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 0
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultIOne                    BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 1
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultITwo                    BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 2
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultIThree                  BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 3
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultISeven                  BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 7
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultIEight                  BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 8
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultINine                   BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 9
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultITen                    BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 10
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultITwelve                 BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 12
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultIThirteen               BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 13
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultIFourteen               BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 14
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultIFifteen                BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 15
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultISixteen                BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 16
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultISeventeen              BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 17
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultIEighteen               BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 18
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultINineteen               BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 19
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultITwenty                 BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 20
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultITwentyOne              BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 21
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultITwentyTwo              BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 22
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultITwentyThree            BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 23
-	BatchResponseInProgressBatchFilesFilesInBatchScanAllResultITwoHundredAndFiftyFive BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI = 255
+	BatchResponseInProgressSchemasScanAllResultIZero                   BatchResponseInProgressSchemasScanAllResultI = 0
+	BatchResponseInProgressSchemasScanAllResultIOne                    BatchResponseInProgressSchemasScanAllResultI = 1
+	BatchResponseInProgressSchemasScanAllResultITwo                    BatchResponseInProgressSchemasScanAllResultI = 2
+	BatchResponseInProgressSchemasScanAllResultIThree                  BatchResponseInProgressSchemasScanAllResultI = 3
+	BatchResponseInProgressSchemasScanAllResultISeven                  BatchResponseInProgressSchemasScanAllResultI = 7
+	BatchResponseInProgressSchemasScanAllResultIEight                  BatchResponseInProgressSchemasScanAllResultI = 8
+	BatchResponseInProgressSchemasScanAllResultINine                   BatchResponseInProgressSchemasScanAllResultI = 9
+	BatchResponseInProgressSchemasScanAllResultITen                    BatchResponseInProgressSchemasScanAllResultI = 10
+	BatchResponseInProgressSchemasScanAllResultITwelve                 BatchResponseInProgressSchemasScanAllResultI = 12
+	BatchResponseInProgressSchemasScanAllResultIThirteen               BatchResponseInProgressSchemasScanAllResultI = 13
+	BatchResponseInProgressSchemasScanAllResultIFourteen               BatchResponseInProgressSchemasScanAllResultI = 14
+	BatchResponseInProgressSchemasScanAllResultIFifteen                BatchResponseInProgressSchemasScanAllResultI = 15
+	BatchResponseInProgressSchemasScanAllResultISixteen                BatchResponseInProgressSchemasScanAllResultI = 16
+	BatchResponseInProgressSchemasScanAllResultISeventeen              BatchResponseInProgressSchemasScanAllResultI = 17
+	BatchResponseInProgressSchemasScanAllResultIEighteen               BatchResponseInProgressSchemasScanAllResultI = 18
+	BatchResponseInProgressSchemasScanAllResultINineteen               BatchResponseInProgressSchemasScanAllResultI = 19
+	BatchResponseInProgressSchemasScanAllResultITwenty                 BatchResponseInProgressSchemasScanAllResultI = 20
+	BatchResponseInProgressSchemasScanAllResultITwentyOne              BatchResponseInProgressSchemasScanAllResultI = 21
+	BatchResponseInProgressSchemasScanAllResultITwentyTwo              BatchResponseInProgressSchemasScanAllResultI = 22
+	BatchResponseInProgressSchemasScanAllResultITwentyThree            BatchResponseInProgressSchemasScanAllResultI = 23
+	BatchResponseInProgressSchemasScanAllResultITwoHundredAndFiftyFive BatchResponseInProgressSchemasScanAllResultI = 255
 )
 
-func (e BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI) ToPointer() *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI {
+func (e BatchResponseInProgressSchemasScanAllResultI) ToPointer() *BatchResponseInProgressSchemasScanAllResultI {
 	return &e
 }
 
-func (e *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI) UnmarshalJSON(data []byte) error {
+func (e *BatchResponseInProgressSchemasScanAllResultI) UnmarshalJSON(data []byte) error {
 	var v int64
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -231,14 +231,14 @@ func (e *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI) UnmarshalJ
 	case 23:
 		fallthrough
 	case 255:
-		*e = BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI(v)
+		*e = BatchResponseInProgressSchemasScanAllResultI(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI: %v", v)
+		return fmt.Errorf("invalid value for BatchResponseInProgressSchemasScanAllResultI: %v", v)
 	}
 }
 
-type BatchResponseInProgressBatchFilesFilesInBatch struct {
+type BatchResponseInProgressFilesInBatch struct {
 	// Unique identifer for the file.
 	DataID *string `json:"data_id,omitempty"`
 	// Total number of engines that detected this file.
@@ -252,88 +252,88 @@ type BatchResponseInProgressBatchFilesFilesInBatch struct {
 	// The filetype in human readable format.
 	FileTypeDescription *string `json:"file_type_description,omitempty"`
 	// The analysis summary
-	ProcessInfo *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo `json:"process_info,omitempty"`
+	ProcessInfo *BatchResponseInProgressSchemasProcessInfo `json:"process_info,omitempty"`
 	// Track analysis progress until reaches 100.
 	ProgressPercentage *int64 `json:"progress_percentage,omitempty"`
 	// The overall scan result as string
-	ScanAllResultA *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA `json:"scan_all_result_a,omitempty"`
+	ScanAllResultA *BatchResponseInProgressSchemasScanAllResultA `json:"scan_all_result_a,omitempty"`
 	// The overall scan result as index in the Processing Results table.
-	ScanAllResultI *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI `json:"scan_all_result_i,omitempty"`
+	ScanAllResultI *BatchResponseInProgressSchemasScanAllResultI `json:"scan_all_result_i,omitempty"`
 	// The total number of engines used to analyze this file.
 	ScannedWith *int64 `json:"scanned_with,omitempty"`
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetDataID() *string {
+func (o *BatchResponseInProgressFilesInBatch) GetDataID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DataID
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetDetectedBy() *int64 {
+func (o *BatchResponseInProgressFilesInBatch) GetDetectedBy() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.DetectedBy
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetDisplayName() *string {
+func (o *BatchResponseInProgressFilesInBatch) GetDisplayName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DisplayName
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetFileSize() *int64 {
+func (o *BatchResponseInProgressFilesInBatch) GetFileSize() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.FileSize
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetFileType() *string {
+func (o *BatchResponseInProgressFilesInBatch) GetFileType() *string {
 	if o == nil {
 		return nil
 	}
 	return o.FileType
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetFileTypeDescription() *string {
+func (o *BatchResponseInProgressFilesInBatch) GetFileTypeDescription() *string {
 	if o == nil {
 		return nil
 	}
 	return o.FileTypeDescription
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetProcessInfo() *BatchResponseInProgressBatchFilesFilesInBatchProcessInfo {
+func (o *BatchResponseInProgressFilesInBatch) GetProcessInfo() *BatchResponseInProgressSchemasProcessInfo {
 	if o == nil {
 		return nil
 	}
 	return o.ProcessInfo
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetProgressPercentage() *int64 {
+func (o *BatchResponseInProgressFilesInBatch) GetProgressPercentage() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ProgressPercentage
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetScanAllResultA() *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultA {
+func (o *BatchResponseInProgressFilesInBatch) GetScanAllResultA() *BatchResponseInProgressSchemasScanAllResultA {
 	if o == nil {
 		return nil
 	}
 	return o.ScanAllResultA
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetScanAllResultI() *BatchResponseInProgressBatchFilesFilesInBatchScanAllResultI {
+func (o *BatchResponseInProgressFilesInBatch) GetScanAllResultI() *BatchResponseInProgressSchemasScanAllResultI {
 	if o == nil {
 		return nil
 	}
 	return o.ScanAllResultI
 }
 
-func (o *BatchResponseInProgressBatchFilesFilesInBatch) GetScannedWith() *int64 {
+func (o *BatchResponseInProgressFilesInBatch) GetScannedWith() *int64 {
 	if o == nil {
 		return nil
 	}
@@ -345,7 +345,7 @@ type BatchResponseInProgressBatchFiles struct {
 	// How many files/entries in the batch.
 	BatchCount *int64 `json:"batch_count,omitempty"`
 	// The list of files in this batch.
-	FilesInBatch []BatchResponseInProgressBatchFilesFilesInBatch `json:"files_in_batch,omitempty"`
+	FilesInBatch []BatchResponseInProgressFilesInBatch `json:"files_in_batch,omitempty"`
 	// The starting index in the batch. Used for pagination.
 	FirstIndex *int64 `json:"first_index,omitempty"`
 	// The number of entries per page.
@@ -359,7 +359,7 @@ func (o *BatchResponseInProgressBatchFiles) GetBatchCount() *int64 {
 	return o.BatchCount
 }
 
-func (o *BatchResponseInProgressBatchFiles) GetFilesInBatch() []BatchResponseInProgressBatchFilesFilesInBatch {
+func (o *BatchResponseInProgressBatchFiles) GetFilesInBatch() []BatchResponseInProgressFilesInBatch {
 	if o == nil {
 		return nil
 	}
@@ -438,7 +438,7 @@ func (o *BatchResponseInProgressProcessInfo) GetUsername() *string {
 	return o.Username
 }
 
-// BatchResponseInProgressScanResultsScanAllResultA - Processing result and its index
+// BatchResponseInProgressScanAllResultA - Processing result and its index
 // * `No Threat Detected`: 0
 // * `Infected`: 1
 // * `Suspicious`: 2
@@ -460,37 +460,37 @@ func (o *BatchResponseInProgressProcessInfo) GetUsername() *string {
 // * `Potentially Unwanted`: 22
 // * `Unsupported File Type`: 23
 // * `In Progress`: 255
-type BatchResponseInProgressScanResultsScanAllResultA string
+type BatchResponseInProgressScanAllResultA string
 
 const (
-	BatchResponseInProgressScanResultsScanAllResultANoThreatDetected          BatchResponseInProgressScanResultsScanAllResultA = "No Threat Detected"
-	BatchResponseInProgressScanResultsScanAllResultAInfected                  BatchResponseInProgressScanResultsScanAllResultA = "Infected"
-	BatchResponseInProgressScanResultsScanAllResultASuspicious                BatchResponseInProgressScanResultsScanAllResultA = "Suspicious"
-	BatchResponseInProgressScanResultsScanAllResultAFailed                    BatchResponseInProgressScanResultsScanAllResultA = "Failed"
-	BatchResponseInProgressScanResultsScanAllResultAWhitelisted               BatchResponseInProgressScanResultsScanAllResultA = "Whitelisted"
-	BatchResponseInProgressScanResultsScanAllResultABlacklisted               BatchResponseInProgressScanResultsScanAllResultA = "Blacklisted"
-	BatchResponseInProgressScanResultsScanAllResultAExceededArchiveDepth      BatchResponseInProgressScanResultsScanAllResultA = "Exceeded Archive Depth"
-	BatchResponseInProgressScanResultsScanAllResultANotScanned                BatchResponseInProgressScanResultsScanAllResultA = "Not Scanned"
-	BatchResponseInProgressScanResultsScanAllResultAEncryptedArchive          BatchResponseInProgressScanResultsScanAllResultA = "Encrypted Archive"
-	BatchResponseInProgressScanResultsScanAllResultAExceededArchiveSize       BatchResponseInProgressScanResultsScanAllResultA = "Exceeded Archive Size"
-	BatchResponseInProgressScanResultsScanAllResultAExceededArchiveFileNumber BatchResponseInProgressScanResultsScanAllResultA = "Exceeded Archive File Number"
-	BatchResponseInProgressScanResultsScanAllResultAPasswordProtectedDocument BatchResponseInProgressScanResultsScanAllResultA = "Password Protected Document"
-	BatchResponseInProgressScanResultsScanAllResultAExceededArchiveTimeout    BatchResponseInProgressScanResultsScanAllResultA = "Exceeded Archive Timeout"
-	BatchResponseInProgressScanResultsScanAllResultAMismatch                  BatchResponseInProgressScanResultsScanAllResultA = "Mismatch"
-	BatchResponseInProgressScanResultsScanAllResultAPotentiallyVulnerableFile BatchResponseInProgressScanResultsScanAllResultA = "Potentially Vulnerable File"
-	BatchResponseInProgressScanResultsScanAllResultACancelled                 BatchResponseInProgressScanResultsScanAllResultA = "Cancelled"
-	BatchResponseInProgressScanResultsScanAllResultASensitiveDataFound        BatchResponseInProgressScanResultsScanAllResultA = "Sensitive Data Found"
-	BatchResponseInProgressScanResultsScanAllResultAYaraRuleMatched           BatchResponseInProgressScanResultsScanAllResultA = "Yara Rule Matched"
-	BatchResponseInProgressScanResultsScanAllResultAPotentiallyUnwanted       BatchResponseInProgressScanResultsScanAllResultA = "Potentially Unwanted"
-	BatchResponseInProgressScanResultsScanAllResultAUnsupportedFileType       BatchResponseInProgressScanResultsScanAllResultA = "Unsupported File Type"
-	BatchResponseInProgressScanResultsScanAllResultAInProgress                BatchResponseInProgressScanResultsScanAllResultA = "In Progress"
+	BatchResponseInProgressScanAllResultANoThreatDetected          BatchResponseInProgressScanAllResultA = "No Threat Detected"
+	BatchResponseInProgressScanAllResultAInfected                  BatchResponseInProgressScanAllResultA = "Infected"
+	BatchResponseInProgressScanAllResultASuspicious                BatchResponseInProgressScanAllResultA = "Suspicious"
+	BatchResponseInProgressScanAllResultAFailed                    BatchResponseInProgressScanAllResultA = "Failed"
+	BatchResponseInProgressScanAllResultAWhitelisted               BatchResponseInProgressScanAllResultA = "Whitelisted"
+	BatchResponseInProgressScanAllResultABlacklisted               BatchResponseInProgressScanAllResultA = "Blacklisted"
+	BatchResponseInProgressScanAllResultAExceededArchiveDepth      BatchResponseInProgressScanAllResultA = "Exceeded Archive Depth"
+	BatchResponseInProgressScanAllResultANotScanned                BatchResponseInProgressScanAllResultA = "Not Scanned"
+	BatchResponseInProgressScanAllResultAEncryptedArchive          BatchResponseInProgressScanAllResultA = "Encrypted Archive"
+	BatchResponseInProgressScanAllResultAExceededArchiveSize       BatchResponseInProgressScanAllResultA = "Exceeded Archive Size"
+	BatchResponseInProgressScanAllResultAExceededArchiveFileNumber BatchResponseInProgressScanAllResultA = "Exceeded Archive File Number"
+	BatchResponseInProgressScanAllResultAPasswordProtectedDocument BatchResponseInProgressScanAllResultA = "Password Protected Document"
+	BatchResponseInProgressScanAllResultAExceededArchiveTimeout    BatchResponseInProgressScanAllResultA = "Exceeded Archive Timeout"
+	BatchResponseInProgressScanAllResultAMismatch                  BatchResponseInProgressScanAllResultA = "Mismatch"
+	BatchResponseInProgressScanAllResultAPotentiallyVulnerableFile BatchResponseInProgressScanAllResultA = "Potentially Vulnerable File"
+	BatchResponseInProgressScanAllResultACancelled                 BatchResponseInProgressScanAllResultA = "Cancelled"
+	BatchResponseInProgressScanAllResultASensitiveDataFound        BatchResponseInProgressScanAllResultA = "Sensitive Data Found"
+	BatchResponseInProgressScanAllResultAYaraRuleMatched           BatchResponseInProgressScanAllResultA = "Yara Rule Matched"
+	BatchResponseInProgressScanAllResultAPotentiallyUnwanted       BatchResponseInProgressScanAllResultA = "Potentially Unwanted"
+	BatchResponseInProgressScanAllResultAUnsupportedFileType       BatchResponseInProgressScanAllResultA = "Unsupported File Type"
+	BatchResponseInProgressScanAllResultAInProgress                BatchResponseInProgressScanAllResultA = "In Progress"
 )
 
-func (e BatchResponseInProgressScanResultsScanAllResultA) ToPointer() *BatchResponseInProgressScanResultsScanAllResultA {
+func (e BatchResponseInProgressScanAllResultA) ToPointer() *BatchResponseInProgressScanAllResultA {
 	return &e
 }
 
-func (e *BatchResponseInProgressScanResultsScanAllResultA) UnmarshalJSON(data []byte) error {
+func (e *BatchResponseInProgressScanAllResultA) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -537,45 +537,45 @@ func (e *BatchResponseInProgressScanResultsScanAllResultA) UnmarshalJSON(data []
 	case "Unsupported File Type":
 		fallthrough
 	case "In Progress":
-		*e = BatchResponseInProgressScanResultsScanAllResultA(v)
+		*e = BatchResponseInProgressScanAllResultA(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for BatchResponseInProgressScanResultsScanAllResultA: %v", v)
+		return fmt.Errorf("invalid value for BatchResponseInProgressScanAllResultA: %v", v)
 	}
 }
 
-// BatchResponseInProgressScanResultsScanAllResultI - Scan result as index in the Processing Results table above
-type BatchResponseInProgressScanResultsScanAllResultI int64
+// BatchResponseInProgressScanAllResultI - Scan result as index in the Processing Results table above
+type BatchResponseInProgressScanAllResultI int64
 
 const (
-	BatchResponseInProgressScanResultsScanAllResultIZero                   BatchResponseInProgressScanResultsScanAllResultI = 0
-	BatchResponseInProgressScanResultsScanAllResultIOne                    BatchResponseInProgressScanResultsScanAllResultI = 1
-	BatchResponseInProgressScanResultsScanAllResultITwo                    BatchResponseInProgressScanResultsScanAllResultI = 2
-	BatchResponseInProgressScanResultsScanAllResultIThree                  BatchResponseInProgressScanResultsScanAllResultI = 3
-	BatchResponseInProgressScanResultsScanAllResultISeven                  BatchResponseInProgressScanResultsScanAllResultI = 7
-	BatchResponseInProgressScanResultsScanAllResultIEight                  BatchResponseInProgressScanResultsScanAllResultI = 8
-	BatchResponseInProgressScanResultsScanAllResultINine                   BatchResponseInProgressScanResultsScanAllResultI = 9
-	BatchResponseInProgressScanResultsScanAllResultITen                    BatchResponseInProgressScanResultsScanAllResultI = 10
-	BatchResponseInProgressScanResultsScanAllResultITwelve                 BatchResponseInProgressScanResultsScanAllResultI = 12
-	BatchResponseInProgressScanResultsScanAllResultIThirteen               BatchResponseInProgressScanResultsScanAllResultI = 13
-	BatchResponseInProgressScanResultsScanAllResultIFourteen               BatchResponseInProgressScanResultsScanAllResultI = 14
-	BatchResponseInProgressScanResultsScanAllResultIFifteen                BatchResponseInProgressScanResultsScanAllResultI = 15
-	BatchResponseInProgressScanResultsScanAllResultISixteen                BatchResponseInProgressScanResultsScanAllResultI = 16
-	BatchResponseInProgressScanResultsScanAllResultISeventeen              BatchResponseInProgressScanResultsScanAllResultI = 17
-	BatchResponseInProgressScanResultsScanAllResultIEighteen               BatchResponseInProgressScanResultsScanAllResultI = 18
-	BatchResponseInProgressScanResultsScanAllResultINineteen               BatchResponseInProgressScanResultsScanAllResultI = 19
-	BatchResponseInProgressScanResultsScanAllResultITwenty                 BatchResponseInProgressScanResultsScanAllResultI = 20
-	BatchResponseInProgressScanResultsScanAllResultITwentyOne              BatchResponseInProgressScanResultsScanAllResultI = 21
-	BatchResponseInProgressScanResultsScanAllResultITwentyTwo              BatchResponseInProgressScanResultsScanAllResultI = 22
-	BatchResponseInProgressScanResultsScanAllResultITwentyThree            BatchResponseInProgressScanResultsScanAllResultI = 23
-	BatchResponseInProgressScanResultsScanAllResultITwoHundredAndFiftyFive BatchResponseInProgressScanResultsScanAllResultI = 255
+	BatchResponseInProgressScanAllResultIZero                   BatchResponseInProgressScanAllResultI = 0
+	BatchResponseInProgressScanAllResultIOne                    BatchResponseInProgressScanAllResultI = 1
+	BatchResponseInProgressScanAllResultITwo                    BatchResponseInProgressScanAllResultI = 2
+	BatchResponseInProgressScanAllResultIThree                  BatchResponseInProgressScanAllResultI = 3
+	BatchResponseInProgressScanAllResultISeven                  BatchResponseInProgressScanAllResultI = 7
+	BatchResponseInProgressScanAllResultIEight                  BatchResponseInProgressScanAllResultI = 8
+	BatchResponseInProgressScanAllResultINine                   BatchResponseInProgressScanAllResultI = 9
+	BatchResponseInProgressScanAllResultITen                    BatchResponseInProgressScanAllResultI = 10
+	BatchResponseInProgressScanAllResultITwelve                 BatchResponseInProgressScanAllResultI = 12
+	BatchResponseInProgressScanAllResultIThirteen               BatchResponseInProgressScanAllResultI = 13
+	BatchResponseInProgressScanAllResultIFourteen               BatchResponseInProgressScanAllResultI = 14
+	BatchResponseInProgressScanAllResultIFifteen                BatchResponseInProgressScanAllResultI = 15
+	BatchResponseInProgressScanAllResultISixteen                BatchResponseInProgressScanAllResultI = 16
+	BatchResponseInProgressScanAllResultISeventeen              BatchResponseInProgressScanAllResultI = 17
+	BatchResponseInProgressScanAllResultIEighteen               BatchResponseInProgressScanAllResultI = 18
+	BatchResponseInProgressScanAllResultINineteen               BatchResponseInProgressScanAllResultI = 19
+	BatchResponseInProgressScanAllResultITwenty                 BatchResponseInProgressScanAllResultI = 20
+	BatchResponseInProgressScanAllResultITwentyOne              BatchResponseInProgressScanAllResultI = 21
+	BatchResponseInProgressScanAllResultITwentyTwo              BatchResponseInProgressScanAllResultI = 22
+	BatchResponseInProgressScanAllResultITwentyThree            BatchResponseInProgressScanAllResultI = 23
+	BatchResponseInProgressScanAllResultITwoHundredAndFiftyFive BatchResponseInProgressScanAllResultI = 255
 )
 
-func (e BatchResponseInProgressScanResultsScanAllResultI) ToPointer() *BatchResponseInProgressScanResultsScanAllResultI {
+func (e BatchResponseInProgressScanAllResultI) ToPointer() *BatchResponseInProgressScanAllResultI {
 	return &e
 }
 
-func (e *BatchResponseInProgressScanResultsScanAllResultI) UnmarshalJSON(data []byte) error {
+func (e *BatchResponseInProgressScanAllResultI) UnmarshalJSON(data []byte) error {
 	var v int64
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -622,10 +622,10 @@ func (e *BatchResponseInProgressScanResultsScanAllResultI) UnmarshalJSON(data []
 	case 23:
 		fallthrough
 	case 255:
-		*e = BatchResponseInProgressScanResultsScanAllResultI(v)
+		*e = BatchResponseInProgressScanAllResultI(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for BatchResponseInProgressScanResultsScanAllResultI: %v", v)
+		return fmt.Errorf("invalid value for BatchResponseInProgressScanAllResultI: %v", v)
 	}
 }
 
@@ -634,9 +634,9 @@ type BatchResponseInProgressScanResults struct {
 	// The batch unique identifer
 	BatchID *string `json:"batch_id,omitempty"`
 	// The overall scan result as string
-	ScanAllResultA *BatchResponseInProgressScanResultsScanAllResultA `json:"scan_all_result_a,omitempty"`
+	ScanAllResultA *BatchResponseInProgressScanAllResultA `json:"scan_all_result_a,omitempty"`
 	// The overall scan result as index in the Processing Results table.
-	ScanAllResultI *BatchResponseInProgressScanResultsScanAllResultI `json:"scan_all_result_i,omitempty"`
+	ScanAllResultI *BatchResponseInProgressScanAllResultI `json:"scan_all_result_i,omitempty"`
 	// Timestamp when the scanning process starts.
 	StartTime *string `json:"start_time,omitempty"`
 	// Total number of scanning engines used as part of this analysis. Not like files, batch is not processed by engine, so this value is always 0.
@@ -652,14 +652,14 @@ func (o *BatchResponseInProgressScanResults) GetBatchID() *string {
 	return o.BatchID
 }
 
-func (o *BatchResponseInProgressScanResults) GetScanAllResultA() *BatchResponseInProgressScanResultsScanAllResultA {
+func (o *BatchResponseInProgressScanResults) GetScanAllResultA() *BatchResponseInProgressScanAllResultA {
 	if o == nil {
 		return nil
 	}
 	return o.ScanAllResultA
 }
 
-func (o *BatchResponseInProgressScanResults) GetScanAllResultI() *BatchResponseInProgressScanResultsScanAllResultI {
+func (o *BatchResponseInProgressScanResults) GetScanAllResultI() *BatchResponseInProgressScanAllResultI {
 	if o == nil {
 		return nil
 	}

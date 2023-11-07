@@ -28,39 +28,39 @@ func (o *ConfigPutCustomResponseHeaderRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigPutCustomResponseHeader500ApplicationJSON - Unexpected event on server
-type ConfigPutCustomResponseHeader500ApplicationJSON struct {
+// ConfigPutCustomResponseHeaderConfigResponseResponseBody - Unexpected event on server
+type ConfigPutCustomResponseHeaderConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigPutCustomResponseHeader500ApplicationJSON) GetErr() *string {
+func (o *ConfigPutCustomResponseHeaderConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigPutCustomResponseHeader404ApplicationJSON - Requests resource was not found.
-type ConfigPutCustomResponseHeader404ApplicationJSON struct {
+// ConfigPutCustomResponseHeaderConfigResponseBody - Requests resource was not found.
+type ConfigPutCustomResponseHeaderConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigPutCustomResponseHeader404ApplicationJSON) GetErr() *string {
+func (o *ConfigPutCustomResponseHeaderConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigPutCustomResponseHeader403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigPutCustomResponseHeader403ApplicationJSON struct {
+// ConfigPutCustomResponseHeaderResponseBody - Invalid user information or Not Allowed
+type ConfigPutCustomResponseHeaderResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigPutCustomResponseHeader403ApplicationJSON) GetErr() *string {
+func (o *ConfigPutCustomResponseHeaderResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -68,6 +68,12 @@ func (o *ConfigPutCustomResponseHeader403ApplicationJSON) GetErr() *string {
 }
 
 type ConfigPutCustomResponseHeaderResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigPutCustomResponseHeaderResponseBody
+	// Requests resource was not found.
+	FourHundredAndFourApplicationJSONObject *ConfigPutCustomResponseHeaderConfigResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigPutCustomResponseHeaderConfigResponseResponseBody
 	// Request processed successfully.
 	AdminConfigCustomResponseHeader *shared.AdminConfigCustomResponseHeader
 	// HTTP response content type for this operation
@@ -76,12 +82,27 @@ type ConfigPutCustomResponseHeaderResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	ConfigPutCustomResponseHeader403ApplicationJSONObject *ConfigPutCustomResponseHeader403ApplicationJSON
-	// Requests resource was not found.
-	ConfigPutCustomResponseHeader404ApplicationJSONObject *ConfigPutCustomResponseHeader404ApplicationJSON
-	// Unexpected event on server
-	ConfigPutCustomResponseHeader500ApplicationJSONObject *ConfigPutCustomResponseHeader500ApplicationJSON
+}
+
+func (o *ConfigPutCustomResponseHeaderResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigPutCustomResponseHeaderResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigPutCustomResponseHeaderResponse) GetFourHundredAndFourApplicationJSONObject() *ConfigPutCustomResponseHeaderConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFourApplicationJSONObject
+}
+
+func (o *ConfigPutCustomResponseHeaderResponse) GetFiveHundredApplicationJSONObject() *ConfigPutCustomResponseHeaderConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigPutCustomResponseHeaderResponse) GetAdminConfigCustomResponseHeader() *shared.AdminConfigCustomResponseHeader {
@@ -110,25 +131,4 @@ func (o *ConfigPutCustomResponseHeaderResponse) GetRawResponse() *http.Response 
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigPutCustomResponseHeaderResponse) GetConfigPutCustomResponseHeader403ApplicationJSONObject() *ConfigPutCustomResponseHeader403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigPutCustomResponseHeader403ApplicationJSONObject
-}
-
-func (o *ConfigPutCustomResponseHeaderResponse) GetConfigPutCustomResponseHeader404ApplicationJSONObject() *ConfigPutCustomResponseHeader404ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigPutCustomResponseHeader404ApplicationJSONObject
-}
-
-func (o *ConfigPutCustomResponseHeaderResponse) GetConfigPutCustomResponseHeader500ApplicationJSONObject() *ConfigPutCustomResponseHeader500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigPutCustomResponseHeader500ApplicationJSONObject
 }

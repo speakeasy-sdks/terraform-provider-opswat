@@ -20,39 +20,39 @@ func (o *ConfigGetSessioncookieRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigGetSessioncookie500ApplicationJSON - Unexpected event on server
-type ConfigGetSessioncookie500ApplicationJSON struct {
+// ConfigGetSessioncookieConfigResponseResponseBody - Unexpected event on server
+type ConfigGetSessioncookieConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigGetSessioncookie500ApplicationJSON) GetErr() *string {
+func (o *ConfigGetSessioncookieConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigGetSessioncookie405ApplicationJSON - The user has no rights for this operation.
-type ConfigGetSessioncookie405ApplicationJSON struct {
+// ConfigGetSessioncookieConfigResponseBody - The user has no rights for this operation.
+type ConfigGetSessioncookieConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigGetSessioncookie405ApplicationJSON) GetErr() *string {
+func (o *ConfigGetSessioncookieConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigGetSessioncookie403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigGetSessioncookie403ApplicationJSON struct {
+// ConfigGetSessioncookieResponseBody - Invalid user information or Not Allowed
+type ConfigGetSessioncookieResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigGetSessioncookie403ApplicationJSON) GetErr() *string {
+func (o *ConfigGetSessioncookieResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -60,6 +60,12 @@ func (o *ConfigGetSessioncookie403ApplicationJSON) GetErr() *string {
 }
 
 type ConfigGetSessioncookieResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigGetSessioncookieResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *ConfigGetSessioncookieConfigResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigGetSessioncookieConfigResponseResponseBody
 	// Request processed successfully.
 	AdminConfigSessioncookie *shared.AdminConfigSessioncookie
 	// HTTP response content type for this operation
@@ -68,12 +74,27 @@ type ConfigGetSessioncookieResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	ConfigGetSessioncookie403ApplicationJSONObject *ConfigGetSessioncookie403ApplicationJSON
-	// The user has no rights for this operation.
-	ConfigGetSessioncookie405ApplicationJSONObject *ConfigGetSessioncookie405ApplicationJSON
-	// Unexpected event on server
-	ConfigGetSessioncookie500ApplicationJSONObject *ConfigGetSessioncookie500ApplicationJSON
+}
+
+func (o *ConfigGetSessioncookieResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigGetSessioncookieResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigGetSessioncookieResponse) GetFourHundredAndFiveApplicationJSONObject() *ConfigGetSessioncookieConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *ConfigGetSessioncookieResponse) GetFiveHundredApplicationJSONObject() *ConfigGetSessioncookieConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigGetSessioncookieResponse) GetAdminConfigSessioncookie() *shared.AdminConfigSessioncookie {
@@ -102,25 +123,4 @@ func (o *ConfigGetSessioncookieResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigGetSessioncookieResponse) GetConfigGetSessioncookie403ApplicationJSONObject() *ConfigGetSessioncookie403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigGetSessioncookie403ApplicationJSONObject
-}
-
-func (o *ConfigGetSessioncookieResponse) GetConfigGetSessioncookie405ApplicationJSONObject() *ConfigGetSessioncookie405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigGetSessioncookie405ApplicationJSONObject
-}
-
-func (o *ConfigGetSessioncookieResponse) GetConfigGetSessioncookie500ApplicationJSONObject() *ConfigGetSessioncookie500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigGetSessioncookie500ApplicationJSONObject
 }

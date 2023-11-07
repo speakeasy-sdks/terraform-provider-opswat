@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// yara - Yara engine configuration and source management APIs.
-type yara struct {
+// Yara engine configuration and source management APIs.
+type Yara struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newYara(sdkConfig sdkConfiguration) *yara {
-	return &yara{
+func newYara(sdkConfig sdkConfiguration) *Yara {
+	return &Yara{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // YaraPackageGenerate - Generate Yara package
 // Generate a new package based on the new added sources.
-func (s *yara) YaraPackageGenerate(ctx context.Context, request operations.YaraPackageGenerateRequest) (*operations.YaraPackageGenerateResponse, error) {
+func (s *Yara) YaraPackageGenerate(ctx context.Context, request operations.YaraPackageGenerateRequest) (*operations.YaraPackageGenerateResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/yara/generate"
 
@@ -69,36 +69,36 @@ func (s *yara) YaraPackageGenerate(ctx context.Context, request operations.YaraP
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.YaraPackageGenerate200ApplicationJSON
+			var out operations.YaraPackageGenerateResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.YaraPackageGenerate200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.YaraPackageGenerate403ApplicationJSON
+			var out operations.YaraPackageGenerateYaraResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.YaraPackageGenerate403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.YaraPackageGenerate500ApplicationJSON
+			var out operations.YaraPackageGenerateYaraResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.YaraPackageGenerate500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -109,7 +109,7 @@ func (s *yara) YaraPackageGenerate(ctx context.Context, request operations.YaraP
 
 // YaraPackageStatus - Yara Generation Status
 // Get status of Yara package generation.
-func (s *yara) YaraPackageStatus(ctx context.Context, request operations.YaraPackageStatusRequest) (*operations.YaraPackageStatusResponse, error) {
+func (s *Yara) YaraPackageStatus(ctx context.Context, request operations.YaraPackageStatusRequest) (*operations.YaraPackageStatusResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/yara/package"
 
@@ -150,36 +150,36 @@ func (s *yara) YaraPackageStatus(ctx context.Context, request operations.YaraPac
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.YaraPackageStatus200ApplicationJSON
+			var out operations.YaraPackageStatusResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.YaraPackageStatus200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.YaraPackageStatus403ApplicationJSON
+			var out operations.YaraPackageStatusYaraResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.YaraPackageStatus403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.YaraPackageStatus500ApplicationJSON
+			var out operations.YaraPackageStatusYaraResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.YaraPackageStatus500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -190,7 +190,7 @@ func (s *yara) YaraPackageStatus(ctx context.Context, request operations.YaraPac
 
 // YaraSourcesGet - Get Yara sources
 // Retrieve a list of all sources for the Yara Engine.
-func (s *yara) YaraSourcesGet(ctx context.Context, request operations.YaraSourcesGetRequest) (*operations.YaraSourcesGetResponse, error) {
+func (s *Yara) YaraSourcesGet(ctx context.Context, request operations.YaraSourcesGetRequest) (*operations.YaraSourcesGetResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/yara/sources"
 
@@ -243,24 +243,24 @@ func (s *yara) YaraSourcesGet(ctx context.Context, request operations.YaraSource
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.YaraSourcesGet403ApplicationJSON
+			var out operations.YaraSourcesGetResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.YaraSourcesGet403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.YaraSourcesGet500ApplicationJSON
+			var out operations.YaraSourcesGetYaraResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.YaraSourcesGet500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -271,7 +271,7 @@ func (s *yara) YaraSourcesGet(ctx context.Context, request operations.YaraSource
 
 // YaraSourcesPut - Modify Yara sources
 // Modify one (or more) of the sources for the Yara Engine.
-func (s *yara) YaraSourcesPut(ctx context.Context, request operations.YaraSourcesPutRequest) (*operations.YaraSourcesPutResponse, error) {
+func (s *Yara) YaraSourcesPut(ctx context.Context, request operations.YaraSourcesPutRequest) (*operations.YaraSourcesPutResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/yara/sources"
 
@@ -334,24 +334,24 @@ func (s *yara) YaraSourcesPut(ctx context.Context, request operations.YaraSource
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.YaraSourcesPut403ApplicationJSON
+			var out operations.YaraSourcesPutResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.YaraSourcesPut403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.YaraSourcesPut500ApplicationJSON
+			var out operations.YaraSourcesPutYaraResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.YaraSourcesPut500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

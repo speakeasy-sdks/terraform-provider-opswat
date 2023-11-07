@@ -2,37 +2,37 @@
 
 package shared
 
-type SkipListBlacklist struct {
+type Blacklist struct {
 }
 
-type SkipListSkip struct {
+type Skip struct {
 }
 
-type SkipListWhitelist struct {
+type Whitelist struct {
 }
 
 // SkipList - Object that defines the skip hashes list.
 type SkipList struct {
-	Blacklist *SkipListBlacklist `json:"blacklist,omitempty"`
-	Skip      *SkipListSkip      `json:"skip,omitempty"`
-	Whitelist *SkipListWhitelist `json:"whitelist,omitempty"`
+	Blacklist *Blacklist `json:"blacklist,omitempty"`
+	Skip      *Skip      `json:"skip,omitempty"`
+	Whitelist *Whitelist `json:"whitelist,omitempty"`
 }
 
-func (o *SkipList) GetBlacklist() *SkipListBlacklist {
+func (o *SkipList) GetBlacklist() *Blacklist {
 	if o == nil {
 		return nil
 	}
 	return o.Blacklist
 }
 
-func (o *SkipList) GetSkip() *SkipListSkip {
+func (o *SkipList) GetSkip() *Skip {
 	if o == nil {
 		return nil
 	}
 	return o.Skip
 }
 
-func (o *SkipList) GetWhitelist() *SkipListWhitelist {
+func (o *SkipList) GetWhitelist() *Whitelist {
 	if o == nil {
 		return nil
 	}

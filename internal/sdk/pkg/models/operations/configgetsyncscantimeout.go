@@ -22,58 +22,58 @@ func (o *ConfigGetSyncScanTimeoutRequest) GetApikey() string {
 	return o.Apikey
 }
 
-type ConfigGetSyncScanTimeout500ApplicationJSONType string
+type ConfigGetSyncScanTimeoutConfigResponseResponseBodyType string
 
 const (
-	ConfigGetSyncScanTimeout500ApplicationJSONTypeErrorWhileRequestingConfig ConfigGetSyncScanTimeout500ApplicationJSONType = "ErrorWhileRequestingConfig"
-	ConfigGetSyncScanTimeout500ApplicationJSONTypeInternalServerError        ConfigGetSyncScanTimeout500ApplicationJSONType = "InternalServerError"
+	ConfigGetSyncScanTimeoutConfigResponseResponseBodyTypeErrorWhileRequestingConfig ConfigGetSyncScanTimeoutConfigResponseResponseBodyType = "ErrorWhileRequestingConfig"
+	ConfigGetSyncScanTimeoutConfigResponseResponseBodyTypeInternalServerError        ConfigGetSyncScanTimeoutConfigResponseResponseBodyType = "InternalServerError"
 )
 
-type ConfigGetSyncScanTimeout500ApplicationJSON struct {
+type ConfigGetSyncScanTimeoutConfigResponseResponseBody struct {
 	ErrorWhileRequestingConfig *shared.ErrorWhileRequestingConfig
 	InternalServerError        *shared.InternalServerError
 
-	Type ConfigGetSyncScanTimeout500ApplicationJSONType
+	Type ConfigGetSyncScanTimeoutConfigResponseResponseBodyType
 }
 
-func CreateConfigGetSyncScanTimeout500ApplicationJSONErrorWhileRequestingConfig(errorWhileRequestingConfig shared.ErrorWhileRequestingConfig) ConfigGetSyncScanTimeout500ApplicationJSON {
-	typ := ConfigGetSyncScanTimeout500ApplicationJSONTypeErrorWhileRequestingConfig
+func CreateConfigGetSyncScanTimeoutConfigResponseResponseBodyErrorWhileRequestingConfig(errorWhileRequestingConfig shared.ErrorWhileRequestingConfig) ConfigGetSyncScanTimeoutConfigResponseResponseBody {
+	typ := ConfigGetSyncScanTimeoutConfigResponseResponseBodyTypeErrorWhileRequestingConfig
 
-	return ConfigGetSyncScanTimeout500ApplicationJSON{
+	return ConfigGetSyncScanTimeoutConfigResponseResponseBody{
 		ErrorWhileRequestingConfig: &errorWhileRequestingConfig,
 		Type:                       typ,
 	}
 }
 
-func CreateConfigGetSyncScanTimeout500ApplicationJSONInternalServerError(internalServerError shared.InternalServerError) ConfigGetSyncScanTimeout500ApplicationJSON {
-	typ := ConfigGetSyncScanTimeout500ApplicationJSONTypeInternalServerError
+func CreateConfigGetSyncScanTimeoutConfigResponseResponseBodyInternalServerError(internalServerError shared.InternalServerError) ConfigGetSyncScanTimeoutConfigResponseResponseBody {
+	typ := ConfigGetSyncScanTimeoutConfigResponseResponseBodyTypeInternalServerError
 
-	return ConfigGetSyncScanTimeout500ApplicationJSON{
+	return ConfigGetSyncScanTimeoutConfigResponseResponseBody{
 		InternalServerError: &internalServerError,
 		Type:                typ,
 	}
 }
 
-func (u *ConfigGetSyncScanTimeout500ApplicationJSON) UnmarshalJSON(data []byte) error {
+func (u *ConfigGetSyncScanTimeoutConfigResponseResponseBody) UnmarshalJSON(data []byte) error {
 
 	errorWhileRequestingConfig := new(shared.ErrorWhileRequestingConfig)
 	if err := utils.UnmarshalJSON(data, &errorWhileRequestingConfig, "", true, true); err == nil {
 		u.ErrorWhileRequestingConfig = errorWhileRequestingConfig
-		u.Type = ConfigGetSyncScanTimeout500ApplicationJSONTypeErrorWhileRequestingConfig
+		u.Type = ConfigGetSyncScanTimeoutConfigResponseResponseBodyTypeErrorWhileRequestingConfig
 		return nil
 	}
 
 	internalServerError := new(shared.InternalServerError)
 	if err := utils.UnmarshalJSON(data, &internalServerError, "", true, true); err == nil {
 		u.InternalServerError = internalServerError
-		u.Type = ConfigGetSyncScanTimeout500ApplicationJSONTypeInternalServerError
+		u.Type = ConfigGetSyncScanTimeoutConfigResponseResponseBodyTypeInternalServerError
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u ConfigGetSyncScanTimeout500ApplicationJSON) MarshalJSON() ([]byte, error) {
+func (u ConfigGetSyncScanTimeoutConfigResponseResponseBody) MarshalJSON() ([]byte, error) {
 	if u.ErrorWhileRequestingConfig != nil {
 		return utils.MarshalJSON(u.ErrorWhileRequestingConfig, "", true)
 	}
@@ -85,26 +85,26 @@ func (u ConfigGetSyncScanTimeout500ApplicationJSON) MarshalJSON() ([]byte, error
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// ConfigGetSyncScanTimeout405ApplicationJSON - The user has no rights for this operation.
-type ConfigGetSyncScanTimeout405ApplicationJSON struct {
+// ConfigGetSyncScanTimeoutConfigResponseBody - The user has no rights for this operation.
+type ConfigGetSyncScanTimeoutConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigGetSyncScanTimeout405ApplicationJSON) GetErr() *string {
+func (o *ConfigGetSyncScanTimeoutConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigGetSyncScanTimeout403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigGetSyncScanTimeout403ApplicationJSON struct {
+// ConfigGetSyncScanTimeoutResponseBody - Invalid user information or Not Allowed
+type ConfigGetSyncScanTimeoutResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigGetSyncScanTimeout403ApplicationJSON) GetErr() *string {
+func (o *ConfigGetSyncScanTimeoutResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -112,6 +112,12 @@ func (o *ConfigGetSyncScanTimeout403ApplicationJSON) GetErr() *string {
 }
 
 type ConfigGetSyncScanTimeoutResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigGetSyncScanTimeoutResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *ConfigGetSyncScanTimeoutConfigResponseBody
+	// Error while requesting configuration.
+	FiveHundredApplicationJSONOneOf *ConfigGetSyncScanTimeoutConfigResponseResponseBody
 	// Request processed successfully.
 	AdminConfigFileSync *shared.AdminConfigFileSync
 	// HTTP response content type for this operation
@@ -120,12 +126,27 @@ type ConfigGetSyncScanTimeoutResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	ConfigGetSyncScanTimeout403ApplicationJSONObject *ConfigGetSyncScanTimeout403ApplicationJSON
-	// The user has no rights for this operation.
-	ConfigGetSyncScanTimeout405ApplicationJSONObject *ConfigGetSyncScanTimeout405ApplicationJSON
-	// Error while requesting configuration.
-	ConfigGetSyncScanTimeout500ApplicationJSONOneOf *ConfigGetSyncScanTimeout500ApplicationJSON
+}
+
+func (o *ConfigGetSyncScanTimeoutResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigGetSyncScanTimeoutResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigGetSyncScanTimeoutResponse) GetFourHundredAndFiveApplicationJSONObject() *ConfigGetSyncScanTimeoutConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *ConfigGetSyncScanTimeoutResponse) GetFiveHundredApplicationJSONOneOf() *ConfigGetSyncScanTimeoutConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONOneOf
 }
 
 func (o *ConfigGetSyncScanTimeoutResponse) GetAdminConfigFileSync() *shared.AdminConfigFileSync {
@@ -154,25 +175,4 @@ func (o *ConfigGetSyncScanTimeoutResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigGetSyncScanTimeoutResponse) GetConfigGetSyncScanTimeout403ApplicationJSONObject() *ConfigGetSyncScanTimeout403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigGetSyncScanTimeout403ApplicationJSONObject
-}
-
-func (o *ConfigGetSyncScanTimeoutResponse) GetConfigGetSyncScanTimeout405ApplicationJSONObject() *ConfigGetSyncScanTimeout405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigGetSyncScanTimeout405ApplicationJSONObject
-}
-
-func (o *ConfigGetSyncScanTimeoutResponse) GetConfigGetSyncScanTimeout500ApplicationJSONOneOf() *ConfigGetSyncScanTimeout500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigGetSyncScanTimeout500ApplicationJSONOneOf
 }

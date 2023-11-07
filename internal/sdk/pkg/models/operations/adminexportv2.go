@@ -29,51 +29,51 @@ func (o *AdminExportV2Request) GetPassword() string {
 	return o.Password
 }
 
-// AdminExportV2500ApplicationJSON - Unexpected event on server
-type AdminExportV2500ApplicationJSON struct {
+// AdminExportV2AdminResponse500ResponseBody - Unexpected event on server
+type AdminExportV2AdminResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminExportV2500ApplicationJSON) GetErr() *string {
+func (o *AdminExportV2AdminResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminExportV2405ApplicationJSON - The user has no rights for this operation.
-type AdminExportV2405ApplicationJSON struct {
+// AdminExportV2AdminResponseResponseBody - The user has no rights for this operation.
+type AdminExportV2AdminResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminExportV2405ApplicationJSON) GetErr() *string {
+func (o *AdminExportV2AdminResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminExportV2403ApplicationJSON - Invalid user information or Not Allowed
-type AdminExportV2403ApplicationJSON struct {
+// AdminExportV2AdminResponseBody - Invalid user information or Not Allowed
+type AdminExportV2AdminResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminExportV2403ApplicationJSON) GetErr() *string {
+func (o *AdminExportV2AdminResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// AdminExportV2400ApplicationJSON - Bad request
-type AdminExportV2400ApplicationJSON struct {
+// AdminExportV2ResponseBody - Bad request
+type AdminExportV2ResponseBody struct {
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AdminExportV2400ApplicationJSON) GetErr() *string {
+func (o *AdminExportV2ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -81,22 +81,57 @@ func (o *AdminExportV2400ApplicationJSON) GetErr() *string {
 }
 
 type AdminExportV2Response struct {
+	// Request processed successfully
+	TwoHundredApplicationOctetStreamBytes []byte
+	// Bad request
+	FourHundredApplicationJSONObject *AdminExportV2ResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *AdminExportV2AdminResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *AdminExportV2AdminResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *AdminExportV2AdminResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	AdminExportV2200ApplicationOctetStreamBinaryString []byte
-	// Bad request
-	AdminExportV2400ApplicationJSONObject *AdminExportV2400ApplicationJSON
-	// Invalid user information or Not Allowed
-	AdminExportV2403ApplicationJSONObject *AdminExportV2403ApplicationJSON
-	// The user has no rights for this operation.
-	AdminExportV2405ApplicationJSONObject *AdminExportV2405ApplicationJSON
-	// Unexpected event on server
-	AdminExportV2500ApplicationJSONObject *AdminExportV2500ApplicationJSON
+}
+
+func (o *AdminExportV2Response) GetTwoHundredApplicationOctetStreamBytes() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationOctetStreamBytes
+}
+
+func (o *AdminExportV2Response) GetFourHundredApplicationJSONObject() *AdminExportV2ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *AdminExportV2Response) GetFourHundredAndThreeApplicationJSONObject() *AdminExportV2AdminResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *AdminExportV2Response) GetFourHundredAndFiveApplicationJSONObject() *AdminExportV2AdminResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *AdminExportV2Response) GetFiveHundredApplicationJSONObject() *AdminExportV2AdminResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *AdminExportV2Response) GetContentType() string {
@@ -118,39 +153,4 @@ func (o *AdminExportV2Response) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *AdminExportV2Response) GetAdminExportV2200ApplicationOctetStreamBinaryString() []byte {
-	if o == nil {
-		return nil
-	}
-	return o.AdminExportV2200ApplicationOctetStreamBinaryString
-}
-
-func (o *AdminExportV2Response) GetAdminExportV2400ApplicationJSONObject() *AdminExportV2400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminExportV2400ApplicationJSONObject
-}
-
-func (o *AdminExportV2Response) GetAdminExportV2403ApplicationJSONObject() *AdminExportV2403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminExportV2403ApplicationJSONObject
-}
-
-func (o *AdminExportV2Response) GetAdminExportV2405ApplicationJSONObject() *AdminExportV2405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminExportV2405ApplicationJSONObject
-}
-
-func (o *AdminExportV2Response) GetAdminExportV2500ApplicationJSONObject() *AdminExportV2500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AdminExportV2500ApplicationJSONObject
 }

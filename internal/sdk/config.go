@@ -15,13 +15,13 @@ import (
 	"strings"
 )
 
-// config - Configure the product through APIs (especially the Settings). Will require admin apikey.
-type config struct {
+// Config - Configure the product through APIs (especially the Settings). Will require admin apikey.
+type Config struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newConfig(sdkConfig sdkConfiguration) *config {
-	return &config{
+func newConfig(sdkConfig sdkConfiguration) *Config {
+	return &Config{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -29,7 +29,7 @@ func newConfig(sdkConfig sdkConfiguration) *config {
 // ConfigAuditLog - Audit clean up
 // Setting audit records (update history) clean up time (clean up records older than).
 // > _**Note**_:The clean up range is defined in `hours`.
-func (s *config) ConfigAuditLog(ctx context.Context, request operations.ConfigAuditLogRequest) (*operations.ConfigAuditLogResponse, error) {
+func (s *Config) ConfigAuditLog(ctx context.Context, request operations.ConfigAuditLogRequest) (*operations.ConfigAuditLogResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/auditlog"
 
@@ -80,48 +80,48 @@ func (s *config) ConfigAuditLog(ctx context.Context, request operations.ConfigAu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigAuditLog200ApplicationJSON
+			var out operations.ConfigAuditLogResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigAuditLog200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigAuditLog403ApplicationJSON
+			var out operations.ConfigAuditLogConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigAuditLog403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigAuditLog405ApplicationJSON
+			var out operations.ConfigAuditLogConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigAuditLog405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigAuditLog500ApplicationJSON
+			var out operations.ConfigAuditLogConfigResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigAuditLog500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -132,7 +132,7 @@ func (s *config) ConfigAuditLog(ctx context.Context, request operations.ConfigAu
 
 // ConfigDeleteSkipHash - Delete hashes from 'skip by hash' list
 // Delete multiple hashes from "skip-by-hash" list.
-func (s *config) ConfigDeleteSkipHash(ctx context.Context, request operations.ConfigDeleteSkipHashRequest) (*operations.ConfigDeleteSkipHashResponse, error) {
+func (s *Config) ConfigDeleteSkipHash(ctx context.Context, request operations.ConfigDeleteSkipHashRequest) (*operations.ConfigDeleteSkipHashResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/skip"
 
@@ -195,36 +195,36 @@ func (s *config) ConfigDeleteSkipHash(ctx context.Context, request operations.Co
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigDeleteSkipHash403ApplicationJSON
+			var out operations.ConfigDeleteSkipHashResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigDeleteSkipHash403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigDeleteSkipHash404ApplicationJSON
+			var out operations.ConfigDeleteSkipHashConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigDeleteSkipHash404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigDeleteSkipHash500ApplicationJSON
+			var out operations.ConfigDeleteSkipHashConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigDeleteSkipHash500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -235,7 +235,7 @@ func (s *config) ConfigDeleteSkipHash(ctx context.Context, request operations.Co
 
 // ConfigGetCustomResponseHeader - Get a list of custom response headers
 // Get a list of custom response headers
-func (s *config) ConfigGetCustomResponseHeader(ctx context.Context, request operations.ConfigGetCustomResponseHeaderRequest) (*operations.ConfigGetCustomResponseHeaderResponse, error) {
+func (s *Config) ConfigGetCustomResponseHeader(ctx context.Context, request operations.ConfigGetCustomResponseHeaderRequest) (*operations.ConfigGetCustomResponseHeaderResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/customresponseheader"
 
@@ -288,36 +288,36 @@ func (s *config) ConfigGetCustomResponseHeader(ctx context.Context, request oper
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetCustomResponseHeader403ApplicationJSON
+			var out operations.ConfigGetCustomResponseHeaderResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetCustomResponseHeader403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetCustomResponseHeader405ApplicationJSON
+			var out operations.ConfigGetCustomResponseHeaderConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetCustomResponseHeader405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetCustomResponseHeader500ApplicationJSON
+			var out operations.ConfigGetCustomResponseHeaderConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetCustomResponseHeader500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -327,7 +327,7 @@ func (s *config) ConfigGetCustomResponseHeader(ctx context.Context, request oper
 }
 
 // ConfigGetHealthCheck - Get health check
-func (s *config) ConfigGetHealthCheck(ctx context.Context, request operations.ConfigGetHealthCheckRequest) (*operations.ConfigGetHealthCheckResponse, error) {
+func (s *Config) ConfigGetHealthCheck(ctx context.Context, request operations.ConfigGetHealthCheckRequest) (*operations.ConfigGetHealthCheckResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/healthcheck"
 
@@ -380,24 +380,24 @@ func (s *config) ConfigGetHealthCheck(ctx context.Context, request operations.Co
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetHealthCheck403ApplicationJSON
+			var out operations.ConfigGetHealthCheckResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetHealthCheck403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetHealthCheck500ApplicationJSON
+			var out operations.ConfigGetHealthCheckConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetHealthCheck500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -407,7 +407,7 @@ func (s *config) ConfigGetHealthCheck(ctx context.Context, request operations.Co
 }
 
 // ConfigGetProxy - Get proxy
-func (s *config) ConfigGetProxy(ctx context.Context, request operations.ConfigGetProxyRequest) (*operations.ConfigGetProxyResponse, error) {
+func (s *Config) ConfigGetProxy(ctx context.Context, request operations.ConfigGetProxyRequest) (*operations.ConfigGetProxyResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/proxy"
 
@@ -460,12 +460,12 @@ func (s *config) ConfigGetProxy(ctx context.Context, request operations.ConfigGe
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetProxy403ApplicationJSON
+			var out operations.ConfigGetProxyResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetProxy403ApplicationJSONObject = &out
+			res.Object = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -476,7 +476,7 @@ func (s *config) ConfigGetProxy(ctx context.Context, request operations.ConfigGe
 
 // ConfigGetSessioncookie - Get session cookie attributes
 // Getting session cookie attributes
-func (s *config) ConfigGetSessioncookie(ctx context.Context, request operations.ConfigGetSessioncookieRequest) (*operations.ConfigGetSessioncookieResponse, error) {
+func (s *Config) ConfigGetSessioncookie(ctx context.Context, request operations.ConfigGetSessioncookieRequest) (*operations.ConfigGetSessioncookieResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/sessioncookie"
 
@@ -529,36 +529,36 @@ func (s *config) ConfigGetSessioncookie(ctx context.Context, request operations.
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetSessioncookie403ApplicationJSON
+			var out operations.ConfigGetSessioncookieResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetSessioncookie403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetSessioncookie405ApplicationJSON
+			var out operations.ConfigGetSessioncookieConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetSessioncookie405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetSessioncookie500ApplicationJSON
+			var out operations.ConfigGetSessioncookieConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetSessioncookie500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -569,7 +569,7 @@ func (s *config) ConfigGetSessioncookie(ctx context.Context, request operations.
 
 // ConfigGetSkipHash - Get 'skip by hash' list
 // Get the list of hashes whitelisted or blacklisted.
-func (s *config) ConfigGetSkipHash(ctx context.Context, request operations.ConfigGetSkipHashRequest) (*operations.ConfigGetSkipHashResponse, error) {
+func (s *Config) ConfigGetSkipHash(ctx context.Context, request operations.ConfigGetSkipHashRequest) (*operations.ConfigGetSkipHashResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/skip"
 
@@ -622,36 +622,36 @@ func (s *config) ConfigGetSkipHash(ctx context.Context, request operations.Confi
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetSkipHash403ApplicationJSON
+			var out operations.ConfigGetSkipHashResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetSkipHash403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetSkipHash404ApplicationJSON
+			var out operations.ConfigGetSkipHashConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetSkipHash404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetSkipHash500ApplicationJSON
+			var out operations.ConfigGetSkipHashConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetSkipHash500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -662,7 +662,7 @@ func (s *config) ConfigGetSkipHash(ctx context.Context, request operations.Confi
 
 // ConfigGetSyncScanTimeout - Synchronous scan connection timeout - Retrieval
 // Retrieving sync scan related connection timeout value (in minutes)
-func (s *config) ConfigGetSyncScanTimeout(ctx context.Context, request operations.ConfigGetSyncScanTimeoutRequest) (*operations.ConfigGetSyncScanTimeoutResponse, error) {
+func (s *Config) ConfigGetSyncScanTimeout(ctx context.Context, request operations.ConfigGetSyncScanTimeoutRequest) (*operations.ConfigGetSyncScanTimeoutResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/file/sync"
 
@@ -715,36 +715,36 @@ func (s *config) ConfigGetSyncScanTimeout(ctx context.Context, request operation
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetSyncScanTimeout403ApplicationJSON
+			var out operations.ConfigGetSyncScanTimeoutResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetSyncScanTimeout403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetSyncScanTimeout405ApplicationJSON
+			var out operations.ConfigGetSyncScanTimeoutConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetSyncScanTimeout405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigGetSyncScanTimeout500ApplicationJSON
+			var out operations.ConfigGetSyncScanTimeoutConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigGetSyncScanTimeout500ApplicationJSONOneOf = &out
+			res.FiveHundredApplicationJSONOneOf = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -754,7 +754,7 @@ func (s *config) ConfigGetSyncScanTimeout(ctx context.Context, request operation
 }
 
 // ConfigPostProxyTestconnection - Check connection to proxy server
-func (s *config) ConfigPostProxyTestconnection(ctx context.Context, request operations.ConfigPostProxyTestconnectionRequest) (*operations.ConfigPostProxyTestconnectionResponse, error) {
+func (s *Config) ConfigPostProxyTestconnection(ctx context.Context, request operations.ConfigPostProxyTestconnectionRequest) (*operations.ConfigPostProxyTestconnectionResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/proxy/testconnection"
 
@@ -805,24 +805,24 @@ func (s *config) ConfigPostProxyTestconnection(ctx context.Context, request oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigPostProxyTestconnection200ApplicationJSON
+			var out operations.ConfigPostProxyTestconnectionResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigPostProxyTestconnection200ApplicationJSONObject = &out
+			res.Object = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigPostProxyTestconnection400ApplicationJSON
+			var out operations.ConfigPostProxyTestconnectionConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigPostProxyTestconnection400ApplicationJSONOneOf = &out
+			res.OneOf = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -833,7 +833,7 @@ func (s *config) ConfigPostProxyTestconnection(ctx context.Context, request oper
 
 // ConfigPostSkipHash - Add new hashes to 'skip by hash' list
 // Add new hashes to 'skip-by-hash' list.
-func (s *config) ConfigPostSkipHash(ctx context.Context, request operations.ConfigPostSkipHashRequest) (*operations.ConfigPostSkipHashResponse, error) {
+func (s *Config) ConfigPostSkipHash(ctx context.Context, request operations.ConfigPostSkipHashRequest) (*operations.ConfigPostSkipHashResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/skip"
 
@@ -896,36 +896,36 @@ func (s *config) ConfigPostSkipHash(ctx context.Context, request operations.Conf
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigPostSkipHash403ApplicationJSON
+			var out operations.ConfigPostSkipHashResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigPostSkipHash403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigPostSkipHash404ApplicationJSON
+			var out operations.ConfigPostSkipHashConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigPostSkipHash404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigPostSkipHash500ApplicationJSON
+			var out operations.ConfigPostSkipHashConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigPostSkipHash500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -936,7 +936,7 @@ func (s *config) ConfigPostSkipHash(ctx context.Context, request operations.Conf
 
 // ConfigPutCustomResponseHeader - Update list of custom response headers
 // Modifying list of custom response headers
-func (s *config) ConfigPutCustomResponseHeader(ctx context.Context, request operations.ConfigPutCustomResponseHeaderRequest) (*operations.ConfigPutCustomResponseHeaderResponse, error) {
+func (s *Config) ConfigPutCustomResponseHeader(ctx context.Context, request operations.ConfigPutCustomResponseHeaderRequest) (*operations.ConfigPutCustomResponseHeaderResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/customresponseheader"
 
@@ -999,36 +999,36 @@ func (s *config) ConfigPutCustomResponseHeader(ctx context.Context, request oper
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigPutCustomResponseHeader403ApplicationJSON
+			var out operations.ConfigPutCustomResponseHeaderResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigPutCustomResponseHeader403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigPutCustomResponseHeader404ApplicationJSON
+			var out operations.ConfigPutCustomResponseHeaderConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigPutCustomResponseHeader404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigPutCustomResponseHeader500ApplicationJSON
+			var out operations.ConfigPutCustomResponseHeaderConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigPutCustomResponseHeader500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1039,7 +1039,7 @@ func (s *config) ConfigPutCustomResponseHeader(ctx context.Context, request oper
 
 // ConfigPutSessioncookie - Update session cookie attributes
 // Modifying session cookie attributes
-func (s *config) ConfigPutSessioncookie(ctx context.Context, request operations.ConfigPutSessioncookieRequest) (*operations.ConfigPutSessioncookieResponse, error) {
+func (s *Config) ConfigPutSessioncookie(ctx context.Context, request operations.ConfigPutSessioncookieRequest) (*operations.ConfigPutSessioncookieResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/sessioncookie"
 
@@ -1102,36 +1102,36 @@ func (s *config) ConfigPutSessioncookie(ctx context.Context, request operations.
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigPutSessioncookie403ApplicationJSON
+			var out operations.ConfigPutSessioncookieResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigPutSessioncookie403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigPutSessioncookie404ApplicationJSON
+			var out operations.ConfigPutSessioncookieConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigPutSessioncookie404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigPutSessioncookie500ApplicationJSON
+			var out operations.ConfigPutSessioncookieConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigPutSessioncookie500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1143,7 +1143,7 @@ func (s *config) ConfigPutSessioncookie(ctx context.Context, request operations.
 // ConfigQuarantine - Quarantine clean up
 // Setting quarantine clean up time (clean up records older than).
 // > _**Note**_:The clean up range is defined in `hours`.
-func (s *config) ConfigQuarantine(ctx context.Context, request operations.ConfigQuarantineRequest) (*operations.ConfigQuarantineResponse, error) {
+func (s *Config) ConfigQuarantine(ctx context.Context, request operations.ConfigQuarantineRequest) (*operations.ConfigQuarantineResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/quarantine"
 
@@ -1194,48 +1194,48 @@ func (s *config) ConfigQuarantine(ctx context.Context, request operations.Config
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigQuarantine200ApplicationJSON
+			var out operations.ConfigQuarantineResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigQuarantine200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigQuarantine403ApplicationJSON
+			var out operations.ConfigQuarantineConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigQuarantine403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigQuarantine405ApplicationJSON
+			var out operations.ConfigQuarantineConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigQuarantine405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigQuarantine500ApplicationJSON
+			var out operations.ConfigQuarantineConfigResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigQuarantine500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1247,7 +1247,7 @@ func (s *config) ConfigQuarantine(ctx context.Context, request operations.Config
 // ConfigSanitizedRepo - Sanitized files clean up
 // Setting sanitized files clean up time (clean up records older than).
 // > _**Note**_:The clean up range is defined in `minutes`.
-func (s *config) ConfigSanitizedRepo(ctx context.Context, request operations.ConfigSanitizedRepoRequest) (*operations.ConfigSanitizedRepoResponse, error) {
+func (s *Config) ConfigSanitizedRepo(ctx context.Context, request operations.ConfigSanitizedRepoRequest) (*operations.ConfigSanitizedRepoResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/sanitize"
 
@@ -1298,48 +1298,48 @@ func (s *config) ConfigSanitizedRepo(ctx context.Context, request operations.Con
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigSanitizedRepo200ApplicationJSON
+			var out operations.ConfigSanitizedRepoResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigSanitizedRepo200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigSanitizedRepo403ApplicationJSON
+			var out operations.ConfigSanitizedRepoConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigSanitizedRepo403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigSanitizedRepo405ApplicationJSON
+			var out operations.ConfigSanitizedRepoConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigSanitizedRepo405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigSanitizedRepo500ApplicationJSON
+			var out operations.ConfigSanitizedRepoConfigResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigSanitizedRepo500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1351,7 +1351,7 @@ func (s *config) ConfigSanitizedRepo(ctx context.Context, request operations.Con
 // ConfigScanHistory - Processing history clean up
 // Setting processing history clean up time (clean up records older than).
 // > _**Note**_:The clean up range is defined in `hours`.
-func (s *config) ConfigScanHistory(ctx context.Context, request operations.ConfigScanHistoryRequest) (*operations.ConfigScanHistoryResponse, error) {
+func (s *Config) ConfigScanHistory(ctx context.Context, request operations.ConfigScanHistoryRequest) (*operations.ConfigScanHistoryResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/scanhistory"
 
@@ -1402,48 +1402,48 @@ func (s *config) ConfigScanHistory(ctx context.Context, request operations.Confi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigScanHistory200ApplicationJSON
+			var out operations.ConfigScanHistoryResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigScanHistory200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigScanHistory403ApplicationJSON
+			var out operations.ConfigScanHistoryConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigScanHistory403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigScanHistory405ApplicationJSON
+			var out operations.ConfigScanHistoryConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigScanHistory405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigScanHistory500ApplicationJSON
+			var out operations.ConfigScanHistoryConfigResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigScanHistory500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1455,7 +1455,7 @@ func (s *config) ConfigScanHistory(ctx context.Context, request operations.Confi
 // ConfigSession - Session settings
 // Configure settings for session generated upon a successful login
 // See more at [Login](/mdcore/metadefender-core/ref#userlogin)
-func (s *config) ConfigSession(ctx context.Context, request operations.ConfigSessionRequest) (*operations.ConfigSessionResponse, error) {
+func (s *Config) ConfigSession(ctx context.Context, request operations.ConfigSessionRequest) (*operations.ConfigSessionResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/session"
 
@@ -1518,36 +1518,36 @@ func (s *config) ConfigSession(ctx context.Context, request operations.ConfigSes
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigSession403ApplicationJSON
+			var out operations.ConfigSessionResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigSession403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigSession405ApplicationJSON
+			var out operations.ConfigSessionConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigSession405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigSession500ApplicationJSON
+			var out operations.ConfigSessionConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigSession500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1559,7 +1559,7 @@ func (s *config) ConfigSession(ctx context.Context, request operations.ConfigSes
 // ConfigUpdate - Modules Update Source and Frequency
 // Setting update frequency for all modules and engines.
 // > _**Note**_:The clean up range is defined in `minutes`.
-func (s *config) ConfigUpdate(ctx context.Context, request operations.ConfigUpdateRequest) (*operations.ConfigUpdateResponse, error) {
+func (s *Config) ConfigUpdate(ctx context.Context, request operations.ConfigUpdateRequest) (*operations.ConfigUpdateResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/update"
 
@@ -1622,36 +1622,36 @@ func (s *config) ConfigUpdate(ctx context.Context, request operations.ConfigUpda
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdate403ApplicationJSON
+			var out operations.ConfigUpdateResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdate403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdate405ApplicationJSON
+			var out operations.ConfigUpdateConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdate405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdate500ApplicationJSON
+			var out operations.ConfigUpdateConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdate500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1661,7 +1661,7 @@ func (s *config) ConfigUpdate(ctx context.Context, request operations.ConfigUpda
 }
 
 // ConfigUpdateHealthCheck - Modify health check
-func (s *config) ConfigUpdateHealthCheck(ctx context.Context, request operations.ConfigUpdateHealthCheckRequest) (*operations.ConfigUpdateHealthCheckResponse, error) {
+func (s *Config) ConfigUpdateHealthCheck(ctx context.Context, request operations.ConfigUpdateHealthCheckRequest) (*operations.ConfigUpdateHealthCheckResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/healthcheck"
 
@@ -1724,12 +1724,12 @@ func (s *config) ConfigUpdateHealthCheck(ctx context.Context, request operations
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdateHealthCheck400ApplicationJSON
+			var out operations.ConfigUpdateHealthCheckResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdateHealthCheck400ApplicationJSONOneOf = &out
+			res.OneOf = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1751,7 +1751,7 @@ func (s *config) ConfigUpdateHealthCheck(ctx context.Context, request operations
 }
 
 // ConfigUpdateProxy - Modify proxy
-func (s *config) ConfigUpdateProxy(ctx context.Context, request operations.ConfigUpdateProxyRequest) (*operations.ConfigUpdateProxyResponse, error) {
+func (s *Config) ConfigUpdateProxy(ctx context.Context, request operations.ConfigUpdateProxyRequest) (*operations.ConfigUpdateProxyResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/proxy"
 
@@ -1814,12 +1814,12 @@ func (s *config) ConfigUpdateProxy(ctx context.Context, request operations.Confi
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdateProxy400ApplicationJSON
+			var out operations.ConfigUpdateProxyResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdateProxy400ApplicationJSONOneOf = &out
+			res.OneOf = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1830,7 +1830,7 @@ func (s *config) ConfigUpdateProxy(ctx context.Context, request operations.Confi
 
 // ConfigUpdateSkipHash - Modify 'skip by hash' list
 // Modify all the hashes and comments in "skip-by-hash" list.
-func (s *config) ConfigUpdateSkipHash(ctx context.Context, request operations.ConfigUpdateSkipHashRequest) (*operations.ConfigUpdateSkipHashResponse, error) {
+func (s *Config) ConfigUpdateSkipHash(ctx context.Context, request operations.ConfigUpdateSkipHashRequest) (*operations.ConfigUpdateSkipHashResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/skip"
 
@@ -1893,36 +1893,36 @@ func (s *config) ConfigUpdateSkipHash(ctx context.Context, request operations.Co
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdateSkipHash403ApplicationJSON
+			var out operations.ConfigUpdateSkipHashResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdateSkipHash403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdateSkipHash404ApplicationJSON
+			var out operations.ConfigUpdateSkipHashConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdateSkipHash404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdateSkipHash500ApplicationJSON
+			var out operations.ConfigUpdateSkipHashConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdateSkipHash500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1933,7 +1933,7 @@ func (s *config) ConfigUpdateSkipHash(ctx context.Context, request operations.Co
 
 // ConfigUpdateSyncScanTimeout - Synchronous scan connection timeout - Modification
 // Modifying sync scan related connection timeout value (in minutes)
-func (s *config) ConfigUpdateSyncScanTimeout(ctx context.Context, request operations.ConfigUpdateSyncScanTimeoutRequest) (*operations.ConfigUpdateSyncScanTimeoutResponse, error) {
+func (s *Config) ConfigUpdateSyncScanTimeout(ctx context.Context, request operations.ConfigUpdateSyncScanTimeoutRequest) (*operations.ConfigUpdateSyncScanTimeoutResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/file/sync"
 
@@ -1996,36 +1996,36 @@ func (s *config) ConfigUpdateSyncScanTimeout(ctx context.Context, request operat
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdateSyncScanTimeout403ApplicationJSON
+			var out operations.ConfigUpdateSyncScanTimeoutResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdateSyncScanTimeout403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdateSyncScanTimeout405ApplicationJSON
+			var out operations.ConfigUpdateSyncScanTimeoutConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdateSyncScanTimeout405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdateSyncScanTimeout500ApplicationJSON
+			var out operations.ConfigUpdateSyncScanTimeoutConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdateSyncScanTimeout500ApplicationJSONOneOf = &out
+			res.FiveHundredApplicationJSONOneOf = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -2036,7 +2036,7 @@ func (s *config) ConfigUpdateSyncScanTimeout(ctx context.Context, request operat
 
 // ConfigUpdateWebhook - Webhook set configuration
 // Modifying settings supported for webhook mode
-func (s *config) ConfigUpdateWebhook(ctx context.Context, request operations.ConfigUpdateWebhookRequest) (*operations.ConfigUpdateWebhookResponse, error) {
+func (s *Config) ConfigUpdateWebhook(ctx context.Context, request operations.ConfigUpdateWebhookRequest) (*operations.ConfigUpdateWebhookResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/webhook"
 
@@ -2099,36 +2099,36 @@ func (s *config) ConfigUpdateWebhook(ctx context.Context, request operations.Con
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdateWebhook403ApplicationJSON
+			var out operations.ConfigUpdateWebhookResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdateWebhook403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdateWebhook404ApplicationJSON
+			var out operations.ConfigUpdateWebhookConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdateWebhook404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigUpdateWebhook500ApplicationJSON
+			var out operations.ConfigUpdateWebhookConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigUpdateWebhook500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -2139,7 +2139,7 @@ func (s *config) ConfigUpdateWebhook(ctx context.Context, request operations.Con
 
 // ConfigWebhook - Webhook get configuration
 // Getting settings supported for webhook mode
-func (s *config) ConfigWebhook(ctx context.Context, request operations.ConfigWebhookRequest) (*operations.ConfigWebhookResponse, error) {
+func (s *Config) ConfigWebhook(ctx context.Context, request operations.ConfigWebhookRequest) (*operations.ConfigWebhookResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/config/webhook"
 
@@ -2192,36 +2192,36 @@ func (s *config) ConfigWebhook(ctx context.Context, request operations.ConfigWeb
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigWebhook403ApplicationJSON
+			var out operations.ConfigWebhookResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigWebhook403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigWebhook405ApplicationJSON
+			var out operations.ConfigWebhookConfigResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigWebhook405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ConfigWebhook500ApplicationJSON
+			var out operations.ConfigWebhookConfigResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ConfigWebhook500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

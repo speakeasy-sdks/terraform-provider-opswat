@@ -60,13 +60,13 @@ func (o *FileAnalysisGetRequest) GetUserAgent() *string {
 	return o.UserAgent
 }
 
-// FileAnalysisGet500ApplicationJSON - Unexpected event on server
-type FileAnalysisGet500ApplicationJSON struct {
+// FileAnalysisGetResponseBody - Unexpected event on server
+type FileAnalysisGetResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *FileAnalysisGet500ApplicationJSON) GetErr() *string {
+func (o *FileAnalysisGetResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -84,7 +84,7 @@ type FileAnalysisGetResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Unexpected event on server
-	FileAnalysisGet500ApplicationJSONObject *FileAnalysisGet500ApplicationJSON
+	Object *FileAnalysisGetResponseBody
 }
 
 func (o *FileAnalysisGetResponse) GetAnalysisResult() *shared.AnalysisResult {
@@ -122,9 +122,9 @@ func (o *FileAnalysisGetResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *FileAnalysisGetResponse) GetFileAnalysisGet500ApplicationJSONObject() *FileAnalysisGet500ApplicationJSON {
+func (o *FileAnalysisGetResponse) GetObject() *FileAnalysisGetResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.FileAnalysisGet500ApplicationJSONObject
+	return o.Object
 }

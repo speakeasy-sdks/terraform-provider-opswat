@@ -2,29 +2,29 @@
 
 package shared
 
-// AdminConfigCustomResponseHeaderIncludeAddress - To include data from address_str.
-type AdminConfigCustomResponseHeaderIncludeAddress struct {
+// IncludeAddress - To include data from address_str.
+type IncludeAddress struct {
 	// IP address.
 	AddressStr *string `json:"address_str,omitempty"`
 	// Include data from address_str.
 	Enabled *bool `json:"enabled,omitempty"`
 }
 
-func (o *AdminConfigCustomResponseHeaderIncludeAddress) GetAddressStr() *string {
+func (o *IncludeAddress) GetAddressStr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressStr
 }
 
-func (o *AdminConfigCustomResponseHeaderIncludeAddress) GetEnabled() *bool {
+func (o *IncludeAddress) GetEnabled() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.Enabled
 }
 
-type AdminConfigCustomResponseHeaderSpecifyUsersAgent struct {
+type SpecifyUsersAgent struct {
 	// Indicate which user_agent should be allowed to include new header in response header.
 	AllowedUsersAgent []string `json:"allowed_users_agent,omitempty"`
 	// True: required matched header user_agent to given list in allowed_users_agent
@@ -33,14 +33,14 @@ type AdminConfigCustomResponseHeaderSpecifyUsersAgent struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }
 
-func (o *AdminConfigCustomResponseHeaderSpecifyUsersAgent) GetAllowedUsersAgent() []string {
+func (o *SpecifyUsersAgent) GetAllowedUsersAgent() []string {
 	if o == nil {
 		return nil
 	}
 	return o.AllowedUsersAgent
 }
 
-func (o *AdminConfigCustomResponseHeaderSpecifyUsersAgent) GetEnabled() *bool {
+func (o *SpecifyUsersAgent) GetEnabled() *bool {
 	if o == nil {
 		return nil
 	}
@@ -52,10 +52,10 @@ type AdminConfigCustomResponseHeader struct {
 	// Only return new X-Core-Id header for authorized user.
 	AuthorizedOnly *bool `json:"authorized_only,omitempty"`
 	// To include data from address_str.
-	IncludeAddress *AdminConfigCustomResponseHeaderIncludeAddress `json:"include_address,omitempty"`
+	IncludeAddress *IncludeAddress `json:"include_address,omitempty"`
 	// Include generated deployment ID.
-	IncludeDeploymentID *bool                                             `json:"include_deployment_id,omitempty"`
-	SpecifyUsersAgent   *AdminConfigCustomResponseHeaderSpecifyUsersAgent `json:"specify_users_agent,omitempty"`
+	IncludeDeploymentID *bool              `json:"include_deployment_id,omitempty"`
+	SpecifyUsersAgent   *SpecifyUsersAgent `json:"specify_users_agent,omitempty"`
 }
 
 func (o *AdminConfigCustomResponseHeader) GetAuthorizedOnly() *bool {
@@ -65,7 +65,7 @@ func (o *AdminConfigCustomResponseHeader) GetAuthorizedOnly() *bool {
 	return o.AuthorizedOnly
 }
 
-func (o *AdminConfigCustomResponseHeader) GetIncludeAddress() *AdminConfigCustomResponseHeaderIncludeAddress {
+func (o *AdminConfigCustomResponseHeader) GetIncludeAddress() *IncludeAddress {
 	if o == nil {
 		return nil
 	}
@@ -79,7 +79,7 @@ func (o *AdminConfigCustomResponseHeader) GetIncludeDeploymentID() *bool {
 	return o.IncludeDeploymentID
 }
 
-func (o *AdminConfigCustomResponseHeader) GetSpecifyUsersAgent() *AdminConfigCustomResponseHeaderSpecifyUsersAgent {
+func (o *AdminConfigCustomResponseHeader) GetSpecifyUsersAgent() *SpecifyUsersAgent {
 	if o == nil {
 		return nil
 	}

@@ -30,76 +30,76 @@ func (o *ConfigPostProxyTestconnectionRequest) GetApikey() string {
 	return o.Apikey
 }
 
-type ConfigPostProxyTestconnection400ApplicationJSONType string
+type ConfigPostProxyTestconnectionConfigResponseBodyType string
 
 const (
-	ConfigPostProxyTestconnection400ApplicationJSONTypeMissingPort                 ConfigPostProxyTestconnection400ApplicationJSONType = "MissingPort"
-	ConfigPostProxyTestconnection400ApplicationJSONTypeMissingServerAddress        ConfigPostProxyTestconnection400ApplicationJSONType = "MissingServerAddress"
-	ConfigPostProxyTestconnection400ApplicationJSONTypeProxyRequiresAuthentication ConfigPostProxyTestconnection400ApplicationJSONType = "ProxyRequiresAuthentication"
+	ConfigPostProxyTestconnectionConfigResponseBodyTypeMissingPort                 ConfigPostProxyTestconnectionConfigResponseBodyType = "MissingPort"
+	ConfigPostProxyTestconnectionConfigResponseBodyTypeMissingServerAddress        ConfigPostProxyTestconnectionConfigResponseBodyType = "MissingServerAddress"
+	ConfigPostProxyTestconnectionConfigResponseBodyTypeProxyRequiresAuthentication ConfigPostProxyTestconnectionConfigResponseBodyType = "ProxyRequiresAuthentication"
 )
 
-type ConfigPostProxyTestconnection400ApplicationJSON struct {
+type ConfigPostProxyTestconnectionConfigResponseBody struct {
 	MissingPort                 *shared.MissingPort
 	MissingServerAddress        *shared.MissingServerAddress
 	ProxyRequiresAuthentication *shared.ProxyRequiresAuthentication
 
-	Type ConfigPostProxyTestconnection400ApplicationJSONType
+	Type ConfigPostProxyTestconnectionConfigResponseBodyType
 }
 
-func CreateConfigPostProxyTestconnection400ApplicationJSONMissingPort(missingPort shared.MissingPort) ConfigPostProxyTestconnection400ApplicationJSON {
-	typ := ConfigPostProxyTestconnection400ApplicationJSONTypeMissingPort
+func CreateConfigPostProxyTestconnectionConfigResponseBodyMissingPort(missingPort shared.MissingPort) ConfigPostProxyTestconnectionConfigResponseBody {
+	typ := ConfigPostProxyTestconnectionConfigResponseBodyTypeMissingPort
 
-	return ConfigPostProxyTestconnection400ApplicationJSON{
+	return ConfigPostProxyTestconnectionConfigResponseBody{
 		MissingPort: &missingPort,
 		Type:        typ,
 	}
 }
 
-func CreateConfigPostProxyTestconnection400ApplicationJSONMissingServerAddress(missingServerAddress shared.MissingServerAddress) ConfigPostProxyTestconnection400ApplicationJSON {
-	typ := ConfigPostProxyTestconnection400ApplicationJSONTypeMissingServerAddress
+func CreateConfigPostProxyTestconnectionConfigResponseBodyMissingServerAddress(missingServerAddress shared.MissingServerAddress) ConfigPostProxyTestconnectionConfigResponseBody {
+	typ := ConfigPostProxyTestconnectionConfigResponseBodyTypeMissingServerAddress
 
-	return ConfigPostProxyTestconnection400ApplicationJSON{
+	return ConfigPostProxyTestconnectionConfigResponseBody{
 		MissingServerAddress: &missingServerAddress,
 		Type:                 typ,
 	}
 }
 
-func CreateConfigPostProxyTestconnection400ApplicationJSONProxyRequiresAuthentication(proxyRequiresAuthentication shared.ProxyRequiresAuthentication) ConfigPostProxyTestconnection400ApplicationJSON {
-	typ := ConfigPostProxyTestconnection400ApplicationJSONTypeProxyRequiresAuthentication
+func CreateConfigPostProxyTestconnectionConfigResponseBodyProxyRequiresAuthentication(proxyRequiresAuthentication shared.ProxyRequiresAuthentication) ConfigPostProxyTestconnectionConfigResponseBody {
+	typ := ConfigPostProxyTestconnectionConfigResponseBodyTypeProxyRequiresAuthentication
 
-	return ConfigPostProxyTestconnection400ApplicationJSON{
+	return ConfigPostProxyTestconnectionConfigResponseBody{
 		ProxyRequiresAuthentication: &proxyRequiresAuthentication,
 		Type:                        typ,
 	}
 }
 
-func (u *ConfigPostProxyTestconnection400ApplicationJSON) UnmarshalJSON(data []byte) error {
+func (u *ConfigPostProxyTestconnectionConfigResponseBody) UnmarshalJSON(data []byte) error {
 
 	missingPort := new(shared.MissingPort)
 	if err := utils.UnmarshalJSON(data, &missingPort, "", true, true); err == nil {
 		u.MissingPort = missingPort
-		u.Type = ConfigPostProxyTestconnection400ApplicationJSONTypeMissingPort
+		u.Type = ConfigPostProxyTestconnectionConfigResponseBodyTypeMissingPort
 		return nil
 	}
 
 	missingServerAddress := new(shared.MissingServerAddress)
 	if err := utils.UnmarshalJSON(data, &missingServerAddress, "", true, true); err == nil {
 		u.MissingServerAddress = missingServerAddress
-		u.Type = ConfigPostProxyTestconnection400ApplicationJSONTypeMissingServerAddress
+		u.Type = ConfigPostProxyTestconnectionConfigResponseBodyTypeMissingServerAddress
 		return nil
 	}
 
 	proxyRequiresAuthentication := new(shared.ProxyRequiresAuthentication)
 	if err := utils.UnmarshalJSON(data, &proxyRequiresAuthentication, "", true, true); err == nil {
 		u.ProxyRequiresAuthentication = proxyRequiresAuthentication
-		u.Type = ConfigPostProxyTestconnection400ApplicationJSONTypeProxyRequiresAuthentication
+		u.Type = ConfigPostProxyTestconnectionConfigResponseBodyTypeProxyRequiresAuthentication
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u ConfigPostProxyTestconnection400ApplicationJSON) MarshalJSON() ([]byte, error) {
+func (u ConfigPostProxyTestconnectionConfigResponseBody) MarshalJSON() ([]byte, error) {
 	if u.MissingPort != nil {
 		return utils.MarshalJSON(u.MissingPort, "", true)
 	}
@@ -115,12 +115,12 @@ func (u ConfigPostProxyTestconnection400ApplicationJSON) MarshalJSON() ([]byte, 
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// ConfigPostProxyTestconnection200ApplicationJSON - Request processed successfully
-type ConfigPostProxyTestconnection200ApplicationJSON struct {
+// ConfigPostProxyTestconnectionResponseBody - Request processed successfully
+type ConfigPostProxyTestconnectionResponseBody struct {
 	Result *string `json:"result,omitempty"`
 }
 
-func (o *ConfigPostProxyTestconnection200ApplicationJSON) GetResult() *string {
+func (o *ConfigPostProxyTestconnectionResponseBody) GetResult() *string {
 	if o == nil {
 		return nil
 	}
@@ -135,9 +135,9 @@ type ConfigPostProxyTestconnectionResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Request processed successfully
-	ConfigPostProxyTestconnection200ApplicationJSONObject *ConfigPostProxyTestconnection200ApplicationJSON
+	Object *ConfigPostProxyTestconnectionResponseBody
 	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	ConfigPostProxyTestconnection400ApplicationJSONOneOf *ConfigPostProxyTestconnection400ApplicationJSON
+	OneOf *ConfigPostProxyTestconnectionConfigResponseBody
 }
 
 func (o *ConfigPostProxyTestconnectionResponse) GetContentType() string {
@@ -161,16 +161,16 @@ func (o *ConfigPostProxyTestconnectionResponse) GetRawResponse() *http.Response 
 	return o.RawResponse
 }
 
-func (o *ConfigPostProxyTestconnectionResponse) GetConfigPostProxyTestconnection200ApplicationJSONObject() *ConfigPostProxyTestconnection200ApplicationJSON {
+func (o *ConfigPostProxyTestconnectionResponse) GetObject() *ConfigPostProxyTestconnectionResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ConfigPostProxyTestconnection200ApplicationJSONObject
+	return o.Object
 }
 
-func (o *ConfigPostProxyTestconnectionResponse) GetConfigPostProxyTestconnection400ApplicationJSONOneOf() *ConfigPostProxyTestconnection400ApplicationJSON {
+func (o *ConfigPostProxyTestconnectionResponse) GetOneOf() *ConfigPostProxyTestconnectionConfigResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ConfigPostProxyTestconnection400ApplicationJSONOneOf
+	return o.OneOf
 }

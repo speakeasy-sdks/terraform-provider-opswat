@@ -19,52 +19,52 @@ func (o *LicenseBackupNominationRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// LicenseBackupNomination500ApplicationJSON - Unexpected event on server
-type LicenseBackupNomination500ApplicationJSON struct {
+// LicenseBackupNominationAdminResponse500ResponseBody - Unexpected event on server
+type LicenseBackupNominationAdminResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *LicenseBackupNomination500ApplicationJSON) GetErr() *string {
+func (o *LicenseBackupNominationAdminResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// LicenseBackupNomination403ApplicationJSON - Invalid user information or Not Allowed
-type LicenseBackupNomination403ApplicationJSON struct {
+// LicenseBackupNominationAdminResponseResponseBody - Invalid user information or Not Allowed
+type LicenseBackupNominationAdminResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *LicenseBackupNomination403ApplicationJSON) GetErr() *string {
+func (o *LicenseBackupNominationAdminResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// LicenseBackupNomination400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type LicenseBackupNomination400ApplicationJSON struct {
+// LicenseBackupNominationAdminResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type LicenseBackupNominationAdminResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *LicenseBackupNomination400ApplicationJSON) GetErr() *string {
+func (o *LicenseBackupNominationAdminResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// LicenseBackupNomination200ApplicationJSON - Request successfully
-type LicenseBackupNomination200ApplicationJSON struct {
+// LicenseBackupNominationResponseBody - Request successfully
+type LicenseBackupNominationResponseBody struct {
 	// Successful message
 	Success *string `json:"success,omitempty"`
 }
 
-func (o *LicenseBackupNomination200ApplicationJSON) GetSuccess() *string {
+func (o *LicenseBackupNominationResponseBody) GetSuccess() *string {
 	if o == nil {
 		return nil
 	}
@@ -72,20 +72,48 @@ func (o *LicenseBackupNomination200ApplicationJSON) GetSuccess() *string {
 }
 
 type LicenseBackupNominationResponse struct {
+	// Request successfully
+	TwoHundredApplicationJSONObject *LicenseBackupNominationResponseBody
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *LicenseBackupNominationAdminResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *LicenseBackupNominationAdminResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *LicenseBackupNominationAdminResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request successfully
-	LicenseBackupNomination200ApplicationJSONObject *LicenseBackupNomination200ApplicationJSON
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	LicenseBackupNomination400ApplicationJSONObject *LicenseBackupNomination400ApplicationJSON
-	// Invalid user information or Not Allowed
-	LicenseBackupNomination403ApplicationJSONObject *LicenseBackupNomination403ApplicationJSON
-	// Unexpected event on server
-	LicenseBackupNomination500ApplicationJSONObject *LicenseBackupNomination500ApplicationJSON
+}
+
+func (o *LicenseBackupNominationResponse) GetTwoHundredApplicationJSONObject() *LicenseBackupNominationResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *LicenseBackupNominationResponse) GetFourHundredApplicationJSONObject() *LicenseBackupNominationAdminResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *LicenseBackupNominationResponse) GetFourHundredAndThreeApplicationJSONObject() *LicenseBackupNominationAdminResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *LicenseBackupNominationResponse) GetFiveHundredApplicationJSONObject() *LicenseBackupNominationAdminResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *LicenseBackupNominationResponse) GetContentType() string {
@@ -107,32 +135,4 @@ func (o *LicenseBackupNominationResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *LicenseBackupNominationResponse) GetLicenseBackupNomination200ApplicationJSONObject() *LicenseBackupNomination200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseBackupNomination200ApplicationJSONObject
-}
-
-func (o *LicenseBackupNominationResponse) GetLicenseBackupNomination400ApplicationJSONObject() *LicenseBackupNomination400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseBackupNomination400ApplicationJSONObject
-}
-
-func (o *LicenseBackupNominationResponse) GetLicenseBackupNomination403ApplicationJSONObject() *LicenseBackupNomination403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseBackupNomination403ApplicationJSONObject
-}
-
-func (o *LicenseBackupNominationResponse) GetLicenseBackupNomination500ApplicationJSONObject() *LicenseBackupNomination500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseBackupNomination500ApplicationJSONObject
 }

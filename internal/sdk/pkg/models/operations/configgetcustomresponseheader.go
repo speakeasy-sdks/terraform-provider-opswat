@@ -20,39 +20,39 @@ func (o *ConfigGetCustomResponseHeaderRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigGetCustomResponseHeader500ApplicationJSON - Unexpected event on server
-type ConfigGetCustomResponseHeader500ApplicationJSON struct {
+// ConfigGetCustomResponseHeaderConfigResponseResponseBody - Unexpected event on server
+type ConfigGetCustomResponseHeaderConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigGetCustomResponseHeader500ApplicationJSON) GetErr() *string {
+func (o *ConfigGetCustomResponseHeaderConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigGetCustomResponseHeader405ApplicationJSON - The user has no rights for this operation.
-type ConfigGetCustomResponseHeader405ApplicationJSON struct {
+// ConfigGetCustomResponseHeaderConfigResponseBody - The user has no rights for this operation.
+type ConfigGetCustomResponseHeaderConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigGetCustomResponseHeader405ApplicationJSON) GetErr() *string {
+func (o *ConfigGetCustomResponseHeaderConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigGetCustomResponseHeader403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigGetCustomResponseHeader403ApplicationJSON struct {
+// ConfigGetCustomResponseHeaderResponseBody - Invalid user information or Not Allowed
+type ConfigGetCustomResponseHeaderResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigGetCustomResponseHeader403ApplicationJSON) GetErr() *string {
+func (o *ConfigGetCustomResponseHeaderResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -60,6 +60,12 @@ func (o *ConfigGetCustomResponseHeader403ApplicationJSON) GetErr() *string {
 }
 
 type ConfigGetCustomResponseHeaderResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigGetCustomResponseHeaderResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *ConfigGetCustomResponseHeaderConfigResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigGetCustomResponseHeaderConfigResponseResponseBody
 	// Request processed successfully.
 	AdminConfigCustomResponseHeader *shared.AdminConfigCustomResponseHeader
 	// HTTP response content type for this operation
@@ -68,12 +74,27 @@ type ConfigGetCustomResponseHeaderResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	ConfigGetCustomResponseHeader403ApplicationJSONObject *ConfigGetCustomResponseHeader403ApplicationJSON
-	// The user has no rights for this operation.
-	ConfigGetCustomResponseHeader405ApplicationJSONObject *ConfigGetCustomResponseHeader405ApplicationJSON
-	// Unexpected event on server
-	ConfigGetCustomResponseHeader500ApplicationJSONObject *ConfigGetCustomResponseHeader500ApplicationJSON
+}
+
+func (o *ConfigGetCustomResponseHeaderResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigGetCustomResponseHeaderResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigGetCustomResponseHeaderResponse) GetFourHundredAndFiveApplicationJSONObject() *ConfigGetCustomResponseHeaderConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *ConfigGetCustomResponseHeaderResponse) GetFiveHundredApplicationJSONObject() *ConfigGetCustomResponseHeaderConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigGetCustomResponseHeaderResponse) GetAdminConfigCustomResponseHeader() *shared.AdminConfigCustomResponseHeader {
@@ -102,25 +123,4 @@ func (o *ConfigGetCustomResponseHeaderResponse) GetRawResponse() *http.Response 
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigGetCustomResponseHeaderResponse) GetConfigGetCustomResponseHeader403ApplicationJSONObject() *ConfigGetCustomResponseHeader403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigGetCustomResponseHeader403ApplicationJSONObject
-}
-
-func (o *ConfigGetCustomResponseHeaderResponse) GetConfigGetCustomResponseHeader405ApplicationJSONObject() *ConfigGetCustomResponseHeader405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigGetCustomResponseHeader405ApplicationJSONObject
-}
-
-func (o *ConfigGetCustomResponseHeaderResponse) GetConfigGetCustomResponseHeader500ApplicationJSONObject() *ConfigGetCustomResponseHeader500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigGetCustomResponseHeader500ApplicationJSONObject
 }

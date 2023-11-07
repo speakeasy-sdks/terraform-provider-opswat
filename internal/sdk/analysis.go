@@ -15,19 +15,19 @@ import (
 	"strings"
 )
 
-// analysis - ### File analysis APIs
+// Analysis - ### File analysis APIs
 // Submit each file to MetaDefender Core individually or group them in batches. Each file submission will return a `data_id` which will be the unique identifier used to retrieve the analysis results.
 // **Important**: Even though one file is being submitted, if MetaDefender Core is configured to extract the files, all compound file types (archives, Office documents, etc.) will be extracted and each file within will be analyzed as a separate entry.
 //   - This means that if you submit an archive with 100 files in it, MetaDefender Core will process 101 files: original file as it is and each of the 100 child files
 //   - Note that by opening the files, detection ratio can increase even by 30%.
 //
 // > _**Note**:_ MetaDefender API doesn't support chunk upload. You shouldn't load the file in memory, is recommended to stream the files to MetaDefender Core as part of the upload process.
-type analysis struct {
+type Analysis struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newAnalysis(sdkConfig sdkConfiguration) *analysis {
-	return &analysis{
+func newAnalysis(sdkConfig sdkConfiguration) *Analysis {
+	return &Analysis{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -35,7 +35,7 @@ func newAnalysis(sdkConfig sdkConfiguration) *analysis {
 // AnalysisRules - Fetching Available Analysis Rules
 // Retrieve all available rules with their custom configurations.
 // Fetching available processing rules.
-func (s *analysis) AnalysisRules(ctx context.Context, request operations.AnalysisRulesRequest) (*operations.AnalysisRulesResponse, error) {
+func (s *Analysis) AnalysisRules(ctx context.Context, request operations.AnalysisRulesRequest) (*operations.AnalysisRulesResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/file/rules"
 
@@ -76,24 +76,24 @@ func (s *analysis) AnalysisRules(ctx context.Context, request operations.Analysi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out []operations.AnalysisRules200ApplicationJSON
+			var out []operations.ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AnalysisRules200ApplicationJSONObjects = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AnalysisRules500ApplicationJSON
+			var out operations.AnalysisRulesResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AnalysisRules500ApplicationJSONObject = &out
+			res.Object = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -105,7 +105,7 @@ func (s *analysis) AnalysisRules(ctx context.Context, request operations.Analysi
 // DownloadFile - Download either sanitized files or DLP processed files
 // Retrieve sanitized file based on the `data_id`.
 // In case there's no sanitized file, and DLP processed file is available, user will retrieve DLP processed file.
-func (s *analysis) DownloadFile(ctx context.Context, request operations.DownloadFileRequest, opts ...operations.Option) (*operations.DownloadFileResponse, error) {
+func (s *Analysis) DownloadFile(ctx context.Context, request operations.DownloadFileRequest, opts ...operations.Option) (*operations.DownloadFileResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -164,43 +164,43 @@ func (s *analysis) DownloadFile(ctx context.Context, request operations.Download
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			res.DownloadFile200ApplicationOctetStreamBinaryString = rawBody
+			res.TwoHundredApplicationOctetStreamBytes = rawBody
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.DownloadFile404ApplicationJSON
+			var out operations.DownloadFileResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.DownloadFile404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.DownloadFile405ApplicationJSON
+			var out operations.DownloadFileAnalysisResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.DownloadFile405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.DownloadFile500ApplicationJSON
+			var out operations.DownloadFileAnalysisResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.DownloadFile500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -211,7 +211,7 @@ func (s *analysis) DownloadFile(ctx context.Context, request operations.Download
 
 // DownloadQuarantinedFile - Download Quarantined File
 // Retrieve a quarantined file based on the `sha256` of the original file
-func (s *analysis) DownloadQuarantinedFile(ctx context.Context, request operations.DownloadQuarantinedFileRequest, opts ...operations.Option) (*operations.DownloadQuarantinedFileResponse, error) {
+func (s *Analysis) DownloadQuarantinedFile(ctx context.Context, request operations.DownloadQuarantinedFileRequest, opts ...operations.Option) (*operations.DownloadQuarantinedFileResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -270,43 +270,43 @@ func (s *analysis) DownloadQuarantinedFile(ctx context.Context, request operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			res.DownloadQuarantinedFile200ApplicationOctetStreamBinaryString = rawBody
+			res.TwoHundredApplicationOctetStreamBytes = rawBody
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.DownloadQuarantinedFile403ApplicationJSON
+			var out operations.DownloadQuarantinedFileResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.DownloadQuarantinedFile403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.DownloadQuarantinedFile404ApplicationJSON
+			var out operations.DownloadQuarantinedFileAnalysisResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.DownloadQuarantinedFile404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.DownloadQuarantinedFile500ApplicationJSON
+			var out operations.DownloadQuarantinedFileAnalysisResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.DownloadQuarantinedFile500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -319,7 +319,7 @@ func (s *analysis) DownloadQuarantinedFile(ctx context.Context, request operatio
 // When cancelling a file analysis, the connected analysis (e.g. files in an archive) that are still in progress will be cancelled also.
 //
 // The cancelled analysis will be automatically closed.
-func (s *analysis) FileAnalysisCancel(ctx context.Context, request operations.FileAnalysisCancelRequest) (*operations.FileAnalysisCancelResponse, error) {
+func (s *Analysis) FileAnalysisCancel(ctx context.Context, request operations.FileAnalysisCancelRequest) (*operations.FileAnalysisCancelResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/file/{data_id}/cancel", request, nil)
 	if err != nil {
@@ -363,72 +363,72 @@ func (s *analysis) FileAnalysisCancel(ctx context.Context, request operations.Fi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisCancel200ApplicationJSON
+			var out operations.FileAnalysisCancelResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisCancel200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisCancel400ApplicationJSON
+			var out operations.FileAnalysisCancelAnalysisResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisCancel400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisCancel403ApplicationJSON
+			var out operations.FileAnalysisCancelAnalysisResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisCancel403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisCancel404ApplicationJSON
+			var out operations.FileAnalysisCancelAnalysisResponse404ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisCancel404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisCancel405ApplicationJSON
+			var out operations.FileAnalysisCancelAnalysisResponse405ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisCancel405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisCancel500ApplicationJSON
+			var out operations.FileAnalysisCancelAnalysisResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisCancel500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -457,7 +457,7 @@ func (s *analysis) FileAnalysisCancel(ctx context.Context, request operations.Fi
 // >   - worst_data_id: data id of the file that has the worst result in the archive
 // > - scan_results
 // >   - last_file_scanned (stored only in memory, not in database): If available, the name of the most recent processed file
-func (s *analysis) FileAnalysisGet(ctx context.Context, request operations.FileAnalysisGetRequest) (*operations.FileAnalysisGetResponse, error) {
+func (s *Analysis) FileAnalysisGet(ctx context.Context, request operations.FileAnalysisGetRequest) (*operations.FileAnalysisGetResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/file/{data_id}", request, nil)
 	if err != nil {
@@ -519,12 +519,12 @@ func (s *analysis) FileAnalysisGet(ctx context.Context, request operations.FileA
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisGet500ApplicationJSON
+			var out operations.FileAnalysisGetResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisGet500ApplicationJSONObject = &out
+			res.Object = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -546,7 +546,7 @@ func (s *analysis) FileAnalysisGet(ctx context.Context, request operations.FileA
 // > - worst_data_id
 //
 // > Also the "outdated_data" field will only be shown in the root archive.
-func (s *analysis) FileAnalysisGetAllChildFiles(ctx context.Context, request operations.FileAnalysisGetAllChildFilesRequest) (*operations.FileAnalysisGetAllChildFilesResponse, error) {
+func (s *Analysis) FileAnalysisGetAllChildFiles(ctx context.Context, request operations.FileAnalysisGetAllChildFilesRequest) (*operations.FileAnalysisGetAllChildFilesResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/archive/{data_id}", request, nil)
 	if err != nil {
@@ -602,12 +602,12 @@ func (s *analysis) FileAnalysisGetAllChildFiles(ctx context.Context, request ope
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisGetAllChildFiles500ApplicationJSON
+			var out operations.FileAnalysisGetAllChildFilesResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisGetAllChildFiles500ApplicationJSONObject = &out
+			res.Object = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -620,7 +620,7 @@ func (s *analysis) FileAnalysisGetAllChildFiles(ctx context.Context, request ope
 // **Scanning a file using a specified workflow.**
 // Scan is done asynchronously and each scan request is tracked by data id of which result can be retrieved by API Fetch Scan Result.
 // > _**Note**_: Chunked transfer encoding (applying header Transfer-Encoding: Chunked) is **not supported** on `/file` API.
-func (s *analysis) FileAnalysisPost(ctx context.Context, request operations.FileAnalysisPostRequest) (*operations.FileAnalysisPostResponse, error) {
+func (s *Analysis) FileAnalysisPost(ctx context.Context, request operations.FileAnalysisPostRequest) (*operations.FileAnalysisPostResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/file"
 
@@ -673,84 +673,84 @@ func (s *analysis) FileAnalysisPost(ctx context.Context, request operations.File
 
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisPost200ApplicationJSON
+			var out operations.FileAnalysisPostResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisPost200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisPost400ApplicationJSON
+			var out operations.FileAnalysisPostAnalysisResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisPost400ApplicationJSONOneOf = &out
+			res.FourHundredApplicationJSONOneOf = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisPost403ApplicationJSON
+			var out operations.FileAnalysisPostAnalysisResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisPost403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 411:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisPost411ApplicationJSON
+			var out operations.FileAnalysisPostAnalysisResponse411ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisPost411ApplicationJSONObject = &out
+			res.FourHundredAndElevenApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 422:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisPost422ApplicationJSON
+			var out operations.FileAnalysisPostAnalysisResponse422ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisPost422ApplicationJSONObject = &out
+			res.FourHundredAndTwentyTwoApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisPost500ApplicationJSON
+			var out operations.FileAnalysisPostAnalysisResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisPost500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 503:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisPost503ApplicationJSON
+			var out operations.FileAnalysisPostAnalysisResponse503ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisPost503ApplicationJSONObject = &out
+			res.FiveHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -776,7 +776,7 @@ func (s *analysis) FileAnalysisPost(ctx context.Context, request operations.File
 // > _**Note**_: In case of receiving data ID, expecting the client side to perform query polling for scan result / progress then, see more at [Fetch Analysis Result](/mdcore/metadefender-core/ref#fileanalysisget)
 // >
 // > The timeout value could be configurable, see more at [Synchronous scan connection timeout - Modification](/mdcore/metadefender-core/ref#configupdatesyncscantimeout)
-func (s *analysis) FileAnalysisSyncPost(ctx context.Context, request operations.FileAnalysisSyncPostRequest) (*operations.FileAnalysisSyncPostResponse, error) {
+func (s *Analysis) FileAnalysisSyncPost(ctx context.Context, request operations.FileAnalysisSyncPostRequest) (*operations.FileAnalysisSyncPostResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/file/sync"
 
@@ -839,12 +839,12 @@ func (s *analysis) FileAnalysisSyncPost(ctx context.Context, request operations.
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisSyncPost400ApplicationJSON
+			var out operations.FileAnalysisSyncPostResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisSyncPost400ApplicationJSONOneOf = &out
+			res.FourHundredApplicationJSONOneOf = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -863,60 +863,60 @@ func (s *analysis) FileAnalysisSyncPost(ctx context.Context, request operations.
 	case httpRes.StatusCode == 408:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisSyncPost408ApplicationJSON
+			var out operations.FileAnalysisSyncPostAnalysisResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisSyncPost408ApplicationJSONObject = &out
+			res.FourHundredAndEightApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 411:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisSyncPost411ApplicationJSON
+			var out operations.FileAnalysisSyncPostAnalysisResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisSyncPost411ApplicationJSONObject = &out
+			res.FourHundredAndElevenApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 422:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisSyncPost422ApplicationJSON
+			var out operations.FileAnalysisSyncPostAnalysisResponse422ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisSyncPost422ApplicationJSONObject = &out
+			res.FourHundredAndTwentyTwoApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisSyncPost500ApplicationJSON
+			var out operations.FileAnalysisSyncPostAnalysisResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisSyncPost500ApplicationJSONOneOf = &out
+			res.FiveHundredApplicationJSONOneOf = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 503:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.FileAnalysisSyncPost503ApplicationJSON
+			var out operations.FileAnalysisSyncPostAnalysisResponse503ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.FileAnalysisSyncPost503ApplicationJSONObject = &out
+			res.FiveHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -927,7 +927,7 @@ func (s *analysis) FileAnalysisSyncPost(ctx context.Context, request operations.
 
 // HashGet - Fetch Analysis Result By Hash
 // Retrieve analysis result by hash
-func (s *analysis) HashGet(ctx context.Context, request operations.HashGetRequest) (*operations.HashGetResponse, error) {
+func (s *Analysis) HashGet(ctx context.Context, request operations.HashGetRequest) (*operations.HashGetResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/hash/{hash}", request, nil)
 	if err != nil {
@@ -993,7 +993,7 @@ func (s *analysis) HashGet(ctx context.Context, request operations.HashGetReques
 // ResultExportedFile - Export processing result as a PDF file
 // Retrieve a PDF processing result file.
 // The content of this PDF file can be changed over MD Core version.
-func (s *analysis) ResultExportedFile(ctx context.Context, request operations.ResultExportedFileRequest, opts ...operations.Option) (*operations.ResultExportedFileResponse, error) {
+func (s *Analysis) ResultExportedFile(ctx context.Context, request operations.ResultExportedFileRequest, opts ...operations.Option) (*operations.ResultExportedFileResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -1052,43 +1052,43 @@ func (s *analysis) ResultExportedFile(ctx context.Context, request operations.Re
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			res.ResultExportedFile200ApplicationPdfBinaryString = rawBody
+			res.TwoHundredApplicationPdfBytes = rawBody
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ResultExportedFile403ApplicationJSON
+			var out operations.ResultExportedFileResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ResultExportedFile403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ResultExportedFile404ApplicationJSON
+			var out operations.ResultExportedFileAnalysisResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ResultExportedFile404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ResultExportedFile500ApplicationJSON
+			var out operations.ResultExportedFileAnalysisResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ResultExportedFile500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1101,7 +1101,7 @@ func (s *analysis) ResultExportedFile(ctx context.Context, request operations.Re
 // Retrieve a list of the deepest blocked files inside an input original archive file based on the `data_id` of that archive file. Leaf file is the one that not having any successful extracted file inside.
 // In case there's no blocked file, user will see an empty array.
 // This list only returns 100 items at most.
-func (s *analysis) RetrieveBlockedLeafFile(ctx context.Context, request operations.RetrieveBlockedLeafFileRequest, opts ...operations.Option) (*operations.RetrieveBlockedLeafFileResponse, error) {
+func (s *Analysis) RetrieveBlockedLeafFile(ctx context.Context, request operations.RetrieveBlockedLeafFileRequest, opts ...operations.Option) (*operations.RetrieveBlockedLeafFileResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -1167,36 +1167,36 @@ func (s *analysis) RetrieveBlockedLeafFile(ctx context.Context, request operatio
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.RetrieveBlockedLeafFile404ApplicationJSON
+			var out operations.RetrieveBlockedLeafFileAnalysisResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.RetrieveBlockedLeafFile404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.RetrieveBlockedLeafFile405ApplicationJSON
+			var out operations.RetrieveBlockedLeafFileAnalysisResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.RetrieveBlockedLeafFile405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.RetrieveBlockedLeafFile500ApplicationJSON
+			var out operations.RetrieveBlockedLeafFileAnalysisResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.RetrieveBlockedLeafFile500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1207,7 +1207,7 @@ func (s *analysis) RetrieveBlockedLeafFile(ctx context.Context, request operatio
 
 // SanitizedFile - Download Sanitized Files
 // Retrieve sanitized file based on the `data_id`
-func (s *analysis) SanitizedFile(ctx context.Context, request operations.SanitizedFileRequest, opts ...operations.Option) (*operations.SanitizedFileResponse, error) {
+func (s *Analysis) SanitizedFile(ctx context.Context, request operations.SanitizedFileRequest, opts ...operations.Option) (*operations.SanitizedFileResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -1266,43 +1266,43 @@ func (s *analysis) SanitizedFile(ctx context.Context, request operations.Sanitiz
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			res.SanitizedFile200ApplicationOctetStreamBinaryString = rawBody
+			res.TwoHundredApplicationOctetStreamBytes = rawBody
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.SanitizedFile404ApplicationJSON
+			var out operations.SanitizedFileResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.SanitizedFile404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.SanitizedFile405ApplicationJSON
+			var out operations.SanitizedFileAnalysisResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.SanitizedFile405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.SanitizedFile500ApplicationJSON
+			var out operations.SanitizedFileAnalysisResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.SanitizedFile500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -1313,7 +1313,7 @@ func (s *analysis) SanitizedFile(ctx context.Context, request operations.Sanitiz
 
 // WebhookStatus - Query webhook status
 // Prior to being notified by Core when webhooks mode is set, client can anytime ask Core for file / batch processing webhooks status.
-func (s *analysis) WebhookStatus(ctx context.Context, request operations.WebhookStatusRequest) (*operations.WebhookStatusResponse, error) {
+func (s *Analysis) WebhookStatus(ctx context.Context, request operations.WebhookStatusRequest) (*operations.WebhookStatusResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/file/webhook/{data_id}", request, nil)
 	if err != nil {
@@ -1357,60 +1357,60 @@ func (s *analysis) WebhookStatus(ctx context.Context, request operations.Webhook
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.WebhookStatus200ApplicationJSON
+			var out operations.WebhookStatusResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.WebhookStatus200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.WebhookStatus400ApplicationJSON
+			var out operations.WebhookStatusAnalysisResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.WebhookStatus400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.WebhookStatus403ApplicationJSON
+			var out operations.WebhookStatusAnalysisResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.WebhookStatus403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.WebhookStatus404ApplicationJSON
+			var out operations.WebhookStatusAnalysisResponse404ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.WebhookStatus404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.WebhookStatus500ApplicationJSON
+			var out operations.WebhookStatusAnalysisResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.WebhookStatus500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

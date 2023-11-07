@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// ExtractionInfoDecryptedStatus - Indicate that decryption phase is successful or not.
-type ExtractionInfoDecryptedStatus string
+// DecryptedStatus - Indicate that decryption phase is successful or not.
+type DecryptedStatus string
 
 const (
-	ExtractionInfoDecryptedStatusSuccess ExtractionInfoDecryptedStatus = "Success"
-	ExtractionInfoDecryptedStatusFailed  ExtractionInfoDecryptedStatus = "Failed"
+	DecryptedStatusSuccess DecryptedStatus = "Success"
+	DecryptedStatusFailed  DecryptedStatus = "Failed"
 )
 
-func (e ExtractionInfoDecryptedStatus) ToPointer() *ExtractionInfoDecryptedStatus {
+func (e DecryptedStatus) ToPointer() *DecryptedStatus {
 	return &e
 }
 
-func (e *ExtractionInfoDecryptedStatus) UnmarshalJSON(data []byte) error {
+func (e *DecryptedStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,17 +28,17 @@ func (e *ExtractionInfoDecryptedStatus) UnmarshalJSON(data []byte) error {
 	case "Success":
 		fallthrough
 	case "Failed":
-		*e = ExtractionInfoDecryptedStatus(v)
+		*e = DecryptedStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ExtractionInfoDecryptedStatus: %v", v)
+		return fmt.Errorf("invalid value for DecryptedStatus: %v", v)
 	}
 }
 
 // ExtractionInfo - Details for archive extraction.
 type ExtractionInfo struct {
 	// Indicate that decryption phase is successful or not.
-	DecryptedStatus *ExtractionInfoDecryptedStatus `json:"decrypted_status,omitempty"`
+	DecryptedStatus *DecryptedStatus `json:"decrypted_status,omitempty"`
 	// Error category
 	ErrCategory *string `json:"err_category,omitempty"`
 	// Error code
@@ -49,7 +49,7 @@ type ExtractionInfo struct {
 	IsEncryptedFile *bool `json:"is_encrypted_file,omitempty"`
 }
 
-func (o *ExtractionInfo) GetDecryptedStatus() *ExtractionInfoDecryptedStatus {
+func (o *ExtractionInfo) GetDecryptedStatus() *DecryptedStatus {
 	if o == nil {
 		return nil
 	}

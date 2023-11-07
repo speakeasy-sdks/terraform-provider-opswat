@@ -27,38 +27,38 @@ func (o *LicenseUploadRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// LicenseUpload500ApplicationJSON - Unexpected event on server
-type LicenseUpload500ApplicationJSON struct {
+// LicenseUploadLicenseResponseResponseBody - Unexpected event on server
+type LicenseUploadLicenseResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *LicenseUpload500ApplicationJSON) GetErr() *string {
+func (o *LicenseUploadLicenseResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// LicenseUpload403ApplicationJSON - Invalid user information or Not Allowed
-type LicenseUpload403ApplicationJSON struct {
+// LicenseUploadLicenseResponseBody - Invalid user information or Not Allowed
+type LicenseUploadLicenseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *LicenseUpload403ApplicationJSON) GetErr() *string {
+func (o *LicenseUploadLicenseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// LicenseUpload200ApplicationJSON - Request processed successfully
-type LicenseUpload200ApplicationJSON struct {
+// LicenseUploadResponseBody - Request processed successfully
+type LicenseUploadResponseBody struct {
 	Success *bool `json:"success,omitempty"`
 }
 
-func (o *LicenseUpload200ApplicationJSON) GetSuccess() *bool {
+func (o *LicenseUploadResponseBody) GetSuccess() *bool {
 	if o == nil {
 		return nil
 	}
@@ -66,18 +66,39 @@ func (o *LicenseUpload200ApplicationJSON) GetSuccess() *bool {
 }
 
 type LicenseUploadResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *LicenseUploadResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *LicenseUploadLicenseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *LicenseUploadLicenseResponseResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	LicenseUpload200ApplicationJSONObject *LicenseUpload200ApplicationJSON
-	// Invalid user information or Not Allowed
-	LicenseUpload403ApplicationJSONObject *LicenseUpload403ApplicationJSON
-	// Unexpected event on server
-	LicenseUpload500ApplicationJSONObject *LicenseUpload500ApplicationJSON
+}
+
+func (o *LicenseUploadResponse) GetTwoHundredApplicationJSONObject() *LicenseUploadResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *LicenseUploadResponse) GetFourHundredAndThreeApplicationJSONObject() *LicenseUploadLicenseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *LicenseUploadResponse) GetFiveHundredApplicationJSONObject() *LicenseUploadLicenseResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *LicenseUploadResponse) GetContentType() string {
@@ -99,25 +120,4 @@ func (o *LicenseUploadResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *LicenseUploadResponse) GetLicenseUpload200ApplicationJSONObject() *LicenseUpload200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseUpload200ApplicationJSONObject
-}
-
-func (o *LicenseUploadResponse) GetLicenseUpload403ApplicationJSONObject() *LicenseUpload403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseUpload403ApplicationJSONObject
-}
-
-func (o *LicenseUploadResponse) GetLicenseUpload500ApplicationJSONObject() *LicenseUpload500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.LicenseUpload500ApplicationJSONObject
 }

@@ -28,79 +28,114 @@ func (o *EngineConfigPutRequest) GetEngineID() string {
 	return o.EngineID
 }
 
-// EngineConfigPut500ApplicationJSON - Unexpected event on server
-type EngineConfigPut500ApplicationJSON struct {
+// EngineConfigPutEnginesResponse500ResponseBody - Unexpected event on server
+type EngineConfigPutEnginesResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineConfigPut500ApplicationJSON) GetErr() *string {
+func (o *EngineConfigPutEnginesResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// EngineConfigPut405ApplicationJSON - The user has no rights for this operation.
-type EngineConfigPut405ApplicationJSON struct {
+// EngineConfigPutEnginesResponse405ResponseBody - The user has no rights for this operation.
+type EngineConfigPutEnginesResponse405ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineConfigPut405ApplicationJSON) GetErr() *string {
+func (o *EngineConfigPutEnginesResponse405ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// EngineConfigPut403ApplicationJSON - Invalid user information or Not Allowed
-type EngineConfigPut403ApplicationJSON struct {
+// EngineConfigPutEnginesResponseResponseBody - Invalid user information or Not Allowed
+type EngineConfigPutEnginesResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineConfigPut403ApplicationJSON) GetErr() *string {
+func (o *EngineConfigPutEnginesResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// EngineConfigPut400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type EngineConfigPut400ApplicationJSON struct {
+// EngineConfigPutEnginesResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type EngineConfigPutEnginesResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineConfigPut400ApplicationJSON) GetErr() *string {
+func (o *EngineConfigPutEnginesResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// EngineConfigPut200ApplicationJSON - Each engine has different number and types of configurations
-type EngineConfigPut200ApplicationJSON struct {
+// EngineConfigPutResponseBody - Each engine has different number and types of configurations
+type EngineConfigPutResponseBody struct {
 }
 
 type EngineConfigPutResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *EngineConfigPutResponseBody
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *EngineConfigPutEnginesResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *EngineConfigPutEnginesResponseResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *EngineConfigPutEnginesResponse405ResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *EngineConfigPutEnginesResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	EngineConfigPut200ApplicationJSONObject *EngineConfigPut200ApplicationJSON
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	EngineConfigPut400ApplicationJSONObject *EngineConfigPut400ApplicationJSON
-	// Invalid user information or Not Allowed
-	EngineConfigPut403ApplicationJSONObject *EngineConfigPut403ApplicationJSON
-	// The user has no rights for this operation.
-	EngineConfigPut405ApplicationJSONObject *EngineConfigPut405ApplicationJSON
-	// Unexpected event on server
-	EngineConfigPut500ApplicationJSONObject *EngineConfigPut500ApplicationJSON
+}
+
+func (o *EngineConfigPutResponse) GetTwoHundredApplicationJSONObject() *EngineConfigPutResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *EngineConfigPutResponse) GetFourHundredApplicationJSONObject() *EngineConfigPutEnginesResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *EngineConfigPutResponse) GetFourHundredAndThreeApplicationJSONObject() *EngineConfigPutEnginesResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *EngineConfigPutResponse) GetFourHundredAndFiveApplicationJSONObject() *EngineConfigPutEnginesResponse405ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *EngineConfigPutResponse) GetFiveHundredApplicationJSONObject() *EngineConfigPutEnginesResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *EngineConfigPutResponse) GetContentType() string {
@@ -122,39 +157,4 @@ func (o *EngineConfigPutResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *EngineConfigPutResponse) GetEngineConfigPut200ApplicationJSONObject() *EngineConfigPut200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineConfigPut200ApplicationJSONObject
-}
-
-func (o *EngineConfigPutResponse) GetEngineConfigPut400ApplicationJSONObject() *EngineConfigPut400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineConfigPut400ApplicationJSONObject
-}
-
-func (o *EngineConfigPutResponse) GetEngineConfigPut403ApplicationJSONObject() *EngineConfigPut403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineConfigPut403ApplicationJSONObject
-}
-
-func (o *EngineConfigPutResponse) GetEngineConfigPut405ApplicationJSONObject() *EngineConfigPut405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineConfigPut405ApplicationJSONObject
-}
-
-func (o *EngineConfigPutResponse) GetEngineConfigPut500ApplicationJSONObject() *EngineConfigPut500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineConfigPut500ApplicationJSONObject
 }

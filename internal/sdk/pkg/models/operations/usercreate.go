@@ -28,52 +28,52 @@ func (o *UserCreateRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// UserCreate500ApplicationJSON - Unexpected event on server
-type UserCreate500ApplicationJSON struct {
+// UserCreateAdminResponse500ResponseBody - Unexpected event on server
+type UserCreateAdminResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *UserCreate500ApplicationJSON) GetErr() *string {
+func (o *UserCreateAdminResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// UserCreate405ApplicationJSON - The user has no rights for this operation.
-type UserCreate405ApplicationJSON struct {
+// UserCreateAdminResponseResponseBody - The user has no rights for this operation.
+type UserCreateAdminResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *UserCreate405ApplicationJSON) GetErr() *string {
+func (o *UserCreateAdminResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// UserCreate403ApplicationJSON - Invalid user information or Not Allowed
-type UserCreate403ApplicationJSON struct {
+// UserCreateAdminResponseBody - Invalid user information or Not Allowed
+type UserCreateAdminResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *UserCreate403ApplicationJSON) GetErr() *string {
+func (o *UserCreateAdminResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// UserCreate400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type UserCreate400ApplicationJSON struct {
+// UserCreateResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type UserCreateResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *UserCreate400ApplicationJSON) GetErr() *string {
+func (o *UserCreateResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -81,6 +81,14 @@ func (o *UserCreate400ApplicationJSON) GetErr() *string {
 }
 
 type UserCreateResponse struct {
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *UserCreateResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *UserCreateAdminResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *UserCreateAdminResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *UserCreateAdminResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -89,14 +97,34 @@ type UserCreateResponse struct {
 	RawResponse *http.Response
 	// Request processed successfully.
 	UserResponse *shared.UserResponse
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	UserCreate400ApplicationJSONObject *UserCreate400ApplicationJSON
-	// Invalid user information or Not Allowed
-	UserCreate403ApplicationJSONObject *UserCreate403ApplicationJSON
-	// The user has no rights for this operation.
-	UserCreate405ApplicationJSONObject *UserCreate405ApplicationJSON
-	// Unexpected event on server
-	UserCreate500ApplicationJSONObject *UserCreate500ApplicationJSON
+}
+
+func (o *UserCreateResponse) GetFourHundredApplicationJSONObject() *UserCreateResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *UserCreateResponse) GetFourHundredAndThreeApplicationJSONObject() *UserCreateAdminResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *UserCreateResponse) GetFourHundredAndFiveApplicationJSONObject() *UserCreateAdminResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *UserCreateResponse) GetFiveHundredApplicationJSONObject() *UserCreateAdminResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *UserCreateResponse) GetContentType() string {
@@ -125,32 +153,4 @@ func (o *UserCreateResponse) GetUserResponse() *shared.UserResponse {
 		return nil
 	}
 	return o.UserResponse
-}
-
-func (o *UserCreateResponse) GetUserCreate400ApplicationJSONObject() *UserCreate400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserCreate400ApplicationJSONObject
-}
-
-func (o *UserCreateResponse) GetUserCreate403ApplicationJSONObject() *UserCreate403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserCreate403ApplicationJSONObject
-}
-
-func (o *UserCreateResponse) GetUserCreate405ApplicationJSONObject() *UserCreate405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserCreate405ApplicationJSONObject
-}
-
-func (o *UserCreateResponse) GetUserCreate500ApplicationJSONObject() *UserCreate500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserCreate500ApplicationJSONObject
 }

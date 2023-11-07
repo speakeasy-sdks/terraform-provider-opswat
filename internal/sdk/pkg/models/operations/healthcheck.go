@@ -19,13 +19,13 @@ func (o *HealthCheckRequest) GetVerbose() *bool {
 	return o.Verbose
 }
 
-// HealthCheck500ApplicationJSON - Unexpected event on server
-type HealthCheck500ApplicationJSON struct {
+// HealthCheckResponseBody - Unexpected event on server
+type HealthCheckResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *HealthCheck500ApplicationJSON) GetErr() *string {
+func (o *HealthCheckResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -40,7 +40,7 @@ type HealthCheckResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Unexpected event on server
-	HealthCheck500ApplicationJSONObject *HealthCheck500ApplicationJSON
+	Object *HealthCheckResponseBody
 	// Service is currently healthy
 	Readyz *shared.Readyz
 }
@@ -66,11 +66,11 @@ func (o *HealthCheckResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *HealthCheckResponse) GetHealthCheck500ApplicationJSONObject() *HealthCheck500ApplicationJSON {
+func (o *HealthCheckResponse) GetObject() *HealthCheckResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.HealthCheck500ApplicationJSONObject
+	return o.Object
 }
 
 func (o *HealthCheckResponse) GetReadyz() *shared.Readyz {

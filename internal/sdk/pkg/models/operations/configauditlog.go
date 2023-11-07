@@ -28,52 +28,52 @@ func (o *ConfigAuditLogRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigAuditLog500ApplicationJSON - Unexpected event on server
-type ConfigAuditLog500ApplicationJSON struct {
+// ConfigAuditLogConfigResponse500ResponseBody - Unexpected event on server
+type ConfigAuditLogConfigResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigAuditLog500ApplicationJSON) GetErr() *string {
+func (o *ConfigAuditLogConfigResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigAuditLog405ApplicationJSON - The user has no rights for this operation.
-type ConfigAuditLog405ApplicationJSON struct {
+// ConfigAuditLogConfigResponseResponseBody - The user has no rights for this operation.
+type ConfigAuditLogConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigAuditLog405ApplicationJSON) GetErr() *string {
+func (o *ConfigAuditLogConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigAuditLog403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigAuditLog403ApplicationJSON struct {
+// ConfigAuditLogConfigResponseBody - Invalid user information or Not Allowed
+type ConfigAuditLogConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigAuditLog403ApplicationJSON) GetErr() *string {
+func (o *ConfigAuditLogConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigAuditLog200ApplicationJSON - Request processed successfully
-type ConfigAuditLog200ApplicationJSON struct {
+// ConfigAuditLogResponseBody - Request processed successfully
+type ConfigAuditLogResponseBody struct {
 	// The number of hours of data retention. Anything older than this number will be deleted.
 	Cleanuprange *int64 `json:"cleanuprange,omitempty"`
 }
 
-func (o *ConfigAuditLog200ApplicationJSON) GetCleanuprange() *int64 {
+func (o *ConfigAuditLogResponseBody) GetCleanuprange() *int64 {
 	if o == nil {
 		return nil
 	}
@@ -81,20 +81,48 @@ func (o *ConfigAuditLog200ApplicationJSON) GetCleanuprange() *int64 {
 }
 
 type ConfigAuditLogResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *ConfigAuditLogResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigAuditLogConfigResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *ConfigAuditLogConfigResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigAuditLogConfigResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	ConfigAuditLog200ApplicationJSONObject *ConfigAuditLog200ApplicationJSON
-	// Invalid user information or Not Allowed
-	ConfigAuditLog403ApplicationJSONObject *ConfigAuditLog403ApplicationJSON
-	// The user has no rights for this operation.
-	ConfigAuditLog405ApplicationJSONObject *ConfigAuditLog405ApplicationJSON
-	// Unexpected event on server
-	ConfigAuditLog500ApplicationJSONObject *ConfigAuditLog500ApplicationJSON
+}
+
+func (o *ConfigAuditLogResponse) GetTwoHundredApplicationJSONObject() *ConfigAuditLogResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ConfigAuditLogResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigAuditLogConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigAuditLogResponse) GetFourHundredAndFiveApplicationJSONObject() *ConfigAuditLogConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *ConfigAuditLogResponse) GetFiveHundredApplicationJSONObject() *ConfigAuditLogConfigResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigAuditLogResponse) GetContentType() string {
@@ -116,32 +144,4 @@ func (o *ConfigAuditLogResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigAuditLogResponse) GetConfigAuditLog200ApplicationJSONObject() *ConfigAuditLog200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigAuditLog200ApplicationJSONObject
-}
-
-func (o *ConfigAuditLogResponse) GetConfigAuditLog403ApplicationJSONObject() *ConfigAuditLog403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigAuditLog403ApplicationJSONObject
-}
-
-func (o *ConfigAuditLogResponse) GetConfigAuditLog405ApplicationJSONObject() *ConfigAuditLog405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigAuditLog405ApplicationJSONObject
-}
-
-func (o *ConfigAuditLogResponse) GetConfigAuditLog500ApplicationJSONObject() *ConfigAuditLog500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigAuditLog500ApplicationJSONObject
 }

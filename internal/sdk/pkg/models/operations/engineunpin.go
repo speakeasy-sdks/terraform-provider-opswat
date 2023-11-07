@@ -8,20 +8,20 @@ import (
 	"net/http"
 )
 
-// EngineUnpinType - Unpin engine or database to applying automatic updates on it.
+// HeaderType - Unpin engine or database to applying automatic updates on it.
 // (If it is not defined both engine and database will be unpinned.)
-type EngineUnpinType string
+type HeaderType string
 
 const (
-	EngineUnpinTypeEngine   EngineUnpinType = "engine"
-	EngineUnpinTypeDatabase EngineUnpinType = "database"
+	HeaderTypeEngine   HeaderType = "engine"
+	HeaderTypeDatabase HeaderType = "database"
 )
 
-func (e EngineUnpinType) ToPointer() *EngineUnpinType {
+func (e HeaderType) ToPointer() *HeaderType {
 	return &e
 }
 
-func (e *EngineUnpinType) UnmarshalJSON(data []byte) error {
+func (e *HeaderType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -30,10 +30,10 @@ func (e *EngineUnpinType) UnmarshalJSON(data []byte) error {
 	case "engine":
 		fallthrough
 	case "database":
-		*e = EngineUnpinType(v)
+		*e = HeaderType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for EngineUnpinType: %v", v)
+		return fmt.Errorf("invalid value for HeaderType: %v", v)
 	}
 }
 
@@ -45,7 +45,7 @@ type EngineUnpinRequest struct {
 	EngineID string `pathParam:"style=simple,explode=false,name=engineId"`
 	// Unpin engine or database to applying automatic updates on it.
 	// (If it is not defined both engine and database will be unpinned.)
-	Type *EngineUnpinType `header:"style=simple,explode=false,name=type"`
+	Type *HeaderType `header:"style=simple,explode=false,name=type"`
 }
 
 func (o *EngineUnpinRequest) GetApikey() string {
@@ -62,78 +62,78 @@ func (o *EngineUnpinRequest) GetEngineID() string {
 	return o.EngineID
 }
 
-func (o *EngineUnpinRequest) GetType() *EngineUnpinType {
+func (o *EngineUnpinRequest) GetType() *HeaderType {
 	if o == nil {
 		return nil
 	}
 	return o.Type
 }
 
-// EngineUnpin500ApplicationJSON - Unexpected event on server
-type EngineUnpin500ApplicationJSON struct {
+// EngineUnpinEnginesResponse500ResponseBody - Unexpected event on server
+type EngineUnpinEnginesResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineUnpin500ApplicationJSON) GetErr() *string {
+func (o *EngineUnpinEnginesResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// EngineUnpin405ApplicationJSON - The user has no rights for this operation.
-type EngineUnpin405ApplicationJSON struct {
+// EngineUnpinEnginesResponse405ResponseBody - The user has no rights for this operation.
+type EngineUnpinEnginesResponse405ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineUnpin405ApplicationJSON) GetErr() *string {
+func (o *EngineUnpinEnginesResponse405ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// EngineUnpin403ApplicationJSON - Invalid user information or Not Allowed
-type EngineUnpin403ApplicationJSON struct {
+// EngineUnpinEnginesResponseResponseBody - Invalid user information or Not Allowed
+type EngineUnpinEnginesResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineUnpin403ApplicationJSON) GetErr() *string {
+func (o *EngineUnpinEnginesResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// EngineUnpin400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type EngineUnpin400ApplicationJSON struct {
+// EngineUnpinEnginesResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type EngineUnpinEnginesResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineUnpin400ApplicationJSON) GetErr() *string {
+func (o *EngineUnpinEnginesResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-type EngineUnpin200ApplicationJSONResult string
+type EngineUnpinResult string
 
 const (
-	EngineUnpin200ApplicationJSONResultEngineIsUnpinned                 EngineUnpin200ApplicationJSONResult = "Engine is unpinned"
-	EngineUnpin200ApplicationJSONResultDatabaseIsUnpinned               EngineUnpin200ApplicationJSONResult = "Database is unpinned"
-	EngineUnpin200ApplicationJSONResultBothEngineAndDatabaseAreUnpinned EngineUnpin200ApplicationJSONResult = "Both engine and database are unpinned"
+	EngineUnpinResultEngineIsUnpinned                 EngineUnpinResult = "Engine is unpinned"
+	EngineUnpinResultDatabaseIsUnpinned               EngineUnpinResult = "Database is unpinned"
+	EngineUnpinResultBothEngineAndDatabaseAreUnpinned EngineUnpinResult = "Both engine and database are unpinned"
 )
 
-func (e EngineUnpin200ApplicationJSONResult) ToPointer() *EngineUnpin200ApplicationJSONResult {
+func (e EngineUnpinResult) ToPointer() *EngineUnpinResult {
 	return &e
 }
 
-func (e *EngineUnpin200ApplicationJSONResult) UnmarshalJSON(data []byte) error {
+func (e *EngineUnpinResult) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -144,19 +144,19 @@ func (e *EngineUnpin200ApplicationJSONResult) UnmarshalJSON(data []byte) error {
 	case "Database is unpinned":
 		fallthrough
 	case "Both engine and database are unpinned":
-		*e = EngineUnpin200ApplicationJSONResult(v)
+		*e = EngineUnpinResult(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for EngineUnpin200ApplicationJSONResult: %v", v)
+		return fmt.Errorf("invalid value for EngineUnpinResult: %v", v)
 	}
 }
 
-// EngineUnpin200ApplicationJSON - Request processed successfully
-type EngineUnpin200ApplicationJSON struct {
-	Result *EngineUnpin200ApplicationJSONResult `json:"result,omitempty"`
+// EngineUnpinResponseBody - Request processed successfully
+type EngineUnpinResponseBody struct {
+	Result *EngineUnpinResult `json:"result,omitempty"`
 }
 
-func (o *EngineUnpin200ApplicationJSON) GetResult() *EngineUnpin200ApplicationJSONResult {
+func (o *EngineUnpinResponseBody) GetResult() *EngineUnpinResult {
 	if o == nil {
 		return nil
 	}
@@ -164,22 +164,57 @@ func (o *EngineUnpin200ApplicationJSON) GetResult() *EngineUnpin200ApplicationJS
 }
 
 type EngineUnpinResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *EngineUnpinResponseBody
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *EngineUnpinEnginesResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *EngineUnpinEnginesResponseResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *EngineUnpinEnginesResponse405ResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *EngineUnpinEnginesResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	EngineUnpin200ApplicationJSONObject *EngineUnpin200ApplicationJSON
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	EngineUnpin400ApplicationJSONObject *EngineUnpin400ApplicationJSON
-	// Invalid user information or Not Allowed
-	EngineUnpin403ApplicationJSONObject *EngineUnpin403ApplicationJSON
-	// The user has no rights for this operation.
-	EngineUnpin405ApplicationJSONObject *EngineUnpin405ApplicationJSON
-	// Unexpected event on server
-	EngineUnpin500ApplicationJSONObject *EngineUnpin500ApplicationJSON
+}
+
+func (o *EngineUnpinResponse) GetTwoHundredApplicationJSONObject() *EngineUnpinResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *EngineUnpinResponse) GetFourHundredApplicationJSONObject() *EngineUnpinEnginesResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *EngineUnpinResponse) GetFourHundredAndThreeApplicationJSONObject() *EngineUnpinEnginesResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *EngineUnpinResponse) GetFourHundredAndFiveApplicationJSONObject() *EngineUnpinEnginesResponse405ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *EngineUnpinResponse) GetFiveHundredApplicationJSONObject() *EngineUnpinEnginesResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *EngineUnpinResponse) GetContentType() string {
@@ -201,39 +236,4 @@ func (o *EngineUnpinResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *EngineUnpinResponse) GetEngineUnpin200ApplicationJSONObject() *EngineUnpin200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineUnpin200ApplicationJSONObject
-}
-
-func (o *EngineUnpinResponse) GetEngineUnpin400ApplicationJSONObject() *EngineUnpin400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineUnpin400ApplicationJSONObject
-}
-
-func (o *EngineUnpinResponse) GetEngineUnpin403ApplicationJSONObject() *EngineUnpin403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineUnpin403ApplicationJSONObject
-}
-
-func (o *EngineUnpinResponse) GetEngineUnpin405ApplicationJSONObject() *EngineUnpin405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineUnpin405ApplicationJSONObject
-}
-
-func (o *EngineUnpinResponse) GetEngineUnpin500ApplicationJSONObject() *EngineUnpin500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineUnpin500ApplicationJSONObject
 }

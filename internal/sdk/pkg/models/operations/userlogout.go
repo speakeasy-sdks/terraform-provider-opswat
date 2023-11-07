@@ -19,49 +19,49 @@ func (o *UserLogoutRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// UserLogout500ApplicationJSON - Unexpected event on server
-type UserLogout500ApplicationJSON struct {
+// UserLogoutAuthResponse500ResponseBody - Unexpected event on server
+type UserLogoutAuthResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *UserLogout500ApplicationJSON) GetErr() *string {
+func (o *UserLogoutAuthResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// UserLogout403ApplicationJSON - Invalid user information.
-type UserLogout403ApplicationJSON struct {
+// UserLogoutAuthResponseResponseBody - Invalid user information.
+type UserLogoutAuthResponseResponseBody struct {
 	Err string `json:"err"`
 }
 
-func (o *UserLogout403ApplicationJSON) GetErr() string {
+func (o *UserLogoutAuthResponseResponseBody) GetErr() string {
 	if o == nil {
 		return ""
 	}
 	return o.Err
 }
 
-// UserLogout400ApplicationJSON - Bad Request.
-type UserLogout400ApplicationJSON struct {
+// UserLogoutAuthResponseBody - Bad Request.
+type UserLogoutAuthResponseBody struct {
 	Err string `json:"err"`
 }
 
-func (o *UserLogout400ApplicationJSON) GetErr() string {
+func (o *UserLogoutAuthResponseBody) GetErr() string {
 	if o == nil {
 		return ""
 	}
 	return o.Err
 }
 
-// UserLogout200ApplicationJSON - OK
-type UserLogout200ApplicationJSON struct {
+// UserLogoutResponseBody - OK
+type UserLogoutResponseBody struct {
 	Response string `json:"response"`
 }
 
-func (o *UserLogout200ApplicationJSON) GetResponse() string {
+func (o *UserLogoutResponseBody) GetResponse() string {
 	if o == nil {
 		return ""
 	}
@@ -69,20 +69,48 @@ func (o *UserLogout200ApplicationJSON) GetResponse() string {
 }
 
 type UserLogoutResponse struct {
+	// OK
+	TwoHundredApplicationJSONObject *UserLogoutResponseBody
+	// Bad Request.
+	FourHundredApplicationJSONObject *UserLogoutAuthResponseBody
+	// Invalid user information.
+	FourHundredAndThreeApplicationJSONObject *UserLogoutAuthResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *UserLogoutAuthResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// OK
-	UserLogout200ApplicationJSONObject *UserLogout200ApplicationJSON
-	// Bad Request.
-	UserLogout400ApplicationJSONObject *UserLogout400ApplicationJSON
-	// Invalid user information.
-	UserLogout403ApplicationJSONObject *UserLogout403ApplicationJSON
-	// Unexpected event on server
-	UserLogout500ApplicationJSONObject *UserLogout500ApplicationJSON
+}
+
+func (o *UserLogoutResponse) GetTwoHundredApplicationJSONObject() *UserLogoutResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *UserLogoutResponse) GetFourHundredApplicationJSONObject() *UserLogoutAuthResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *UserLogoutResponse) GetFourHundredAndThreeApplicationJSONObject() *UserLogoutAuthResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *UserLogoutResponse) GetFiveHundredApplicationJSONObject() *UserLogoutAuthResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *UserLogoutResponse) GetContentType() string {
@@ -104,32 +132,4 @@ func (o *UserLogoutResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *UserLogoutResponse) GetUserLogout200ApplicationJSONObject() *UserLogout200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserLogout200ApplicationJSONObject
-}
-
-func (o *UserLogoutResponse) GetUserLogout400ApplicationJSONObject() *UserLogout400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserLogout400ApplicationJSONObject
-}
-
-func (o *UserLogoutResponse) GetUserLogout403ApplicationJSONObject() *UserLogout403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserLogout403ApplicationJSONObject
-}
-
-func (o *UserLogoutResponse) GetUserLogout500ApplicationJSONObject() *UserLogout500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserLogout500ApplicationJSONObject
 }

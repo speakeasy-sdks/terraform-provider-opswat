@@ -25,34 +25,34 @@ func (o *AnalysisRulesRequest) GetUserAgent() *string {
 	return o.UserAgent
 }
 
-// AnalysisRules500ApplicationJSON - Unexpected event on server
-type AnalysisRules500ApplicationJSON struct {
+// AnalysisRulesResponseBody - Unexpected event on server
+type AnalysisRulesResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *AnalysisRules500ApplicationJSON) GetErr() *string {
+func (o *AnalysisRulesResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-type AnalysisRules200ApplicationJSON struct {
+type ResponseBody struct {
 	// The maximum allowed file size (in bytes) for this rule.
 	MaxFileSize *int64 `json:"max_file_size,omitempty"`
 	// A unique identifier for identify in the used rule for a scan..
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *AnalysisRules200ApplicationJSON) GetMaxFileSize() *int64 {
+func (o *ResponseBody) GetMaxFileSize() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.MaxFileSize
 }
 
-func (o *AnalysisRules200ApplicationJSON) GetName() *string {
+func (o *ResponseBody) GetName() *string {
 	if o == nil {
 		return nil
 	}
@@ -67,9 +67,9 @@ type AnalysisRulesResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Returns the list of available rules.
-	AnalysisRules200ApplicationJSONObjects []AnalysisRules200ApplicationJSON
+	Classes []ResponseBody
 	// Unexpected event on server
-	AnalysisRules500ApplicationJSONObject *AnalysisRules500ApplicationJSON
+	Object *AnalysisRulesResponseBody
 }
 
 func (o *AnalysisRulesResponse) GetContentType() string {
@@ -93,16 +93,16 @@ func (o *AnalysisRulesResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *AnalysisRulesResponse) GetAnalysisRules200ApplicationJSONObjects() []AnalysisRules200ApplicationJSON {
+func (o *AnalysisRulesResponse) GetClasses() []ResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.AnalysisRules200ApplicationJSONObjects
+	return o.Classes
 }
 
-func (o *AnalysisRulesResponse) GetAnalysisRules500ApplicationJSONObject() *AnalysisRules500ApplicationJSON {
+func (o *AnalysisRulesResponse) GetObject() *AnalysisRulesResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.AnalysisRules500ApplicationJSONObject
+	return o.Object
 }

@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// stats - Health check and statistics about MetaDefender Core usage.
-type stats struct {
+// Stats - Health check and statistics about MetaDefender Core usage.
+type Stats struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newStats(sdkConfig sdkConfiguration) *stats {
-	return &stats{
+func newStats(sdkConfig sdkConfiguration) *Stats {
+	return &Stats{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // ActivePerformance - Active performance
 // Get active performance statistics.
-func (s *stats) ActivePerformance(ctx context.Context, request operations.ActivePerformanceRequest) (*operations.ActivePerformanceResponse, error) {
+func (s *Stats) ActivePerformance(ctx context.Context, request operations.ActivePerformanceRequest) (*operations.ActivePerformanceResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/stat/activeperformance"
 
@@ -73,48 +73,48 @@ func (s *stats) ActivePerformance(ctx context.Context, request operations.Active
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ActivePerformance200ApplicationJSON
+			var out operations.ActivePerformanceResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ActivePerformance200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ActivePerformance403ApplicationJSON
+			var out operations.ActivePerformanceStatsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ActivePerformance403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ActivePerformance405ApplicationJSON
+			var out operations.ActivePerformanceStatsResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ActivePerformance405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ActivePerformance500ApplicationJSON
+			var out operations.ActivePerformanceStatsResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ActivePerformance500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -125,7 +125,7 @@ func (s *stats) ActivePerformance(ctx context.Context, request operations.Active
 
 // EnginesStatus - Engines Status
 // The response is an array of engines with database information.
-func (s *stats) EnginesStatus(ctx context.Context, request operations.EnginesStatusRequest) (*operations.EnginesStatusResponse, error) {
+func (s *Stats) EnginesStatus(ctx context.Context, request operations.EnginesStatusRequest) (*operations.EnginesStatusResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/stat/engines"
 
@@ -166,12 +166,12 @@ func (s *stats) EnginesStatus(ctx context.Context, request operations.EnginesSta
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out []operations.EnginesStatus200ApplicationJSON
+			var out []operations.EnginesStatusResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.EnginesStatus200ApplicationJSONObjects = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -182,7 +182,7 @@ func (s *stats) EnginesStatus(ctx context.Context, request operations.EnginesSta
 
 // HealthCheck - Get health check status
 // Fetch current health check status of MetaDefender Core server.
-func (s *stats) HealthCheck(ctx context.Context, request operations.HealthCheckRequest) (*operations.HealthCheckResponse, error) {
+func (s *Stats) HealthCheck(ctx context.Context, request operations.HealthCheckRequest) (*operations.HealthCheckResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/readyz"
 
@@ -237,12 +237,12 @@ func (s *stats) HealthCheck(ctx context.Context, request operations.HealthCheckR
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.HealthCheck500ApplicationJSON
+			var out operations.HealthCheckResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.HealthCheck500ApplicationJSONObject = &out
+			res.Object = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -254,7 +254,7 @@ func (s *stats) HealthCheck(ctx context.Context, request operations.HealthCheckR
 
 // NodesStatus - Nodes Status
 // Get a list of all connected nodes and their status.
-func (s *stats) NodesStatus(ctx context.Context, request operations.NodesStatusRequest) (*operations.NodesStatusResponse, error) {
+func (s *Stats) NodesStatus(ctx context.Context, request operations.NodesStatusRequest) (*operations.NodesStatusResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/stat/nodes"
 
@@ -295,36 +295,36 @@ func (s *stats) NodesStatus(ctx context.Context, request operations.NodesStatusR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out []operations.NodesStatus200ApplicationJSON
+			var out []operations.NodesStatusStatsResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.NodesStatus200ApplicationJSONObjects = out
+			res.TwoHundredApplicationJSONClasses = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.NodesStatus403ApplicationJSON
+			var out operations.NodesStatusResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.NodesStatus403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.NodesStatus405ApplicationJSON
+			var out operations.NodesStatusStatsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.NodesStatus405ApplicationJSONObject = &out
+			res.FourHundredAndFiveApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -335,7 +335,7 @@ func (s *stats) NodesStatus(ctx context.Context, request operations.NodesStatusR
 
 // ProductVersion - Get Product Version
 // Fetch details about the product version.
-func (s *stats) ProductVersion(ctx context.Context, request operations.ProductVersionRequest) (*operations.ProductVersionResponse, error) {
+func (s *Stats) ProductVersion(ctx context.Context, request operations.ProductVersionRequest) (*operations.ProductVersionResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/version"
 
@@ -376,24 +376,24 @@ func (s *stats) ProductVersion(ctx context.Context, request operations.ProductVe
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ProductVersion200ApplicationJSON
+			var out operations.ProductVersionResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ProductVersion200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ProductVersion500ApplicationJSON
+			var out operations.ProductVersionStatsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ProductVersion500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

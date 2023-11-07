@@ -7,7 +7,57 @@ import (
 	"fmt"
 )
 
-// DLPResponseCertainty - Describes how certain the hit is, possible values:
+// Certainty - Describes how certain the hit is, possible values:
+//   - `Very Low`
+//   - `Low`
+//   - `Medium`
+//   - `High`
+//   - `Very High`
+type Certainty string
+
+const (
+	CertaintyVeryLow  Certainty = "Very Low"
+	CertaintyLow      Certainty = "Low"
+	CertaintyMedium   Certainty = "Medium"
+	CertaintyHigh     Certainty = "High"
+	CertaintyVeryHigh Certainty = "Very High"
+)
+
+func (e Certainty) ToPointer() *Certainty {
+	return &e
+}
+
+func (e *Certainty) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "Very Low":
+		fallthrough
+	case "Low":
+		fallthrough
+	case "Medium":
+		fallthrough
+	case "High":
+		fallthrough
+	case "Very High":
+		*e = Certainty(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Certainty: %v", v)
+	}
+}
+
+// Errors - A  list of error objects (empty if no errors happened), each error object contains following keys:
+//   - `scan`: scan related error description
+//   - `redact`: redaction related error description
+//   - `watermark`: watermark related error description
+//   - `metadata_removal`: metadata removal related error description
+type Errors struct {
+}
+
+// DLPResponseCertainty - The text version of "certainty_score", possible values:
 //   - `Very Low`
 //   - `Low`
 //   - `Medium`
@@ -49,309 +99,7 @@ func (e *DLPResponseCertainty) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// DLPResponseErrors - A  list of error objects (empty if no errors happened), each error object contains following keys:
-//   - `scan`: scan related error description
-//   - `redact`: redaction related error description
-//   - `watermark`: watermark related error description
-//   - `metadata_removal`: metadata removal related error description
-type DLPResponseErrors struct {
-}
-
-// DLPResponseHitsCcnHitsCertainty - The text version of "certainty_score", possible values:
-//   - `Very Low`
-//   - `Low`
-//   - `Medium`
-//   - `High`
-//   - `Very High`
-type DLPResponseHitsCcnHitsCertainty string
-
-const (
-	DLPResponseHitsCcnHitsCertaintyVeryLow  DLPResponseHitsCcnHitsCertainty = "Very Low"
-	DLPResponseHitsCcnHitsCertaintyLow      DLPResponseHitsCcnHitsCertainty = "Low"
-	DLPResponseHitsCcnHitsCertaintyMedium   DLPResponseHitsCcnHitsCertainty = "Medium"
-	DLPResponseHitsCcnHitsCertaintyHigh     DLPResponseHitsCcnHitsCertainty = "High"
-	DLPResponseHitsCcnHitsCertaintyVeryHigh DLPResponseHitsCcnHitsCertainty = "Very High"
-)
-
-func (e DLPResponseHitsCcnHitsCertainty) ToPointer() *DLPResponseHitsCcnHitsCertainty {
-	return &e
-}
-
-func (e *DLPResponseHitsCcnHitsCertainty) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "Very Low":
-		fallthrough
-	case "Low":
-		fallthrough
-	case "Medium":
-		fallthrough
-	case "High":
-		fallthrough
-	case "Very High":
-		*e = DLPResponseHitsCcnHitsCertainty(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DLPResponseHitsCcnHitsCertainty: %v", v)
-	}
-}
-
-// DLPResponseHitsCcnHitsSeverity - (NOTE: this field is deprecated): can be 0 (detected) or 1 (suspicious).
-type DLPResponseHitsCcnHitsSeverity int64
-
-const (
-	DLPResponseHitsCcnHitsSeverityZero DLPResponseHitsCcnHitsSeverity = 0
-	DLPResponseHitsCcnHitsSeverityOne  DLPResponseHitsCcnHitsSeverity = 1
-)
-
-func (e DLPResponseHitsCcnHitsSeverity) ToPointer() *DLPResponseHitsCcnHitsSeverity {
-	return &e
-}
-
-func (e *DLPResponseHitsCcnHitsSeverity) UnmarshalJSON(data []byte) error {
-	var v int64
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case 0:
-		fallthrough
-	case 1:
-		*e = DLPResponseHitsCcnHitsSeverity(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DLPResponseHitsCcnHitsSeverity: %v", v)
-	}
-}
-
-// DLPResponseHitsCcnHits - An entry detailing the match.
-type DLPResponseHitsCcnHits struct {
-	// The context after the matched data.
-	After *string `json:"after,omitempty"`
-	// The context before the matched data.
-	Before *string `json:"before,omitempty"`
-	// The text version of "certainty_score", possible values:
-	//   * `Very Low`
-	//   * `Low`
-	//   * `Medium`
-	//   * `High`
-	//   * `Very High`
-	//
-	Certainty *DLPResponseHitsCcnHitsCertainty `json:"certainty,omitempty"`
-	// Is  defined by the relevance of the given hit in its context. It is calculated based on multiple factors such as the number of digits, possible values: [0-100]
-	//
-	CertaintyScore *int64 `json:"certainty_score,omitempty"`
-	// The matched data.
-	Hit *string `json:"hit,omitempty"`
-	// The location of the hit that is found in a file.
-	Location *string `json:"location,omitempty"`
-	// (NOTE: this field is deprecated): can be 0 (detected) or 1 (suspicious).
-	//
-	Severity *DLPResponseHitsCcnHitsSeverity `json:"severity,omitempty"`
-	// If file was redacted or not.
-	TryRedact *bool `json:"tryRedact,omitempty"`
-}
-
-func (o *DLPResponseHitsCcnHits) GetAfter() *string {
-	if o == nil {
-		return nil
-	}
-	return o.After
-}
-
-func (o *DLPResponseHitsCcnHits) GetBefore() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Before
-}
-
-func (o *DLPResponseHitsCcnHits) GetCertainty() *DLPResponseHitsCcnHitsCertainty {
-	if o == nil {
-		return nil
-	}
-	return o.Certainty
-}
-
-func (o *DLPResponseHitsCcnHits) GetCertaintyScore() *int64 {
-	if o == nil {
-		return nil
-	}
-	return o.CertaintyScore
-}
-
-func (o *DLPResponseHitsCcnHits) GetHit() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Hit
-}
-
-func (o *DLPResponseHitsCcnHits) GetLocation() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Location
-}
-
-func (o *DLPResponseHitsCcnHits) GetSeverity() *DLPResponseHitsCcnHitsSeverity {
-	if o == nil {
-		return nil
-	}
-	return o.Severity
-}
-
-func (o *DLPResponseHitsCcnHits) GetTryRedact() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.TryRedact
-}
-
-type DLPResponseHitsCcn struct {
-	// Credit Card Number, Social Security Number, or in case of RegEx, the name of the rule that has been given by the user
-	DisplayName *string `json:"display_name,omitempty"`
-	// A list of detections that matched this rule/pattern.
-	Hits []DLPResponseHitsCcnHits `json:"hits,omitempty"`
-}
-
-func (o *DLPResponseHitsCcn) GetDisplayName() *string {
-	if o == nil {
-		return nil
-	}
-	return o.DisplayName
-}
-
-func (o *DLPResponseHitsCcn) GetHits() []DLPResponseHitsCcnHits {
-	if o == nil {
-		return nil
-	}
-	return o.Hits
-}
-
-// DLPResponseHits - Detailed results that contains as key the type of matched rule:
-//   - ccn (credit card number),
-//   - ssn (social security number),
-//   - regex_<index> (regular expression with an index in order to differentiate the RegEx rules if there are more.)
-type DLPResponseHits struct {
-	Ccn *DLPResponseHitsCcn `json:"ccn,omitempty"`
-}
-
-func (o *DLPResponseHits) GetCcn() *DLPResponseHitsCcn {
-	if o == nil {
-		return nil
-	}
-	return o.Ccn
-}
-
-// DLPResponseMetadataRemovalResult - Result of the metadata removal process, possible values:
-//   - `removed`
-//   - `not removed`
-//   - `failed to remove`
-type DLPResponseMetadataRemovalResult string
-
-const (
-	DLPResponseMetadataRemovalResultRemoved        DLPResponseMetadataRemovalResult = "removed"
-	DLPResponseMetadataRemovalResultNotRemoved     DLPResponseMetadataRemovalResult = "not removed"
-	DLPResponseMetadataRemovalResultFailedToRemove DLPResponseMetadataRemovalResult = "failed to remove"
-)
-
-func (e DLPResponseMetadataRemovalResult) ToPointer() *DLPResponseMetadataRemovalResult {
-	return &e
-}
-
-func (e *DLPResponseMetadataRemovalResult) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "removed":
-		fallthrough
-	case "not removed":
-		fallthrough
-	case "failed to remove":
-		*e = DLPResponseMetadataRemovalResult(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DLPResponseMetadataRemovalResult: %v", v)
-	}
-}
-
-// DLPResponseMetadataRemoval - Result of metadata removal.
-type DLPResponseMetadataRemoval struct {
-	// Result of the metadata removal process, possible values:
-	//   * `removed`
-	//   * `not removed`
-	//   * `failed to remove`
-	//
-	Result *DLPResponseMetadataRemovalResult `json:"result,omitempty"`
-}
-
-func (o *DLPResponseMetadataRemoval) GetResult() *DLPResponseMetadataRemovalResult {
-	if o == nil {
-		return nil
-	}
-	return o.Result
-}
-
-// DLPResponseRedactResult - Result of the redaction process, possible values:
-//   - `redacted`
-//   - `not redacted`
-//   - `failed to redact`
-type DLPResponseRedactResult string
-
-const (
-	DLPResponseRedactResultRedacted       DLPResponseRedactResult = "redacted"
-	DLPResponseRedactResultNotRedacted    DLPResponseRedactResult = "not redacted"
-	DLPResponseRedactResultFailedToRedact DLPResponseRedactResult = "failed to redact"
-)
-
-func (e DLPResponseRedactResult) ToPointer() *DLPResponseRedactResult {
-	return &e
-}
-
-func (e *DLPResponseRedactResult) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "redacted":
-		fallthrough
-	case "not redacted":
-		fallthrough
-	case "failed to redact":
-		*e = DLPResponseRedactResult(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DLPResponseRedactResult: %v", v)
-	}
-}
-
-// DLPResponseRedact - Result of redaction process.
-type DLPResponseRedact struct {
-	// Result of the redaction process, possible values:
-	//   * `redacted`
-	//   * `not redacted`
-	//   * `failed to redact`
-	//
-	Result *DLPResponseRedactResult `json:"result,omitempty"`
-}
-
-func (o *DLPResponseRedact) GetResult() *DLPResponseRedactResult {
-	if o == nil {
-		return nil
-	}
-	return o.Result
-}
-
-// DLPResponseSeverity - (NOTE: this field is deprecated): represents the severity of the data loss, possible values:
-//   - `0` - Certainly is data loss
-//   - `1` - Might be data loss
+// DLPResponseSeverity - (NOTE: this field is deprecated): can be 0 (detected) or 1 (suspicious).
 type DLPResponseSeverity int64
 
 const (
@@ -379,27 +127,279 @@ func (e *DLPResponseSeverity) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// DLPResponseVerdict - The overall result for the scanned file. Possible values:
+// DLPResponseHits - An entry detailing the match.
+type DLPResponseHits struct {
+	// The context after the matched data.
+	After *string `json:"after,omitempty"`
+	// The context before the matched data.
+	Before *string `json:"before,omitempty"`
+	// The text version of "certainty_score", possible values:
+	//   * `Very Low`
+	//   * `Low`
+	//   * `Medium`
+	//   * `High`
+	//   * `Very High`
+	//
+	Certainty *DLPResponseCertainty `json:"certainty,omitempty"`
+	// Is  defined by the relevance of the given hit in its context. It is calculated based on multiple factors such as the number of digits, possible values: [0-100]
+	//
+	CertaintyScore *int64 `json:"certainty_score,omitempty"`
+	// The matched data.
+	Hit *string `json:"hit,omitempty"`
+	// The location of the hit that is found in a file.
+	Location *string `json:"location,omitempty"`
+	// (NOTE: this field is deprecated): can be 0 (detected) or 1 (suspicious).
+	//
+	Severity *DLPResponseSeverity `json:"severity,omitempty"`
+	// If file was redacted or not.
+	TryRedact *bool `json:"tryRedact,omitempty"`
+}
+
+func (o *DLPResponseHits) GetAfter() *string {
+	if o == nil {
+		return nil
+	}
+	return o.After
+}
+
+func (o *DLPResponseHits) GetBefore() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Before
+}
+
+func (o *DLPResponseHits) GetCertainty() *DLPResponseCertainty {
+	if o == nil {
+		return nil
+	}
+	return o.Certainty
+}
+
+func (o *DLPResponseHits) GetCertaintyScore() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.CertaintyScore
+}
+
+func (o *DLPResponseHits) GetHit() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Hit
+}
+
+func (o *DLPResponseHits) GetLocation() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Location
+}
+
+func (o *DLPResponseHits) GetSeverity() *DLPResponseSeverity {
+	if o == nil {
+		return nil
+	}
+	return o.Severity
+}
+
+func (o *DLPResponseHits) GetTryRedact() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.TryRedact
+}
+
+type Ccn struct {
+	// Credit Card Number, Social Security Number, or in case of RegEx, the name of the rule that has been given by the user
+	DisplayName *string `json:"display_name,omitempty"`
+	// A list of detections that matched this rule/pattern.
+	Hits []DLPResponseHits `json:"hits,omitempty"`
+}
+
+func (o *Ccn) GetDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisplayName
+}
+
+func (o *Ccn) GetHits() []DLPResponseHits {
+	if o == nil {
+		return nil
+	}
+	return o.Hits
+}
+
+// Hits - Detailed results that contains as key the type of matched rule:
+//   - ccn (credit card number),
+//   - ssn (social security number),
+//   - regex_<index> (regular expression with an index in order to differentiate the RegEx rules if there are more.)
+type Hits struct {
+	Ccn *Ccn `json:"ccn,omitempty"`
+}
+
+func (o *Hits) GetCcn() *Ccn {
+	if o == nil {
+		return nil
+	}
+	return o.Ccn
+}
+
+// DLPResponseSchemasMetadataRemovalResult - Result of the metadata removal process, possible values:
+//   - `removed`
+//   - `not removed`
+//   - `failed to remove`
+type DLPResponseSchemasMetadataRemovalResult string
+
+const (
+	DLPResponseSchemasMetadataRemovalResultRemoved        DLPResponseSchemasMetadataRemovalResult = "removed"
+	DLPResponseSchemasMetadataRemovalResultNotRemoved     DLPResponseSchemasMetadataRemovalResult = "not removed"
+	DLPResponseSchemasMetadataRemovalResultFailedToRemove DLPResponseSchemasMetadataRemovalResult = "failed to remove"
+)
+
+func (e DLPResponseSchemasMetadataRemovalResult) ToPointer() *DLPResponseSchemasMetadataRemovalResult {
+	return &e
+}
+
+func (e *DLPResponseSchemasMetadataRemovalResult) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "removed":
+		fallthrough
+	case "not removed":
+		fallthrough
+	case "failed to remove":
+		*e = DLPResponseSchemasMetadataRemovalResult(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for DLPResponseSchemasMetadataRemovalResult: %v", v)
+	}
+}
+
+// MetadataRemoval - Result of metadata removal.
+type MetadataRemoval struct {
+	// Result of the metadata removal process, possible values:
+	//   * `removed`
+	//   * `not removed`
+	//   * `failed to remove`
+	//
+	Result *DLPResponseSchemasMetadataRemovalResult `json:"result,omitempty"`
+}
+
+func (o *MetadataRemoval) GetResult() *DLPResponseSchemasMetadataRemovalResult {
+	if o == nil {
+		return nil
+	}
+	return o.Result
+}
+
+// DLPResponseResult - Result of the redaction process, possible values:
+//   - `redacted`
+//   - `not redacted`
+//   - `failed to redact`
+type DLPResponseResult string
+
+const (
+	DLPResponseResultRedacted       DLPResponseResult = "redacted"
+	DLPResponseResultNotRedacted    DLPResponseResult = "not redacted"
+	DLPResponseResultFailedToRedact DLPResponseResult = "failed to redact"
+)
+
+func (e DLPResponseResult) ToPointer() *DLPResponseResult {
+	return &e
+}
+
+func (e *DLPResponseResult) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "redacted":
+		fallthrough
+	case "not redacted":
+		fallthrough
+	case "failed to redact":
+		*e = DLPResponseResult(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for DLPResponseResult: %v", v)
+	}
+}
+
+// Redact - Result of redaction process.
+type Redact struct {
+	// Result of the redaction process, possible values:
+	//   * `redacted`
+	//   * `not redacted`
+	//   * `failed to redact`
+	//
+	Result *DLPResponseResult `json:"result,omitempty"`
+}
+
+func (o *Redact) GetResult() *DLPResponseResult {
+	if o == nil {
+		return nil
+	}
+	return o.Result
+}
+
+// Severity - (NOTE: this field is deprecated): represents the severity of the data loss, possible values:
+//   - `0` - Certainly is data loss
+//   - `1` - Might be data loss
+type Severity int64
+
+const (
+	SeverityZero Severity = 0
+	SeverityOne  Severity = 1
+)
+
+func (e Severity) ToPointer() *Severity {
+	return &e
+}
+
+func (e *Severity) UnmarshalJSON(data []byte) error {
+	var v int64
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case 0:
+		fallthrough
+	case 1:
+		*e = Severity(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Severity: %v", v)
+	}
+}
+
+// Verdict - The overall result for the scanned file. Possible values:
 //   - `0` - Clean
 //   - `1` - Found matched data
 //   - `2` - Suspicious
 //   - `3` - Failed
 //   - `4` - Not scanned
-type DLPResponseVerdict int64
+type Verdict int64
 
 const (
-	DLPResponseVerdictZero  DLPResponseVerdict = 0
-	DLPResponseVerdictOne   DLPResponseVerdict = 1
-	DLPResponseVerdictTwo   DLPResponseVerdict = 2
-	DLPResponseVerdictThree DLPResponseVerdict = 3
-	DLPResponseVerdictFour  DLPResponseVerdict = 4
+	VerdictZero  Verdict = 0
+	VerdictOne   Verdict = 1
+	VerdictTwo   Verdict = 2
+	VerdictThree Verdict = 3
+	VerdictFour  Verdict = 4
 )
 
-func (e DLPResponseVerdict) ToPointer() *DLPResponseVerdict {
+func (e Verdict) ToPointer() *Verdict {
 	return &e
 }
 
-func (e *DLPResponseVerdict) UnmarshalJSON(data []byte) error {
+func (e *Verdict) UnmarshalJSON(data []byte) error {
 	var v int64
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -414,30 +414,30 @@ func (e *DLPResponseVerdict) UnmarshalJSON(data []byte) error {
 	case 3:
 		fallthrough
 	case 4:
-		*e = DLPResponseVerdict(v)
+		*e = Verdict(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DLPResponseVerdict: %v", v)
+		return fmt.Errorf("invalid value for Verdict: %v", v)
 	}
 }
 
-// DLPResponseWatermarkResult - Result of the watermarking process, possible values:
+// DLPResponseSchemasResult - Result of the watermarking process, possible values:
 //   - `added`
 //   - `not added`
 //   - `failed to add`
-type DLPResponseWatermarkResult string
+type DLPResponseSchemasResult string
 
 const (
-	DLPResponseWatermarkResultAdded       DLPResponseWatermarkResult = "added"
-	DLPResponseWatermarkResultNotAdded    DLPResponseWatermarkResult = "not added"
-	DLPResponseWatermarkResultFailedToAdd DLPResponseWatermarkResult = "failed to add"
+	DLPResponseSchemasResultAdded       DLPResponseSchemasResult = "added"
+	DLPResponseSchemasResultNotAdded    DLPResponseSchemasResult = "not added"
+	DLPResponseSchemasResultFailedToAdd DLPResponseSchemasResult = "failed to add"
 )
 
-func (e DLPResponseWatermarkResult) ToPointer() *DLPResponseWatermarkResult {
+func (e DLPResponseSchemasResult) ToPointer() *DLPResponseSchemasResult {
 	return &e
 }
 
-func (e *DLPResponseWatermarkResult) UnmarshalJSON(data []byte) error {
+func (e *DLPResponseSchemasResult) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -448,24 +448,24 @@ func (e *DLPResponseWatermarkResult) UnmarshalJSON(data []byte) error {
 	case "not added":
 		fallthrough
 	case "failed to add":
-		*e = DLPResponseWatermarkResult(v)
+		*e = DLPResponseSchemasResult(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DLPResponseWatermarkResult: %v", v)
+		return fmt.Errorf("invalid value for DLPResponseSchemasResult: %v", v)
 	}
 }
 
-// DLPResponseWatermark - Result of watermarking process.
-type DLPResponseWatermark struct {
+// Watermark - Result of watermarking process.
+type Watermark struct {
 	// Result of the watermarking process, possible values:
 	//   * `added`
 	//   * `not added`
 	//   * `failed to add`
 	//
-	Result *DLPResponseWatermarkResult `json:"result,omitempty"`
+	Result *DLPResponseSchemasResult `json:"result,omitempty"`
 }
 
-func (o *DLPResponseWatermark) GetResult() *DLPResponseWatermarkResult {
+func (o *Watermark) GetResult() *DLPResponseSchemasResult {
 	if o == nil {
 		return nil
 	}
@@ -481,14 +481,14 @@ type DLPResponse struct {
 	//   * `High`
 	//   * `Very High`
 	//
-	Certainty *DLPResponseCertainty `json:"certainty,omitempty"`
+	Certainty *Certainty `json:"certainty,omitempty"`
 	// A  list of error objects (empty if no errors happened), each error object contains following keys:
 	//   * `scan`: scan related error description
 	//   * `redact`: redaction related error description
 	//   * `watermark`: watermark related error description
 	//   * `metadata_removal`: metadata removal related error description
 	//
-	Errors *DLPResponseErrors `json:"errors,omitempty"`
+	Errors *Errors `json:"errors,omitempty"`
 	// Output processed file name (pre-configured on engine settings under Core's worflow rule)
 	Filename *string `json:"filename,omitempty"`
 	// Detailed results that contains as key the type of matched rule:
@@ -496,16 +496,16 @@ type DLPResponse struct {
 	//   * ssn (social security number),
 	//   * regex_<index> (regular expression with an index in order to differentiate the RegEx rules if there are more.)
 	//
-	Hits *DLPResponseHits `json:"hits,omitempty"`
+	Hits *Hits `json:"hits,omitempty"`
 	// Result of metadata removal.
-	MetadataRemoval *DLPResponseMetadataRemoval `json:"metadata_removal,omitempty"`
+	MetadataRemoval *MetadataRemoval `json:"metadata_removal,omitempty"`
 	// Result of redaction process.
-	Redact *DLPResponseRedact `json:"redact,omitempty"`
+	Redact *Redact `json:"redact,omitempty"`
 	// (NOTE: this field is deprecated): represents the severity of the data loss, possible values:
 	//   * `0` - Certainly is data loss
 	//   * `1` - Might be data loss
 	//
-	Severity *DLPResponseSeverity `json:"severity,omitempty"`
+	Severity *Severity `json:"severity,omitempty"`
 	// The overall result for the scanned file. Possible values:
 	//   * `0` - Clean
 	//   * `1` - Found matched data
@@ -513,19 +513,19 @@ type DLPResponse struct {
 	//   * `3` - Failed
 	//   * `4` - Not scanned
 	//
-	Verdict *DLPResponseVerdict `json:"verdict,omitempty"`
+	Verdict *Verdict `json:"verdict,omitempty"`
 	// Result of watermarking process.
-	Watermark *DLPResponseWatermark `json:"watermark,omitempty"`
+	Watermark *Watermark `json:"watermark,omitempty"`
 }
 
-func (o *DLPResponse) GetCertainty() *DLPResponseCertainty {
+func (o *DLPResponse) GetCertainty() *Certainty {
 	if o == nil {
 		return nil
 	}
 	return o.Certainty
 }
 
-func (o *DLPResponse) GetErrors() *DLPResponseErrors {
+func (o *DLPResponse) GetErrors() *Errors {
 	if o == nil {
 		return nil
 	}
@@ -539,42 +539,42 @@ func (o *DLPResponse) GetFilename() *string {
 	return o.Filename
 }
 
-func (o *DLPResponse) GetHits() *DLPResponseHits {
+func (o *DLPResponse) GetHits() *Hits {
 	if o == nil {
 		return nil
 	}
 	return o.Hits
 }
 
-func (o *DLPResponse) GetMetadataRemoval() *DLPResponseMetadataRemoval {
+func (o *DLPResponse) GetMetadataRemoval() *MetadataRemoval {
 	if o == nil {
 		return nil
 	}
 	return o.MetadataRemoval
 }
 
-func (o *DLPResponse) GetRedact() *DLPResponseRedact {
+func (o *DLPResponse) GetRedact() *Redact {
 	if o == nil {
 		return nil
 	}
 	return o.Redact
 }
 
-func (o *DLPResponse) GetSeverity() *DLPResponseSeverity {
+func (o *DLPResponse) GetSeverity() *Severity {
 	if o == nil {
 		return nil
 	}
 	return o.Severity
 }
 
-func (o *DLPResponse) GetVerdict() *DLPResponseVerdict {
+func (o *DLPResponse) GetVerdict() *Verdict {
 	if o == nil {
 		return nil
 	}
 	return o.Verdict
 }
 
-func (o *DLPResponse) GetWatermark() *DLPResponseWatermark {
+func (o *DLPResponse) GetWatermark() *Watermark {
 	if o == nil {
 		return nil
 	}

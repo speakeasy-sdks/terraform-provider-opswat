@@ -28,78 +28,113 @@ func (o *BatchCancelRequest) GetBatchID() string {
 	return o.BatchID
 }
 
-// BatchCancel500ApplicationJSON - Unexpected event on server
-type BatchCancel500ApplicationJSON struct {
+// BatchCancelBatchResponse500ResponseBody - Unexpected event on server
+type BatchCancelBatchResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *BatchCancel500ApplicationJSON) GetErr() *string {
+func (o *BatchCancelBatchResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// BatchCancel404ApplicationJSON - Batch not found (invalid id)
-type BatchCancel404ApplicationJSON struct {
+// BatchCancelBatchResponse404ResponseBody - Batch not found (invalid id)
+type BatchCancelBatchResponse404ResponseBody struct {
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *BatchCancel404ApplicationJSON) GetErr() *string {
+func (o *BatchCancelBatchResponse404ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// BatchCancel403ApplicationJSON - Invalid user information or Not Allowed
-type BatchCancel403ApplicationJSON struct {
+// BatchCancelBatchResponseResponseBody - Invalid user information or Not Allowed
+type BatchCancelBatchResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *BatchCancel403ApplicationJSON) GetErr() *string {
+func (o *BatchCancelBatchResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// BatchCancel400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type BatchCancel400ApplicationJSON struct {
+// BatchCancelBatchResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type BatchCancelBatchResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *BatchCancel400ApplicationJSON) GetErr() *string {
+func (o *BatchCancelBatchResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// BatchCancel200ApplicationJSON - Batch cancelled.
-type BatchCancel200ApplicationJSON struct {
+// BatchCancelResponseBody - Batch cancelled.
+type BatchCancelResponseBody struct {
 }
 
 type BatchCancelResponse struct {
+	// Batch cancelled.
+	TwoHundredApplicationJSONObject *BatchCancelResponseBody
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *BatchCancelBatchResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *BatchCancelBatchResponseResponseBody
+	// Batch not found (invalid id)
+	FourHundredAndFourApplicationJSONObject *BatchCancelBatchResponse404ResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *BatchCancelBatchResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Batch cancelled.
-	BatchCancel200ApplicationJSONObject *BatchCancel200ApplicationJSON
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	BatchCancel400ApplicationJSONObject *BatchCancel400ApplicationJSON
-	// Invalid user information or Not Allowed
-	BatchCancel403ApplicationJSONObject *BatchCancel403ApplicationJSON
-	// Batch not found (invalid id)
-	BatchCancel404ApplicationJSONObject *BatchCancel404ApplicationJSON
-	// Unexpected event on server
-	BatchCancel500ApplicationJSONObject *BatchCancel500ApplicationJSON
+}
+
+func (o *BatchCancelResponse) GetTwoHundredApplicationJSONObject() *BatchCancelResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *BatchCancelResponse) GetFourHundredApplicationJSONObject() *BatchCancelBatchResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *BatchCancelResponse) GetFourHundredAndThreeApplicationJSONObject() *BatchCancelBatchResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *BatchCancelResponse) GetFourHundredAndFourApplicationJSONObject() *BatchCancelBatchResponse404ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFourApplicationJSONObject
+}
+
+func (o *BatchCancelResponse) GetFiveHundredApplicationJSONObject() *BatchCancelBatchResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *BatchCancelResponse) GetContentType() string {
@@ -121,39 +156,4 @@ func (o *BatchCancelResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *BatchCancelResponse) GetBatchCancel200ApplicationJSONObject() *BatchCancel200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchCancel200ApplicationJSONObject
-}
-
-func (o *BatchCancelResponse) GetBatchCancel400ApplicationJSONObject() *BatchCancel400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchCancel400ApplicationJSONObject
-}
-
-func (o *BatchCancelResponse) GetBatchCancel403ApplicationJSONObject() *BatchCancel403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchCancel403ApplicationJSONObject
-}
-
-func (o *BatchCancelResponse) GetBatchCancel404ApplicationJSONObject() *BatchCancel404ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchCancel404ApplicationJSONObject
-}
-
-func (o *BatchCancelResponse) GetBatchCancel500ApplicationJSONObject() *BatchCancel500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.BatchCancel500ApplicationJSONObject
 }

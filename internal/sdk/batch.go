@@ -15,13 +15,13 @@ import (
 	"strings"
 )
 
-// batch - Group the analysis requests in batches.
-type batch struct {
+// Batch - Group the analysis requests in batches.
+type Batch struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newBatch(sdkConfig sdkConfiguration) *batch {
-	return &batch{
+func newBatch(sdkConfig sdkConfiguration) *Batch {
+	return &Batch{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -30,7 +30,7 @@ func newBatch(sdkConfig sdkConfiguration) *batch {
 // When cancelling a batch, the connected analysis that are still in progress will be cancelled also.
 //
 // The cancelled batch will be closed.
-func (s *batch) BatchCancel(ctx context.Context, request operations.BatchCancelRequest) (*operations.BatchCancelResponse, error) {
+func (s *Batch) BatchCancel(ctx context.Context, request operations.BatchCancelRequest) (*operations.BatchCancelResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/file/batch/{batchId}/cancel", request, nil)
 	if err != nil {
@@ -74,60 +74,60 @@ func (s *batch) BatchCancel(ctx context.Context, request operations.BatchCancelR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchCancel200ApplicationJSON
+			var out operations.BatchCancelResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchCancel200ApplicationJSONObject = &out
+			res.TwoHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchCancel400ApplicationJSON
+			var out operations.BatchCancelBatchResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchCancel400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchCancel403ApplicationJSON
+			var out operations.BatchCancelBatchResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchCancel403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchCancel404ApplicationJSON
+			var out operations.BatchCancelBatchResponse404ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchCancel404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchCancel500ApplicationJSON
+			var out operations.BatchCancelBatchResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchCancel500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -138,7 +138,7 @@ func (s *batch) BatchCancel(ctx context.Context, request operations.BatchCancelR
 
 // BatchClose - Close Batch
 // The batch will be closed and files can no longer be added to the current batch.
-func (s *batch) BatchClose(ctx context.Context, request operations.BatchCloseRequest) (*operations.BatchCloseResponse, error) {
+func (s *Batch) BatchClose(ctx context.Context, request operations.BatchCloseRequest) (*operations.BatchCloseResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/file/batch/{batchId}/close", request, nil)
 	if err != nil {
@@ -194,48 +194,48 @@ func (s *batch) BatchClose(ctx context.Context, request operations.BatchCloseReq
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchClose400ApplicationJSON
+			var out operations.BatchCloseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchClose400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchClose403ApplicationJSON
+			var out operations.BatchCloseBatchResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchClose403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchClose404ApplicationJSON
+			var out operations.BatchCloseBatchResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchClose404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchClose500ApplicationJSON
+			var out operations.BatchCloseBatchResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchClose500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -246,7 +246,7 @@ func (s *batch) BatchClose(ctx context.Context, request operations.BatchCloseReq
 
 // BatchCreate - Initiate Batch
 // Create a new batch and retrieve the batch_id
-func (s *batch) BatchCreate(ctx context.Context, request operations.BatchCreateRequest) (*operations.BatchCreateResponse, error) {
+func (s *Batch) BatchCreate(ctx context.Context, request operations.BatchCreateRequest) (*operations.BatchCreateResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/file/batch"
 
@@ -299,36 +299,36 @@ func (s *batch) BatchCreate(ctx context.Context, request operations.BatchCreateR
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchCreate400ApplicationJSON
+			var out operations.BatchCreateResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchCreate400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchCreate403ApplicationJSON
+			var out operations.BatchCreateBatchResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchCreate403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchCreate500ApplicationJSON
+			var out operations.BatchCreateBatchResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchCreate500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -339,7 +339,7 @@ func (s *batch) BatchCreate(ctx context.Context, request operations.BatchCreateR
 
 // BatchSignedResult - Download Signed Batch Result
 // Download digitally signed status report for the entire batch
-func (s *batch) BatchSignedResult(ctx context.Context, request operations.BatchSignedResultRequest) (*operations.BatchSignedResultResponse, error) {
+func (s *Batch) BatchSignedResult(ctx context.Context, request operations.BatchSignedResultRequest) (*operations.BatchSignedResultResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/file/batch/{batchId}/certificate", request, nil)
 	if err != nil {
@@ -384,48 +384,48 @@ func (s *batch) BatchSignedResult(ctx context.Context, request operations.BatchS
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchSignedResult400ApplicationJSON
+			var out operations.BatchSignedResultResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchSignedResult400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchSignedResult403ApplicationJSON
+			var out operations.BatchSignedResultBatchResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchSignedResult403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchSignedResult404ApplicationJSON
+			var out operations.BatchSignedResultBatchResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchSignedResult404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchSignedResult500ApplicationJSON
+			var out operations.BatchSignedResultBatchResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchSignedResult500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -436,7 +436,7 @@ func (s *batch) BatchSignedResult(ctx context.Context, request operations.BatchS
 
 // BatchStatus - Status of Batch Analysis
 // Retrieve status report for the entire batch
-func (s *batch) BatchStatus(ctx context.Context, request operations.BatchStatusRequest) (*operations.BatchStatusResponse, error) {
+func (s *Batch) BatchStatus(ctx context.Context, request operations.BatchStatusRequest) (*operations.BatchStatusResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/file/batch/{batchId}", request, nil)
 	if err != nil {
@@ -496,48 +496,48 @@ func (s *batch) BatchStatus(ctx context.Context, request operations.BatchStatusR
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchStatus400ApplicationJSON
+			var out operations.BatchStatusResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchStatus400ApplicationJSONObject = &out
+			res.FourHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchStatus403ApplicationJSON
+			var out operations.BatchStatusBatchResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchStatus403ApplicationJSONObject = &out
+			res.FourHundredAndThreeApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchStatus404ApplicationJSON
+			var out operations.BatchStatusBatchResponseResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchStatus404ApplicationJSONObject = &out
+			res.FourHundredAndFourApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.BatchStatus500ApplicationJSON
+			var out operations.BatchStatusBatchResponse500ResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.BatchStatus500ApplicationJSONObject = &out
+			res.FiveHundredApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

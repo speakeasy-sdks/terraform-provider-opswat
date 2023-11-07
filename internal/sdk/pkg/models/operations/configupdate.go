@@ -28,39 +28,39 @@ func (o *ConfigUpdateRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigUpdate500ApplicationJSON - Unexpected event on server
-type ConfigUpdate500ApplicationJSON struct {
+// ConfigUpdateConfigResponseResponseBody - Unexpected event on server
+type ConfigUpdateConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigUpdate500ApplicationJSON) GetErr() *string {
+func (o *ConfigUpdateConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigUpdate405ApplicationJSON - The user has no rights for this operation.
-type ConfigUpdate405ApplicationJSON struct {
+// ConfigUpdateConfigResponseBody - The user has no rights for this operation.
+type ConfigUpdateConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigUpdate405ApplicationJSON) GetErr() *string {
+func (o *ConfigUpdateConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigUpdate403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigUpdate403ApplicationJSON struct {
+// ConfigUpdateResponseBody - Invalid user information or Not Allowed
+type ConfigUpdateResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigUpdate403ApplicationJSON) GetErr() *string {
+func (o *ConfigUpdateResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -68,6 +68,12 @@ func (o *ConfigUpdate403ApplicationJSON) GetErr() *string {
 }
 
 type ConfigUpdateResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigUpdateResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *ConfigUpdateConfigResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigUpdateConfigResponseResponseBody
 	// Request processed successfully
 	AdminConfigUpdate *shared.AdminConfigUpdate
 	// HTTP response content type for this operation
@@ -76,12 +82,27 @@ type ConfigUpdateResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	ConfigUpdate403ApplicationJSONObject *ConfigUpdate403ApplicationJSON
-	// The user has no rights for this operation.
-	ConfigUpdate405ApplicationJSONObject *ConfigUpdate405ApplicationJSON
-	// Unexpected event on server
-	ConfigUpdate500ApplicationJSONObject *ConfigUpdate500ApplicationJSON
+}
+
+func (o *ConfigUpdateResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigUpdateResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigUpdateResponse) GetFourHundredAndFiveApplicationJSONObject() *ConfigUpdateConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *ConfigUpdateResponse) GetFiveHundredApplicationJSONObject() *ConfigUpdateConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigUpdateResponse) GetAdminConfigUpdate() *shared.AdminConfigUpdate {
@@ -110,25 +131,4 @@ func (o *ConfigUpdateResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigUpdateResponse) GetConfigUpdate403ApplicationJSONObject() *ConfigUpdate403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigUpdate403ApplicationJSONObject
-}
-
-func (o *ConfigUpdateResponse) GetConfigUpdate405ApplicationJSONObject() *ConfigUpdate405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigUpdate405ApplicationJSONObject
-}
-
-func (o *ConfigUpdateResponse) GetConfigUpdate500ApplicationJSONObject() *ConfigUpdate500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigUpdate500ApplicationJSONObject
 }

@@ -2,8 +2,8 @@
 
 package shared
 
-// NewUserRoleRequestRights - A list of rights for each permission
-type NewUserRoleRequestRights struct {
+// Rights - A list of rights for each permission
+type Rights struct {
 	// What permissions are allowed for Node.
 	Agents []RolePermissionObject `json:"agents,omitempty"`
 	// What permissions are allowed for Certificates.
@@ -40,119 +40,119 @@ type NewUserRoleRequestRights struct {
 	Zone []RolePermissionObject `json:"zone,omitempty"`
 }
 
-func (o *NewUserRoleRequestRights) GetAgents() []RolePermissionObject {
+func (o *Rights) GetAgents() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Agents
 }
 
-func (o *NewUserRoleRequestRights) GetCert() []RolePermissionObject {
+func (o *Rights) GetCert() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Cert
 }
 
-func (o *NewUserRoleRequestRights) GetConfiglog() []RolePermissionObject {
+func (o *Rights) GetConfiglog() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Configlog
 }
 
-func (o *NewUserRoleRequestRights) GetEngines() []RolePermissionObject {
+func (o *Rights) GetEngines() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Engines
 }
 
-func (o *NewUserRoleRequestRights) GetExternal() []RolePermissionObject {
+func (o *Rights) GetExternal() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.External
 }
 
-func (o *NewUserRoleRequestRights) GetLicense() []RolePermissionObject {
+func (o *Rights) GetLicense() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.License
 }
 
-func (o *NewUserRoleRequestRights) GetQuarantine() []RolePermissionObject {
+func (o *Rights) GetQuarantine() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Quarantine
 }
 
-func (o *NewUserRoleRequestRights) GetRetention() []RolePermissionObject {
+func (o *Rights) GetRetention() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Retention
 }
 
-func (o *NewUserRoleRequestRights) GetRule() []RolePermissionObject {
+func (o *Rights) GetRule() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Rule
 }
 
-func (o *NewUserRoleRequestRights) GetScan() []RolePermissionObject {
+func (o *Rights) GetScan() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Scan
 }
 
-func (o *NewUserRoleRequestRights) GetScanlog() []RolePermissionObject {
+func (o *Rights) GetScanlog() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Scanlog
 }
 
-func (o *NewUserRoleRequestRights) GetSkip() []RolePermissionObject {
+func (o *Rights) GetSkip() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Skip
 }
 
-func (o *NewUserRoleRequestRights) GetUpdate() []RolePermissionObject {
+func (o *Rights) GetUpdate() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Update
 }
 
-func (o *NewUserRoleRequestRights) GetUpdatelog() []RolePermissionObject {
+func (o *Rights) GetUpdatelog() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Updatelog
 }
 
-func (o *NewUserRoleRequestRights) GetUsers() []RolePermissionObject {
+func (o *Rights) GetUsers() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Users
 }
 
-func (o *NewUserRoleRequestRights) GetWorkflow() []RolePermissionObject {
+func (o *Rights) GetWorkflow() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
 	return o.Workflow
 }
 
-func (o *NewUserRoleRequestRights) GetZone() []RolePermissionObject {
+func (o *Rights) GetZone() []RolePermissionObject {
 	if o == nil {
 		return nil
 	}
@@ -166,7 +166,7 @@ type NewUserRoleRequest struct {
 	// The name identifier of the role
 	Name *string `json:"name,omitempty"`
 	// A list of rights for each permission
-	Rights *NewUserRoleRequestRights `json:"rights,omitempty"`
+	Rights *Rights `json:"rights,omitempty"`
 }
 
 func (o *NewUserRoleRequest) GetDisplayName() *string {
@@ -183,7 +183,7 @@ func (o *NewUserRoleRequest) GetName() *string {
 	return o.Name
 }
 
-func (o *NewUserRoleRequest) GetRights() *NewUserRoleRequestRights {
+func (o *NewUserRoleRequest) GetRights() *Rights {
 	if o == nil {
 		return nil
 	}

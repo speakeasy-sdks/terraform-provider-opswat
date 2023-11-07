@@ -47,52 +47,52 @@ func (o *PostLicenseBackupRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// PostLicenseBackup500ApplicationJSON - Unexpected event on server
-type PostLicenseBackup500ApplicationJSON struct {
+// PostLicenseBackupAdminResponse500ResponseBody - Unexpected event on server
+type PostLicenseBackupAdminResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *PostLicenseBackup500ApplicationJSON) GetErr() *string {
+func (o *PostLicenseBackupAdminResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// PostLicenseBackup403ApplicationJSON - Invalid user information or Not Allowed
-type PostLicenseBackup403ApplicationJSON struct {
+// PostLicenseBackupAdminResponseResponseBody - Invalid user information or Not Allowed
+type PostLicenseBackupAdminResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *PostLicenseBackup403ApplicationJSON) GetErr() *string {
+func (o *PostLicenseBackupAdminResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// PostLicenseBackup400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type PostLicenseBackup400ApplicationJSON struct {
+// PostLicenseBackupAdminResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type PostLicenseBackupAdminResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *PostLicenseBackup400ApplicationJSON) GetErr() *string {
+func (o *PostLicenseBackupAdminResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// PostLicenseBackup200ApplicationJSON - Request successfully
-type PostLicenseBackup200ApplicationJSON struct {
+// PostLicenseBackupResponseBody - Request successfully
+type PostLicenseBackupResponseBody struct {
 	// Successful message
 	Success *string `json:"success,omitempty"`
 }
 
-func (o *PostLicenseBackup200ApplicationJSON) GetSuccess() *string {
+func (o *PostLicenseBackupResponseBody) GetSuccess() *string {
 	if o == nil {
 		return nil
 	}
@@ -100,20 +100,48 @@ func (o *PostLicenseBackup200ApplicationJSON) GetSuccess() *string {
 }
 
 type PostLicenseBackupResponse struct {
+	// Request successfully
+	TwoHundredApplicationJSONObject *PostLicenseBackupResponseBody
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *PostLicenseBackupAdminResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *PostLicenseBackupAdminResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *PostLicenseBackupAdminResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request successfully
-	PostLicenseBackup200ApplicationJSONObject *PostLicenseBackup200ApplicationJSON
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	PostLicenseBackup400ApplicationJSONObject *PostLicenseBackup400ApplicationJSON
-	// Invalid user information or Not Allowed
-	PostLicenseBackup403ApplicationJSONObject *PostLicenseBackup403ApplicationJSON
-	// Unexpected event on server
-	PostLicenseBackup500ApplicationJSONObject *PostLicenseBackup500ApplicationJSON
+}
+
+func (o *PostLicenseBackupResponse) GetTwoHundredApplicationJSONObject() *PostLicenseBackupResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *PostLicenseBackupResponse) GetFourHundredApplicationJSONObject() *PostLicenseBackupAdminResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *PostLicenseBackupResponse) GetFourHundredAndThreeApplicationJSONObject() *PostLicenseBackupAdminResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *PostLicenseBackupResponse) GetFiveHundredApplicationJSONObject() *PostLicenseBackupAdminResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *PostLicenseBackupResponse) GetContentType() string {
@@ -135,32 +163,4 @@ func (o *PostLicenseBackupResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *PostLicenseBackupResponse) GetPostLicenseBackup200ApplicationJSONObject() *PostLicenseBackup200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.PostLicenseBackup200ApplicationJSONObject
-}
-
-func (o *PostLicenseBackupResponse) GetPostLicenseBackup400ApplicationJSONObject() *PostLicenseBackup400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.PostLicenseBackup400ApplicationJSONObject
-}
-
-func (o *PostLicenseBackupResponse) GetPostLicenseBackup403ApplicationJSONObject() *PostLicenseBackup403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.PostLicenseBackup403ApplicationJSONObject
-}
-
-func (o *PostLicenseBackupResponse) GetPostLicenseBackup500ApplicationJSONObject() *PostLicenseBackup500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.PostLicenseBackup500ApplicationJSONObject
 }

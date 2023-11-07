@@ -165,124 +165,124 @@ func (o *FileAnalysisSyncPostRequest) GetWorkflow() *string {
 	return o.Workflow
 }
 
-// FileAnalysisSyncPost503ApplicationJSON - Server is too busy, scan queue is full. Try again later.
-type FileAnalysisSyncPost503ApplicationJSON struct {
+// FileAnalysisSyncPostAnalysisResponse503ResponseBody - Server is too busy, scan queue is full. Try again later.
+type FileAnalysisSyncPostAnalysisResponse503ResponseBody struct {
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *FileAnalysisSyncPost503ApplicationJSON) GetErr() *string {
+func (o *FileAnalysisSyncPostAnalysisResponse503ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-type FileAnalysisSyncPost500ApplicationJSONType string
+type FileAnalysisSyncPostAnalysisResponse500ResponseBodyType string
 
 const (
-	FileAnalysisSyncPost500ApplicationJSONTypeLicenseExpired    FileAnalysisSyncPost500ApplicationJSONType = "LicenseExpired"
-	FileAnalysisSyncPost500ApplicationJSONTypeNoAvailableRule   FileAnalysisSyncPost500ApplicationJSONType = "NoAvailableRule"
-	FileAnalysisSyncPost500ApplicationJSONTypeInternalError     FileAnalysisSyncPost500ApplicationJSONType = "InternalError"
-	FileAnalysisSyncPost500ApplicationJSONTypeLocalFileNotFound FileAnalysisSyncPost500ApplicationJSONType = "LocalFileNotFound"
-	FileAnalysisSyncPost500ApplicationJSONTypeFileSizeExceeded  FileAnalysisSyncPost500ApplicationJSONType = "FileSizeExceeded"
+	FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeLicenseExpired    FileAnalysisSyncPostAnalysisResponse500ResponseBodyType = "LicenseExpired"
+	FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeNoAvailableRule   FileAnalysisSyncPostAnalysisResponse500ResponseBodyType = "NoAvailableRule"
+	FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeInternalError     FileAnalysisSyncPostAnalysisResponse500ResponseBodyType = "InternalError"
+	FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeLocalFileNotFound FileAnalysisSyncPostAnalysisResponse500ResponseBodyType = "LocalFileNotFound"
+	FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeFileSizeExceeded  FileAnalysisSyncPostAnalysisResponse500ResponseBodyType = "FileSizeExceeded"
 )
 
-type FileAnalysisSyncPost500ApplicationJSON struct {
+type FileAnalysisSyncPostAnalysisResponse500ResponseBody struct {
 	LicenseExpired    *shared.LicenseExpired
 	NoAvailableRule   *shared.NoAvailableRule
 	InternalError     *shared.InternalError
 	LocalFileNotFound *shared.LocalFileNotFound
 	FileSizeExceeded  *shared.FileSizeExceeded
 
-	Type FileAnalysisSyncPost500ApplicationJSONType
+	Type FileAnalysisSyncPostAnalysisResponse500ResponseBodyType
 }
 
-func CreateFileAnalysisSyncPost500ApplicationJSONLicenseExpired(licenseExpired shared.LicenseExpired) FileAnalysisSyncPost500ApplicationJSON {
-	typ := FileAnalysisSyncPost500ApplicationJSONTypeLicenseExpired
+func CreateFileAnalysisSyncPostAnalysisResponse500ResponseBodyLicenseExpired(licenseExpired shared.LicenseExpired) FileAnalysisSyncPostAnalysisResponse500ResponseBody {
+	typ := FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeLicenseExpired
 
-	return FileAnalysisSyncPost500ApplicationJSON{
+	return FileAnalysisSyncPostAnalysisResponse500ResponseBody{
 		LicenseExpired: &licenseExpired,
 		Type:           typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost500ApplicationJSONNoAvailableRule(noAvailableRule shared.NoAvailableRule) FileAnalysisSyncPost500ApplicationJSON {
-	typ := FileAnalysisSyncPost500ApplicationJSONTypeNoAvailableRule
+func CreateFileAnalysisSyncPostAnalysisResponse500ResponseBodyNoAvailableRule(noAvailableRule shared.NoAvailableRule) FileAnalysisSyncPostAnalysisResponse500ResponseBody {
+	typ := FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeNoAvailableRule
 
-	return FileAnalysisSyncPost500ApplicationJSON{
+	return FileAnalysisSyncPostAnalysisResponse500ResponseBody{
 		NoAvailableRule: &noAvailableRule,
 		Type:            typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost500ApplicationJSONInternalError(internalError shared.InternalError) FileAnalysisSyncPost500ApplicationJSON {
-	typ := FileAnalysisSyncPost500ApplicationJSONTypeInternalError
+func CreateFileAnalysisSyncPostAnalysisResponse500ResponseBodyInternalError(internalError shared.InternalError) FileAnalysisSyncPostAnalysisResponse500ResponseBody {
+	typ := FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeInternalError
 
-	return FileAnalysisSyncPost500ApplicationJSON{
+	return FileAnalysisSyncPostAnalysisResponse500ResponseBody{
 		InternalError: &internalError,
 		Type:          typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost500ApplicationJSONLocalFileNotFound(localFileNotFound shared.LocalFileNotFound) FileAnalysisSyncPost500ApplicationJSON {
-	typ := FileAnalysisSyncPost500ApplicationJSONTypeLocalFileNotFound
+func CreateFileAnalysisSyncPostAnalysisResponse500ResponseBodyLocalFileNotFound(localFileNotFound shared.LocalFileNotFound) FileAnalysisSyncPostAnalysisResponse500ResponseBody {
+	typ := FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeLocalFileNotFound
 
-	return FileAnalysisSyncPost500ApplicationJSON{
+	return FileAnalysisSyncPostAnalysisResponse500ResponseBody{
 		LocalFileNotFound: &localFileNotFound,
 		Type:              typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost500ApplicationJSONFileSizeExceeded(fileSizeExceeded shared.FileSizeExceeded) FileAnalysisSyncPost500ApplicationJSON {
-	typ := FileAnalysisSyncPost500ApplicationJSONTypeFileSizeExceeded
+func CreateFileAnalysisSyncPostAnalysisResponse500ResponseBodyFileSizeExceeded(fileSizeExceeded shared.FileSizeExceeded) FileAnalysisSyncPostAnalysisResponse500ResponseBody {
+	typ := FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeFileSizeExceeded
 
-	return FileAnalysisSyncPost500ApplicationJSON{
+	return FileAnalysisSyncPostAnalysisResponse500ResponseBody{
 		FileSizeExceeded: &fileSizeExceeded,
 		Type:             typ,
 	}
 }
 
-func (u *FileAnalysisSyncPost500ApplicationJSON) UnmarshalJSON(data []byte) error {
+func (u *FileAnalysisSyncPostAnalysisResponse500ResponseBody) UnmarshalJSON(data []byte) error {
 
 	licenseExpired := new(shared.LicenseExpired)
 	if err := utils.UnmarshalJSON(data, &licenseExpired, "", true, true); err == nil {
 		u.LicenseExpired = licenseExpired
-		u.Type = FileAnalysisSyncPost500ApplicationJSONTypeLicenseExpired
+		u.Type = FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeLicenseExpired
 		return nil
 	}
 
 	noAvailableRule := new(shared.NoAvailableRule)
 	if err := utils.UnmarshalJSON(data, &noAvailableRule, "", true, true); err == nil {
 		u.NoAvailableRule = noAvailableRule
-		u.Type = FileAnalysisSyncPost500ApplicationJSONTypeNoAvailableRule
+		u.Type = FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeNoAvailableRule
 		return nil
 	}
 
 	internalError := new(shared.InternalError)
 	if err := utils.UnmarshalJSON(data, &internalError, "", true, true); err == nil {
 		u.InternalError = internalError
-		u.Type = FileAnalysisSyncPost500ApplicationJSONTypeInternalError
+		u.Type = FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeInternalError
 		return nil
 	}
 
 	localFileNotFound := new(shared.LocalFileNotFound)
 	if err := utils.UnmarshalJSON(data, &localFileNotFound, "", true, true); err == nil {
 		u.LocalFileNotFound = localFileNotFound
-		u.Type = FileAnalysisSyncPost500ApplicationJSONTypeLocalFileNotFound
+		u.Type = FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeLocalFileNotFound
 		return nil
 	}
 
 	fileSizeExceeded := new(shared.FileSizeExceeded)
 	if err := utils.UnmarshalJSON(data, &fileSizeExceeded, "", true, true); err == nil {
 		u.FileSizeExceeded = fileSizeExceeded
-		u.Type = FileAnalysisSyncPost500ApplicationJSONTypeFileSizeExceeded
+		u.Type = FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeFileSizeExceeded
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u FileAnalysisSyncPost500ApplicationJSON) MarshalJSON() ([]byte, error) {
+func (u FileAnalysisSyncPostAnalysisResponse500ResponseBody) MarshalJSON() ([]byte, error) {
 	if u.LicenseExpired != nil {
 		return utils.MarshalJSON(u.LicenseExpired, "", true)
 	}
@@ -306,58 +306,58 @@ func (u FileAnalysisSyncPost500ApplicationJSON) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// FileAnalysisSyncPost422ApplicationJSON - Body input is empty.
-type FileAnalysisSyncPost422ApplicationJSON struct {
+// FileAnalysisSyncPostAnalysisResponse422ResponseBody - Body input is empty.
+type FileAnalysisSyncPostAnalysisResponse422ResponseBody struct {
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *FileAnalysisSyncPost422ApplicationJSON) GetErr() *string {
+func (o *FileAnalysisSyncPostAnalysisResponse422ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// FileAnalysisSyncPost411ApplicationJSON - Content-Length header is missing from the request.
-type FileAnalysisSyncPost411ApplicationJSON struct {
+// FileAnalysisSyncPostAnalysisResponseResponseBody - Content-Length header is missing from the request.
+type FileAnalysisSyncPostAnalysisResponseResponseBody struct {
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *FileAnalysisSyncPost411ApplicationJSON) GetErr() *string {
+func (o *FileAnalysisSyncPostAnalysisResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// FileAnalysisSyncPost408ApplicationJSON - Timed out response. The scan is still in progress, but the connection is timed out.
-type FileAnalysisSyncPost408ApplicationJSON struct {
+// FileAnalysisSyncPostAnalysisResponseBody - Timed out response. The scan is still in progress, but the connection is timed out.
+type FileAnalysisSyncPostAnalysisResponseBody struct {
 	DataID *string `json:"data_id,omitempty"`
 }
 
-func (o *FileAnalysisSyncPost408ApplicationJSON) GetDataID() *string {
+func (o *FileAnalysisSyncPostAnalysisResponseBody) GetDataID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DataID
 }
 
-type FileAnalysisSyncPost400ApplicationJSONType string
+type FileAnalysisSyncPostResponseBodyType string
 
 const (
-	FileAnalysisSyncPost400ApplicationJSONTypeInvalidAPIKeyGiven          FileAnalysisSyncPost400ApplicationJSONType = "InvalidAPIKeyGiven"
-	FileAnalysisSyncPost400ApplicationJSONTypeBodyAndDownloadLinkGiven    FileAnalysisSyncPost400ApplicationJSONType = "BodyAndDownloadLinkGiven"
-	FileAnalysisSyncPost400ApplicationJSONTypeInprogressBatchClosed       FileAnalysisSyncPost400ApplicationJSONType = "InprogressBatchClosed"
-	FileAnalysisSyncPost400ApplicationJSONTypeBatchNotFound               FileAnalysisSyncPost400ApplicationJSONType = "BatchNotFound"
-	FileAnalysisSyncPost400ApplicationJSONTypeBatchInstanceMismatched     FileAnalysisSyncPost400ApplicationJSONType = "BatchInstanceMismatched"
-	FileAnalysisSyncPost400ApplicationJSONTypeBodyAndLocalFilePathGiven   FileAnalysisSyncPost400ApplicationJSONType = "BodyAndLocalFilePathGiven"
-	FileAnalysisSyncPost400ApplicationJSONTypeFileUploadRejected          FileAnalysisSyncPost400ApplicationJSONType = "FileUploadRejected"
-	FileAnalysisSyncPost400ApplicationJSONTypeRedirectLinkNotSupported    FileAnalysisSyncPost400ApplicationJSONType = "RedirectLinkNotSupported"
-	FileAnalysisSyncPost400ApplicationJSONTypeInvalidDownloadLink         FileAnalysisSyncPost400ApplicationJSONType = "InvalidDownloadLink"
-	FileAnalysisSyncPost400ApplicationJSONTypeInvalidProtocolDownloadLink FileAnalysisSyncPost400ApplicationJSONType = "InvalidProtocolDownloadLink"
+	FileAnalysisSyncPostResponseBodyTypeInvalidAPIKeyGiven          FileAnalysisSyncPostResponseBodyType = "InvalidAPIKeyGiven"
+	FileAnalysisSyncPostResponseBodyTypeBodyAndDownloadLinkGiven    FileAnalysisSyncPostResponseBodyType = "BodyAndDownloadLinkGiven"
+	FileAnalysisSyncPostResponseBodyTypeInprogressBatchClosed       FileAnalysisSyncPostResponseBodyType = "InprogressBatchClosed"
+	FileAnalysisSyncPostResponseBodyTypeBatchNotFound               FileAnalysisSyncPostResponseBodyType = "BatchNotFound"
+	FileAnalysisSyncPostResponseBodyTypeBatchInstanceMismatched     FileAnalysisSyncPostResponseBodyType = "BatchInstanceMismatched"
+	FileAnalysisSyncPostResponseBodyTypeBodyAndLocalFilePathGiven   FileAnalysisSyncPostResponseBodyType = "BodyAndLocalFilePathGiven"
+	FileAnalysisSyncPostResponseBodyTypeFileUploadRejected          FileAnalysisSyncPostResponseBodyType = "FileUploadRejected"
+	FileAnalysisSyncPostResponseBodyTypeRedirectLinkNotSupported    FileAnalysisSyncPostResponseBodyType = "RedirectLinkNotSupported"
+	FileAnalysisSyncPostResponseBodyTypeInvalidDownloadLink         FileAnalysisSyncPostResponseBodyType = "InvalidDownloadLink"
+	FileAnalysisSyncPostResponseBodyTypeInvalidProtocolDownloadLink FileAnalysisSyncPostResponseBodyType = "InvalidProtocolDownloadLink"
 )
 
-type FileAnalysisSyncPost400ApplicationJSON struct {
+type FileAnalysisSyncPostResponseBody struct {
 	InvalidAPIKeyGiven          *shared.InvalidAPIKeyGiven
 	BodyAndDownloadLinkGiven    *shared.BodyAndDownloadLinkGiven
 	InprogressBatchClosed       *shared.InprogressBatchClosed
@@ -369,175 +369,175 @@ type FileAnalysisSyncPost400ApplicationJSON struct {
 	InvalidDownloadLink         *shared.InvalidDownloadLink
 	InvalidProtocolDownloadLink *shared.InvalidProtocolDownloadLink
 
-	Type FileAnalysisSyncPost400ApplicationJSONType
+	Type FileAnalysisSyncPostResponseBodyType
 }
 
-func CreateFileAnalysisSyncPost400ApplicationJSONInvalidAPIKeyGiven(invalidAPIKeyGiven shared.InvalidAPIKeyGiven) FileAnalysisSyncPost400ApplicationJSON {
-	typ := FileAnalysisSyncPost400ApplicationJSONTypeInvalidAPIKeyGiven
+func CreateFileAnalysisSyncPostResponseBodyInvalidAPIKeyGiven(invalidAPIKeyGiven shared.InvalidAPIKeyGiven) FileAnalysisSyncPostResponseBody {
+	typ := FileAnalysisSyncPostResponseBodyTypeInvalidAPIKeyGiven
 
-	return FileAnalysisSyncPost400ApplicationJSON{
+	return FileAnalysisSyncPostResponseBody{
 		InvalidAPIKeyGiven: &invalidAPIKeyGiven,
 		Type:               typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost400ApplicationJSONBodyAndDownloadLinkGiven(bodyAndDownloadLinkGiven shared.BodyAndDownloadLinkGiven) FileAnalysisSyncPost400ApplicationJSON {
-	typ := FileAnalysisSyncPost400ApplicationJSONTypeBodyAndDownloadLinkGiven
+func CreateFileAnalysisSyncPostResponseBodyBodyAndDownloadLinkGiven(bodyAndDownloadLinkGiven shared.BodyAndDownloadLinkGiven) FileAnalysisSyncPostResponseBody {
+	typ := FileAnalysisSyncPostResponseBodyTypeBodyAndDownloadLinkGiven
 
-	return FileAnalysisSyncPost400ApplicationJSON{
+	return FileAnalysisSyncPostResponseBody{
 		BodyAndDownloadLinkGiven: &bodyAndDownloadLinkGiven,
 		Type:                     typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost400ApplicationJSONInprogressBatchClosed(inprogressBatchClosed shared.InprogressBatchClosed) FileAnalysisSyncPost400ApplicationJSON {
-	typ := FileAnalysisSyncPost400ApplicationJSONTypeInprogressBatchClosed
+func CreateFileAnalysisSyncPostResponseBodyInprogressBatchClosed(inprogressBatchClosed shared.InprogressBatchClosed) FileAnalysisSyncPostResponseBody {
+	typ := FileAnalysisSyncPostResponseBodyTypeInprogressBatchClosed
 
-	return FileAnalysisSyncPost400ApplicationJSON{
+	return FileAnalysisSyncPostResponseBody{
 		InprogressBatchClosed: &inprogressBatchClosed,
 		Type:                  typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost400ApplicationJSONBatchNotFound(batchNotFound shared.BatchNotFound) FileAnalysisSyncPost400ApplicationJSON {
-	typ := FileAnalysisSyncPost400ApplicationJSONTypeBatchNotFound
+func CreateFileAnalysisSyncPostResponseBodyBatchNotFound(batchNotFound shared.BatchNotFound) FileAnalysisSyncPostResponseBody {
+	typ := FileAnalysisSyncPostResponseBodyTypeBatchNotFound
 
-	return FileAnalysisSyncPost400ApplicationJSON{
+	return FileAnalysisSyncPostResponseBody{
 		BatchNotFound: &batchNotFound,
 		Type:          typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost400ApplicationJSONBatchInstanceMismatched(batchInstanceMismatched shared.BatchInstanceMismatched) FileAnalysisSyncPost400ApplicationJSON {
-	typ := FileAnalysisSyncPost400ApplicationJSONTypeBatchInstanceMismatched
+func CreateFileAnalysisSyncPostResponseBodyBatchInstanceMismatched(batchInstanceMismatched shared.BatchInstanceMismatched) FileAnalysisSyncPostResponseBody {
+	typ := FileAnalysisSyncPostResponseBodyTypeBatchInstanceMismatched
 
-	return FileAnalysisSyncPost400ApplicationJSON{
+	return FileAnalysisSyncPostResponseBody{
 		BatchInstanceMismatched: &batchInstanceMismatched,
 		Type:                    typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost400ApplicationJSONBodyAndLocalFilePathGiven(bodyAndLocalFilePathGiven shared.BodyAndLocalFilePathGiven) FileAnalysisSyncPost400ApplicationJSON {
-	typ := FileAnalysisSyncPost400ApplicationJSONTypeBodyAndLocalFilePathGiven
+func CreateFileAnalysisSyncPostResponseBodyBodyAndLocalFilePathGiven(bodyAndLocalFilePathGiven shared.BodyAndLocalFilePathGiven) FileAnalysisSyncPostResponseBody {
+	typ := FileAnalysisSyncPostResponseBodyTypeBodyAndLocalFilePathGiven
 
-	return FileAnalysisSyncPost400ApplicationJSON{
+	return FileAnalysisSyncPostResponseBody{
 		BodyAndLocalFilePathGiven: &bodyAndLocalFilePathGiven,
 		Type:                      typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost400ApplicationJSONFileUploadRejected(fileUploadRejected shared.FileUploadRejected) FileAnalysisSyncPost400ApplicationJSON {
-	typ := FileAnalysisSyncPost400ApplicationJSONTypeFileUploadRejected
+func CreateFileAnalysisSyncPostResponseBodyFileUploadRejected(fileUploadRejected shared.FileUploadRejected) FileAnalysisSyncPostResponseBody {
+	typ := FileAnalysisSyncPostResponseBodyTypeFileUploadRejected
 
-	return FileAnalysisSyncPost400ApplicationJSON{
+	return FileAnalysisSyncPostResponseBody{
 		FileUploadRejected: &fileUploadRejected,
 		Type:               typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost400ApplicationJSONRedirectLinkNotSupported(redirectLinkNotSupported shared.RedirectLinkNotSupported) FileAnalysisSyncPost400ApplicationJSON {
-	typ := FileAnalysisSyncPost400ApplicationJSONTypeRedirectLinkNotSupported
+func CreateFileAnalysisSyncPostResponseBodyRedirectLinkNotSupported(redirectLinkNotSupported shared.RedirectLinkNotSupported) FileAnalysisSyncPostResponseBody {
+	typ := FileAnalysisSyncPostResponseBodyTypeRedirectLinkNotSupported
 
-	return FileAnalysisSyncPost400ApplicationJSON{
+	return FileAnalysisSyncPostResponseBody{
 		RedirectLinkNotSupported: &redirectLinkNotSupported,
 		Type:                     typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost400ApplicationJSONInvalidDownloadLink(invalidDownloadLink shared.InvalidDownloadLink) FileAnalysisSyncPost400ApplicationJSON {
-	typ := FileAnalysisSyncPost400ApplicationJSONTypeInvalidDownloadLink
+func CreateFileAnalysisSyncPostResponseBodyInvalidDownloadLink(invalidDownloadLink shared.InvalidDownloadLink) FileAnalysisSyncPostResponseBody {
+	typ := FileAnalysisSyncPostResponseBodyTypeInvalidDownloadLink
 
-	return FileAnalysisSyncPost400ApplicationJSON{
+	return FileAnalysisSyncPostResponseBody{
 		InvalidDownloadLink: &invalidDownloadLink,
 		Type:                typ,
 	}
 }
 
-func CreateFileAnalysisSyncPost400ApplicationJSONInvalidProtocolDownloadLink(invalidProtocolDownloadLink shared.InvalidProtocolDownloadLink) FileAnalysisSyncPost400ApplicationJSON {
-	typ := FileAnalysisSyncPost400ApplicationJSONTypeInvalidProtocolDownloadLink
+func CreateFileAnalysisSyncPostResponseBodyInvalidProtocolDownloadLink(invalidProtocolDownloadLink shared.InvalidProtocolDownloadLink) FileAnalysisSyncPostResponseBody {
+	typ := FileAnalysisSyncPostResponseBodyTypeInvalidProtocolDownloadLink
 
-	return FileAnalysisSyncPost400ApplicationJSON{
+	return FileAnalysisSyncPostResponseBody{
 		InvalidProtocolDownloadLink: &invalidProtocolDownloadLink,
 		Type:                        typ,
 	}
 }
 
-func (u *FileAnalysisSyncPost400ApplicationJSON) UnmarshalJSON(data []byte) error {
+func (u *FileAnalysisSyncPostResponseBody) UnmarshalJSON(data []byte) error {
 
 	invalidAPIKeyGiven := new(shared.InvalidAPIKeyGiven)
 	if err := utils.UnmarshalJSON(data, &invalidAPIKeyGiven, "", true, true); err == nil {
 		u.InvalidAPIKeyGiven = invalidAPIKeyGiven
-		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeInvalidAPIKeyGiven
+		u.Type = FileAnalysisSyncPostResponseBodyTypeInvalidAPIKeyGiven
 		return nil
 	}
 
 	bodyAndDownloadLinkGiven := new(shared.BodyAndDownloadLinkGiven)
 	if err := utils.UnmarshalJSON(data, &bodyAndDownloadLinkGiven, "", true, true); err == nil {
 		u.BodyAndDownloadLinkGiven = bodyAndDownloadLinkGiven
-		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeBodyAndDownloadLinkGiven
+		u.Type = FileAnalysisSyncPostResponseBodyTypeBodyAndDownloadLinkGiven
 		return nil
 	}
 
 	inprogressBatchClosed := new(shared.InprogressBatchClosed)
 	if err := utils.UnmarshalJSON(data, &inprogressBatchClosed, "", true, true); err == nil {
 		u.InprogressBatchClosed = inprogressBatchClosed
-		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeInprogressBatchClosed
+		u.Type = FileAnalysisSyncPostResponseBodyTypeInprogressBatchClosed
 		return nil
 	}
 
 	batchNotFound := new(shared.BatchNotFound)
 	if err := utils.UnmarshalJSON(data, &batchNotFound, "", true, true); err == nil {
 		u.BatchNotFound = batchNotFound
-		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeBatchNotFound
+		u.Type = FileAnalysisSyncPostResponseBodyTypeBatchNotFound
 		return nil
 	}
 
 	batchInstanceMismatched := new(shared.BatchInstanceMismatched)
 	if err := utils.UnmarshalJSON(data, &batchInstanceMismatched, "", true, true); err == nil {
 		u.BatchInstanceMismatched = batchInstanceMismatched
-		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeBatchInstanceMismatched
+		u.Type = FileAnalysisSyncPostResponseBodyTypeBatchInstanceMismatched
 		return nil
 	}
 
 	bodyAndLocalFilePathGiven := new(shared.BodyAndLocalFilePathGiven)
 	if err := utils.UnmarshalJSON(data, &bodyAndLocalFilePathGiven, "", true, true); err == nil {
 		u.BodyAndLocalFilePathGiven = bodyAndLocalFilePathGiven
-		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeBodyAndLocalFilePathGiven
+		u.Type = FileAnalysisSyncPostResponseBodyTypeBodyAndLocalFilePathGiven
 		return nil
 	}
 
 	fileUploadRejected := new(shared.FileUploadRejected)
 	if err := utils.UnmarshalJSON(data, &fileUploadRejected, "", true, true); err == nil {
 		u.FileUploadRejected = fileUploadRejected
-		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeFileUploadRejected
+		u.Type = FileAnalysisSyncPostResponseBodyTypeFileUploadRejected
 		return nil
 	}
 
 	redirectLinkNotSupported := new(shared.RedirectLinkNotSupported)
 	if err := utils.UnmarshalJSON(data, &redirectLinkNotSupported, "", true, true); err == nil {
 		u.RedirectLinkNotSupported = redirectLinkNotSupported
-		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeRedirectLinkNotSupported
+		u.Type = FileAnalysisSyncPostResponseBodyTypeRedirectLinkNotSupported
 		return nil
 	}
 
 	invalidDownloadLink := new(shared.InvalidDownloadLink)
 	if err := utils.UnmarshalJSON(data, &invalidDownloadLink, "", true, true); err == nil {
 		u.InvalidDownloadLink = invalidDownloadLink
-		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeInvalidDownloadLink
+		u.Type = FileAnalysisSyncPostResponseBodyTypeInvalidDownloadLink
 		return nil
 	}
 
 	invalidProtocolDownloadLink := new(shared.InvalidProtocolDownloadLink)
 	if err := utils.UnmarshalJSON(data, &invalidProtocolDownloadLink, "", true, true); err == nil {
 		u.InvalidProtocolDownloadLink = invalidProtocolDownloadLink
-		u.Type = FileAnalysisSyncPost400ApplicationJSONTypeInvalidProtocolDownloadLink
+		u.Type = FileAnalysisSyncPostResponseBodyTypeInvalidProtocolDownloadLink
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u FileAnalysisSyncPost400ApplicationJSON) MarshalJSON() ([]byte, error) {
+func (u FileAnalysisSyncPostResponseBody) MarshalJSON() ([]byte, error) {
 	if u.InvalidAPIKeyGiven != nil {
 		return utils.MarshalJSON(u.InvalidAPIKeyGiven, "", true)
 	}
@@ -582,6 +582,18 @@ func (u FileAnalysisSyncPost400ApplicationJSON) MarshalJSON() ([]byte, error) {
 }
 
 type FileAnalysisSyncPostResponse struct {
+	// API key is invalid.
+	FourHundredApplicationJSONOneOf *FileAnalysisSyncPostResponseBody
+	// Timed out response. The scan is still in progress, but the connection is timed out.
+	FourHundredAndEightApplicationJSONObject *FileAnalysisSyncPostAnalysisResponseBody
+	// Content-Length header is missing from the request.
+	FourHundredAndElevenApplicationJSONObject *FileAnalysisSyncPostAnalysisResponseResponseBody
+	// Body input is empty.
+	FourHundredAndTwentyTwoApplicationJSONObject *FileAnalysisSyncPostAnalysisResponse422ResponseBody
+	// Internal Server Error.
+	FiveHundredApplicationJSONOneOf *FileAnalysisSyncPostAnalysisResponse500ResponseBody
+	// Server is too busy, scan queue is full. Try again later.
+	FiveHundredAndThreeApplicationJSONObject *FileAnalysisSyncPostAnalysisResponse503ResponseBody
 	// The scan is completed before the connection timeout occurs
 	AnalysisResult *shared.AnalysisResult
 	// Callback URL is not supported.
@@ -592,18 +604,48 @@ type FileAnalysisSyncPostResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// API key is invalid.
-	FileAnalysisSyncPost400ApplicationJSONOneOf *FileAnalysisSyncPost400ApplicationJSON
-	// Timed out response. The scan is still in progress, but the connection is timed out.
-	FileAnalysisSyncPost408ApplicationJSONObject *FileAnalysisSyncPost408ApplicationJSON
-	// Content-Length header is missing from the request.
-	FileAnalysisSyncPost411ApplicationJSONObject *FileAnalysisSyncPost411ApplicationJSON
-	// Body input is empty.
-	FileAnalysisSyncPost422ApplicationJSONObject *FileAnalysisSyncPost422ApplicationJSON
-	// Internal Server Error.
-	FileAnalysisSyncPost500ApplicationJSONOneOf *FileAnalysisSyncPost500ApplicationJSON
-	// Server is too busy, scan queue is full. Try again later.
-	FileAnalysisSyncPost503ApplicationJSONObject *FileAnalysisSyncPost503ApplicationJSON
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFourHundredApplicationJSONOneOf() *FileAnalysisSyncPostResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONOneOf
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFourHundredAndEightApplicationJSONObject() *FileAnalysisSyncPostAnalysisResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndEightApplicationJSONObject
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFourHundredAndElevenApplicationJSONObject() *FileAnalysisSyncPostAnalysisResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndElevenApplicationJSONObject
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFourHundredAndTwentyTwoApplicationJSONObject() *FileAnalysisSyncPostAnalysisResponse422ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndTwentyTwoApplicationJSONObject
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFiveHundredApplicationJSONOneOf() *FileAnalysisSyncPostAnalysisResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONOneOf
+}
+
+func (o *FileAnalysisSyncPostResponse) GetFiveHundredAndThreeApplicationJSONObject() *FileAnalysisSyncPostAnalysisResponse503ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredAndThreeApplicationJSONObject
 }
 
 func (o *FileAnalysisSyncPostResponse) GetAnalysisResult() *shared.AnalysisResult {
@@ -639,46 +681,4 @@ func (o *FileAnalysisSyncPostResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost400ApplicationJSONOneOf() *FileAnalysisSyncPost400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisSyncPost400ApplicationJSONOneOf
-}
-
-func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost408ApplicationJSONObject() *FileAnalysisSyncPost408ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisSyncPost408ApplicationJSONObject
-}
-
-func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost411ApplicationJSONObject() *FileAnalysisSyncPost411ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisSyncPost411ApplicationJSONObject
-}
-
-func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost422ApplicationJSONObject() *FileAnalysisSyncPost422ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisSyncPost422ApplicationJSONObject
-}
-
-func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost500ApplicationJSONOneOf() *FileAnalysisSyncPost500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisSyncPost500ApplicationJSONOneOf
-}
-
-func (o *FileAnalysisSyncPostResponse) GetFileAnalysisSyncPost503ApplicationJSONObject() *FileAnalysisSyncPost503ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisSyncPost503ApplicationJSONObject
 }

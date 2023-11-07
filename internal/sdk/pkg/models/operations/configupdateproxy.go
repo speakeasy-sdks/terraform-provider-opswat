@@ -30,112 +30,112 @@ func (o *ConfigUpdateProxyRequest) GetApikey() string {
 	return o.Apikey
 }
 
-type ConfigUpdateProxy400ApplicationJSONType string
+type ConfigUpdateProxyResponseBodyType string
 
 const (
-	ConfigUpdateProxy400ApplicationJSONTypeMissingEnabledField         ConfigUpdateProxy400ApplicationJSONType = "MissingEnabledField"
-	ConfigUpdateProxy400ApplicationJSONTypeErrorWhileParsingInputJSON  ConfigUpdateProxy400ApplicationJSONType = "ErrorWhileParsingInputJson"
-	ConfigUpdateProxy400ApplicationJSONTypeMissingPort                 ConfigUpdateProxy400ApplicationJSONType = "MissingPort"
-	ConfigUpdateProxy400ApplicationJSONTypeMissingServerAddress        ConfigUpdateProxy400ApplicationJSONType = "MissingServerAddress"
-	ConfigUpdateProxy400ApplicationJSONTypeProxyRequiresAuthentication ConfigUpdateProxy400ApplicationJSONType = "ProxyRequiresAuthentication"
+	ConfigUpdateProxyResponseBodyTypeMissingEnabledField         ConfigUpdateProxyResponseBodyType = "MissingEnabledField"
+	ConfigUpdateProxyResponseBodyTypeErrorWhileParsingInputJSON  ConfigUpdateProxyResponseBodyType = "ErrorWhileParsingInputJson"
+	ConfigUpdateProxyResponseBodyTypeMissingPort                 ConfigUpdateProxyResponseBodyType = "MissingPort"
+	ConfigUpdateProxyResponseBodyTypeMissingServerAddress        ConfigUpdateProxyResponseBodyType = "MissingServerAddress"
+	ConfigUpdateProxyResponseBodyTypeProxyRequiresAuthentication ConfigUpdateProxyResponseBodyType = "ProxyRequiresAuthentication"
 )
 
-type ConfigUpdateProxy400ApplicationJSON struct {
+type ConfigUpdateProxyResponseBody struct {
 	MissingEnabledField         *shared.MissingEnabledField
 	ErrorWhileParsingInputJSON  *shared.ErrorWhileParsingInputJSON
 	MissingPort                 *shared.MissingPort
 	MissingServerAddress        *shared.MissingServerAddress
 	ProxyRequiresAuthentication *shared.ProxyRequiresAuthentication
 
-	Type ConfigUpdateProxy400ApplicationJSONType
+	Type ConfigUpdateProxyResponseBodyType
 }
 
-func CreateConfigUpdateProxy400ApplicationJSONMissingEnabledField(missingEnabledField shared.MissingEnabledField) ConfigUpdateProxy400ApplicationJSON {
-	typ := ConfigUpdateProxy400ApplicationJSONTypeMissingEnabledField
+func CreateConfigUpdateProxyResponseBodyMissingEnabledField(missingEnabledField shared.MissingEnabledField) ConfigUpdateProxyResponseBody {
+	typ := ConfigUpdateProxyResponseBodyTypeMissingEnabledField
 
-	return ConfigUpdateProxy400ApplicationJSON{
+	return ConfigUpdateProxyResponseBody{
 		MissingEnabledField: &missingEnabledField,
 		Type:                typ,
 	}
 }
 
-func CreateConfigUpdateProxy400ApplicationJSONErrorWhileParsingInputJSON(errorWhileParsingInputJSON shared.ErrorWhileParsingInputJSON) ConfigUpdateProxy400ApplicationJSON {
-	typ := ConfigUpdateProxy400ApplicationJSONTypeErrorWhileParsingInputJSON
+func CreateConfigUpdateProxyResponseBodyErrorWhileParsingInputJSON(errorWhileParsingInputJSON shared.ErrorWhileParsingInputJSON) ConfigUpdateProxyResponseBody {
+	typ := ConfigUpdateProxyResponseBodyTypeErrorWhileParsingInputJSON
 
-	return ConfigUpdateProxy400ApplicationJSON{
+	return ConfigUpdateProxyResponseBody{
 		ErrorWhileParsingInputJSON: &errorWhileParsingInputJSON,
 		Type:                       typ,
 	}
 }
 
-func CreateConfigUpdateProxy400ApplicationJSONMissingPort(missingPort shared.MissingPort) ConfigUpdateProxy400ApplicationJSON {
-	typ := ConfigUpdateProxy400ApplicationJSONTypeMissingPort
+func CreateConfigUpdateProxyResponseBodyMissingPort(missingPort shared.MissingPort) ConfigUpdateProxyResponseBody {
+	typ := ConfigUpdateProxyResponseBodyTypeMissingPort
 
-	return ConfigUpdateProxy400ApplicationJSON{
+	return ConfigUpdateProxyResponseBody{
 		MissingPort: &missingPort,
 		Type:        typ,
 	}
 }
 
-func CreateConfigUpdateProxy400ApplicationJSONMissingServerAddress(missingServerAddress shared.MissingServerAddress) ConfigUpdateProxy400ApplicationJSON {
-	typ := ConfigUpdateProxy400ApplicationJSONTypeMissingServerAddress
+func CreateConfigUpdateProxyResponseBodyMissingServerAddress(missingServerAddress shared.MissingServerAddress) ConfigUpdateProxyResponseBody {
+	typ := ConfigUpdateProxyResponseBodyTypeMissingServerAddress
 
-	return ConfigUpdateProxy400ApplicationJSON{
+	return ConfigUpdateProxyResponseBody{
 		MissingServerAddress: &missingServerAddress,
 		Type:                 typ,
 	}
 }
 
-func CreateConfigUpdateProxy400ApplicationJSONProxyRequiresAuthentication(proxyRequiresAuthentication shared.ProxyRequiresAuthentication) ConfigUpdateProxy400ApplicationJSON {
-	typ := ConfigUpdateProxy400ApplicationJSONTypeProxyRequiresAuthentication
+func CreateConfigUpdateProxyResponseBodyProxyRequiresAuthentication(proxyRequiresAuthentication shared.ProxyRequiresAuthentication) ConfigUpdateProxyResponseBody {
+	typ := ConfigUpdateProxyResponseBodyTypeProxyRequiresAuthentication
 
-	return ConfigUpdateProxy400ApplicationJSON{
+	return ConfigUpdateProxyResponseBody{
 		ProxyRequiresAuthentication: &proxyRequiresAuthentication,
 		Type:                        typ,
 	}
 }
 
-func (u *ConfigUpdateProxy400ApplicationJSON) UnmarshalJSON(data []byte) error {
+func (u *ConfigUpdateProxyResponseBody) UnmarshalJSON(data []byte) error {
 
 	missingEnabledField := new(shared.MissingEnabledField)
 	if err := utils.UnmarshalJSON(data, &missingEnabledField, "", true, true); err == nil {
 		u.MissingEnabledField = missingEnabledField
-		u.Type = ConfigUpdateProxy400ApplicationJSONTypeMissingEnabledField
+		u.Type = ConfigUpdateProxyResponseBodyTypeMissingEnabledField
 		return nil
 	}
 
 	errorWhileParsingInputJSON := new(shared.ErrorWhileParsingInputJSON)
 	if err := utils.UnmarshalJSON(data, &errorWhileParsingInputJSON, "", true, true); err == nil {
 		u.ErrorWhileParsingInputJSON = errorWhileParsingInputJSON
-		u.Type = ConfigUpdateProxy400ApplicationJSONTypeErrorWhileParsingInputJSON
+		u.Type = ConfigUpdateProxyResponseBodyTypeErrorWhileParsingInputJSON
 		return nil
 	}
 
 	missingPort := new(shared.MissingPort)
 	if err := utils.UnmarshalJSON(data, &missingPort, "", true, true); err == nil {
 		u.MissingPort = missingPort
-		u.Type = ConfigUpdateProxy400ApplicationJSONTypeMissingPort
+		u.Type = ConfigUpdateProxyResponseBodyTypeMissingPort
 		return nil
 	}
 
 	missingServerAddress := new(shared.MissingServerAddress)
 	if err := utils.UnmarshalJSON(data, &missingServerAddress, "", true, true); err == nil {
 		u.MissingServerAddress = missingServerAddress
-		u.Type = ConfigUpdateProxy400ApplicationJSONTypeMissingServerAddress
+		u.Type = ConfigUpdateProxyResponseBodyTypeMissingServerAddress
 		return nil
 	}
 
 	proxyRequiresAuthentication := new(shared.ProxyRequiresAuthentication)
 	if err := utils.UnmarshalJSON(data, &proxyRequiresAuthentication, "", true, true); err == nil {
 		u.ProxyRequiresAuthentication = proxyRequiresAuthentication
-		u.Type = ConfigUpdateProxy400ApplicationJSONTypeProxyRequiresAuthentication
+		u.Type = ConfigUpdateProxyResponseBodyTypeProxyRequiresAuthentication
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u ConfigUpdateProxy400ApplicationJSON) MarshalJSON() ([]byte, error) {
+func (u ConfigUpdateProxyResponseBody) MarshalJSON() ([]byte, error) {
 	if u.MissingEnabledField != nil {
 		return utils.MarshalJSON(u.MissingEnabledField, "", true)
 	}
@@ -169,7 +169,7 @@ type ConfigUpdateProxyResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	ConfigUpdateProxy400ApplicationJSONOneOf *ConfigUpdateProxy400ApplicationJSON
+	OneOf *ConfigUpdateProxyResponseBody
 }
 
 func (o *ConfigUpdateProxyResponse) GetContentType() string {
@@ -200,9 +200,9 @@ func (o *ConfigUpdateProxyResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *ConfigUpdateProxyResponse) GetConfigUpdateProxy400ApplicationJSONOneOf() *ConfigUpdateProxy400ApplicationJSON {
+func (o *ConfigUpdateProxyResponse) GetOneOf() *ConfigUpdateProxyResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ConfigUpdateProxy400ApplicationJSONOneOf
+	return o.OneOf
 }

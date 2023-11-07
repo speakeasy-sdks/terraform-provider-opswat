@@ -2,8 +2,8 @@
 
 package shared
 
-// UserRequestUISettings - Configuration of Management Console for this user.
-type UserRequestUISettings struct {
+// UISettings - Configuration of Management Console for this user.
+type UISettings struct {
 }
 
 // UserRequest - User object in MetaDefender.
@@ -23,7 +23,7 @@ type UserRequest struct {
 	// A list of roles attached to this user
 	Roles []string `json:"roles,omitempty"`
 	// Configuration of Management Console for this user.
-	UISettings *UserRequestUISettings `json:"ui_settings,omitempty"`
+	UISettings *UISettings `json:"ui_settings,omitempty"`
 }
 
 func (o *UserRequest) GetAPIKey() *string {
@@ -75,7 +75,7 @@ func (o *UserRequest) GetRoles() []string {
 	return o.Roles
 }
 
-func (o *UserRequest) GetUISettings() *UserRequestUISettings {
+func (o *UserRequest) GetUISettings() *UISettings {
 	if o == nil {
 		return nil
 	}

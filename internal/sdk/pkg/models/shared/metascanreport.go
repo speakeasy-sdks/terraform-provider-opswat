@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// MetascanReportScanAllResultA - Processing result and its index
+// ScanAllResultA - Processing result and its index
 // * `No Threat Detected`: 0
 // * `Infected`: 1
 // * `Suspicious`: 2
@@ -29,37 +29,37 @@ import (
 // * `Potentially Unwanted`: 22
 // * `Unsupported File Type`: 23
 // * `In Progress`: 255
-type MetascanReportScanAllResultA string
+type ScanAllResultA string
 
 const (
-	MetascanReportScanAllResultANoThreatDetected          MetascanReportScanAllResultA = "No Threat Detected"
-	MetascanReportScanAllResultAInfected                  MetascanReportScanAllResultA = "Infected"
-	MetascanReportScanAllResultASuspicious                MetascanReportScanAllResultA = "Suspicious"
-	MetascanReportScanAllResultAFailed                    MetascanReportScanAllResultA = "Failed"
-	MetascanReportScanAllResultAWhitelisted               MetascanReportScanAllResultA = "Whitelisted"
-	MetascanReportScanAllResultABlacklisted               MetascanReportScanAllResultA = "Blacklisted"
-	MetascanReportScanAllResultAExceededArchiveDepth      MetascanReportScanAllResultA = "Exceeded Archive Depth"
-	MetascanReportScanAllResultANotScanned                MetascanReportScanAllResultA = "Not Scanned"
-	MetascanReportScanAllResultAEncryptedArchive          MetascanReportScanAllResultA = "Encrypted Archive"
-	MetascanReportScanAllResultAExceededArchiveSize       MetascanReportScanAllResultA = "Exceeded Archive Size"
-	MetascanReportScanAllResultAExceededArchiveFileNumber MetascanReportScanAllResultA = "Exceeded Archive File Number"
-	MetascanReportScanAllResultAPasswordProtectedDocument MetascanReportScanAllResultA = "Password Protected Document"
-	MetascanReportScanAllResultAExceededArchiveTimeout    MetascanReportScanAllResultA = "Exceeded Archive Timeout"
-	MetascanReportScanAllResultAMismatch                  MetascanReportScanAllResultA = "Mismatch"
-	MetascanReportScanAllResultAPotentiallyVulnerableFile MetascanReportScanAllResultA = "Potentially Vulnerable File"
-	MetascanReportScanAllResultACancelled                 MetascanReportScanAllResultA = "Cancelled"
-	MetascanReportScanAllResultASensitiveDataFound        MetascanReportScanAllResultA = "Sensitive Data Found"
-	MetascanReportScanAllResultAYaraRuleMatched           MetascanReportScanAllResultA = "Yara Rule Matched"
-	MetascanReportScanAllResultAPotentiallyUnwanted       MetascanReportScanAllResultA = "Potentially Unwanted"
-	MetascanReportScanAllResultAUnsupportedFileType       MetascanReportScanAllResultA = "Unsupported File Type"
-	MetascanReportScanAllResultAInProgress                MetascanReportScanAllResultA = "In Progress"
+	ScanAllResultANoThreatDetected          ScanAllResultA = "No Threat Detected"
+	ScanAllResultAInfected                  ScanAllResultA = "Infected"
+	ScanAllResultASuspicious                ScanAllResultA = "Suspicious"
+	ScanAllResultAFailed                    ScanAllResultA = "Failed"
+	ScanAllResultAWhitelisted               ScanAllResultA = "Whitelisted"
+	ScanAllResultABlacklisted               ScanAllResultA = "Blacklisted"
+	ScanAllResultAExceededArchiveDepth      ScanAllResultA = "Exceeded Archive Depth"
+	ScanAllResultANotScanned                ScanAllResultA = "Not Scanned"
+	ScanAllResultAEncryptedArchive          ScanAllResultA = "Encrypted Archive"
+	ScanAllResultAExceededArchiveSize       ScanAllResultA = "Exceeded Archive Size"
+	ScanAllResultAExceededArchiveFileNumber ScanAllResultA = "Exceeded Archive File Number"
+	ScanAllResultAPasswordProtectedDocument ScanAllResultA = "Password Protected Document"
+	ScanAllResultAExceededArchiveTimeout    ScanAllResultA = "Exceeded Archive Timeout"
+	ScanAllResultAMismatch                  ScanAllResultA = "Mismatch"
+	ScanAllResultAPotentiallyVulnerableFile ScanAllResultA = "Potentially Vulnerable File"
+	ScanAllResultACancelled                 ScanAllResultA = "Cancelled"
+	ScanAllResultASensitiveDataFound        ScanAllResultA = "Sensitive Data Found"
+	ScanAllResultAYaraRuleMatched           ScanAllResultA = "Yara Rule Matched"
+	ScanAllResultAPotentiallyUnwanted       ScanAllResultA = "Potentially Unwanted"
+	ScanAllResultAUnsupportedFileType       ScanAllResultA = "Unsupported File Type"
+	ScanAllResultAInProgress                ScanAllResultA = "In Progress"
 )
 
-func (e MetascanReportScanAllResultA) ToPointer() *MetascanReportScanAllResultA {
+func (e ScanAllResultA) ToPointer() *ScanAllResultA {
 	return &e
 }
 
-func (e *MetascanReportScanAllResultA) UnmarshalJSON(data []byte) error {
+func (e *ScanAllResultA) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -106,45 +106,45 @@ func (e *MetascanReportScanAllResultA) UnmarshalJSON(data []byte) error {
 	case "Unsupported File Type":
 		fallthrough
 	case "In Progress":
-		*e = MetascanReportScanAllResultA(v)
+		*e = ScanAllResultA(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for MetascanReportScanAllResultA: %v", v)
+		return fmt.Errorf("invalid value for ScanAllResultA: %v", v)
 	}
 }
 
-// MetascanReportScanAllResultI - Scan result as index in the Processing Results table above
-type MetascanReportScanAllResultI int64
+// ScanAllResultI - Scan result as index in the Processing Results table above
+type ScanAllResultI int64
 
 const (
-	MetascanReportScanAllResultIZero                   MetascanReportScanAllResultI = 0
-	MetascanReportScanAllResultIOne                    MetascanReportScanAllResultI = 1
-	MetascanReportScanAllResultITwo                    MetascanReportScanAllResultI = 2
-	MetascanReportScanAllResultIThree                  MetascanReportScanAllResultI = 3
-	MetascanReportScanAllResultISeven                  MetascanReportScanAllResultI = 7
-	MetascanReportScanAllResultIEight                  MetascanReportScanAllResultI = 8
-	MetascanReportScanAllResultINine                   MetascanReportScanAllResultI = 9
-	MetascanReportScanAllResultITen                    MetascanReportScanAllResultI = 10
-	MetascanReportScanAllResultITwelve                 MetascanReportScanAllResultI = 12
-	MetascanReportScanAllResultIThirteen               MetascanReportScanAllResultI = 13
-	MetascanReportScanAllResultIFourteen               MetascanReportScanAllResultI = 14
-	MetascanReportScanAllResultIFifteen                MetascanReportScanAllResultI = 15
-	MetascanReportScanAllResultISixteen                MetascanReportScanAllResultI = 16
-	MetascanReportScanAllResultISeventeen              MetascanReportScanAllResultI = 17
-	MetascanReportScanAllResultIEighteen               MetascanReportScanAllResultI = 18
-	MetascanReportScanAllResultINineteen               MetascanReportScanAllResultI = 19
-	MetascanReportScanAllResultITwenty                 MetascanReportScanAllResultI = 20
-	MetascanReportScanAllResultITwentyOne              MetascanReportScanAllResultI = 21
-	MetascanReportScanAllResultITwentyTwo              MetascanReportScanAllResultI = 22
-	MetascanReportScanAllResultITwentyThree            MetascanReportScanAllResultI = 23
-	MetascanReportScanAllResultITwoHundredAndFiftyFive MetascanReportScanAllResultI = 255
+	ScanAllResultIZero                   ScanAllResultI = 0
+	ScanAllResultIOne                    ScanAllResultI = 1
+	ScanAllResultITwo                    ScanAllResultI = 2
+	ScanAllResultIThree                  ScanAllResultI = 3
+	ScanAllResultISeven                  ScanAllResultI = 7
+	ScanAllResultIEight                  ScanAllResultI = 8
+	ScanAllResultINine                   ScanAllResultI = 9
+	ScanAllResultITen                    ScanAllResultI = 10
+	ScanAllResultITwelve                 ScanAllResultI = 12
+	ScanAllResultIThirteen               ScanAllResultI = 13
+	ScanAllResultIFourteen               ScanAllResultI = 14
+	ScanAllResultIFifteen                ScanAllResultI = 15
+	ScanAllResultISixteen                ScanAllResultI = 16
+	ScanAllResultISeventeen              ScanAllResultI = 17
+	ScanAllResultIEighteen               ScanAllResultI = 18
+	ScanAllResultINineteen               ScanAllResultI = 19
+	ScanAllResultITwenty                 ScanAllResultI = 20
+	ScanAllResultITwentyOne              ScanAllResultI = 21
+	ScanAllResultITwentyTwo              ScanAllResultI = 22
+	ScanAllResultITwentyThree            ScanAllResultI = 23
+	ScanAllResultITwoHundredAndFiftyFive ScanAllResultI = 255
 )
 
-func (e MetascanReportScanAllResultI) ToPointer() *MetascanReportScanAllResultI {
+func (e ScanAllResultI) ToPointer() *ScanAllResultI {
 	return &e
 }
 
-func (e *MetascanReportScanAllResultI) UnmarshalJSON(data []byte) error {
+func (e *ScanAllResultI) UnmarshalJSON(data []byte) error {
 	var v int64
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -191,20 +191,20 @@ func (e *MetascanReportScanAllResultI) UnmarshalJSON(data []byte) error {
 	case 23:
 		fallthrough
 	case 255:
-		*e = MetascanReportScanAllResultI(v)
+		*e = ScanAllResultI(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for MetascanReportScanAllResultI: %v", v)
+		return fmt.Errorf("invalid value for ScanAllResultI: %v", v)
 	}
 }
 
-// MetascanReportScanDetails - Scan results for each antivirus engine. The key is the name of the antivirus engine and the value is the result of the antivirus engine
-type MetascanReportScanDetails struct {
+// ScanDetails - Scan results for each antivirus engine. The key is the name of the antivirus engine and the value is the result of the antivirus engine
+type ScanDetails struct {
 	// Scan report per each engine.
 	ClamAV *AVEngineScanReport `json:"ClamAV,omitempty"`
 }
 
-func (o *MetascanReportScanDetails) GetClamAV() *AVEngineScanReport {
+func (o *ScanDetails) GetClamAV() *AVEngineScanReport {
 	if o == nil {
 		return nil
 	}
@@ -218,11 +218,11 @@ type MetascanReport struct {
 	// Track analysis progress until reaches 100.
 	ProgressPercentage *int64 `json:"progress_percentage,omitempty"`
 	// The overall scan result as string
-	ScanAllResultA *MetascanReportScanAllResultA `json:"scan_all_result_a,omitempty"`
+	ScanAllResultA *ScanAllResultA `json:"scan_all_result_a,omitempty"`
 	// The overall scan result as index in the Processing Results table.
-	ScanAllResultI *MetascanReportScanAllResultI `json:"scan_all_result_i,omitempty"`
+	ScanAllResultI *ScanAllResultI `json:"scan_all_result_i,omitempty"`
 	// Scan results for each antivirus engine. The key is the name of the antivirus engine and the value is the result of the antivirus engine
-	ScanDetails *MetascanReportScanDetails `json:"scan_details,omitempty"`
+	ScanDetails *ScanDetails `json:"scan_details,omitempty"`
 	// Timestamp when the scanning process starts.
 	StartTime *string `json:"start_time,omitempty"`
 	// Total number of scanning engines used as part of this analysis.
@@ -245,21 +245,21 @@ func (o *MetascanReport) GetProgressPercentage() *int64 {
 	return o.ProgressPercentage
 }
 
-func (o *MetascanReport) GetScanAllResultA() *MetascanReportScanAllResultA {
+func (o *MetascanReport) GetScanAllResultA() *ScanAllResultA {
 	if o == nil {
 		return nil
 	}
 	return o.ScanAllResultA
 }
 
-func (o *MetascanReport) GetScanAllResultI() *MetascanReportScanAllResultI {
+func (o *MetascanReport) GetScanAllResultI() *ScanAllResultI {
 	if o == nil {
 		return nil
 	}
 	return o.ScanAllResultI
 }
 
-func (o *MetascanReport) GetScanDetails() *MetascanReportScanDetails {
+func (o *MetascanReport) GetScanDetails() *ScanDetails {
 	if o == nil {
 		return nil
 	}

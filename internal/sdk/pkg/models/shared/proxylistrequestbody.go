@@ -7,25 +7,25 @@ import (
 	"fmt"
 )
 
-// ProxyListRequestBodyFeatureProxyID - Feature ID.
-type ProxyListRequestBodyFeatureProxyID string
+// ProxyListRequestBodyID - Feature ID.
+type ProxyListRequestBodyID string
 
 const (
-	ProxyListRequestBodyFeatureProxyIDCallbackurl  ProxyListRequestBodyFeatureProxyID = "callbackurl"
-	ProxyListRequestBodyFeatureProxyIDDownloadfrom ProxyListRequestBodyFeatureProxyID = "downloadfrom"
-	ProxyListRequestBodyFeatureProxyIDLicense      ProxyListRequestBodyFeatureProxyID = "license"
-	ProxyListRequestBodyFeatureProxyIDMdcloud      ProxyListRequestBodyFeatureProxyID = "mdcloud"
-	ProxyListRequestBodyFeatureProxyIDUpdateengine ProxyListRequestBodyFeatureProxyID = "updateengine"
-	ProxyListRequestBodyFeatureProxyIDSanitizedurl ProxyListRequestBodyFeatureProxyID = "sanitizedurl"
-	ProxyListRequestBodyFeatureProxyIDSsologin     ProxyListRequestBodyFeatureProxyID = "ssologin"
-	ProxyListRequestBodyFeatureProxyIDYara         ProxyListRequestBodyFeatureProxyID = "yara"
+	ProxyListRequestBodyIDCallbackurl  ProxyListRequestBodyID = "callbackurl"
+	ProxyListRequestBodyIDDownloadfrom ProxyListRequestBodyID = "downloadfrom"
+	ProxyListRequestBodyIDLicense      ProxyListRequestBodyID = "license"
+	ProxyListRequestBodyIDMdcloud      ProxyListRequestBodyID = "mdcloud"
+	ProxyListRequestBodyIDUpdateengine ProxyListRequestBodyID = "updateengine"
+	ProxyListRequestBodyIDSanitizedurl ProxyListRequestBodyID = "sanitizedurl"
+	ProxyListRequestBodyIDSsologin     ProxyListRequestBodyID = "ssologin"
+	ProxyListRequestBodyIDYara         ProxyListRequestBodyID = "yara"
 )
 
-func (e ProxyListRequestBodyFeatureProxyID) ToPointer() *ProxyListRequestBodyFeatureProxyID {
+func (e ProxyListRequestBodyID) ToPointer() *ProxyListRequestBodyID {
 	return &e
 }
 
-func (e *ProxyListRequestBodyFeatureProxyID) UnmarshalJSON(data []byte) error {
+func (e *ProxyListRequestBodyID) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -46,27 +46,27 @@ func (e *ProxyListRequestBodyFeatureProxyID) UnmarshalJSON(data []byte) error {
 	case "ssologin":
 		fallthrough
 	case "yara":
-		*e = ProxyListRequestBodyFeatureProxyID(v)
+		*e = ProxyListRequestBodyID(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ProxyListRequestBodyFeatureProxyID: %v", v)
+		return fmt.Errorf("invalid value for ProxyListRequestBodyID: %v", v)
 	}
 }
 
-// ProxyListRequestBodyFeatureProxyUseProxy - 0 - this feature does not use proxy. 1 - this feature use master proxy setting. 2 - this feature use a custom proxy.
-type ProxyListRequestBodyFeatureProxyUseProxy int64
+// ProxyListRequestBodyUseProxy - 0 - this feature does not use proxy. 1 - this feature use master proxy setting. 2 - this feature use a custom proxy.
+type ProxyListRequestBodyUseProxy int64
 
 const (
-	ProxyListRequestBodyFeatureProxyUseProxyZero ProxyListRequestBodyFeatureProxyUseProxy = 0
-	ProxyListRequestBodyFeatureProxyUseProxyOne  ProxyListRequestBodyFeatureProxyUseProxy = 1
-	ProxyListRequestBodyFeatureProxyUseProxyTwo  ProxyListRequestBodyFeatureProxyUseProxy = 2
+	ProxyListRequestBodyUseProxyZero ProxyListRequestBodyUseProxy = 0
+	ProxyListRequestBodyUseProxyOne  ProxyListRequestBodyUseProxy = 1
+	ProxyListRequestBodyUseProxyTwo  ProxyListRequestBodyUseProxy = 2
 )
 
-func (e ProxyListRequestBodyFeatureProxyUseProxy) ToPointer() *ProxyListRequestBodyFeatureProxyUseProxy {
+func (e ProxyListRequestBodyUseProxy) ToPointer() *ProxyListRequestBodyUseProxy {
 	return &e
 }
 
-func (e *ProxyListRequestBodyFeatureProxyUseProxy) UnmarshalJSON(data []byte) error {
+func (e *ProxyListRequestBodyUseProxy) UnmarshalJSON(data []byte) error {
 	var v int64
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -77,22 +77,22 @@ func (e *ProxyListRequestBodyFeatureProxyUseProxy) UnmarshalJSON(data []byte) er
 	case 1:
 		fallthrough
 	case 2:
-		*e = ProxyListRequestBodyFeatureProxyUseProxy(v)
+		*e = ProxyListRequestBodyUseProxy(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ProxyListRequestBodyFeatureProxyUseProxy: %v", v)
+		return fmt.Errorf("invalid value for ProxyListRequestBodyUseProxy: %v", v)
 	}
 }
 
 type ProxyListRequestBodyFeatureProxy struct {
 	Exclusion *string `json:"exclusion,omitempty"`
 	// Feature ID.
-	ID     *ProxyListRequestBodyFeatureProxyID `json:"id,omitempty"`
-	Port   *string                             `json:"port,omitempty"`
-	Server *string                             `json:"server,omitempty"`
+	ID     *ProxyListRequestBodyID `json:"id,omitempty"`
+	Port   *string                 `json:"port,omitempty"`
+	Server *string                 `json:"server,omitempty"`
 	// 0 - this feature does not use proxy. 1 - this feature use master proxy setting. 2 - this feature use a custom proxy.
-	UseProxy *ProxyListRequestBodyFeatureProxyUseProxy `json:"use_proxy,omitempty"`
-	Username *string                                   `json:"username,omitempty"`
+	UseProxy *ProxyListRequestBodyUseProxy `json:"use_proxy,omitempty"`
+	Username *string                       `json:"username,omitempty"`
 }
 
 func (o *ProxyListRequestBodyFeatureProxy) GetExclusion() *string {
@@ -102,7 +102,7 @@ func (o *ProxyListRequestBodyFeatureProxy) GetExclusion() *string {
 	return o.Exclusion
 }
 
-func (o *ProxyListRequestBodyFeatureProxy) GetID() *ProxyListRequestBodyFeatureProxyID {
+func (o *ProxyListRequestBodyFeatureProxy) GetID() *ProxyListRequestBodyID {
 	if o == nil {
 		return nil
 	}
@@ -123,7 +123,7 @@ func (o *ProxyListRequestBodyFeatureProxy) GetServer() *string {
 	return o.Server
 }
 
-func (o *ProxyListRequestBodyFeatureProxy) GetUseProxy() *ProxyListRequestBodyFeatureProxyUseProxy {
+func (o *ProxyListRequestBodyFeatureProxy) GetUseProxy() *ProxyListRequestBodyUseProxy {
 	if o == nil {
 		return nil
 	}

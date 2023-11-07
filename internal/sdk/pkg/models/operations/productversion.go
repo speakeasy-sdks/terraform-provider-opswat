@@ -19,35 +19,35 @@ func (o *ProductVersionRequest) GetApikey() *string {
 	return o.Apikey
 }
 
-// ProductVersion500ApplicationJSON - Unexpected event on server
-type ProductVersion500ApplicationJSON struct {
+// ProductVersionStatsResponseBody - Unexpected event on server
+type ProductVersionStatsResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ProductVersion500ApplicationJSON) GetErr() *string {
+func (o *ProductVersionStatsResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ProductVersion200ApplicationJSON - Provides productId and version information.
-type ProductVersion200ApplicationJSON struct {
+// ProductVersionResponseBody - Provides productId and version information.
+type ProductVersionResponseBody struct {
 	// Product identifier.
 	ProductID *string `json:"product_id,omitempty"`
 	// The product version currently used.
 	Version *string `json:"version,omitempty"`
 }
 
-func (o *ProductVersion200ApplicationJSON) GetProductID() *string {
+func (o *ProductVersionResponseBody) GetProductID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ProductID
 }
 
-func (o *ProductVersion200ApplicationJSON) GetVersion() *string {
+func (o *ProductVersionResponseBody) GetVersion() *string {
 	if o == nil {
 		return nil
 	}
@@ -55,16 +55,30 @@ func (o *ProductVersion200ApplicationJSON) GetVersion() *string {
 }
 
 type ProductVersionResponse struct {
+	// Provides productId and version information.
+	TwoHundredApplicationJSONObject *ProductVersionResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ProductVersionStatsResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Provides productId and version information.
-	ProductVersion200ApplicationJSONObject *ProductVersion200ApplicationJSON
-	// Unexpected event on server
-	ProductVersion500ApplicationJSONObject *ProductVersion500ApplicationJSON
+}
+
+func (o *ProductVersionResponse) GetTwoHundredApplicationJSONObject() *ProductVersionResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ProductVersionResponse) GetFiveHundredApplicationJSONObject() *ProductVersionStatsResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ProductVersionResponse) GetContentType() string {
@@ -86,18 +100,4 @@ func (o *ProductVersionResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ProductVersionResponse) GetProductVersion200ApplicationJSONObject() *ProductVersion200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ProductVersion200ApplicationJSONObject
-}
-
-func (o *ProductVersionResponse) GetProductVersion500ApplicationJSONObject() *ProductVersion500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ProductVersion500ApplicationJSONObject
 }

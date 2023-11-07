@@ -20,13 +20,13 @@ func (o *ConfigGetProxyRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigGetProxy403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigGetProxy403ApplicationJSON struct {
+// ConfigGetProxyResponseBody - Invalid user information or Not Allowed
+type ConfigGetProxyResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigGetProxy403ApplicationJSON) GetErr() *string {
+func (o *ConfigGetProxyResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -43,7 +43,7 @@ type ConfigGetProxyResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Invalid user information or Not Allowed
-	ConfigGetProxy403ApplicationJSONObject *ConfigGetProxy403ApplicationJSON
+	Object *ConfigGetProxyResponseBody
 }
 
 func (o *ConfigGetProxyResponse) GetContentType() string {
@@ -74,9 +74,9 @@ func (o *ConfigGetProxyResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *ConfigGetProxyResponse) GetConfigGetProxy403ApplicationJSONObject() *ConfigGetProxy403ApplicationJSON {
+func (o *ConfigGetProxyResponse) GetObject() *ConfigGetProxyResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ConfigGetProxy403ApplicationJSONObject
+	return o.Object
 }

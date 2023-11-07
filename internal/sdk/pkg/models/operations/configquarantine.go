@@ -28,52 +28,52 @@ func (o *ConfigQuarantineRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigQuarantine500ApplicationJSON - Unexpected event on server
-type ConfigQuarantine500ApplicationJSON struct {
+// ConfigQuarantineConfigResponse500ResponseBody - Unexpected event on server
+type ConfigQuarantineConfigResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigQuarantine500ApplicationJSON) GetErr() *string {
+func (o *ConfigQuarantineConfigResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigQuarantine405ApplicationJSON - The user has no rights for this operation.
-type ConfigQuarantine405ApplicationJSON struct {
+// ConfigQuarantineConfigResponseResponseBody - The user has no rights for this operation.
+type ConfigQuarantineConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigQuarantine405ApplicationJSON) GetErr() *string {
+func (o *ConfigQuarantineConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigQuarantine403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigQuarantine403ApplicationJSON struct {
+// ConfigQuarantineConfigResponseBody - Invalid user information or Not Allowed
+type ConfigQuarantineConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigQuarantine403ApplicationJSON) GetErr() *string {
+func (o *ConfigQuarantineConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigQuarantine200ApplicationJSON - Request processed successfully
-type ConfigQuarantine200ApplicationJSON struct {
+// ConfigQuarantineResponseBody - Request processed successfully
+type ConfigQuarantineResponseBody struct {
 	// The number of hours of data retention. Anything older than this number will be deleted.
 	Cleanuprange *int64 `json:"cleanuprange,omitempty"`
 }
 
-func (o *ConfigQuarantine200ApplicationJSON) GetCleanuprange() *int64 {
+func (o *ConfigQuarantineResponseBody) GetCleanuprange() *int64 {
 	if o == nil {
 		return nil
 	}
@@ -81,20 +81,48 @@ func (o *ConfigQuarantine200ApplicationJSON) GetCleanuprange() *int64 {
 }
 
 type ConfigQuarantineResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *ConfigQuarantineResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigQuarantineConfigResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *ConfigQuarantineConfigResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigQuarantineConfigResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	ConfigQuarantine200ApplicationJSONObject *ConfigQuarantine200ApplicationJSON
-	// Invalid user information or Not Allowed
-	ConfigQuarantine403ApplicationJSONObject *ConfigQuarantine403ApplicationJSON
-	// The user has no rights for this operation.
-	ConfigQuarantine405ApplicationJSONObject *ConfigQuarantine405ApplicationJSON
-	// Unexpected event on server
-	ConfigQuarantine500ApplicationJSONObject *ConfigQuarantine500ApplicationJSON
+}
+
+func (o *ConfigQuarantineResponse) GetTwoHundredApplicationJSONObject() *ConfigQuarantineResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ConfigQuarantineResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigQuarantineConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigQuarantineResponse) GetFourHundredAndFiveApplicationJSONObject() *ConfigQuarantineConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *ConfigQuarantineResponse) GetFiveHundredApplicationJSONObject() *ConfigQuarantineConfigResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigQuarantineResponse) GetContentType() string {
@@ -116,32 +144,4 @@ func (o *ConfigQuarantineResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigQuarantineResponse) GetConfigQuarantine200ApplicationJSONObject() *ConfigQuarantine200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigQuarantine200ApplicationJSONObject
-}
-
-func (o *ConfigQuarantineResponse) GetConfigQuarantine403ApplicationJSONObject() *ConfigQuarantine403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigQuarantine403ApplicationJSONObject
-}
-
-func (o *ConfigQuarantineResponse) GetConfigQuarantine405ApplicationJSONObject() *ConfigQuarantine405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigQuarantine405ApplicationJSONObject
-}
-
-func (o *ConfigQuarantineResponse) GetConfigQuarantine500ApplicationJSONObject() *ConfigQuarantine500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigQuarantine500ApplicationJSONObject
 }

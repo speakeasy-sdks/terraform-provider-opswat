@@ -2,19 +2,19 @@
 
 package shared
 
-type HealthCheckEngines struct {
+type Engines struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	ID          *string `json:"id,omitempty"`
 }
 
-func (o *HealthCheckEngines) GetDisplayName() *string {
+func (o *Engines) GetDisplayName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DisplayName
 }
 
-func (o *HealthCheckEngines) GetID() *string {
+func (o *Engines) GetID() *string {
 	if o == nil {
 		return nil
 	}
@@ -23,12 +23,12 @@ func (o *HealthCheckEngines) GetID() *string {
 
 // HealthCheck - Health check criterias.
 type HealthCheck struct {
-	Database              *bool                `json:"database,omitempty"`
-	EnableFeature         *bool                `json:"enable_feature,omitempty"`
-	Engines               []HealthCheckEngines `json:"engines,omitempty"`
-	License               *bool                `json:"license,omitempty"`
-	NumberActiveAvEngines *int64               `json:"number_active_av_engines,omitempty"`
-	ScanQueue             *int64               `json:"scan_queue,omitempty"`
+	Database              *bool     `json:"database,omitempty"`
+	EnableFeature         *bool     `json:"enable_feature,omitempty"`
+	Engines               []Engines `json:"engines,omitempty"`
+	License               *bool     `json:"license,omitempty"`
+	NumberActiveAvEngines *int64    `json:"number_active_av_engines,omitempty"`
+	ScanQueue             *int64    `json:"scan_queue,omitempty"`
 }
 
 func (o *HealthCheck) GetDatabase() *bool {
@@ -45,7 +45,7 @@ func (o *HealthCheck) GetEnableFeature() *bool {
 	return o.EnableFeature
 }
 
-func (o *HealthCheck) GetEngines() []HealthCheckEngines {
+func (o *HealthCheck) GetEngines() []Engines {
 	if o == nil {
 		return nil
 	}

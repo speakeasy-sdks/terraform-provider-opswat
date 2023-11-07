@@ -31,13 +31,13 @@ func (o *FileAnalysisGetAllChildFilesRequest) GetDataID() string {
 	return o.DataID
 }
 
-// FileAnalysisGetAllChildFiles500ApplicationJSON - Unexpected event on server
-type FileAnalysisGetAllChildFiles500ApplicationJSON struct {
+// FileAnalysisGetAllChildFilesResponseBody - Unexpected event on server
+type FileAnalysisGetAllChildFilesResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *FileAnalysisGetAllChildFiles500ApplicationJSON) GetErr() *string {
+func (o *FileAnalysisGetAllChildFilesResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -54,7 +54,7 @@ type FileAnalysisGetAllChildFilesResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Unexpected event on server
-	FileAnalysisGetAllChildFiles500ApplicationJSONObject *FileAnalysisGetAllChildFiles500ApplicationJSON
+	Object *FileAnalysisGetAllChildFilesResponseBody
 }
 
 func (o *FileAnalysisGetAllChildFilesResponse) GetAnalysisResultAllExtractedFiles() *shared.AnalysisResultAllExtractedFiles {
@@ -85,9 +85,9 @@ func (o *FileAnalysisGetAllChildFilesResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *FileAnalysisGetAllChildFilesResponse) GetFileAnalysisGetAllChildFiles500ApplicationJSONObject() *FileAnalysisGetAllChildFiles500ApplicationJSON {
+func (o *FileAnalysisGetAllChildFilesResponse) GetObject() *FileAnalysisGetAllChildFilesResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.FileAnalysisGetAllChildFiles500ApplicationJSONObject
+	return o.Object
 }

@@ -30,92 +30,134 @@ func (o *FileAnalysisCancelRequest) GetDataID() string {
 	return o.DataID
 }
 
-// FileAnalysisCancel500ApplicationJSON - Unexpected event on server
-type FileAnalysisCancel500ApplicationJSON struct {
+// FileAnalysisCancelAnalysisResponse500ResponseBody - Unexpected event on server
+type FileAnalysisCancelAnalysisResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *FileAnalysisCancel500ApplicationJSON) GetErr() *string {
+func (o *FileAnalysisCancelAnalysisResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// FileAnalysisCancel405ApplicationJSON - The user has no rights for this operation.
-type FileAnalysisCancel405ApplicationJSON struct {
+// FileAnalysisCancelAnalysisResponse405ResponseBody - The user has no rights for this operation.
+type FileAnalysisCancelAnalysisResponse405ResponseBody struct {
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *FileAnalysisCancel405ApplicationJSON) GetErr() *string {
+func (o *FileAnalysisCancelAnalysisResponse405ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// FileAnalysisCancel404ApplicationJSON - Data ID not found (invalid id) or Requests resource was not found
-type FileAnalysisCancel404ApplicationJSON struct {
+// FileAnalysisCancelAnalysisResponse404ResponseBody - Data ID not found (invalid id) or Requests resource was not found
+type FileAnalysisCancelAnalysisResponse404ResponseBody struct {
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *FileAnalysisCancel404ApplicationJSON) GetErr() *string {
+func (o *FileAnalysisCancelAnalysisResponse404ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// FileAnalysisCancel403ApplicationJSON - Invalid user information or Not Allowed
-type FileAnalysisCancel403ApplicationJSON struct {
+// FileAnalysisCancelAnalysisResponseResponseBody - Invalid user information or Not Allowed
+type FileAnalysisCancelAnalysisResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *FileAnalysisCancel403ApplicationJSON) GetErr() *string {
+func (o *FileAnalysisCancelAnalysisResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// FileAnalysisCancel400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type FileAnalysisCancel400ApplicationJSON struct {
+// FileAnalysisCancelAnalysisResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type FileAnalysisCancelAnalysisResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *FileAnalysisCancel400ApplicationJSON) GetErr() *string {
+func (o *FileAnalysisCancelAnalysisResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// FileAnalysisCancel200ApplicationJSON - Analysis was sucessfully cancelled.
-type FileAnalysisCancel200ApplicationJSON struct {
+// FileAnalysisCancelResponseBody - Analysis was sucessfully cancelled.
+type FileAnalysisCancelResponseBody struct {
 }
 
 type FileAnalysisCancelResponse struct {
+	// Analysis was sucessfully cancelled.
+	TwoHundredApplicationJSONObject *FileAnalysisCancelResponseBody
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *FileAnalysisCancelAnalysisResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *FileAnalysisCancelAnalysisResponseResponseBody
+	// Data ID not found (invalid id) or Requests resource was not found
+	FourHundredAndFourApplicationJSONObject *FileAnalysisCancelAnalysisResponse404ResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *FileAnalysisCancelAnalysisResponse405ResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *FileAnalysisCancelAnalysisResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Analysis was sucessfully cancelled.
-	FileAnalysisCancel200ApplicationJSONObject *FileAnalysisCancel200ApplicationJSON
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	FileAnalysisCancel400ApplicationJSONObject *FileAnalysisCancel400ApplicationJSON
-	// Invalid user information or Not Allowed
-	FileAnalysisCancel403ApplicationJSONObject *FileAnalysisCancel403ApplicationJSON
-	// Data ID not found (invalid id) or Requests resource was not found
-	FileAnalysisCancel404ApplicationJSONObject *FileAnalysisCancel404ApplicationJSON
-	// The user has no rights for this operation.
-	FileAnalysisCancel405ApplicationJSONObject *FileAnalysisCancel405ApplicationJSON
-	// Unexpected event on server
-	FileAnalysisCancel500ApplicationJSONObject *FileAnalysisCancel500ApplicationJSON
+}
+
+func (o *FileAnalysisCancelResponse) GetTwoHundredApplicationJSONObject() *FileAnalysisCancelResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *FileAnalysisCancelResponse) GetFourHundredApplicationJSONObject() *FileAnalysisCancelAnalysisResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *FileAnalysisCancelResponse) GetFourHundredAndThreeApplicationJSONObject() *FileAnalysisCancelAnalysisResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *FileAnalysisCancelResponse) GetFourHundredAndFourApplicationJSONObject() *FileAnalysisCancelAnalysisResponse404ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFourApplicationJSONObject
+}
+
+func (o *FileAnalysisCancelResponse) GetFourHundredAndFiveApplicationJSONObject() *FileAnalysisCancelAnalysisResponse405ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *FileAnalysisCancelResponse) GetFiveHundredApplicationJSONObject() *FileAnalysisCancelAnalysisResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *FileAnalysisCancelResponse) GetContentType() string {
@@ -137,46 +179,4 @@ func (o *FileAnalysisCancelResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel200ApplicationJSONObject() *FileAnalysisCancel200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisCancel200ApplicationJSONObject
-}
-
-func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel400ApplicationJSONObject() *FileAnalysisCancel400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisCancel400ApplicationJSONObject
-}
-
-func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel403ApplicationJSONObject() *FileAnalysisCancel403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisCancel403ApplicationJSONObject
-}
-
-func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel404ApplicationJSONObject() *FileAnalysisCancel404ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisCancel404ApplicationJSONObject
-}
-
-func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel405ApplicationJSONObject() *FileAnalysisCancel405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisCancel405ApplicationJSONObject
-}
-
-func (o *FileAnalysisCancelResponse) GetFileAnalysisCancel500ApplicationJSONObject() *FileAnalysisCancel500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.FileAnalysisCancel500ApplicationJSONObject
 }

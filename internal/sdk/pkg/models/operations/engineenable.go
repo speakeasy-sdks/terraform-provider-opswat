@@ -28,64 +28,64 @@ func (o *EngineEnableRequest) GetEngineID() string {
 	return o.EngineID
 }
 
-// EngineEnable500ApplicationJSON - Unexpected event on server
-type EngineEnable500ApplicationJSON struct {
+// EngineEnableEnginesResponse500ResponseBody - Unexpected event on server
+type EngineEnableEnginesResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineEnable500ApplicationJSON) GetErr() *string {
+func (o *EngineEnableEnginesResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// EngineEnable405ApplicationJSON - The user has no rights for this operation.
-type EngineEnable405ApplicationJSON struct {
+// EngineEnableEnginesResponse405ResponseBody - The user has no rights for this operation.
+type EngineEnableEnginesResponse405ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineEnable405ApplicationJSON) GetErr() *string {
+func (o *EngineEnableEnginesResponse405ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// EngineEnable403ApplicationJSON - Invalid user information or Not Allowed
-type EngineEnable403ApplicationJSON struct {
+// EngineEnableEnginesResponseResponseBody - Invalid user information or Not Allowed
+type EngineEnableEnginesResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineEnable403ApplicationJSON) GetErr() *string {
+func (o *EngineEnableEnginesResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// EngineEnable400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type EngineEnable400ApplicationJSON struct {
+// EngineEnableEnginesResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type EngineEnableEnginesResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *EngineEnable400ApplicationJSON) GetErr() *string {
+func (o *EngineEnableEnginesResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// EngineEnable200ApplicationJSON - Request processed successfully
-type EngineEnable200ApplicationJSON struct {
+// EngineEnableResponseBody - Request processed successfully
+type EngineEnableResponseBody struct {
 	Result *string `json:"result,omitempty"`
 }
 
-func (o *EngineEnable200ApplicationJSON) GetResult() *string {
+func (o *EngineEnableResponseBody) GetResult() *string {
 	if o == nil {
 		return nil
 	}
@@ -93,22 +93,57 @@ func (o *EngineEnable200ApplicationJSON) GetResult() *string {
 }
 
 type EngineEnableResponse struct {
+	// Request processed successfully
+	TwoHundredApplicationJSONObject *EngineEnableResponseBody
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *EngineEnableEnginesResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *EngineEnableEnginesResponseResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *EngineEnableEnginesResponse405ResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *EngineEnableEnginesResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully
-	EngineEnable200ApplicationJSONObject *EngineEnable200ApplicationJSON
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	EngineEnable400ApplicationJSONObject *EngineEnable400ApplicationJSON
-	// Invalid user information or Not Allowed
-	EngineEnable403ApplicationJSONObject *EngineEnable403ApplicationJSON
-	// The user has no rights for this operation.
-	EngineEnable405ApplicationJSONObject *EngineEnable405ApplicationJSON
-	// Unexpected event on server
-	EngineEnable500ApplicationJSONObject *EngineEnable500ApplicationJSON
+}
+
+func (o *EngineEnableResponse) GetTwoHundredApplicationJSONObject() *EngineEnableResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *EngineEnableResponse) GetFourHundredApplicationJSONObject() *EngineEnableEnginesResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *EngineEnableResponse) GetFourHundredAndThreeApplicationJSONObject() *EngineEnableEnginesResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *EngineEnableResponse) GetFourHundredAndFiveApplicationJSONObject() *EngineEnableEnginesResponse405ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *EngineEnableResponse) GetFiveHundredApplicationJSONObject() *EngineEnableEnginesResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *EngineEnableResponse) GetContentType() string {
@@ -130,39 +165,4 @@ func (o *EngineEnableResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *EngineEnableResponse) GetEngineEnable200ApplicationJSONObject() *EngineEnable200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineEnable200ApplicationJSONObject
-}
-
-func (o *EngineEnableResponse) GetEngineEnable400ApplicationJSONObject() *EngineEnable400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineEnable400ApplicationJSONObject
-}
-
-func (o *EngineEnableResponse) GetEngineEnable403ApplicationJSONObject() *EngineEnable403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineEnable403ApplicationJSONObject
-}
-
-func (o *EngineEnableResponse) GetEngineEnable405ApplicationJSONObject() *EngineEnable405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineEnable405ApplicationJSONObject
-}
-
-func (o *EngineEnableResponse) GetEngineEnable500ApplicationJSONObject() *EngineEnable500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.EngineEnable500ApplicationJSONObject
 }

@@ -21,105 +21,105 @@ func (o *YaraPackageGenerateRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// YaraPackageGenerate500ApplicationJSON - Unexpected event on server
-type YaraPackageGenerate500ApplicationJSON struct {
+// YaraPackageGenerateYaraResponseResponseBody - Unexpected event on server
+type YaraPackageGenerateYaraResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *YaraPackageGenerate500ApplicationJSON) GetErr() *string {
+func (o *YaraPackageGenerateYaraResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// YaraPackageGenerate403ApplicationJSON - Invalid user information or Not Allowed
-type YaraPackageGenerate403ApplicationJSON struct {
+// YaraPackageGenerateYaraResponseBody - Invalid user information or Not Allowed
+type YaraPackageGenerateYaraResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *YaraPackageGenerate403ApplicationJSON) GetErr() *string {
+func (o *YaraPackageGenerateYaraResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-type YaraPackageGenerate200ApplicationJSONIssuesGeneral struct {
+type General struct {
 	Message  *string `json:"message,omitempty"`
 	Severity *string `json:"severity,omitempty"`
 }
 
-func (o *YaraPackageGenerate200ApplicationJSONIssuesGeneral) GetMessage() *string {
+func (o *General) GetMessage() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Message
 }
 
-func (o *YaraPackageGenerate200ApplicationJSONIssuesGeneral) GetSeverity() *string {
+func (o *General) GetSeverity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Severity
 }
 
-type YaraPackageGenerate200ApplicationJSONIssuesSource struct {
+type Source struct {
 	Message  *string `json:"message,omitempty"`
 	Severity *string `json:"severity,omitempty"`
 }
 
-func (o *YaraPackageGenerate200ApplicationJSONIssuesSource) GetMessage() *string {
+func (o *Source) GetMessage() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Message
 }
 
-func (o *YaraPackageGenerate200ApplicationJSONIssuesSource) GetSeverity() *string {
+func (o *Source) GetSeverity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Severity
 }
 
-// YaraPackageGenerate200ApplicationJSONIssues - Stores a map of issues. Each key represents the according source, except "general", which contains general errors occurred during the generation process
-type YaraPackageGenerate200ApplicationJSONIssues struct {
+// Issues - Stores a map of issues. Each key represents the according source, except "general", which contains general errors occurred during the generation process
+type Issues struct {
 	// Contains general errors occurred during the generation process
-	General []YaraPackageGenerate200ApplicationJSONIssuesGeneral `json:"general,omitempty"`
-	Source  []YaraPackageGenerate200ApplicationJSONIssuesSource  `json:"source,omitempty"`
+	General []General `json:"general,omitempty"`
+	Source  []Source  `json:"source,omitempty"`
 }
 
-func (o *YaraPackageGenerate200ApplicationJSONIssues) GetGeneral() []YaraPackageGenerate200ApplicationJSONIssuesGeneral {
+func (o *Issues) GetGeneral() []General {
 	if o == nil {
 		return nil
 	}
 	return o.General
 }
 
-func (o *YaraPackageGenerate200ApplicationJSONIssues) GetSource() []YaraPackageGenerate200ApplicationJSONIssuesSource {
+func (o *Issues) GetSource() []Source {
 	if o == nil {
 		return nil
 	}
 	return o.Source
 }
 
-// YaraPackageGenerate200ApplicationJSONStatus - Current status of generating the package.
-type YaraPackageGenerate200ApplicationJSONStatus string
+// Status - Current status of generating the package.
+type Status string
 
 const (
-	YaraPackageGenerate200ApplicationJSONStatusIdle       YaraPackageGenerate200ApplicationJSONStatus = "idle"
-	YaraPackageGenerate200ApplicationJSONStatusError      YaraPackageGenerate200ApplicationJSONStatus = "error"
-	YaraPackageGenerate200ApplicationJSONStatusInprogress YaraPackageGenerate200ApplicationJSONStatus = "inprogress"
+	StatusIdle       Status = "idle"
+	StatusError      Status = "error"
+	StatusInprogress Status = "inprogress"
 )
 
-func (e YaraPackageGenerate200ApplicationJSONStatus) ToPointer() *YaraPackageGenerate200ApplicationJSONStatus {
+func (e Status) ToPointer() *Status {
 	return &e
 }
 
-func (e *YaraPackageGenerate200ApplicationJSONStatus) UnmarshalJSON(data []byte) error {
+func (e *Status) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -130,38 +130,38 @@ func (e *YaraPackageGenerate200ApplicationJSONStatus) UnmarshalJSON(data []byte)
 	case "error":
 		fallthrough
 	case "inprogress":
-		*e = YaraPackageGenerate200ApplicationJSONStatus(v)
+		*e = Status(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for YaraPackageGenerate200ApplicationJSONStatus: %v", v)
+		return fmt.Errorf("invalid value for Status: %v", v)
 	}
 }
 
-// YaraPackageGenerate200ApplicationJSON - Request processed successfully.
-type YaraPackageGenerate200ApplicationJSON struct {
+// YaraPackageGenerateResponseBody - Request processed successfully.
+type YaraPackageGenerateResponseBody struct {
 	// Stores a map of issues. Each key represents the according source, except "general", which contains general errors occurred during the generation process
-	Issues *YaraPackageGenerate200ApplicationJSONIssues `json:"issues,omitempty"`
+	Issues *Issues `json:"issues,omitempty"`
 	// Used only when status is inprogress, otherwise its empty
 	StartTime *string `json:"start_time,omitempty"`
 	// Current status of generating the package.
-	Status *YaraPackageGenerate200ApplicationJSONStatus `json:"status,omitempty"`
+	Status *Status `json:"status,omitempty"`
 }
 
-func (o *YaraPackageGenerate200ApplicationJSON) GetIssues() *YaraPackageGenerate200ApplicationJSONIssues {
+func (o *YaraPackageGenerateResponseBody) GetIssues() *Issues {
 	if o == nil {
 		return nil
 	}
 	return o.Issues
 }
 
-func (o *YaraPackageGenerate200ApplicationJSON) GetStartTime() *string {
+func (o *YaraPackageGenerateResponseBody) GetStartTime() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StartTime
 }
 
-func (o *YaraPackageGenerate200ApplicationJSON) GetStatus() *YaraPackageGenerate200ApplicationJSONStatus {
+func (o *YaraPackageGenerateResponseBody) GetStatus() *Status {
 	if o == nil {
 		return nil
 	}
@@ -169,18 +169,39 @@ func (o *YaraPackageGenerate200ApplicationJSON) GetStatus() *YaraPackageGenerate
 }
 
 type YaraPackageGenerateResponse struct {
+	// Request processed successfully.
+	TwoHundredApplicationJSONObject *YaraPackageGenerateResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *YaraPackageGenerateYaraResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *YaraPackageGenerateYaraResponseResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Request processed successfully.
-	YaraPackageGenerate200ApplicationJSONObject *YaraPackageGenerate200ApplicationJSON
-	// Invalid user information or Not Allowed
-	YaraPackageGenerate403ApplicationJSONObject *YaraPackageGenerate403ApplicationJSON
-	// Unexpected event on server
-	YaraPackageGenerate500ApplicationJSONObject *YaraPackageGenerate500ApplicationJSON
+}
+
+func (o *YaraPackageGenerateResponse) GetTwoHundredApplicationJSONObject() *YaraPackageGenerateResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *YaraPackageGenerateResponse) GetFourHundredAndThreeApplicationJSONObject() *YaraPackageGenerateYaraResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *YaraPackageGenerateResponse) GetFiveHundredApplicationJSONObject() *YaraPackageGenerateYaraResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *YaraPackageGenerateResponse) GetContentType() string {
@@ -202,25 +223,4 @@ func (o *YaraPackageGenerateResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *YaraPackageGenerateResponse) GetYaraPackageGenerate200ApplicationJSONObject() *YaraPackageGenerate200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.YaraPackageGenerate200ApplicationJSONObject
-}
-
-func (o *YaraPackageGenerateResponse) GetYaraPackageGenerate403ApplicationJSONObject() *YaraPackageGenerate403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.YaraPackageGenerate403ApplicationJSONObject
-}
-
-func (o *YaraPackageGenerateResponse) GetYaraPackageGenerate500ApplicationJSONObject() *YaraPackageGenerate500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.YaraPackageGenerate500ApplicationJSONObject
 }

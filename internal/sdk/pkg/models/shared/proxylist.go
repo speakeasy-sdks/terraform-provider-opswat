@@ -7,25 +7,25 @@ import (
 	"fmt"
 )
 
-// ProxyListFeatureProxyID - Feature ID.
-type ProxyListFeatureProxyID string
+// ID - Feature ID.
+type ID string
 
 const (
-	ProxyListFeatureProxyIDCallbackurl  ProxyListFeatureProxyID = "callbackurl"
-	ProxyListFeatureProxyIDDownloadfrom ProxyListFeatureProxyID = "downloadfrom"
-	ProxyListFeatureProxyIDLicense      ProxyListFeatureProxyID = "license"
-	ProxyListFeatureProxyIDMdcloud      ProxyListFeatureProxyID = "mdcloud"
-	ProxyListFeatureProxyIDUpdateengine ProxyListFeatureProxyID = "updateengine"
-	ProxyListFeatureProxyIDSanitizedurl ProxyListFeatureProxyID = "sanitizedurl"
-	ProxyListFeatureProxyIDSsologin     ProxyListFeatureProxyID = "ssologin"
-	ProxyListFeatureProxyIDYara         ProxyListFeatureProxyID = "yara"
+	IDCallbackurl  ID = "callbackurl"
+	IDDownloadfrom ID = "downloadfrom"
+	IDLicense      ID = "license"
+	IDMdcloud      ID = "mdcloud"
+	IDUpdateengine ID = "updateengine"
+	IDSanitizedurl ID = "sanitizedurl"
+	IDSsologin     ID = "ssologin"
+	IDYara         ID = "yara"
 )
 
-func (e ProxyListFeatureProxyID) ToPointer() *ProxyListFeatureProxyID {
+func (e ID) ToPointer() *ID {
 	return &e
 }
 
-func (e *ProxyListFeatureProxyID) UnmarshalJSON(data []byte) error {
+func (e *ID) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -46,27 +46,27 @@ func (e *ProxyListFeatureProxyID) UnmarshalJSON(data []byte) error {
 	case "ssologin":
 		fallthrough
 	case "yara":
-		*e = ProxyListFeatureProxyID(v)
+		*e = ID(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ProxyListFeatureProxyID: %v", v)
+		return fmt.Errorf("invalid value for ID: %v", v)
 	}
 }
 
-// ProxyListFeatureProxyUseProxy - 0 - this feature does not use proxy. 1 - this feature use master proxy setting. 2 - this feature use a custom proxy.
-type ProxyListFeatureProxyUseProxy int64
+// UseProxy - 0 - this feature does not use proxy. 1 - this feature use master proxy setting. 2 - this feature use a custom proxy.
+type UseProxy int64
 
 const (
-	ProxyListFeatureProxyUseProxyZero ProxyListFeatureProxyUseProxy = 0
-	ProxyListFeatureProxyUseProxyOne  ProxyListFeatureProxyUseProxy = 1
-	ProxyListFeatureProxyUseProxyTwo  ProxyListFeatureProxyUseProxy = 2
+	UseProxyZero UseProxy = 0
+	UseProxyOne  UseProxy = 1
+	UseProxyTwo  UseProxy = 2
 )
 
-func (e ProxyListFeatureProxyUseProxy) ToPointer() *ProxyListFeatureProxyUseProxy {
+func (e UseProxy) ToPointer() *UseProxy {
 	return &e
 }
 
-func (e *ProxyListFeatureProxyUseProxy) UnmarshalJSON(data []byte) error {
+func (e *UseProxy) UnmarshalJSON(data []byte) error {
 	var v int64
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -77,60 +77,60 @@ func (e *ProxyListFeatureProxyUseProxy) UnmarshalJSON(data []byte) error {
 	case 1:
 		fallthrough
 	case 2:
-		*e = ProxyListFeatureProxyUseProxy(v)
+		*e = UseProxy(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ProxyListFeatureProxyUseProxy: %v", v)
+		return fmt.Errorf("invalid value for UseProxy: %v", v)
 	}
 }
 
-type ProxyListFeatureProxy struct {
+type FeatureProxy struct {
 	Exclusion *string `json:"exclusion,omitempty"`
 	// Feature ID.
-	ID     *ProxyListFeatureProxyID `json:"id,omitempty"`
-	Port   *string                  `json:"port,omitempty"`
-	Server *string                  `json:"server,omitempty"`
+	ID     *ID     `json:"id,omitempty"`
+	Port   *string `json:"port,omitempty"`
+	Server *string `json:"server,omitempty"`
 	// 0 - this feature does not use proxy. 1 - this feature use master proxy setting. 2 - this feature use a custom proxy.
-	UseProxy *ProxyListFeatureProxyUseProxy `json:"use_proxy,omitempty"`
-	Username *string                        `json:"username,omitempty"`
+	UseProxy *UseProxy `json:"use_proxy,omitempty"`
+	Username *string   `json:"username,omitempty"`
 }
 
-func (o *ProxyListFeatureProxy) GetExclusion() *string {
+func (o *FeatureProxy) GetExclusion() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Exclusion
 }
 
-func (o *ProxyListFeatureProxy) GetID() *ProxyListFeatureProxyID {
+func (o *FeatureProxy) GetID() *ID {
 	if o == nil {
 		return nil
 	}
 	return o.ID
 }
 
-func (o *ProxyListFeatureProxy) GetPort() *string {
+func (o *FeatureProxy) GetPort() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Port
 }
 
-func (o *ProxyListFeatureProxy) GetServer() *string {
+func (o *FeatureProxy) GetServer() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Server
 }
 
-func (o *ProxyListFeatureProxy) GetUseProxy() *ProxyListFeatureProxyUseProxy {
+func (o *FeatureProxy) GetUseProxy() *UseProxy {
 	if o == nil {
 		return nil
 	}
 	return o.UseProxy
 }
 
-func (o *ProxyListFeatureProxy) GetUsername() *string {
+func (o *FeatureProxy) GetUsername() *string {
 	if o == nil {
 		return nil
 	}
@@ -141,10 +141,10 @@ type ProxyList struct {
 	Enabled   *bool   `json:"enabled,omitempty"`
 	Exclusion *string `json:"exclusion,omitempty"`
 	// Decide which feature to use or not use proxy.
-	FeatureProxy []ProxyListFeatureProxy `json:"feature_proxy,omitempty"`
-	Port         *string                 `json:"port,omitempty"`
-	Server       *string                 `json:"server,omitempty"`
-	Username     *string                 `json:"username,omitempty"`
+	FeatureProxy []FeatureProxy `json:"feature_proxy,omitempty"`
+	Port         *string        `json:"port,omitempty"`
+	Server       *string        `json:"server,omitempty"`
+	Username     *string        `json:"username,omitempty"`
 }
 
 func (o *ProxyList) GetEnabled() *bool {
@@ -161,7 +161,7 @@ func (o *ProxyList) GetExclusion() *string {
 	return o.Exclusion
 }
 
-func (o *ProxyList) GetFeatureProxy() []ProxyListFeatureProxy {
+func (o *ProxyList) GetFeatureProxy() []FeatureProxy {
 	if o == nil {
 		return nil
 	}

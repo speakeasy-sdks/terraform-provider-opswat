@@ -28,39 +28,39 @@ func (o *ConfigSessionRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigSession500ApplicationJSON - Unexpected event on server
-type ConfigSession500ApplicationJSON struct {
+// ConfigSessionConfigResponseResponseBody - Unexpected event on server
+type ConfigSessionConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigSession500ApplicationJSON) GetErr() *string {
+func (o *ConfigSessionConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigSession405ApplicationJSON - The user has no rights for this operation.
-type ConfigSession405ApplicationJSON struct {
+// ConfigSessionConfigResponseBody - The user has no rights for this operation.
+type ConfigSessionConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigSession405ApplicationJSON) GetErr() *string {
+func (o *ConfigSessionConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigSession403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigSession403ApplicationJSON struct {
+// ConfigSessionResponseBody - Invalid user information or Not Allowed
+type ConfigSessionResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigSession403ApplicationJSON) GetErr() *string {
+func (o *ConfigSessionResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -68,6 +68,12 @@ func (o *ConfigSession403ApplicationJSON) GetErr() *string {
 }
 
 type ConfigSessionResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigSessionResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *ConfigSessionConfigResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigSessionConfigResponseResponseBody
 	// Request processed successfully
 	AdminConfigSession *shared.AdminConfigSession
 	// HTTP response content type for this operation
@@ -76,12 +82,27 @@ type ConfigSessionResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	ConfigSession403ApplicationJSONObject *ConfigSession403ApplicationJSON
-	// The user has no rights for this operation.
-	ConfigSession405ApplicationJSONObject *ConfigSession405ApplicationJSON
-	// Unexpected event on server
-	ConfigSession500ApplicationJSONObject *ConfigSession500ApplicationJSON
+}
+
+func (o *ConfigSessionResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigSessionResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigSessionResponse) GetFourHundredAndFiveApplicationJSONObject() *ConfigSessionConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *ConfigSessionResponse) GetFiveHundredApplicationJSONObject() *ConfigSessionConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigSessionResponse) GetAdminConfigSession() *shared.AdminConfigSession {
@@ -110,25 +131,4 @@ func (o *ConfigSessionResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigSessionResponse) GetConfigSession403ApplicationJSONObject() *ConfigSession403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigSession403ApplicationJSONObject
-}
-
-func (o *ConfigSessionResponse) GetConfigSession405ApplicationJSONObject() *ConfigSession405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigSession405ApplicationJSONObject
-}
-
-func (o *ConfigSessionResponse) GetConfigSession500ApplicationJSONObject() *ConfigSession500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigSession500ApplicationJSONObject
 }

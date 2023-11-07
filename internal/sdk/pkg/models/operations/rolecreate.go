@@ -28,52 +28,52 @@ func (o *RoleCreateRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// RoleCreate500ApplicationJSON - Unexpected event on server
-type RoleCreate500ApplicationJSON struct {
+// RoleCreateAdminResponse500ResponseBody - Unexpected event on server
+type RoleCreateAdminResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *RoleCreate500ApplicationJSON) GetErr() *string {
+func (o *RoleCreateAdminResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// RoleCreate405ApplicationJSON - The user has no rights for this operation.
-type RoleCreate405ApplicationJSON struct {
+// RoleCreateAdminResponseResponseBody - The user has no rights for this operation.
+type RoleCreateAdminResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *RoleCreate405ApplicationJSON) GetErr() *string {
+func (o *RoleCreateAdminResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// RoleCreate403ApplicationJSON - Invalid user information or Not Allowed
-type RoleCreate403ApplicationJSON struct {
+// RoleCreateAdminResponseBody - Invalid user information or Not Allowed
+type RoleCreateAdminResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *RoleCreate403ApplicationJSON) GetErr() *string {
+func (o *RoleCreateAdminResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// RoleCreate400ApplicationJSON - Bad Request (e.g. invalid header, apikey is missing or invalid).
-type RoleCreate400ApplicationJSON struct {
+// RoleCreateResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
+type RoleCreateResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *RoleCreate400ApplicationJSON) GetErr() *string {
+func (o *RoleCreateResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -81,6 +81,14 @@ func (o *RoleCreate400ApplicationJSON) GetErr() *string {
 }
 
 type RoleCreateResponse struct {
+	// Bad Request (e.g. invalid header, apikey is missing or invalid).
+	FourHundredApplicationJSONObject *RoleCreateResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *RoleCreateAdminResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *RoleCreateAdminResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *RoleCreateAdminResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// Request processed successfully
@@ -89,14 +97,34 @@ type RoleCreateResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Bad Request (e.g. invalid header, apikey is missing or invalid).
-	RoleCreate400ApplicationJSONObject *RoleCreate400ApplicationJSON
-	// Invalid user information or Not Allowed
-	RoleCreate403ApplicationJSONObject *RoleCreate403ApplicationJSON
-	// The user has no rights for this operation.
-	RoleCreate405ApplicationJSONObject *RoleCreate405ApplicationJSON
-	// Unexpected event on server
-	RoleCreate500ApplicationJSONObject *RoleCreate500ApplicationJSON
+}
+
+func (o *RoleCreateResponse) GetFourHundredApplicationJSONObject() *RoleCreateResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredApplicationJSONObject
+}
+
+func (o *RoleCreateResponse) GetFourHundredAndThreeApplicationJSONObject() *RoleCreateAdminResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *RoleCreateResponse) GetFourHundredAndFiveApplicationJSONObject() *RoleCreateAdminResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *RoleCreateResponse) GetFiveHundredApplicationJSONObject() *RoleCreateAdminResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *RoleCreateResponse) GetContentType() string {
@@ -125,32 +153,4 @@ func (o *RoleCreateResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *RoleCreateResponse) GetRoleCreate400ApplicationJSONObject() *RoleCreate400ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.RoleCreate400ApplicationJSONObject
-}
-
-func (o *RoleCreateResponse) GetRoleCreate403ApplicationJSONObject() *RoleCreate403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.RoleCreate403ApplicationJSONObject
-}
-
-func (o *RoleCreateResponse) GetRoleCreate405ApplicationJSONObject() *RoleCreate405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.RoleCreate405ApplicationJSONObject
-}
-
-func (o *RoleCreateResponse) GetRoleCreate500ApplicationJSONObject() *RoleCreate500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.RoleCreate500ApplicationJSONObject
 }

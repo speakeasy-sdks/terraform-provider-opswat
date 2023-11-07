@@ -37,46 +37,46 @@ func (o *ActivePerformanceRequest) GetRuleName() *string {
 	return o.RuleName
 }
 
-// ActivePerformance500ApplicationJSON - Unexpected event on server
-type ActivePerformance500ApplicationJSON struct {
+// ActivePerformanceStatsResponse500ResponseBody - Unexpected event on server
+type ActivePerformanceStatsResponse500ResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ActivePerformance500ApplicationJSON) GetErr() *string {
+func (o *ActivePerformanceStatsResponse500ResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ActivePerformance405ApplicationJSON - The user has no rights for this operation.
-type ActivePerformance405ApplicationJSON struct {
+// ActivePerformanceStatsResponseResponseBody - The user has no rights for this operation.
+type ActivePerformanceStatsResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ActivePerformance405ApplicationJSON) GetErr() *string {
+func (o *ActivePerformanceStatsResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ActivePerformance403ApplicationJSON - Invalid user information or Not Allowed
-type ActivePerformance403ApplicationJSON struct {
+// ActivePerformanceStatsResponseBody - Invalid user information or Not Allowed
+type ActivePerformanceStatsResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ActivePerformance403ApplicationJSON) GetErr() *string {
+func (o *ActivePerformanceStatsResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-type ActivePerformance200ApplicationJSONActivePerformanceHashTime struct {
+type HashTime struct {
 	// Average hash calculating time.
 	Avg *int64 `json:"avg,omitempty"`
 	// Maximum hash calculating time.
@@ -85,28 +85,28 @@ type ActivePerformance200ApplicationJSONActivePerformanceHashTime struct {
 	Min *int64 `json:"min,omitempty"`
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceHashTime) GetAvg() *int64 {
+func (o *HashTime) GetAvg() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Avg
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceHashTime) GetMax() *int64 {
+func (o *HashTime) GetMax() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Max
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceHashTime) GetMin() *int64 {
+func (o *HashTime) GetMin() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Min
 }
 
-type ActivePerformance200ApplicationJSONActivePerformanceProcessingTime struct {
+type ProcessingTime struct {
 	// Average overall processing time.
 	Avg *int64 `json:"avg,omitempty"`
 	// Maximum overall processing time.
@@ -115,28 +115,28 @@ type ActivePerformance200ApplicationJSONActivePerformanceProcessingTime struct {
 	Min *int64 `json:"min,omitempty"`
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceProcessingTime) GetAvg() *int64 {
+func (o *ProcessingTime) GetAvg() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Avg
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceProcessingTime) GetMax() *int64 {
+func (o *ProcessingTime) GetMax() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Max
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceProcessingTime) GetMin() *int64 {
+func (o *ProcessingTime) GetMin() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Min
 }
 
-type ActivePerformance200ApplicationJSONActivePerformanceQueueTime struct {
+type QueueTime struct {
 	// Average queue time.
 	Avg *int64 `json:"avg,omitempty"`
 	// Maximum queue time.
@@ -145,28 +145,28 @@ type ActivePerformance200ApplicationJSONActivePerformanceQueueTime struct {
 	Min *int64 `json:"min,omitempty"`
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceQueueTime) GetAvg() *int64 {
+func (o *QueueTime) GetAvg() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Avg
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceQueueTime) GetMax() *int64 {
+func (o *QueueTime) GetMax() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Max
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceQueueTime) GetMin() *int64 {
+func (o *QueueTime) GetMin() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Min
 }
 
-type ActivePerformance200ApplicationJSONActivePerformanceWaitTime struct {
+type WaitTime struct {
 	// Average waiting time.
 	Avg *int64 `json:"avg,omitempty"`
 	// Maximum waiting time.
@@ -175,113 +175,113 @@ type ActivePerformance200ApplicationJSONActivePerformanceWaitTime struct {
 	Min *int64 `json:"min,omitempty"`
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceWaitTime) GetAvg() *int64 {
+func (o *WaitTime) GetAvg() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Avg
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceWaitTime) GetMax() *int64 {
+func (o *WaitTime) GetMax() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Max
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformanceWaitTime) GetMin() *int64 {
+func (o *WaitTime) GetMin() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Min
 }
 
-type ActivePerformance200ApplicationJSONActivePerformance struct {
+type ActivePerformance struct {
 	// Number of failed processing results.
-	FailedResults  *int64                                                              `json:"failed_results,omitempty"`
-	HashTime       *ActivePerformance200ApplicationJSONActivePerformanceHashTime       `json:"hash_time,omitempty"`
-	ProcessingTime *ActivePerformance200ApplicationJSONActivePerformanceProcessingTime `json:"processing_time,omitempty"`
-	QueueTime      *ActivePerformance200ApplicationJSONActivePerformanceQueueTime      `json:"queue_time,omitempty"`
+	FailedResults  *int64          `json:"failed_results,omitempty"`
+	HashTime       *HashTime       `json:"hash_time,omitempty"`
+	ProcessingTime *ProcessingTime `json:"processing_time,omitempty"`
+	QueueTime      *QueueTime      `json:"queue_time,omitempty"`
 	// Total number of successfully-processed objects (excluding failed or not-scanned results)
 	SuccessResults *int64 `json:"success_results,omitempty"`
 	// Total processed file size in bytes.
 	TotalFilesize *int64 `json:"total_filesize,omitempty"`
 	// Total number of file submissions.
-	TotalRequests *int64                                                        `json:"total_requests,omitempty"`
-	WaitTime      *ActivePerformance200ApplicationJSONActivePerformanceWaitTime `json:"wait_time,omitempty"`
+	TotalRequests *int64    `json:"total_requests,omitempty"`
+	WaitTime      *WaitTime `json:"wait_time,omitempty"`
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformance) GetFailedResults() *int64 {
+func (o *ActivePerformance) GetFailedResults() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.FailedResults
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformance) GetHashTime() *ActivePerformance200ApplicationJSONActivePerformanceHashTime {
+func (o *ActivePerformance) GetHashTime() *HashTime {
 	if o == nil {
 		return nil
 	}
 	return o.HashTime
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformance) GetProcessingTime() *ActivePerformance200ApplicationJSONActivePerformanceProcessingTime {
+func (o *ActivePerformance) GetProcessingTime() *ProcessingTime {
 	if o == nil {
 		return nil
 	}
 	return o.ProcessingTime
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformance) GetQueueTime() *ActivePerformance200ApplicationJSONActivePerformanceQueueTime {
+func (o *ActivePerformance) GetQueueTime() *QueueTime {
 	if o == nil {
 		return nil
 	}
 	return o.QueueTime
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformance) GetSuccessResults() *int64 {
+func (o *ActivePerformance) GetSuccessResults() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.SuccessResults
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformance) GetTotalFilesize() *int64 {
+func (o *ActivePerformance) GetTotalFilesize() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.TotalFilesize
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformance) GetTotalRequests() *int64 {
+func (o *ActivePerformance) GetTotalRequests() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.TotalRequests
 }
 
-func (o *ActivePerformance200ApplicationJSONActivePerformance) GetWaitTime() *ActivePerformance200ApplicationJSONActivePerformanceWaitTime {
+func (o *ActivePerformance) GetWaitTime() *WaitTime {
 	if o == nil {
 		return nil
 	}
 	return o.WaitTime
 }
 
-// ActivePerformance200ApplicationJSON - Active performance report on MetaDefender Core
-type ActivePerformance200ApplicationJSON struct {
-	ActivePerformance *ActivePerformance200ApplicationJSONActivePerformance `json:"active_performance,omitempty"`
+// ActivePerformanceResponseBody - Active performance report on MetaDefender Core
+type ActivePerformanceResponseBody struct {
+	ActivePerformance *ActivePerformance `json:"active_performance,omitempty"`
 	// The data is gathered in this recent milliseconds.
 	FromTime *int64 `json:"from_time,omitempty"`
 }
 
-func (o *ActivePerformance200ApplicationJSON) GetActivePerformance() *ActivePerformance200ApplicationJSONActivePerformance {
+func (o *ActivePerformanceResponseBody) GetActivePerformance() *ActivePerformance {
 	if o == nil {
 		return nil
 	}
 	return o.ActivePerformance
 }
 
-func (o *ActivePerformance200ApplicationJSON) GetFromTime() *int64 {
+func (o *ActivePerformanceResponseBody) GetFromTime() *int64 {
 	if o == nil {
 		return nil
 	}
@@ -289,20 +289,48 @@ func (o *ActivePerformance200ApplicationJSON) GetFromTime() *int64 {
 }
 
 type ActivePerformanceResponse struct {
+	// Active performance report on MetaDefender Core
+	TwoHundredApplicationJSONObject *ActivePerformanceResponseBody
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ActivePerformanceStatsResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *ActivePerformanceStatsResponseResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ActivePerformanceStatsResponse500ResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Active performance report on MetaDefender Core
-	ActivePerformance200ApplicationJSONObject *ActivePerformance200ApplicationJSON
-	// Invalid user information or Not Allowed
-	ActivePerformance403ApplicationJSONObject *ActivePerformance403ApplicationJSON
-	// The user has no rights for this operation.
-	ActivePerformance405ApplicationJSONObject *ActivePerformance405ApplicationJSON
-	// Unexpected event on server
-	ActivePerformance500ApplicationJSONObject *ActivePerformance500ApplicationJSON
+}
+
+func (o *ActivePerformanceResponse) GetTwoHundredApplicationJSONObject() *ActivePerformanceResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *ActivePerformanceResponse) GetFourHundredAndThreeApplicationJSONObject() *ActivePerformanceStatsResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ActivePerformanceResponse) GetFourHundredAndFiveApplicationJSONObject() *ActivePerformanceStatsResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *ActivePerformanceResponse) GetFiveHundredApplicationJSONObject() *ActivePerformanceStatsResponse500ResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ActivePerformanceResponse) GetContentType() string {
@@ -324,32 +352,4 @@ func (o *ActivePerformanceResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ActivePerformanceResponse) GetActivePerformance200ApplicationJSONObject() *ActivePerformance200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ActivePerformance200ApplicationJSONObject
-}
-
-func (o *ActivePerformanceResponse) GetActivePerformance403ApplicationJSONObject() *ActivePerformance403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ActivePerformance403ApplicationJSONObject
-}
-
-func (o *ActivePerformanceResponse) GetActivePerformance405ApplicationJSONObject() *ActivePerformance405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ActivePerformance405ApplicationJSONObject
-}
-
-func (o *ActivePerformanceResponse) GetActivePerformance500ApplicationJSONObject() *ActivePerformance500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ActivePerformance500ApplicationJSONObject
 }

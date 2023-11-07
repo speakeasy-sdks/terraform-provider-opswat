@@ -7,26 +7,26 @@ import (
 	"fmt"
 )
 
-type FileTypeResponseFileInfoGroupIDs string
+type GroupIDs string
 
 const (
-	FileTypeResponseFileInfoGroupIDsA FileTypeResponseFileInfoGroupIDs = "A"
-	FileTypeResponseFileInfoGroupIDsD FileTypeResponseFileInfoGroupIDs = "D"
-	FileTypeResponseFileInfoGroupIDsE FileTypeResponseFileInfoGroupIDs = "E"
-	FileTypeResponseFileInfoGroupIDsG FileTypeResponseFileInfoGroupIDs = "G"
-	FileTypeResponseFileInfoGroupIDsI FileTypeResponseFileInfoGroupIDs = "I"
-	FileTypeResponseFileInfoGroupIDsM FileTypeResponseFileInfoGroupIDs = "M"
-	FileTypeResponseFileInfoGroupIDsP FileTypeResponseFileInfoGroupIDs = "P"
-	FileTypeResponseFileInfoGroupIDsT FileTypeResponseFileInfoGroupIDs = "T"
-	FileTypeResponseFileInfoGroupIDsZ FileTypeResponseFileInfoGroupIDs = "Z"
-	FileTypeResponseFileInfoGroupIDsO FileTypeResponseFileInfoGroupIDs = "O"
+	GroupIDsA GroupIDs = "A"
+	GroupIDsD GroupIDs = "D"
+	GroupIDsE GroupIDs = "E"
+	GroupIDsG GroupIDs = "G"
+	GroupIDsI GroupIDs = "I"
+	GroupIDsM GroupIDs = "M"
+	GroupIDsP GroupIDs = "P"
+	GroupIDsT GroupIDs = "T"
+	GroupIDsZ GroupIDs = "Z"
+	GroupIDsO GroupIDs = "O"
 )
 
-func (e FileTypeResponseFileInfoGroupIDs) ToPointer() *FileTypeResponseFileInfoGroupIDs {
+func (e GroupIDs) ToPointer() *GroupIDs {
 	return &e
 }
 
-func (e *FileTypeResponseFileInfoGroupIDs) UnmarshalJSON(data []byte) error {
+func (e *GroupIDs) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -51,14 +51,14 @@ func (e *FileTypeResponseFileInfoGroupIDs) UnmarshalJSON(data []byte) error {
 	case "Z":
 		fallthrough
 	case "O":
-		*e = FileTypeResponseFileInfoGroupIDs(v)
+		*e = GroupIDs(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FileTypeResponseFileInfoGroupIDs: %v", v)
+		return fmt.Errorf("invalid value for GroupIDs: %v", v)
 	}
 }
 
-type FileTypeResponseFileInfo struct {
+type FileInfo struct {
 	// File type description
 	Description string `json:"description"`
 	// File is password-protected or not
@@ -82,7 +82,7 @@ type FileTypeResponseFileInfo struct {
 	//   * `Z` - Mail messages
 	//   * `O` - Other (anything that is not recognized as one of the above)
 	//
-	GroupIDs []FileTypeResponseFileInfoGroupIDs `json:"groupIDs"`
+	GroupIDs []GroupIDs `json:"groupIDs"`
 	// MIME type
 	Type string `json:"type"`
 	// File type ID
@@ -91,96 +91,96 @@ type FileTypeResponseFileInfo struct {
 	TypeIds []string `json:"type_ids"`
 }
 
-func (o *FileTypeResponseFileInfo) GetDescription() string {
+func (o *FileInfo) GetDescription() string {
 	if o == nil {
 		return ""
 	}
 	return o.Description
 }
 
-func (o *FileTypeResponseFileInfo) GetEncrypted() bool {
+func (o *FileInfo) GetEncrypted() bool {
 	if o == nil {
 		return false
 	}
 	return o.Encrypted
 }
 
-func (o *FileTypeResponseFileInfo) GetExtensions() string {
+func (o *FileInfo) GetExtensions() string {
 	if o == nil {
 		return ""
 	}
 	return o.Extensions
 }
 
-func (o *FileTypeResponseFileInfo) GetGroupID() string {
+func (o *FileInfo) GetGroupID() string {
 	if o == nil {
 		return ""
 	}
 	return o.GroupID
 }
 
-func (o *FileTypeResponseFileInfo) GetGroupIDs() []FileTypeResponseFileInfoGroupIDs {
+func (o *FileInfo) GetGroupIDs() []GroupIDs {
 	if o == nil {
-		return []FileTypeResponseFileInfoGroupIDs{}
+		return []GroupIDs{}
 	}
 	return o.GroupIDs
 }
 
-func (o *FileTypeResponseFileInfo) GetType() string {
+func (o *FileInfo) GetType() string {
 	if o == nil {
 		return ""
 	}
 	return o.Type
 }
 
-func (o *FileTypeResponseFileInfo) GetTypeID() string {
+func (o *FileInfo) GetTypeID() string {
 	if o == nil {
 		return ""
 	}
 	return o.TypeID
 }
 
-func (o *FileTypeResponseFileInfo) GetTypeIds() []string {
+func (o *FileInfo) GetTypeIds() []string {
 	if o == nil {
 		return []string{}
 	}
 	return o.TypeIds
 }
 
-// FileTypeResponseFileInfoDetails - Detailed information.
-type FileTypeResponseFileInfoDetails struct {
+// FileInfoDetails - Detailed information.
+type FileInfoDetails struct {
 }
 
-// FileTypeResponseFileMetadata - Metadata information.
-type FileTypeResponseFileMetadata struct {
+// FileMetadata - Metadata information.
+type FileMetadata struct {
 }
 
 // FileTypeResponse - response information from FileType engine
 type FileTypeResponse struct {
-	FileInfo FileTypeResponseFileInfo `json:"file_info"`
+	FileInfo FileInfo `json:"file_info"`
 	// Detailed information.
-	FileInfoDetails *FileTypeResponseFileInfoDetails `json:"file_info_details,omitempty"`
+	FileInfoDetails *FileInfoDetails `json:"file_info_details,omitempty"`
 	// Metadata information.
-	FileMetadata *FileTypeResponseFileMetadata `json:"file_metadata,omitempty"`
+	FileMetadata *FileMetadata `json:"file_metadata,omitempty"`
 	// SHA256 Hash of user-interface template. For web console only.
 	ResultTemplateHash *string `json:"result_template_hash,omitempty"`
 }
 
-func (o *FileTypeResponse) GetFileInfo() FileTypeResponseFileInfo {
+func (o *FileTypeResponse) GetFileInfo() FileInfo {
 	if o == nil {
-		return FileTypeResponseFileInfo{}
+		return FileInfo{}
 	}
 	return o.FileInfo
 }
 
-func (o *FileTypeResponse) GetFileInfoDetails() *FileTypeResponseFileInfoDetails {
+func (o *FileTypeResponse) GetFileInfoDetails() *FileInfoDetails {
 	if o == nil {
 		return nil
 	}
 	return o.FileInfoDetails
 }
 
-func (o *FileTypeResponse) GetFileMetadata() *FileTypeResponseFileMetadata {
+func (o *FileTypeResponse) GetFileMetadata() *FileMetadata {
 	if o == nil {
 		return nil
 	}

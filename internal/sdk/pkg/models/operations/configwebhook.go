@@ -20,39 +20,39 @@ func (o *ConfigWebhookRequest) GetApikey() string {
 	return o.Apikey
 }
 
-// ConfigWebhook500ApplicationJSON - Unexpected event on server
-type ConfigWebhook500ApplicationJSON struct {
+// ConfigWebhookConfigResponseResponseBody - Unexpected event on server
+type ConfigWebhookConfigResponseResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigWebhook500ApplicationJSON) GetErr() *string {
+func (o *ConfigWebhookConfigResponseResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigWebhook405ApplicationJSON - The user has no rights for this operation.
-type ConfigWebhook405ApplicationJSON struct {
+// ConfigWebhookConfigResponseBody - The user has no rights for this operation.
+type ConfigWebhookConfigResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigWebhook405ApplicationJSON) GetErr() *string {
+func (o *ConfigWebhookConfigResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// ConfigWebhook403ApplicationJSON - Invalid user information or Not Allowed
-type ConfigWebhook403ApplicationJSON struct {
+// ConfigWebhookResponseBody - Invalid user information or Not Allowed
+type ConfigWebhookResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *ConfigWebhook403ApplicationJSON) GetErr() *string {
+func (o *ConfigWebhookResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -60,6 +60,12 @@ func (o *ConfigWebhook403ApplicationJSON) GetErr() *string {
 }
 
 type ConfigWebhookResponse struct {
+	// Invalid user information or Not Allowed
+	FourHundredAndThreeApplicationJSONObject *ConfigWebhookResponseBody
+	// The user has no rights for this operation.
+	FourHundredAndFiveApplicationJSONObject *ConfigWebhookConfigResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *ConfigWebhookConfigResponseResponseBody
 	// Request processed successfully.
 	AdminConfigWebhook *shared.AdminConfigWebhook
 	// HTTP response content type for this operation
@@ -68,12 +74,27 @@ type ConfigWebhookResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// Invalid user information or Not Allowed
-	ConfigWebhook403ApplicationJSONObject *ConfigWebhook403ApplicationJSON
-	// The user has no rights for this operation.
-	ConfigWebhook405ApplicationJSONObject *ConfigWebhook405ApplicationJSON
-	// Unexpected event on server
-	ConfigWebhook500ApplicationJSONObject *ConfigWebhook500ApplicationJSON
+}
+
+func (o *ConfigWebhookResponse) GetFourHundredAndThreeApplicationJSONObject() *ConfigWebhookResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *ConfigWebhookResponse) GetFourHundredAndFiveApplicationJSONObject() *ConfigWebhookConfigResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndFiveApplicationJSONObject
+}
+
+func (o *ConfigWebhookResponse) GetFiveHundredApplicationJSONObject() *ConfigWebhookConfigResponseResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *ConfigWebhookResponse) GetAdminConfigWebhook() *shared.AdminConfigWebhook {
@@ -102,25 +123,4 @@ func (o *ConfigWebhookResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ConfigWebhookResponse) GetConfigWebhook403ApplicationJSONObject() *ConfigWebhook403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigWebhook403ApplicationJSONObject
-}
-
-func (o *ConfigWebhookResponse) GetConfigWebhook405ApplicationJSONObject() *ConfigWebhook405ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigWebhook405ApplicationJSONObject
-}
-
-func (o *ConfigWebhookResponse) GetConfigWebhook500ApplicationJSONObject() *ConfigWebhook500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.ConfigWebhook500ApplicationJSONObject
 }

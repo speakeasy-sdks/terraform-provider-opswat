@@ -28,26 +28,26 @@ func (o *UserLoginRequestBody) GetUser() string {
 	return o.User
 }
 
-// UserLogin500ApplicationJSON - Unexpected event on server
-type UserLogin500ApplicationJSON struct {
+// UserLoginAuthResponseBody - Unexpected event on server
+type UserLoginAuthResponseBody struct {
 	// Error reason
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *UserLogin500ApplicationJSON) GetErr() *string {
+func (o *UserLoginAuthResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Err
 }
 
-// UserLogin403ApplicationJSON - Invalid credentials
-type UserLogin403ApplicationJSON struct {
+// UserLoginResponseBody - Invalid credentials
+type UserLoginResponseBody struct {
 	// <error message> will describe the incident. More details would be logged in MetaDefender Core logs
 	Err *string `json:"err,omitempty"`
 }
 
-func (o *UserLogin403ApplicationJSON) GetErr() *string {
+func (o *UserLoginResponseBody) GetErr() *string {
 	if o == nil {
 		return nil
 	}
@@ -55,6 +55,10 @@ func (o *UserLogin403ApplicationJSON) GetErr() *string {
 }
 
 type UserLoginResponse struct {
+	// Invalid credentials
+	FourHundredAndThreeApplicationJSONObject *UserLoginResponseBody
+	// Unexpected event on server
+	FiveHundredApplicationJSONObject *UserLoginAuthResponseBody
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
@@ -63,10 +67,20 @@ type UserLoginResponse struct {
 	RawResponse *http.Response
 	// OK
 	UserLogin *shared.UserLogin
-	// Invalid credentials
-	UserLogin403ApplicationJSONObject *UserLogin403ApplicationJSON
-	// Unexpected event on server
-	UserLogin500ApplicationJSONObject *UserLogin500ApplicationJSON
+}
+
+func (o *UserLoginResponse) GetFourHundredAndThreeApplicationJSONObject() *UserLoginResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FourHundredAndThreeApplicationJSONObject
+}
+
+func (o *UserLoginResponse) GetFiveHundredApplicationJSONObject() *UserLoginAuthResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.FiveHundredApplicationJSONObject
 }
 
 func (o *UserLoginResponse) GetContentType() string {
@@ -95,18 +109,4 @@ func (o *UserLoginResponse) GetUserLogin() *shared.UserLogin {
 		return nil
 	}
 	return o.UserLogin
-}
-
-func (o *UserLoginResponse) GetUserLogin403ApplicationJSONObject() *UserLogin403ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserLogin403ApplicationJSONObject
-}
-
-func (o *UserLoginResponse) GetUserLogin500ApplicationJSONObject() *UserLogin500ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.UserLogin500ApplicationJSONObject
 }

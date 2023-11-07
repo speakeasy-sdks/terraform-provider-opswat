@@ -21,23 +21,23 @@ func (o *EnginesStatusRequest) GetApikey() *string {
 	return o.Apikey
 }
 
-// EnginesStatus200ApplicationJSONEngineType - Engine's type:
+// EngineType - Engine's type:
 //   - av
 //   - archive
 //   - filetype
-type EnginesStatus200ApplicationJSONEngineType string
+type EngineType string
 
 const (
-	EnginesStatus200ApplicationJSONEngineTypeAv       EnginesStatus200ApplicationJSONEngineType = "av"
-	EnginesStatus200ApplicationJSONEngineTypeArchive  EnginesStatus200ApplicationJSONEngineType = "archive"
-	EnginesStatus200ApplicationJSONEngineTypeFiletype EnginesStatus200ApplicationJSONEngineType = "filetype"
+	EngineTypeAv       EngineType = "av"
+	EngineTypeArchive  EngineType = "archive"
+	EngineTypeFiletype EngineType = "filetype"
 )
 
-func (e EnginesStatus200ApplicationJSONEngineType) ToPointer() *EnginesStatus200ApplicationJSONEngineType {
+func (e EngineType) ToPointer() *EngineType {
 	return &e
 }
 
-func (e *EnginesStatus200ApplicationJSONEngineType) UnmarshalJSON(data []byte) error {
+func (e *EngineType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -48,14 +48,14 @@ func (e *EnginesStatus200ApplicationJSONEngineType) UnmarshalJSON(data []byte) e
 	case "archive":
 		fallthrough
 	case "filetype":
-		*e = EnginesStatus200ApplicationJSONEngineType(v)
+		*e = EngineType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for EnginesStatus200ApplicationJSONEngineType: %v", v)
+		return fmt.Errorf("invalid value for EngineType: %v", v)
 	}
 }
 
-// EnginesStatus200ApplicationJSONState - Status of the engine:
+// State - Status of the engine:
 //   - downloading
 //   - downloaded
 //   - staging
@@ -65,25 +65,25 @@ func (e *EnginesStatus200ApplicationJSONEngineType) UnmarshalJSON(data []byte) e
 //   - permanently failed
 //   - content invalid
 //   - download failed
-type EnginesStatus200ApplicationJSONState string
+type State string
 
 const (
-	EnginesStatus200ApplicationJSONStateDownloading       EnginesStatus200ApplicationJSONState = "downloading"
-	EnginesStatus200ApplicationJSONStateDownloaded        EnginesStatus200ApplicationJSONState = "downloaded"
-	EnginesStatus200ApplicationJSONStateStaging           EnginesStatus200ApplicationJSONState = "staging"
-	EnginesStatus200ApplicationJSONStateProduction        EnginesStatus200ApplicationJSONState = "production"
-	EnginesStatus200ApplicationJSONStateRemoved           EnginesStatus200ApplicationJSONState = "removed"
-	EnginesStatus200ApplicationJSONStateTemporaryFailed   EnginesStatus200ApplicationJSONState = "temporary failed"
-	EnginesStatus200ApplicationJSONStatePermanentlyFailed EnginesStatus200ApplicationJSONState = "permanently failed"
-	EnginesStatus200ApplicationJSONStateContentInvalid    EnginesStatus200ApplicationJSONState = "content invalid"
-	EnginesStatus200ApplicationJSONStateDownloadFailed    EnginesStatus200ApplicationJSONState = "download failed"
+	StateDownloading       State = "downloading"
+	StateDownloaded        State = "downloaded"
+	StateStaging           State = "staging"
+	StateProduction        State = "production"
+	StateRemoved           State = "removed"
+	StateTemporaryFailed   State = "temporary failed"
+	StatePermanentlyFailed State = "permanently failed"
+	StateContentInvalid    State = "content invalid"
+	StateDownloadFailed    State = "download failed"
 )
 
-func (e EnginesStatus200ApplicationJSONState) ToPointer() *EnginesStatus200ApplicationJSONState {
+func (e State) ToPointer() *State {
 	return &e
 }
 
-func (e *EnginesStatus200ApplicationJSONState) UnmarshalJSON(data []byte) error {
+func (e *State) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -106,14 +106,14 @@ func (e *EnginesStatus200ApplicationJSONState) UnmarshalJSON(data []byte) error 
 	case "content invalid":
 		fallthrough
 	case "download failed":
-		*e = EnginesStatus200ApplicationJSONState(v)
+		*e = State(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for EnginesStatus200ApplicationJSONState: %v", v)
+		return fmt.Errorf("invalid value for State: %v", v)
 	}
 }
 
-type EnginesStatus200ApplicationJSON struct {
+type EnginesStatusResponseBody struct {
 	// If used by at least one engine
 	Active *bool `json:"active,omitempty"`
 	// The database definition time for this engine
@@ -135,7 +135,7 @@ type EnginesStatus200ApplicationJSON struct {
 	//   * archive
 	//   * filetype
 	//
-	EngineType *EnginesStatus200ApplicationJSONEngineType `json:"engine_type,omitempty"`
+	EngineType *EngineType `json:"engine_type,omitempty"`
 	// Status of the engine:
 	//   * downloading
 	//   * downloaded
@@ -147,73 +147,73 @@ type EnginesStatus200ApplicationJSON struct {
 	//   * content invalid
 	//   * download failed
 	//
-	State *EnginesStatus200ApplicationJSONState `json:"state,omitempty"`
+	State *State `json:"state,omitempty"`
 }
 
-func (o *EnginesStatus200ApplicationJSON) GetActive() *bool {
+func (o *EnginesStatusResponseBody) GetActive() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.Active
 }
 
-func (o *EnginesStatus200ApplicationJSON) GetDefTime() *string {
+func (o *EnginesStatusResponseBody) GetDefTime() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DefTime
 }
 
-func (o *EnginesStatus200ApplicationJSON) GetDownloadProgress() *int64 {
+func (o *EnginesStatusResponseBody) GetDownloadProgress() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.DownloadProgress
 }
 
-func (o *EnginesStatus200ApplicationJSON) GetDownloadTime() *string {
+func (o *EnginesStatusResponseBody) GetDownloadTime() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DownloadTime
 }
 
-func (o *EnginesStatus200ApplicationJSON) GetEngID() *string {
+func (o *EnginesStatusResponseBody) GetEngID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.EngID
 }
 
-func (o *EnginesStatus200ApplicationJSON) GetEngName() *string {
+func (o *EnginesStatusResponseBody) GetEngName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.EngName
 }
 
-func (o *EnginesStatus200ApplicationJSON) GetEngType() *string {
+func (o *EnginesStatusResponseBody) GetEngType() *string {
 	if o == nil {
 		return nil
 	}
 	return o.EngType
 }
 
-func (o *EnginesStatus200ApplicationJSON) GetEngVer() *string {
+func (o *EnginesStatusResponseBody) GetEngVer() *string {
 	if o == nil {
 		return nil
 	}
 	return o.EngVer
 }
 
-func (o *EnginesStatus200ApplicationJSON) GetEngineType() *EnginesStatus200ApplicationJSONEngineType {
+func (o *EnginesStatusResponseBody) GetEngineType() *EngineType {
 	if o == nil {
 		return nil
 	}
 	return o.EngineType
 }
 
-func (o *EnginesStatus200ApplicationJSON) GetState() *EnginesStatus200ApplicationJSONState {
+func (o *EnginesStatusResponseBody) GetState() *State {
 	if o == nil {
 		return nil
 	}
@@ -228,7 +228,7 @@ type EnginesStatusResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// An array with all the engines and their details.
-	EnginesStatus200ApplicationJSONObjects []EnginesStatus200ApplicationJSON
+	Classes []EnginesStatusResponseBody
 }
 
 func (o *EnginesStatusResponse) GetContentType() string {
@@ -252,9 +252,9 @@ func (o *EnginesStatusResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *EnginesStatusResponse) GetEnginesStatus200ApplicationJSONObjects() []EnginesStatus200ApplicationJSON {
+func (o *EnginesStatusResponse) GetClasses() []EnginesStatusResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.EnginesStatus200ApplicationJSONObjects
+	return o.Classes
 }
