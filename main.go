@@ -7,7 +7,7 @@ import (
 	"flag"
 	"log"
 
-	"Metadefender/internal/provider"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/provider"
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 )
 

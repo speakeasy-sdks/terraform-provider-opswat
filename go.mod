@@ -1,4 +1,4 @@
-module Metadefender
+module github.com/gerbil/terraform-provider-Metadefender
 
 go 1.18
 

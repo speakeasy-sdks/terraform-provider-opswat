@@ -3,12 +3,12 @@
 package sdk
 
 import (
-	"Metadefender/internal/sdk/pkg/models/operations"
-	"Metadefender/internal/sdk/pkg/models/sdkerrors"
-	"Metadefender/internal/sdk/pkg/utils"
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/sdk/pkg/models/operations"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/sdk/pkg/models/sdkerrors"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/sdk/pkg/utils"
 	"io"
 	"net/http"
 )

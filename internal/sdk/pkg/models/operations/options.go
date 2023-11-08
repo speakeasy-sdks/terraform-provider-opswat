@@ -3,8 +3,8 @@
 package operations
 
 import (
-	"Metadefender/internal/sdk/pkg/utils"
 	"errors"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/sdk/pkg/utils"
 )
 
 var ErrUnsupportedOption = errors.New("unsupported option")

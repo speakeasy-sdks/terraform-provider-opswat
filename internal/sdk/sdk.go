@@ -3,8 +3,8 @@
 package sdk
 
 import (
-	"Metadefender/internal/sdk/pkg/utils"
 	"fmt"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/sdk/pkg/utils"
 	"net/http"
 	"time"
 )
@@ -201,9 +201,9 @@ func New(opts ...SDKOption) *Metadefender {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "v5.6.1",
-			SDKVersion:        "0.6.0",
-			GenVersion:        "2.181.1",
-			UserAgent:         "speakeasy-sdk/go 0.6.0 2.181.1 v5.6.1 Metadefender",
+			SDKVersion:        "0.7.0",
+			GenVersion:        "2.183.0",
+			UserAgent:         "speakeasy-sdk/go 0.7.0 2.183.0 v5.6.1 Metadefender",
 		},
 	}
 	for _, opt := range opts {

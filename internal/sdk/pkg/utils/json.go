@@ -12,7 +12,7 @@ import (
 	"time"
 	"unsafe"
 
-	"Metadefender/internal/sdk/pkg/types"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/sdk/pkg/types"
 
 	"github.com/ericlagergren/decimal"
 )

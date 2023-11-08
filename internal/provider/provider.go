@@ -3,8 +3,8 @@
 package provider
 
 import (
-	"Metadefender/internal/sdk"
 	"context"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/sdk"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"

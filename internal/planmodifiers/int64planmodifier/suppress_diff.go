@@ -3,8 +3,8 @@
 package int64planmodifier
 
 import (
-	"Metadefender/internal/planmodifiers/utils"
 	"context"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/planmodifiers/utils"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 )

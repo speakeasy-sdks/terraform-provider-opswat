@@ -3,9 +3,9 @@
 package operations
 
 import (
-	"Metadefender/internal/sdk/pkg/models/shared"
-	"Metadefender/internal/sdk/pkg/utils"
 	"errors"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/sdk/pkg/models/shared"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/sdk/pkg/utils"
 	"net/http"
 )
 

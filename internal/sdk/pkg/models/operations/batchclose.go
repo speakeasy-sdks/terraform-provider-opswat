@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"Metadefender/internal/sdk/pkg/models/shared"
+	"github.com/gerbil/terraform-provider-Metadefender/internal/sdk/pkg/models/shared"
 	"net/http"
 )
 
