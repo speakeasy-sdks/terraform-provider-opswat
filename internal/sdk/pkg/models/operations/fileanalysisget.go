@@ -103,7 +103,7 @@ func (o *FileAnalysisGetResponse) GetContentType() string {
 
 func (o *FileAnalysisGetResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }
