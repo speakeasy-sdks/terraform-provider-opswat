@@ -201,9 +201,9 @@ func New(opts ...SDKOption) *Metadefender {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "v5.6.1",
-			SDKVersion:        "0.9.1",
-			GenVersion:        "2.202.2",
-			UserAgent:         "speakeasy-sdk/go 0.9.1 2.202.2 v5.6.1 Metadefender",
+			SDKVersion:        "0.10.0",
+			GenVersion:        "2.213.3",
+			UserAgent:         "speakeasy-sdk/go 0.10.0 2.213.3 v5.6.1 Metadefender",
 		},
 	}
 	for _, opt := range opts {

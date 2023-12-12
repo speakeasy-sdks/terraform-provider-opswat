@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 9954f3c474501f6a305db91c4f4e2315
   docVersion: v5.6.1
-  speakeasyVersion: 1.123.0
-  generationVersion: 2.202.2
+  speakeasyVersion: 1.126.0
+  generationVersion: 2.213.3
 generation:
   comments: {}
   sdkClassName: Metadefender
@@ -12,11 +12,11 @@ generation:
     optionalPropertyRendering: withExample
 features:
   terraform:
-    core: 3.5.1
+    core: 3.6.0
     globalServerURLs: 2.82.1
     unions: 2.81.5
 terraform:
-  version: 0.9.1
+  version: 0.10.0
   author: gerbil
   imports:
     option: openapi
