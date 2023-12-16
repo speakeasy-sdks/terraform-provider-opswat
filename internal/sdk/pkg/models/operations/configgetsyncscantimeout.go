@@ -29,6 +29,7 @@ const (
 	ConfigGetSyncScanTimeoutConfigResponseResponseBodyTypeInternalServerError        ConfigGetSyncScanTimeoutConfigResponseResponseBodyType = "InternalServerError"
 )
 
+// ConfigGetSyncScanTimeoutConfigResponseResponseBody - Error while requesting configuration.
 type ConfigGetSyncScanTimeoutConfigResponseResponseBody struct {
 	ErrorWhileRequestingConfig *shared.ErrorWhileRequestingConfig
 	InternalServerError        *shared.InternalServerError

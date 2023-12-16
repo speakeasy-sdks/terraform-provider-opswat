@@ -47,28 +47,7 @@ func (o *BatchResponseInProgressSchemasProcessInfo) GetVerdicts() []string {
 	return o.Verdicts
 }
 
-// BatchResponseInProgressSchemasScanAllResultA - Processing result and its index
-// * `No Threat Detected`: 0
-// * `Infected`: 1
-// * `Suspicious`: 2
-// * `Failed`: 3
-// * `Whitelisted`: 7
-// * `Blacklisted`: 8
-// * `Exceeded Archive Depth`: 9
-// * `Not Scanned`: 10
-// * `Encrypted Archive`: 12
-// * `Exceeded Archive Size`: 13
-// * `Exceeded Archive File Number`: 14
-// * `Password Protected Document`: 15
-// * `Exceeded Archive Timeout`: 16
-// * `Mismatch`: 17
-// * `Potentially Vulnerable File`: 18
-// * `Cancelled`: 19
-// * `Sensitive Data Found`: 20
-// * `Yara Rule Matched`: 21
-// * `Potentially Unwanted`: 22
-// * `Unsupported File Type`: 23
-// * `In Progress`: 255
+// BatchResponseInProgressSchemasScanAllResultA - The overall scan result as string
 type BatchResponseInProgressSchemasScanAllResultA string
 
 const (
@@ -153,7 +132,7 @@ func (e *BatchResponseInProgressSchemasScanAllResultA) UnmarshalJSON(data []byte
 	}
 }
 
-// BatchResponseInProgressSchemasScanAllResultI - Scan result as index in the Processing Results table above
+// BatchResponseInProgressSchemasScanAllResultI - The overall scan result as index in the Processing Results table.
 type BatchResponseInProgressSchemasScanAllResultI int64
 
 const (
@@ -438,28 +417,7 @@ func (o *BatchResponseInProgressProcessInfo) GetUsername() *string {
 	return o.Username
 }
 
-// BatchResponseInProgressScanAllResultA - Processing result and its index
-// * `No Threat Detected`: 0
-// * `Infected`: 1
-// * `Suspicious`: 2
-// * `Failed`: 3
-// * `Whitelisted`: 7
-// * `Blacklisted`: 8
-// * `Exceeded Archive Depth`: 9
-// * `Not Scanned`: 10
-// * `Encrypted Archive`: 12
-// * `Exceeded Archive Size`: 13
-// * `Exceeded Archive File Number`: 14
-// * `Password Protected Document`: 15
-// * `Exceeded Archive Timeout`: 16
-// * `Mismatch`: 17
-// * `Potentially Vulnerable File`: 18
-// * `Cancelled`: 19
-// * `Sensitive Data Found`: 20
-// * `Yara Rule Matched`: 21
-// * `Potentially Unwanted`: 22
-// * `Unsupported File Type`: 23
-// * `In Progress`: 255
+// BatchResponseInProgressScanAllResultA - The overall scan result as string
 type BatchResponseInProgressScanAllResultA string
 
 const (
@@ -544,7 +502,7 @@ func (e *BatchResponseInProgressScanAllResultA) UnmarshalJSON(data []byte) error
 	}
 }
 
-// BatchResponseInProgressScanAllResultI - Scan result as index in the Processing Results table above
+// BatchResponseInProgressScanAllResultI - The overall scan result as index in the Processing Results table.
 type BatchResponseInProgressScanAllResultI int64
 
 const (

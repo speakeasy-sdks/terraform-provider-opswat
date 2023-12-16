@@ -40,6 +40,7 @@ const (
 	ConfigUpdateProxyResponseBodyTypeProxyRequiresAuthentication ConfigUpdateProxyResponseBodyType = "ProxyRequiresAuthentication"
 )
 
+// ConfigUpdateProxyResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type ConfigUpdateProxyResponseBody struct {
 	MissingEnabledField         *shared.MissingEnabledField
 	ErrorWhileParsingInputJSON  *shared.ErrorWhileParsingInputJSON

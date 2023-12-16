@@ -37,6 +37,7 @@ const (
 	ConfigUpdateHealthCheckResponseBodyTypeSetRequiredEngineFailedWhenInvalidEngine  ConfigUpdateHealthCheckResponseBodyType = "SetRequiredEngineFailedWhenInvalidEngine"
 )
 
+// ConfigUpdateHealthCheckResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type ConfigUpdateHealthCheckResponseBody struct {
 	SetRequiredEngineFailedWhenInvalidLicense *shared.SetRequiredEngineFailedWhenInvalidLicense
 	SetRequiredEngineFailedWhenInvalidEngine  *shared.SetRequiredEngineFailedWhenInvalidEngine

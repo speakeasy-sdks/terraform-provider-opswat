@@ -288,6 +288,7 @@ const (
 	FileAnalysisPostAnalysisResponseBodyTypeFileUploadRejected       FileAnalysisPostAnalysisResponseBodyType = "FileUploadRejected"
 )
 
+// FileAnalysisPostAnalysisResponseBody - Callbackurl and/or apikey is invalid.
 type FileAnalysisPostAnalysisResponseBody struct {
 	BodyAndDownloadLinkGiven *shared.BodyAndDownloadLinkGiven
 	CallbackURLInvalid       *shared.CallbackURLInvalid

@@ -38,6 +38,7 @@ const (
 	ConfigPostProxyTestconnectionConfigResponseBodyTypeProxyRequiresAuthentication ConfigPostProxyTestconnectionConfigResponseBodyType = "ProxyRequiresAuthentication"
 )
 
+// ConfigPostProxyTestconnectionConfigResponseBody - Bad Request (e.g. invalid header, apikey is missing or invalid).
 type ConfigPostProxyTestconnectionConfigResponseBody struct {
 	MissingPort                 *shared.MissingPort
 	MissingServerAddress        *shared.MissingServerAddress

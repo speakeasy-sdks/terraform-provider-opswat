@@ -7,28 +7,7 @@ import (
 	"fmt"
 )
 
-// ScanAllResultA - Processing result and its index
-// * `No Threat Detected`: 0
-// * `Infected`: 1
-// * `Suspicious`: 2
-// * `Failed`: 3
-// * `Whitelisted`: 7
-// * `Blacklisted`: 8
-// * `Exceeded Archive Depth`: 9
-// * `Not Scanned`: 10
-// * `Encrypted Archive`: 12
-// * `Exceeded Archive Size`: 13
-// * `Exceeded Archive File Number`: 14
-// * `Password Protected Document`: 15
-// * `Exceeded Archive Timeout`: 16
-// * `Mismatch`: 17
-// * `Potentially Vulnerable File`: 18
-// * `Cancelled`: 19
-// * `Sensitive Data Found`: 20
-// * `Yara Rule Matched`: 21
-// * `Potentially Unwanted`: 22
-// * `Unsupported File Type`: 23
-// * `In Progress`: 255
+// ScanAllResultA - The overall scan result as string
 type ScanAllResultA string
 
 const (
@@ -113,7 +92,7 @@ func (e *ScanAllResultA) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// ScanAllResultI - Scan result as index in the Processing Results table above
+// ScanAllResultI - The overall scan result as index in the Processing Results table.
 type ScanAllResultI int64
 
 const (

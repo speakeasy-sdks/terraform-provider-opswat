@@ -187,6 +187,7 @@ const (
 	FileAnalysisSyncPostAnalysisResponse500ResponseBodyTypeFileSizeExceeded  FileAnalysisSyncPostAnalysisResponse500ResponseBodyType = "FileSizeExceeded"
 )
 
+// FileAnalysisSyncPostAnalysisResponse500ResponseBody - Internal Server Error.
 type FileAnalysisSyncPostAnalysisResponse500ResponseBody struct {
 	LicenseExpired    *shared.LicenseExpired
 	NoAvailableRule   *shared.NoAvailableRule
@@ -357,6 +358,7 @@ const (
 	FileAnalysisSyncPostResponseBodyTypeInvalidProtocolDownloadLink FileAnalysisSyncPostResponseBodyType = "InvalidProtocolDownloadLink"
 )
 
+// FileAnalysisSyncPostResponseBody - API key is invalid.
 type FileAnalysisSyncPostResponseBody struct {
 	InvalidAPIKeyGiven          *shared.InvalidAPIKeyGiven
 	BodyAndDownloadLinkGiven    *shared.BodyAndDownloadLinkGiven
