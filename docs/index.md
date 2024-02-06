@@ -97,7 +97,7 @@ terraform {
   required_providers {
     Metadefender = {
       source  = "gerbil/Metadefender"
-      version = "0.11.3"
+      version = "0.12.0"
     }
   }
 }
